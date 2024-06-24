@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 02:38:47 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 02:40:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:22:41 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,4 @@ void    init_e(t_exec *e)
 	e->envp = NULL;
 }
 
-void    init_token_list(t_tlist *)
+void    init_token_list(t_list *);

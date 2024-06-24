@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exec.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 02:40:29 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:25:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct s_tlist
+typedef struct s_token
 {
 	int             pos;
     char			*content;
 	struct s_plist	*next;
-}					t_tlist;
+}					t_token;
 
 typedef struct s_exec
 {
