@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 04:57:42 by pmateo           ###   ########.fr       */
+/*   Created: 2024/06/24 02:38:47 by pmateo            #+#    #+#             */
+/*   Updated: 2024/06/24 02:40:55 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "../INCLUDES/mini_exec.h"
 
-void    init_global(t_global *g)
+void    init_e(t_exec *e)
 {
-	g->input = NULL;
-	g->env = NULL;
-	g->export_env = NULL;
+    e->input = NULL;
+	e->envp = NULL;
 }
+
+void    init_token_list(t_tlist *)

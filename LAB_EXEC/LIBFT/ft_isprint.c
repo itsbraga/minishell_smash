@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.c                                       :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 04:57:42 by pmateo           ###   ########.fr       */
+/*   Created: 2023/05/24 19:17:15 by pmateo            #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-void    init_global(t_global *g)
+int	ft_isprint(int c)
 {
-	g->input = NULL;
-	g->env = NULL;
-	g->export_env = NULL;
+	if (c > 31 && c < 127)
+		return (1);
+	else
+		return (0);
 }
+// int	main(void)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while(i <= 47)
+// 	{
+// 		printf("%d\n", ft_isprint(i));
+// 		i++;
+// 	}
+// }

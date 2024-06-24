@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 04:57:42 by pmateo           ###   ########.fr       */
+/*   Created: 2023/05/05 21:04:20 by pmateo            #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-void    init_global(t_global *g)
+int	ft_isalnum(int c)
 {
-	g->input = NULL;
-	g->env = NULL;
-	g->export_env = NULL;
+	if ((c > 64 && c < 91)
+		|| (c > 96 && c < 123)
+		|| (c > 47 && c < 58))
+		return (8);
+	else
+		return (0);
 }
+
+/*int	main(void)
+{
+	char	c;
+	
+	c = 'z';
+	printf("ma fonction retourne %d\n", ft_isalnum(c));
+	printf("la fonction de base retourne %d", isalnum(c));
+}*/

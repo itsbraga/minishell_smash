@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/04/24 14:38:49 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/06/24 08:10:43 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 int main(int argc, char **argv, char **envp)
 {
-    t_global global;
-    
-    if (argc > 1)
-        exit(EXIT_FAILURE);
-    (void)argv;
-    init_global(&global);
-	global.envp = envp;
-    while (1)
-    {
-        ft_printf("@_@ $> ");
-        global.input = get_next_line(0);
-		if (global.input)
-			add_history(global.input);
+	t_global g;
+	
+	if (argc > 1)
+		exit(EXIT_FAILURE);
+	(void)argv;
+	init_global(&g);
+	g.env = create_env(envp);
+	// g.export_env = create_export_env(envp);
+	while (1)
+	{
+		g.input = readline("@_@ $> ");
+		if (*g.input)
+			add_history(g.input);
 		
-    }
-    return (0);
+	}
+	return (0);
 }

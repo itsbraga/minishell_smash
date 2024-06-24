@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.c                                       :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 04:57:42 by pmateo           ###   ########.fr       */
+/*   Created: 2024/03/25 02:52:47 by pmateo            #+#    #+#             */
+/*   Updated: 2024/06/05 19:43:29 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-void    init_global(t_global *g)
+void	ft_lstprint(t_list *lst)
 {
-	g->input = NULL;
-	g->env = NULL;
-	g->export_env = NULL;
+	while (lst)
+	{
+		ft_printf(1, "&cell = %p\n", lst);
+		ft_printf(1, "content_cell = %d\n", *((int *)lst->content));
+		ft_printf(1, "&next_cell = %p\n", lst->next);
+		ft_printf(1, "|\n|\n|\n");
+		lst = lst->next;
+	}
+	ft_printf(1, "&cell = NULL\n");
+	ft_printf(1, "content_cell = NULL\n");
+	ft_printf(1, "&next_cell = NULL\n");
 }

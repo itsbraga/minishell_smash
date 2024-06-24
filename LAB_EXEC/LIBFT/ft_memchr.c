@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 04:57:42 by pmateo           ###   ########.fr       */
+/*   Created: 2023/05/15 22:35:52 by pmateo            #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-void    init_global(t_global *g)
+void	*ft_memchr(const void *mb, int c, size_t n)
 {
-	g->input = NULL;
-	g->env = NULL;
-	g->export_env = NULL;
+	const char	*pmb;
+	size_t		i;
+
+	i = 0;
+	pmb = (const char *)mb;
+	while (i < n)
+	{
+		if (pmb[i] == (char)c)
+			return ((void *)&pmb[i]);
+		i++;
+	}
+	return (NULL);
 }
+
+// int	main(void)
+// {
+// 	char s[] = {0, 1, 2, 3, 4, 5};
+// 	printf("%p\n", ft_memchr(s, 2 + 256, 3));
+// }

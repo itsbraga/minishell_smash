@@ -1,20 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 04:57:42 by pmateo           ###   ########.fr       */
+/*   Created: 2023/06/25 00:01:42 by pmateo            #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-void    init_global(t_global *g)
+void	*ft_calloc(size_t num, size_t size)
 {
-	g->input = NULL;
-	g->env = NULL;
-	g->export_env = NULL;
+	void	*buffer;
+	size_t	i;
+	size_t	tmp;
+
+	i = 0;
+	if (num == 0 || size == 0)
+	{
+		num = 1;
+		size = 1;
+	}
+	tmp = num * size;
+	if ((tmp / size) != num)
+		return (NULL);
+	buffer = (void *)malloc(size * num);
+	if (!buffer)
+		return (NULL);
+	while (i < num * size)
+	{
+		((unsigned char *)buffer)[i] = 0;
+		i++;
+	}
+	return (buffer);
 }

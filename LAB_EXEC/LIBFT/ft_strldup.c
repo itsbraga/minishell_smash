@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strldup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eltouma <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/21 17:18:15 by eltouma           #+#    #+#             */
-/*   Updated: 2024/06/21 17:18:41 by eltouma          ###   ########.fr       */
+/*   Created: 2024/05/15 20:06:42 by pmateo            #+#    #+#             */
+/*   Updated: 2024/06/11 16:27:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "INCLUDES/libft.h"
 
-int	main(void)
+char	*ft_strldup(const char *s1, size_t length)
 {
-	printf("HELLO\n");
+	char	*s2;
+
+	s2 = malloc((length + 1) * sizeof(char));
+	if (s2 == NULL)
+		return (NULL);
+	ft_strlcpy(s2, s1, (length + 1));
+	return (s2);
 }
