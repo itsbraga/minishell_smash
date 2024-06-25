@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:40 by pmateo           ###   ########.fr       */
+/*   Created: 2023/05/16 06:27:16 by marvin            #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-int main(int argc, char **argv, char **envp)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	t_global g;
-	
-	if (argc > 1)
-		exit(EXIT_FAILURE);
-	(void)argv;
-	init_global(&g);
-	g.env = create_env(envp);
-	// g.export_env = create_export_env(envp);
-	while (1)
+	unsigned char	*ps;
+
+	ps = (unsigned char *)s;
+	while (n--)
 	{
-		g.input = readline("@_@ $> ");
-		if (*g.input)
-			add_history(g.input);
-		
+		*ps = c;
+		ps++;
 	}
-	return (0);
+	return (s);
 }
+
+/*int	main(void)
+{
+	char	str[20];
+
+	ft_memset(str, 97, sizeof(str));
+	printf("%s\n", str);
+	printf("%ld", sizeof(str));
+}*/

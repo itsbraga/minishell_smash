@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strldup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:40 by pmateo           ###   ########.fr       */
+/*   Created: 2024/05/15 20:06:42 by pmateo            #+#    #+#             */
+/*   Updated: 2024/06/11 16:27:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-int main(int argc, char **argv, char **envp)
+char	*ft_strldup(const char *s1, size_t length)
 {
-	t_global g;
-	
-	if (argc > 1)
-		exit(EXIT_FAILURE);
-	(void)argv;
-	init_global(&g);
-	g.env = create_env(envp);
-	// g.export_env = create_export_env(envp);
-	while (1)
-	{
-		g.input = readline("@_@ $> ");
-		if (*g.input)
-			add_history(g.input);
-		
-	}
-	return (0);
+	char	*s2;
+
+	s2 = malloc((length + 1) * sizeof(char));
+	if (s2 == NULL)
+		return (NULL);
+	ft_strlcpy(s2, s1, (length + 1));
+	return (s2);
 }

@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:40 by pmateo           ###   ########.fr       */
+/*   Created: 2023/05/15 22:35:52 by pmateo            #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-int main(int argc, char **argv, char **envp)
+void	*ft_memchr(const void *mb, int c, size_t n)
 {
-	t_global g;
-	
-	if (argc > 1)
-		exit(EXIT_FAILURE);
-	(void)argv;
-	init_global(&g);
-	g.env = create_env(envp);
-	// g.export_env = create_export_env(envp);
-	while (1)
+	const char	*pmb;
+	size_t		i;
+
+	i = 0;
+	pmb = (const char *)mb;
+	while (i < n)
 	{
-		g.input = readline("@_@ $> ");
-		if (*g.input)
-			add_history(g.input);
-		
+		if (pmb[i] == (char)c)
+			return ((void *)&pmb[i]);
+		i++;
 	}
-	return (0);
+	return (NULL);
 }
+
+// int	main(void)
+// {
+// 	char s[] = {0, 1, 2, 3, 4, 5};
+// 	printf("%p\n", ft_memchr(s, 2 + 256, 3));
+// }

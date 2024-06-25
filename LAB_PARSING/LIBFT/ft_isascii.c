@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:40 by pmateo           ###   ########.fr       */
+/*   Created: 2023/05/05 21:16:31 by pmateo            #+#    #+#             */
+/*   Updated: 2024/03/25 02:52:39 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-int main(int argc, char **argv, char **envp)
+int	ft_isascii(int c)
 {
-	t_global g;
-	
-	if (argc > 1)
-		exit(EXIT_FAILURE);
-	(void)argv;
-	init_global(&g);
-	g.env = create_env(envp);
-	// g.export_env = create_export_env(envp);
-	while (1)
-	{
-		g.input = readline("@_@ $> ");
-		if (*g.input)
-			add_history(g.input);
-		
-	}
-	return (0);
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
 }
+
+// int	main(void)
+// {
+// 	char	c;
+
+// 	c = 'Ç';
+// 	printf("ma fonction retourne %d\n", ft_isascii(c));
+// 	printf("la fonction de base retourne %d\n", isascii(c));
+// }

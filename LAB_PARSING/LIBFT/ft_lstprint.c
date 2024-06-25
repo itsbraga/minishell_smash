@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:40 by pmateo           ###   ########.fr       */
+/*   Created: 2024/03/25 02:52:47 by pmateo            #+#    #+#             */
+/*   Updated: 2024/06/05 19:43:29 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-int main(int argc, char **argv, char **envp)
+void	ft_lstprint(t_list *lst)
 {
-	t_global g;
-	
-	if (argc > 1)
-		exit(EXIT_FAILURE);
-	(void)argv;
-	init_global(&g);
-	g.env = create_env(envp);
-	// g.export_env = create_export_env(envp);
-	while (1)
+	while (lst)
 	{
-		g.input = readline("@_@ $> ");
-		if (*g.input)
-			add_history(g.input);
-		
+		ft_printf(1, "&cell = %p\n", lst);
+		ft_printf(1, "content_cell = %d\n", *((int *)lst->content));
+		ft_printf(1, "&next_cell = %p\n", lst->next);
+		ft_printf(1, "|\n|\n|\n");
+		lst = lst->next;
 	}
-	return (0);
+	ft_printf(1, "&cell = NULL\n");
+	ft_printf(1, "content_cell = NULL\n");
+	ft_printf(1, "&next_cell = NULL\n");
 }

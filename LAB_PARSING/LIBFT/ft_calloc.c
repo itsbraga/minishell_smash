@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:40 by pmateo           ###   ########.fr       */
+/*   Created: 2023/06/25 00:01:42 by pmateo            #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-int main(int argc, char **argv, char **envp)
+void	*ft_calloc(size_t num, size_t size)
 {
-	t_global g;
-	
-	if (argc > 1)
-		exit(EXIT_FAILURE);
-	(void)argv;
-	init_global(&g);
-	g.env = create_env(envp);
-	// g.export_env = create_export_env(envp);
-	while (1)
+	void	*buffer;
+	size_t	i;
+	size_t	tmp;
+
+	i = 0;
+	if (num == 0 || size == 0)
 	{
-		g.input = readline("@_@ $> ");
-		if (*g.input)
-			add_history(g.input);
-		
+		num = 1;
+		size = 1;
 	}
-	return (0);
+	tmp = num * size;
+	if ((tmp / size) != num)
+		return (NULL);
+	buffer = (void *)malloc(size * num);
+	if (!buffer)
+		return (NULL);
+	while (i < num * size)
+	{
+		((unsigned char *)buffer)[i] = 0;
+		i++;
+	}
+	return (buffer);
 }

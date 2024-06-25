@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:40 by pmateo           ###   ########.fr       */
+/*   Created: 2023/07/25 21:48:52 by pmateo            #+#    #+#             */
+/*   Updated: 2024/04/18 23:15:46 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "../INCLUDES/get_next_line_bonus.h"
 
-int main(int argc, char **argv, char **envp)
+size_t	ft_strlen_gnl(const char *str, int c)
 {
-	t_global g;
-	
-	if (argc > 1)
-		exit(EXIT_FAILURE);
-	(void)argv;
-	init_global(&g);
-	g.env = create_env(envp);
-	// g.export_env = create_export_env(envp);
-	while (1)
+	size_t	i;
+
+	i = 0;
+	if (c == 1)
 	{
-		g.input = readline("@_@ $> ");
-		if (*g.input)
-			add_history(g.input);
-		
+		while (str[i] != '\0')
+			i++;
+		return (i);
 	}
-	return (0);
+	else
+	{
+		while (str[i] != '\n')
+			i++;
+		return (i);
+	}
 }

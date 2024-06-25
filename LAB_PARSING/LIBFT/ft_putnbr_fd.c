@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:40 by pmateo           ###   ########.fr       */
+/*   Created: 2023/05/28 23:24:59 by u4s2e0r           #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "INCLUDES/libft.h"
 
-int main(int argc, char **argv, char **envp)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	t_global g;
-	
-	if (argc > 1)
-		exit(EXIT_FAILURE);
-	(void)argv;
-	init_global(&g);
-	g.env = create_env(envp);
-	// g.export_env = create_export_env(envp);
-	while (1)
+	long int	nbl;
+
+	nbl = nb;
+	if (nbl < 0)
 	{
-		g.input = readline("@_@ $> ");
-		if (*g.input)
-			add_history(g.input);
-		
+		nbl = nbl * -1;
+		ft_putchar_fd('-', fd);
 	}
-	return (0);
+	if (nbl >= 0 && nbl <= 9)
+		ft_putchar_fd((nbl + 48), fd);
+	else
+	{
+		ft_putnbr_fd((nbl / 10), fd);
+		ft_putchar_fd((nbl % 10) + 48, fd);
+	}
 }
+
+// int	main(void)
+// {
+// 	int nb = -4242;
+// 	int fd = 1;
+// 	ft_putnbr_fd(nb, fd);
+// }
