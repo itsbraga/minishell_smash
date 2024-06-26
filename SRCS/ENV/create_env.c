@@ -6,89 +6,41 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/25 20:00:36 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/06/26 19:44:12 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCLUDES/minishell.h"
 
-// int	cmp_to_equal(const char *s1, const char *s2)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s1[i] == s2[i] && s1[i] && s2[i] && s1[i] != '=' && s2[i] != '=')
-// 		i++;
-// 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-// }
-
-size_t	get_env_size(char **envp)
+static void	fill_export_env(t_global *g, size_t exp_env_size, size_t envp_size)
 {
-	size_t	size;
-	
-	size = 0;
-	while (envp[size])
-		size++;
-	return (size);
+	while (exp_env_size != envp_size)
+	{
+		if (!exp_env_size)
+			copy_toppest(g);
+		else
+			alpha_sort(g, g->export_env[exp_env_size - 1], exp_env_size);
+		exp_env_size++;
+	}
+	g->export_env[envp_size] = NULL;
 }
 
-char	**create_env(char **envp)
+void	create_env(t_global *g, char **envp)
 {
 	int		i;
-	size_t	env_size;
+	size_t	envp_size;
 	char 	**minishell_env;
 
 	i = 0;
-	env_size = get_env_size(envp); 
-	minishell_env = malloc((env_size + 1) * sizeof(char *));
+	envp_size = get_env_size(envp);
+	minishell_env = malloc((envp_size + 1) * sizeof(char *));
 	while (envp[i])
 	{
 		minishell_env[i] = ft_strdup(envp[i]);
 		i++;
 	}
-	return (minishell_env);
+	g->env = minishell_env;
+	g->export_env = malloc((envp_size +1) * sizeof(char *));
+	fill_export_env(g, 0, envp_size);
 }
 
-// char *alpha_sort(char **envp)
-// {
-// 	int	i;
-// 	char *tmp_top;
-
-// 	i = 0;
-// 	tmp_top = NULL;
-// 	while(envp[i])
-// 	{
-// 		if (!tmp_top)
-// 			tmp_top = envp[i];
-// 		else
-// 		{
-// 			if (envp[i][0] > tmp_top[0])
-// 				tmp_top = envp[i];
-// 		}
-// 		i++;
-// 	}
-// 	return ( )
-// }
-
-// char	**create_env_export(char **envp, size_t	env_size)
-// {
-// 	size_t	env_size;
-// 	char **export_env;
-// 	char *lastest;
-
-// 	env_size -= 1;
-// 	export_env = malloc((env_size + 1) * sizeof(char *));
-// 	lastest = NULL;
-// 	while (envp[env_size])
-// 	{
-// 		if (!lastest)
-// 			lastest = envp[env_size];
-// 		else
-// 		{
-// 			if (cmp_to_equal(envp[env_size], lastest))
-// 		}
-// 		env_size--;
-// 	}	
-
-	
-// }

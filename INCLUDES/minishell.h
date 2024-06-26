@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/26 16:41:58 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:18:19 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ typedef struct s_global
 // struct exec
 
 void	init_global(t_global *global);
-char	**create_env(char **envp);
+void	create_env(t_global *g, char **envp);
+size_t	get_env_size(char **envp);
+void	copy_toppest(t_global *g);
+void	alpha_sort(t_global *g, char *current, size_t exp_env_index);
 
 #endif

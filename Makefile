@@ -48,7 +48,7 @@ all: $(LIBFT) $(NAME)
 
 $(OBJ_DIR)%.o: %.c
 				@mkdir -p $(dir $@)
-				@$(CC) $(DEPFLAGS) $(CFLAGS) -c $< -o $@
+				@$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) -c $< -o $@
 -include $(DEPS)
 
 $(LIBFT):
