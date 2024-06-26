@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/26 16:51:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:25:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,24 @@ void	add_back(t_token **t, t_token *new_node)
 	}
 }
 
+void	clear_lst(t_token **t)
+{
+	t_token	*cur;
+	t_token	*new_next;
+	
+	cur = *t;
+	while (cur != NULL)
+	{
+		new_next = cur->next;
+		free(cur);
+		cur = new_next;
+	}
+	*t = NULL;
+}
+
 void	del_one(t_token *t)
 {
-	//del((t)->content);
-	
+	if (t->content != NULL)
+		free(t->content);
 	free(t);
 }
