@@ -1,66 +1,82 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/20 14:22:48 by pmateo            #+#    #+#              #
-#    Updated: 2024/06/24 08:12:57 by pmateo           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
+#	FEATURES
+#******************************************************************************#
 
-CC = cc
-FLAGS = -Werror -Wextra -Wall -g -g3
-RM = rm -f
-.DEFAULT_GOAL := all
+RESET		:=	\e[0m
+BOLD		:=	\e[1m
+ITAL		:=	\e[3m
+BLINK		:=	\e[5m
 
-NAME = minishell
+YELLOW		:=	\e[33m
+GREEN		:=	\e[32m
+BLUE		:=	\e[34m
+PURPLE		:=	\e[35m
+PINK		:=	\e[38;2;255;182;193m
 
-DIR_LIBFT = ./LIBFT
-LIBFT = 	${DIR_LIBFT}/libft.a
+#******************************************************************************#
+#	BASICS
+#******************************************************************************#
 
-DIRINC_LIBFT = 		${DIR_LIBFT}/INCLUDES
-DIRINC_MINISHELL = ./INCLUDES
-INCFILES = 			${DIRINC_MINISHELL}/minishell.h
+NAME		=	minishell
+LIBFT_PATH	=	LIBFT
+LIBFT		=	$(LIBFT_PATH)/libft.a
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror -IINCLUDES
+LFLAGS		=	-L $(LIBFT_PATH) -lft -lreadline
+DEPFLAGS	=	-MMD -MP
+MAKEFLAGS	+=	--no-print-directory
+DEBUG		=	-g -g3
 
-DIR_SRCS = 			./SRCS/
-SRCS = 				main.c SRCS/INIT/structures.c SRCS/ENV/create_env.c
+#******************************************************************************#
+#	SOURCES, OBJECTS AND DEPENDENCIES
+#******************************************************************************#
 
-OBJ = ${SRCS:.c=.o}
+SRC_DIR		=	$(shell find SRCS -type d)
+SRCS		=	$(foreach dir, $(SRC_DIR), $(wildcard $(dir)/*.c))
+vpath %.c $(SRC_DIR)
 
-OBJ_INIT = ${SRCS/INIT:.c=.o}
+OBJ_DIR		=	OBJS/
+OBJS		=	$(patsubst SRCS/%.c,$(OBJ_DIR)%.o,$(SRCS))
 
-OBJ_ENV = ${SRCS/OBJ_ENV:.c=.o}
+DEPS		=	$(patsubst SRCS/%.c,$(OBJ_DIR)%.d,$(SRCS))
 
-%.o: ${DIR_SRCS}%.c ${INCFILES}
-	${CC} ${FLAGS} -c $< -o $@ -I ${DIRINC_MINISHELL} -I ${DIR_LIBFT}
+#******************************************************************************#
+#	RULES
+#******************************************************************************#
 
-%.o: ${DIR_SRCS}INIT/%.c ${INCFILES}
-	${CC} ${FLAGS} -c $< -o $@ -I ${DIRINC_MINISHELL} -I ${DIR_LIBFT}
-	
-%.o: ${DIR_SRCS}ENV/%.c ${INCFILES}
-	${CC} ${FLAGS} -c $< -o $@ -I ${DIRINC_MINISHELL} -I ${DIR_LIBFT}
+all: $(LIBFT) $(NAME)
 
-${LIBFT}:
-	${MAKE} -s -C ${DIR_LIBFT}
+$(OBJ_DIR)%.o: %.c
+				@mkdir -p $(dir $@)
+				@$(CC) $(DEPFLAGS) $(CFLAGS) -c $< -o $@
+-include $(DEPS)
 
-${NAME}: ${OBJ} ${OBJ_INIT} ${LIBFT} ${INCFILES}
-	${CC} ${FLAGS} -o ${NAME} ${OBJ} ${OBJ_INIT} -I ${DIRINC_MINISHELL} -I ${DIRINC_LIBFT} -L ${DIR_LIBFT} -lft -lreadline
+$(LIBFT):
+		@make -sC $(LIBFT_PATH) $(MAKEFLAGS)
 
-all: ${LIBFT} ${NAME}
-		@echo "\033[1;5;32m# MINISHELL READY ! #\033[0m"
+$(NAME): $(OBJS) $(LIBFT)
+			@printf "$(BOLD)\n================="
+			@printf "$(RESET)$(shell bash rainbow.sh " MINISHELL ")"
+			@printf "$(BOLD)=================\n\n$(RESET)"
+			@printf "$(BLINK)$(BOLD)$(GREEN)\t\t # READY! #$(RESET)\n\n"
+			@printf "$(BOLD)=============================================\n\n$(RESET)"
+			@$(CC) $(CFLAGS) $(DEBUG) $(OBJS) $(LFLAGS) -o $(NAME)
 
 clean:
-		@${MAKE} -s -C ${DIR_LIBFT} clean
-		@${RM} ${OBJ} ${OBJ_BONUS}
-		@echo "\033[1;9;35m# No more object files. #\033[0m"
+		@rm -rf $(OBJ_DIR)
+		@make clean -sC $(LIBFT_PATH)
+		@printf "\n$(BOLD)$(GREEN)[objs]:\t $(RESET)Clean completed\n"
 
 fclean: clean
-		@${MAKE} -s -C ${DIR_LIBFT} fclean
-		@${RM} ${NAME} ${NAME_BONUS}
-		@echo "\033[1;9;35m# No more executable files. #\033[0m"
+			@rm -rf $(NAME)
+			@make fclean -sC $(LIBFT_PATH)
+			@printf "$(BOLD)$(BLUE)[execs]: $(RESET)Full clean completed!\n\n"
 
-re: fclean all
+re:		fclean all
+			@printf "$(BOLD)make re: $(RESET)Rebuilding done!\n\n"
 
-.PHONY: all re clean fclean
+norm:
+		@clear
+		@norminette $(SRC_DIR) | grep -v Norme -B1 || true
+
+.PHONY:		all clean fclean re norm
