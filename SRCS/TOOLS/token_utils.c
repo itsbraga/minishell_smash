@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/28 17:40:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/06/28 19:50:24 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,13 @@ t_token	*new_node(char *content)
 	return (new_node);
 }
 
-t_token	*last_node(t_token *t)
+t_token	*t_last_node(t_token *t)
 {
 	if (!t)
 		return (NULL);
-	else
-	{
-		while (t->next != NULL)
-			t = t->next;
-		return (t);
-	}
+	while (t->next != NULL)
+		t = t->next;
+	return (t);
 }
 
 void	add_back(t_token **t, t_token *new_node)
@@ -49,30 +46,20 @@ void	add_back(t_token **t, t_token *new_node)
 		*t = new_node;
 	else
 	{
-		tmp = last_node(*t);
+		tmp = t_last_node(*t);
 		tmp->next = new_node;
 	}
 }
 
-void	clear_lst(t_token **t)
+void	display_tokens(t_token *t)
 {
-	t_token	*cur;
-	t_token	*new_next;
-	
-	cur = *t;
-	while (cur != NULL)
-	{
-		new_next = cur->next;
-		free(cur);
-		cur = new_next;
-	}
-	*t = NULL;
-}
+	t_token	*tmp;
 
-void	del_one(t_token *t)
-{
-	if (t->content != NULL)
-		free(t->content);
-	free(t);
-	//faire pointer sur la cellule suivante, ne pas laisser de trou
+	tmp = t;
+	while (tmp != NULL)
+	{
+		ft_putstr_fd(tmp->content, 1);
+		ft_putendl_fd("", 1);
+		tmp = tmp->next;
+	}
 }

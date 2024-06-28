@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/28 18:02:59 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:53:22 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 \******************************************************************************/
 
 # define MALLOC_ERR -1
-# define PARSING_ERR -2
+# define PARSER_ERR -2
 # define LEXER_ERR -3
 # define EXPORT_ERR -4
 # define EXEC_ERR -5

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/28 18:01:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/06/28 19:46:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,10 @@ char	*dquote(char **str);
 \******************************************************************************/
 
 t_token	*new_node(char *content);
-t_token	*last_node(t_token *t);
+t_token	*t_last_node(t_token *t);
 void	add_back(t_token **t, t_token *new_node);
-void	clear_lst(t_token **t);
-void	del_one(t_token *t);
+void	clear_tokens(t_token **t);
+void	delone_token(t_token *t);
+void	delcurrent_token(t_token **t, t_token *cur);
 
 #endif
