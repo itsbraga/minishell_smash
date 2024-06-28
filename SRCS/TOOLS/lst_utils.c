@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/26 19:25:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:06:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_token	*new_node(char *content)
 	new_node = malloc(sizeof(t_token));
 	if (!new_node)
 		return (NULL);
+	// rajouter les autres elements de la structure token
 	new_node->content = content;
 	new_node->next = NULL;
 	return (new_node);
@@ -69,4 +70,5 @@ void	del_one(t_token *t)
 	if (t->content != NULL)
 		free(t->content);
 	free(t);
+	//faire pointer sur la cellule suivante, ne pas laisser de trou
 }
