@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/28 15:31:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/06/28 18:01:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,13 @@
 # include "../LIBFT/INCLUDES/libft.h"
 # include "../LIBFT/INCLUDES/ft_printf.h"
 # include "../LIBFT/INCLUDES/get_next_line_bonus.h"
+# include "defines.h"
 # include "colors.h"
 
-//ERROR MACRO
-# define MALLOC_ERR -1
-# define PARSING_ERR -2
-# define LEXER_ERR -3
-# define EXPORT_ERR -4
-# define EXEC_ERR -5
-//PARSING MACRO
-# define S_QUOTE_INSIDE 1
-# define D_QUOTE_INSIDE 2
-// struct token pour parsing et autres infos
+/******************************************************************************\
+ * STRUCTS
+\******************************************************************************/
+// pour parsing et autres infos
 typedef struct s_token
 {
 	int				idx;
@@ -57,12 +52,48 @@ typedef struct s_global
 	t_token		*token;
 }				t_global;
 
+/******************************************************************************\
+ * INIT
+\******************************************************************************/
 
 void	init_global(t_global *global);
-// ENVIRONNEMENT
+void	init_token(t_token *t);
+
+/******************************************************************************\
+ * ENVIRONMENT
+\******************************************************************************/
+
 void	create_env(t_global *g, char **envp);
 size_t	get_env_size(char **envp);
 void	copy_toppest(t_global *g);
 void	alpha_sort(t_global *g, char *current, size_t exp_env_index);
+
+/******************************************************************************\
+ * EXPAND
+\******************************************************************************/
+
+/******************************************************************************\
+ * LEXER
+\******************************************************************************/
+
+bool	is_closed_squote(char **str);
+bool	is_closed_dquote(char **str);
+
+/******************************************************************************\
+ * PARSER
+\******************************************************************************/
+
+char	*squote(char **str);
+char	*dquote(char **str);
+
+/******************************************************************************\
+ * TOOLS
+\******************************************************************************/
+
+t_token	*new_node(char *content);
+t_token	*last_node(t_token *t);
+void	add_back(t_token **t, t_token *new_node);
+void	clear_lst(t_token **t);
+void	del_one(t_token *t);
 
 #endif

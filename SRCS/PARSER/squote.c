@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dquote.c                                           :+:      :+:    :+:   */
+/*   squote.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 19:51:15 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/26 19:59:52 by annabrag         ###   ########.fr       */
+/*   Created: 2024/06/28 15:52:48 by annabrag          #+#    #+#             */
+/*   Updated: 2024/06/28 18:00:26 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCLUDES/minishell.h"
 
-// Handle double quotes ("") and single quotes (''),
-// which should escape special characters, beside $
-// for double quotes
-
-int	is_correct_dquote(char **str)
+/*	Enclosing characters in single-quotes ( '' ) shall preserve
+	the literal value of each character within the single-quotes.
+	A single-quote cannot occur within single-quotes.
+	Example:
+			elgato@42 $> '$HOME''
+			elgato@42 $>
+			elgato@42 $>
+	It gives a dquote
+*/
+char	*squote(char **str)
 {
-	int	i;
-	
+	char	*token_c;
+	int		i;
+
 	i = 0;
-	if (*str[0] == '"')
+	while (*str[i] != '\0' && *str[i] != '\'')
 		i++;
-	while (*str[i] != '$' || *str[i] != '\\' || *str[i] != "'")
-	{
-		if (*str[i] == '"');
-			return (1);
-		i++;
-	}
-	return (0);
+	token_c = ft_substr(*str, 0, i);
+	*str += i;
+	return (token_c);
 }

@@ -58,7 +58,7 @@ $(NAME): $(OBJS) $(LIBFT)
 			@printf "$(BOLD)\n================="
 			@printf "$(RESET)$(shell bash rainbow.sh " MINISHELL ")"
 			@printf "$(BOLD)=================\n\n$(RESET)"
-			@printf "$(BLINK)$(BOLD)$(GREEN)\t\t # READY! #$(RESET)\n\n"
+			@printf "$(BLINK)$(BOLD)$(PINK)\t\t # READY! #$(RESET)\n\n"
 			@printf "$(BOLD)=============================================\n\n$(RESET)"
 			@$(CC) $(CFLAGS) $(DEBUG) $(OBJS) $(LFLAGS) -o $(NAME)
 
