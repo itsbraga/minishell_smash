@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:25:39 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/02 16:38:14 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/07/03 23:29:12 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token	*new_node(char *content)
 	if (!new_node)
 		return (NULL);
 	new_node->idx = 0;
-	new_node->quoted_way = 0;
+	new_node->to_expand = false;
 	new_node->content = content;
 	new_node->next = NULL;
 	return (new_node);
@@ -59,4 +59,19 @@ void	display_tokens(t_token *t)
 		ft_putendl_fd("", 1);
 		tmp = tmp->next;
 	}
-} 
+}
+
+size_t	get_tlist_size(t_token **t)
+{
+	size_t	size;
+	t_token *node;
+
+	size = 0;
+	node = *t;
+	while (node != NULL)
+	{
+		size++;
+		node = node->next;
+	}
+	return(size);
+}

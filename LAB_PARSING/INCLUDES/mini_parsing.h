@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/03 01:18:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/07/03 23:57:21 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,12 @@
 # define EXEC_ERR -5
 # define TRUE 1
 # define FALSE 0
-# define NO_QUOTE 0
-# define ONLY_SQUOTE 1
-# define ONLY_DQUOTE 2
-# define SQUOTE_INSIDE 3
-# define DQUOTE_INSIDE 4
+# define UNCLOSED_QUOTE -1
 
 typedef struct s_token
 {
 	int             idx;
-	int				quote_way;
+	bool			to_expand;
     char			*content;
 	struct s_token	*next;
 }					t_token;
