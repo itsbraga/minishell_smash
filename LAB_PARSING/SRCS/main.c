@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:05:00 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/03 01:47:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/07/03 18:22:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ void	expand_token(t_token **tok, char **envp)
 	}
 }
 
-// Je recupere mon seul argument, le split, recupere la liste chainé résultante et applique sur chaque éléments une fonction d'expand
-// Cette fonction doit premièrement déterminer si la variable à expand est entre double quote, single quote ou les deux.
-// Deuxièmement, avec le flag déterminé précedemment, soit elle expandra avec la bonne variable d'environnement si elle existe et
-// le cas échéant elle affichera la string originelle en enlevant les quotes nécéssaires
+// Si '' ou "" il me faut supprimer les quotes
+// Si single quote avec au moins un charactere a l'interieur = literal value except ENVVAR
+// Si double quote avec au moins un charactere a l'interieur = literal value 
 
 int	main(int argc, char **argv, char **envp)
 {
