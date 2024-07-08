@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/06 14:29:27 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/07/08 21:12:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@
 # define LEXER_ERR -3
 # define EXP_ERR -4
 # define EXEC_ERR -5
-# define TRUE 1
-# define FALSE 0
-# define UNCLOSED_QUOTE -1
 
 typedef struct s_token
 {

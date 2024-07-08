@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/08 01:45:00 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/07/08 22:26:59 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,23 +105,152 @@ char	*remove_empty_quotes(char *str, int quote_idx)
 }
 
 
-void	empty_quotes(t_token *current)
+void	empty_quotes(char *str)
 {
-	char *str;
 	int		i;
 	
-	str = current->content;
 	i = 0;
 	while (str[i])
 	{
 		if ((str[i] == '"' && str[i + 1] == '"') || (str[i] == '\'' && str[i + 1] == '\''))
 		{
-			current->content = remove_empty_quotes(str, i);
+			str = remove_empty_quotes(str, i);
 			i = 0;
-			str = current->content;
 		}
 		else
 			i++;
+	}
+}
+
+//Cette fonction doit faire 3 choses :
+//- supprimer les quotes contenant quelque chose.
+//- si à l'intérieur de quotes je trouve un $ je vérifie dans quel type de quote si je dois expand ou non, si oui alors j'expand
+//- expand les variables qui ne sont dans dans des quotes.
+
+char	*remove_filled_quotes_and_expand(char *str, char *first_quote, char *second_quote, char type_quote)
+{
+	int	i;
+	int	j;
+
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == type_quote)
+		{
+			j = i + 1;
+			while (str[j] != type_quote)
+				j++;
+			
+			i = j + 1;
+		}
+		i++;
+	}
+	
+	
+}
+
+void	others_quotes(char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] == '\'')
+		{
+			j = i + 1;
+			while (str[j] != '\'')
+				j++;
+			str = remove_filled_quotes_and_expand(str, &str[i], &str[j], '\'');
+			i = j + 1;
+		}
+		else if (str[i] == '"')
+		{
+			j = i + 1;
+			while (str[j] != '"')
+				j++;
+			str = remove_filled_quotes_and_expand(str, &str[i], &str[j], '"');
+			i = j + 1;
+		}
+		i++;
+	}
+	
+}
+
+bool	switch_bool(bool closed)
+{
+	if (closed == true)
+		closed = false;
+	else
+		closed = true;
+	return (closed);
+}
+
+char *take_var(char *str, char *var)
+{
+	int	i;
+	int	j;
+	char *to_find;
+
+	i = 0;
+	while ((str + i) != var + 1)
+		i++;
+	j = i;
+	while(str[j] <= 'A' && str[j] <= 'Z')
+		j++;
+	to_find = ft_strldup(&str[i], (j - i + 1));
+	return (to_find);
+}
+
+char *search_var(char *to_find)
+{
+	
+}
+
+char	*expand(char *str, char *var)
+{
+	int		i;
+	int		j;
+	char 	*to_find;
+	char	*var_value;
+
+	i = 0;
+	to_find = take_var(str, var);
+	var_value = search_var(to_find);
+	if (var_value == NULL)
+		//
+	else
+		//
+	//
+	
+}
+
+void	handle_expand(char *str)
+{
+	int		i;
+	bool 	closed;
+	char	quote;
+
+	i = 0;
+	closed = true;
+	quote = NULL;
+	while (str[i])
+	{
+		if (str[i] == '\'' && quote != '"')
+		{
+			quote = '\'';
+			closed = switch_bool(closed);
+		}
+		if (str[i] == '"' && quote != '\'')
+		{
+			quote = '"';
+			closed = switch_bool(closed);
+		}
+		if (str[i] == '$' && (quote != '\'' && closed != false))
+			str = expand(str, &str[i]);
+		i++;
 	}
 }
 
@@ -140,8 +269,9 @@ void	handle_quotes(t_token **tok)
 			exit(EXIT_FAILURE);
 			// quote_exit();
 		}
-		empty_quotes(current);
-		// others_quotes(current);
+		empty_quotes(current->content);
+		handle_expand(current->content);
+		others_quotes(current->content);
 		current = current->next;
 		size_list--;
 	}
