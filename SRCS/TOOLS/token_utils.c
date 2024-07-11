@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: panther <panther@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/28 19:50:24 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/07/11 11:48:53 by panther          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	display_tokens(t_token *t)
 	while (tmp != NULL)
 	{
 		ft_putstr_fd(tmp->content, 1);
-		ft_putendl_fd("", 1);
 		tmp = tmp->next;
+		if (!tmp)
+			ft_putendl_fd("\n", 1);
+		else
+			ft_putstr_fd("->", 1);
 	}
 }

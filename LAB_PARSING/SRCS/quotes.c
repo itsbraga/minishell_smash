@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: panther <panther@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/08 22:26:59 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/07/11 15:14:12 by panther          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_parsing.h"
 
-// Si '' ou "" il me faut supprimer les quotes
+// Si '' ou "" il faut supprimer les quotes
 // Si single quote avec au moins un charactere a l'interieur = literal value except ENVVAR
 // Si double quote avec au moins un charactere a l'interieur = literal value
 
@@ -79,6 +79,7 @@ bool	unclosed_quotes(char *str)
 	}
 	return (unclosed_quotes_return(closed));
 }
+
 char	*remove_empty_quotes(char *str, int quote_idx)
 {
 	int	i;
@@ -104,7 +105,6 @@ char	*remove_empty_quotes(char *str, int quote_idx)
 	return (new_str);
 }
 
-
 void	empty_quotes(char *str)
 {
 	int		i;
@@ -122,16 +122,45 @@ void	empty_quotes(char *str)
 	}
 }
 
-//Cette fonction doit faire 3 choses :
+// Cette fonction doit faire 3 choses :
 //- supprimer les quotes contenant quelque chose.
-//- si à l'intérieur de quotes je trouve un $ je vérifie dans quel type de quote si je dois expand ou non, si oui alors j'expand
-//- expand les variables qui ne sont dans dans des quotes.
+//- si à l'intérieur de quotes je trouve un $ je vérifie le type de quote (si je dois expand ou non)
+//- expand les variables qui ne sont pas dans des quotes.
+
+// char	*remove_filled_quotes_and_expand(char *str, char *first_quote, char *second_quote, char type_quote)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if ((str[i] == type_quote) && (type_quote == '"'))
+// 		{
+// 			j = i + 1;
+// 			while (str[j] && (str[j] != type_quote))
+// 			{
+// 				if (str[j] == '$')
+// 					// expand
+// 				j++;
+// 			}
+// 			i = j + 1;
+// 		}
+// 		else if ((str[i] == type_quote) && (type_quote == '\''))
+// 		{
+// 			j = i + 1;
+// 			while (str[j] && (str[j] != type_quote))
+// 				j++;
+// 			i = j + 1;
+// 		}
+// 		i++;
+// 	}
+// }
 
 char	*remove_filled_quotes_and_expand(char *str, char *first_quote, char *second_quote, char type_quote)
 {
 	int	i;
 	int	j;
-
 
 	i = 0;
 	while (str[i])
@@ -139,15 +168,12 @@ char	*remove_filled_quotes_and_expand(char *str, char *first_quote, char *second
 		if (str[i] == type_quote)
 		{
 			j = i + 1;
-			while (str[j] != type_quote)
+			while (str[j] && (str[j] != type_quote))
 				j++;
-			
 			i = j + 1;
 		}
 		i++;
 	}
-	
-	
 }
 
 void	others_quotes(char *str)
@@ -156,7 +182,7 @@ void	others_quotes(char *str)
 	int	j;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '\'')
 		{
@@ -195,10 +221,10 @@ char *take_var(char *str, char *var)
 	char *to_find;
 
 	i = 0;
-	while ((str + i) != var + 1)
+	while ((str + i) != (var + 1))
 		i++;
 	j = i;
-	while(str[j] <= 'A' && str[j] <= 'Z')
+	while (str[j] && (str[j] >= 'A' && str[j] <= 'Z'))
 		j++;
 	to_find = ft_strldup(&str[i], (j - i + 1));
 	return (to_find);
@@ -265,7 +291,8 @@ void	handle_quotes(t_token **tok)
 	{
 		if (unclosed_quotes(current->content) == true)
 		{
-			ft_putendl_fd("Unclosed quote ! Aborting...", 2);
+			ft_putendl_fd("Unclosed quote !", 2);
+			ft_putendl_fd("Aborting...", 2);
 			exit(EXIT_FAILURE);
 			// quote_exit();
 		}

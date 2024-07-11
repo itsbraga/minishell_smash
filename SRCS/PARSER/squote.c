@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   squote.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: panther <panther@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 15:52:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/28 18:33:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:49:35 by panther          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	*squote(char **str)
 {
 	char	*token_c;
 	int		i;
-	int		has_quote;
+//	int		has_quote;
 
 	i = 0;
-	has_quote = 0;
+//	has_quote = 0;
 	while (*str[i] != '\0' && *str[i] != '\'')
 		i++;
 	token_c = ft_substr(*str, 0, i);
