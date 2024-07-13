@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panther <panther@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/11 15:14:12 by panther          ###   ########.fr       */
+/*   Updated: 2024/07/12 20:44:38 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,8 @@
 
 // Si '' ou "" il faut supprimer les quotes
 // Si single quote avec au moins un charactere a l'interieur = literal value except ENVVAR
-// Si double quote avec au moins un charactere a l'interieur = literal value
+// Si double quote avec au moins un charactere a l'interieur = literal value 
 
-// Cette fonction n'est pas suffisante
-// bool	unclosed_quotes(char *str)
-// {
-// 	int 	i;
-// 	int		nb_squote;
-// 	int		nb_dquote;
-	
-// 	i = 0;
-// 	nb_squote = 0;
-// 	nb_dquote = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '\'')
-// 			nb_squote++;
-// 		else if (str[i] == '"')
-// 			nb_dquote++;
-// 		i++;
-// 	}
-// 	if (nb_squote % 2 == 1 || nb_dquote % 2 == 1)
-// 		return (true);
-//	else
-// 		return (false);
-// }
 
 // Je parcours ma string
 // Je tombe sur un quote 
@@ -157,24 +134,24 @@ void	empty_quotes(char *str)
 // 	}
 // }
 
-char	*remove_filled_quotes_and_expand(char *str, char *first_quote, char *second_quote, char type_quote)
-{
-	int	i;
-	int	j;
+// char	*remove_filled_quotes_and_expand(char *str, char *first_quote, char *second_quote, char type_quote)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == type_quote)
-		{
-			j = i + 1;
-			while (str[j] && (str[j] != type_quote))
-				j++;
-			i = j + 1;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == type_quote)
+// 		{
+// 			j = i + 1;
+// 			while (str[j] && (str[j] != type_quote))
+// 				j++;
+// 			i = j + 1;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	others_quotes(char *str)
 {
@@ -214,73 +191,7 @@ bool	switch_bool(bool closed)
 	return (closed);
 }
 
-char *take_var(char *str, char *var)
-{
-	int	i;
-	int	j;
-	char *to_find;
-
-	i = 0;
-	while ((str + i) != (var + 1))
-		i++;
-	j = i;
-	while (str[j] && (str[j] >= 'A' && str[j] <= 'Z'))
-		j++;
-	to_find = ft_strldup(&str[i], (j - i + 1));
-	return (to_find);
-}
-
-char *search_var(char *to_find)
-{
-	
-}
-
-char	*expand(char *str, char *var)
-{
-	int		i;
-	int		j;
-	char 	*to_find;
-	char	*var_value;
-
-	i = 0;
-	to_find = take_var(str, var);
-	var_value = search_var(to_find);
-	if (var_value == NULL)
-		//
-	else
-		//
-	//
-	
-}
-
-void	handle_expand(char *str)
-{
-	int		i;
-	bool 	closed;
-	char	quote;
-
-	i = 0;
-	closed = true;
-	quote = NULL;
-	while (str[i])
-	{
-		if (str[i] == '\'' && quote != '"')
-		{
-			quote = '\'';
-			closed = switch_bool(closed);
-		}
-		if (str[i] == '"' && quote != '\'')
-		{
-			quote = '"';
-			closed = switch_bool(closed);
-		}
-		if (str[i] == '$' && (quote != '\'' && closed != false))
-			str = expand(str, &str[i]);
-		i++;
-	}
-}
-
-void	handle_quotes(t_token **tok)
+void	handle_quotes_and_expand(t_token **tok, char **envp)
 {
 	size_t	size_list;
 	t_token *current;
@@ -297,7 +208,7 @@ void	handle_quotes(t_token **tok)
 			// quote_exit();
 		}
 		empty_quotes(current->content);
-		handle_expand(current->content);
+		handle_expand(current->content, envp);
 		others_quotes(current->content);
 		current = current->next;
 		size_list--;

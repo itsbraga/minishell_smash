@@ -6,39 +6,63 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/03 20:46:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/07/12 20:59:00 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_parsing.h"
 
-// Le flag "to_expand" ne doit etre mis a 1 selon deux facteurs, si le parser a rencontre un $
-// en debut de string, et 
-// void    handle_expansion(t_token *t)
-// {
-// 	t_token *current;
-	
-// 	current = g->token;
-// 	while (current->content)
-// 	{
-// 		if (current->to_expand)
-// 		{
-// 			if (current->t_quoted != D_QUOTE_INSIDE)
-// 				expand_token(g, current);  
-// 		}
-// 		else
-// 			current = current->next;
-// 	}    
-// }
-
-void	expand_token(t_token **tok, char **envp)
+void	remove_var()
 {
-	t_token *current;
+	
+}
 
-	current = *tok;
-	while (current->next != NULL)
+void	add_var_value()
+{
+	
+}
+
+char	*expand(char *str, char *var, char **envp)
+{
+	int		i;
+	int		j;
+	char 	*to_find;
+	char	*var_value;
+
+	i = 0;
+	to_find = take_var(str, var);
+	var_value = search_var(to_find, envp);
+	if (var_value == NULL)
+		remove_var();
+	else
+		add_var_value();
+	//
+	
+}
+
+void	handle_expand(char *str, char **envp)
+{
+	int		i;
+	bool 	closed;
+	char	quote;
+
+	i = 0;
+	closed = true;
+	quote = NULL;
+	while (str[i])
 	{
-		assign_token(current);
-		current = current->next;
+		if (str[i] == '\'' && quote != '"')
+		{
+			quote = '\'';
+			closed = switch_bool(closed);
+		}
+		if (str[i] == '"' && quote != '\'')
+		{
+			quote = '"';
+			closed = switch_bool(closed);
+		}
+		if (str[i] == '$' && (quote != '\'' && closed != false))
+			str = expand(str, &str[i], envp);
+		i++;
 	}
 }
