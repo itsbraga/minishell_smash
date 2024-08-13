@@ -1,15 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   token_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 17:02:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/13 14:34:19 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/13 14:33:44 by annabrag          #+#    #+#             */
+/*   Updated: 2024/08/13 14:44:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Handle signals like in bash (ctrl + C, ctrl + \, ctrl + D)
+int	is_special_char(int c)
+{
+	if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96)
+		|| (c >= 123 && c <= 126))
+		return (1);
+	return (0);
+}

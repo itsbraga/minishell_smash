@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/28 19:46:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:35:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_token
 	int				idx;
 	bool			to_expand;
 	bool			s_quoted;
-	bool			d_quoted;
+	bool			db_quoted;
 	int				t_quoted;
 	char			*content;
 	struct s_token	*next;
@@ -72,19 +72,16 @@ void	alpha_sort(t_global *g, char *current, size_t exp_env_index);
  * EXPAND
 \******************************************************************************/
 
+
 /******************************************************************************\
- * LEXER
+ * PARSING
 \******************************************************************************/
 
 bool	is_closed_squote(char **str);
-bool	is_closed_dquote(char **str);
-
-/******************************************************************************\
- * PARSER
-\******************************************************************************/
-
+bool	is_closed_dbquote(char **str);
 char	*squote(char **str);
-char	*dquote(char **str);
+char	*dbquote(char **str);
+char	*cat_tcontent(t_token *to_cat);
 
 /******************************************************************************\
  * TOOLS
@@ -96,5 +93,6 @@ void	add_back(t_token **t, t_token *new_node);
 void	clear_tokens(t_token **t);
 void	delone_token(t_token *t);
 void	delcurrent_token(t_token **t, t_token *cur);
+int		is_special_char(int c);
 
 #endif

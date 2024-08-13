@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panther <panther@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/07/11 11:48:53 by panther          ###   ########.fr       */
+/*   Updated: 2024/08/13 15:35:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "minishell.h"
 
 t_token	*new_node(char *content)
 {
@@ -22,7 +22,7 @@ t_token	*new_node(char *content)
 	new_node->idx = 0;
 	new_node->to_expand = false;
 	new_node->s_quoted = false;
-	new_node->d_quoted = false;
+	new_node->db_quoted = false;
 	new_node->t_quoted = 0;
 	new_node->content = content;
 	new_node->next = NULL;

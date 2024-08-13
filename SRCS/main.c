@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panther <panther@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/11 15:36:54 by panther          ###   ########.fr       */
+/*   Updated: 2024/08/13 14:44:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/minishell.h"
+#include "minishell.h"
 
 static char	*get_user_name(void)
 {
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 	init_global(&g);
 	create_env(&g, envp);
 	user = get_user_name();
-	prompt = ft_strjoin(user, "@42] $>");
+	prompt = ft_strjoin(user, "@42] $> ");
 	while (1)
 	{
 		g.input = readline(prompt);

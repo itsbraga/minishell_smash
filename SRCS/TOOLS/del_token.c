@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/28 19:53:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:34:19 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "minishell.h"
 
 void	clear_tokens(t_token **t)
 {

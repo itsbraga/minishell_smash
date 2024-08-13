@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/26 19:35:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/13 14:34:19 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "minishell.h"
 
 static int	cmp_to_equal(const char *s1, const char *s2)
 {
@@ -69,7 +69,8 @@ void	alpha_sort(t_global *g, char *current, size_t exp_env_index)
 				tmp = g->env[i];
 			else
 			{
-				if ((cmp_to_equal(tmp, g->env[i]) > 0) && (cmp_to_equal(tmp, current) != 0))
+				if ((cmp_to_equal(tmp, g->env[i]) > 0)
+						&& (cmp_to_equal(tmp, current) != 0))
 					tmp = g->env[i];
 			}	
 		}

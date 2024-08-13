@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes.c                                           :+:      :+:    :+:   */
+/*   check_if_closed.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:44:18 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/28 19:22:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:02:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "minishell.h"
 
 bool	is_closed_squote(char **str)
 {
@@ -25,12 +25,12 @@ bool	is_closed_squote(char **str)
 			return (true);
 	else
 	{
-		printf("%s\n", "minishell: syntax error ➤ unclosed quote");
+		printf("%s\n", "minishell: syntax error ➤ unclosed single quote");
 		return (false);
 	}
 }
 
-bool	is_closed_dquote(char **str)
+bool	is_closed_dbquote(char **str)
 {
 	int	i;
 	
@@ -43,7 +43,7 @@ bool	is_closed_dquote(char **str)
 		return (true);
 	else
 	{
-		printf("%s\n", "minishell: syntax error ➤ unclosed quote");
+		printf("%s\n", "minishell: syntax error ➤ unclosed double quote");
 		return (false);
 	}
 }

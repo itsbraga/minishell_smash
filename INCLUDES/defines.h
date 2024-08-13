@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/28 18:53:22 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:27:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@
  * CUSTOM
 \******************************************************************************/
 
-# define PROMPT BOLD PINK "[elgato" RESET "@" BOLD PINK "42]" RESET " $> "
+// # define PROMPT BOLD PINK "[elgato" RESET "@" BOLD PINK "42]" RESET " $> "
 
 #endif

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   squote.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panther <panther@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 15:52:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/07/11 15:49:35 by panther          ###   ########.fr       */
+/*   Updated: 2024/08/13 15:32:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "minishell.h"
 
 /*	Enclosing characters in single-quotes ( '' ) shall preserve
 	the literal value of each character within the single-quotes.
@@ -19,21 +19,41 @@
 			elgato@42 $> '$HOME''
 			elgato@42 $>
 			elgato@42 $>
-	It gives a dquote
+	It gives a dbquote
 */
 
 // ajouter un flag pour indiquer s'il y a plus de deux single quotes
 char	*squote(char **str)
 {
-	char	*token_c;
+	char	*t_content;
 	int		i;
 //	int		has_quote;
 
+	t_content = NULL;
 	i = 0;
 //	has_quote = 0;
 	while (*str[i] != '\0' && *str[i] != '\'')
 		i++;
-	token_c = ft_substr(*str, 0, i);
+	t_content = ft_substr(*str, 0, i);
 	*str += i;
-	return (token_c);
+	return (t_content);
+}
+
+bool	add_squote_content(char **str, t_token **t)
+{
+	char	*content;
+	t_token	*new_elem;
+	
+	content = NULL;
+	if (**str == '\'')
+		content = squote(str);
+	if (content != NULL)
+		new_elem = new_node(content);
+	if (!content || !new_elem)
+	{
+		clear_tokens(t);
+		return (false);
+	}
+	add_back(t, new_elem);
+	return (true);
 }

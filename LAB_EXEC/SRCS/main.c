@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 16:28:11 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/13 14:22:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 void    fill_token_list(t_token **token, t_exec *e)
 {
     char **cmd_tab;
-    t_token *new_token;
+    t_token *new_elem;
 
     cmd_tab = ft_split(e->input, ' ');
     if (!cmd_tab)
         exit(EXIT_FAILURE);
     while (cmd_tab)
     {
-        new_token = 
+        new_elem = 
     }
 }
 

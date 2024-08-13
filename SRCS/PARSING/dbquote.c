@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dquote.c                                           :+:      :+:    :+:   */
+/*   dbquote.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:51:15 by annabrag          #+#    #+#             */
-/*   Updated: 2024/06/28 19:51:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:01:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/minishell.h"
+#include "minishell.h"
 
 /*
 	Enclosing characters in double-quotes ( "" ) shall preserve
@@ -18,11 +18,12 @@
 	with the exception of the characters dollar sign, backquote,
 	and backslash
 */
-char	*dquote(char **str)
+char	*dbquote(char **str)
 {
 	char	*t_content;
 	int		i;
-
+	
+	t_content = NULL;
 	i = 0;
 	while (*str[i] != '\0' && (*str[i] != '"' || *str[i] != '$'))
 		i++;
@@ -31,21 +32,23 @@ char	*dquote(char **str)
 	return (t_content);
 }
 
-bool	add_dquote_content(char **str, t_token **t)
+bool	add_dbquote_content(char **str, t_token **t)
 {
 	char	*content;
-	t_token	*new_token;
+	t_token	*new_elem;
 	
 	content = NULL;
 	if (**str == '"')
-		content = dquote(str);
+		content = dbquote(str);
+	// else if (**str == '$')
+	// 	content = dollar();
 	if (content != NULL)
-		new_token = new_node(content);
-	if (!content || !new_token)
+		new_elem = new_node(content);
+	if (!content || !new_elem)
 	{
-		delone_token(new_token);
+		clear_tokens(t);
 		return (false);
 	}
-	add_back(t, new_token);
+	add_back(t, new_elem);
 	return (true);
 }
