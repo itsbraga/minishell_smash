@@ -6,15 +6,23 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/12 20:59:00 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/15 18:39:21 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_parsing.h"
-
-void	remove_var()
+// EXEMPLE : BLANC"$ROUGE"BLEU = BLANCBLEU
+void	remove_var(char *str, char *var, size_t var_size)
 {
-	
+	int	i;
+	int	j;
+	char *new_str;
+
+	i = 0;
+	j = (var - str) + 1;
+	while ((str[j] >= 'A' && str[j] <= 'Z') || (str[j] >= '0' && str[j] <= '9'))
+		j++;
+		
 }
 
 void	add_var_value()
@@ -33,9 +41,9 @@ char	*expand(char *str, char *var, char **envp)
 	to_find = take_var(str, var);
 	var_value = search_var(to_find, envp);
 	if (var_value == NULL)
-		remove_var();
+		remove_var(str, var, ft_strlen(to_find) + 1);
 	else
-		add_var_value();
+		add_var_value(str, var_value, ft_strlen(var_value));
 	//
 	
 }
