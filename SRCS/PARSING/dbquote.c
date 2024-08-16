@@ -32,7 +32,7 @@ char	*dbquote(char **str)
 	return (t_content);
 }
 
-bool	add_dbquote_content(char **str, t_token **t)
+int	add_dbquote_content(char **str, t_token **t)
 {
 	char	*content;
 	t_token	*new_elem;
@@ -47,8 +47,8 @@ bool	add_dbquote_content(char **str, t_token **t)
 	if (!content || !new_elem)
 	{
 		clear_tokens(t);
-		return (false);
+		return (EXIT_FAILURE);
 	}
 	add_back(t, new_elem);
-	return (true);
+	return (EXIT_SUCCESS);
 }

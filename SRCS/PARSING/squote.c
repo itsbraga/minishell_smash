@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 15:52:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/13 15:32:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:44:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*squote(char **str)
 	return (t_content);
 }
 
-bool	add_squote_content(char **str, t_token **t)
+int	add_squote_content(char **str, t_token **t)
 {
 	char	*content;
 	t_token	*new_elem;
@@ -52,8 +52,8 @@ bool	add_squote_content(char **str, t_token **t)
 	if (!content || !new_elem)
 	{
 		clear_tokens(t);
-		return (false);
+		return (EXIT_FAILURE);
 	}
 	add_back(t, new_elem);
-	return (true);
+	return (EXIT_SUCCESS);
 }

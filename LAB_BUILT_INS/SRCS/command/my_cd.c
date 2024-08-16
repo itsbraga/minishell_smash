@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_utils2.c                                     :+:      :+:    :+:   */
+/*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 14:33:44 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/16 17:41:55 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/16 16:21:49 by annabrag          #+#    #+#             */
+/*   Updated: 2024/08/16 17:51:57 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "built_ins.h"
 
-bool	is_special_char(int c)
+static char	*home_path(char *path)
 {
-	if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96)
-		|| (c >= 123 && c <= 126))
-		return (true);
-	return (false);
+	char	*res;
+
+	if ((ft_strcmp(path, "~") == 0) || (ft_strcmp(path, "~/") == 0))
+	{
+		res = getenv("HOME");
+		if (res != NULL)
+		{
+			res = ft_substr(path, 1, ft_strlen(path));
+			return (res);
+		}
+	}
 }

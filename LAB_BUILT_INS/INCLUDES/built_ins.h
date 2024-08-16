@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   built_ins.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/16 16:13:56 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:54:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef BUILT_INS_H
+# define BUILT_INS_H
 
 # include <stddef.h>
 # include <stdio.h>
@@ -56,6 +56,6 @@ t_token		*t_last_node(t_token *t);
 void		add_back(t_token **t, t_token *new_node);
 void		display_tokens(t_token *t);
 int			my_pwd(void);
-void		execute_builtins(char *command);
+void		exec_built_in(char **built_in);
 
 #endif

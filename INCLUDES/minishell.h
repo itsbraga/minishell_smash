@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 16:12:41 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:44:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ bool	is_closed_squote(char **str);
 bool	is_closed_dbquote(char **str);
 char	*squote(char **str);
 char	*dbquote(char **str);
+int		add_squote_content(char **str, t_token **t);
+int		add_dbquote_content(char **str, t_token **t);
 char	*cat_tcontent(t_token *to_cat);
 
 /******************************************************************************\
@@ -93,7 +95,7 @@ void	add_back(t_token **t, t_token *new_node);
 void	clear_tokens(t_token **t);
 void	delone_token(t_token *t);
 void	delcurrent_token(t_token **t, t_token *cur);
-int		is_special_char(int c);
+bool	is_special_char(int c);
 
 /******************************************************************************\
  * BUILTINS

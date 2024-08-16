@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 15:08:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:39:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(g.input);
 		// free(g.input);
 	}
+	printf("%s%s%s", PURPLE, "Bye le sang\n", RESET);
 	free(user);
 	free(prompt);
 	return (0);

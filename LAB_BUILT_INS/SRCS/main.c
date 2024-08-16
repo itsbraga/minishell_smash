@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/16 16:14:21 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 18:01:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built_ins.h"
 
 t_global	g;
 
@@ -41,7 +41,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc > 1)
 		exit(EXIT_FAILURE);
 	(void)argv;
-	(void)envp;
 	init_global(&g);
 	create_env(&g, envp);
 	user = get_user_name();
@@ -51,11 +50,12 @@ int	main(int argc, char **argv, char **envp)
 		g.input = readline(prompt);
 		if (*g.input)
 		{
-			execute_builtins(g.input);
+			exec_built_in(*g.input);
 			add_history(g.input);
 		}
 		// free(g.input);
 	}
+	printf("%s%s%s", PURPLE, "Bye le sang\n", RESET);
 	free(user);
 	free(prompt);
 	return (0);

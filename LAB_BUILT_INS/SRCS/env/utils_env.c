@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 15:16:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:52:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built_ins.h"
 
 static int	cmp_to_equal(const char *s1, const char *s2)
 {

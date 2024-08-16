@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/16 16:02:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:51:59 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built_ins.h"
 
 /*	PWD means Print Working Directory	
 	The $PWD environment variable is a dynamic variable

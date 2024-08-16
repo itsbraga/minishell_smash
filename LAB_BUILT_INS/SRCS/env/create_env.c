@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 15:14:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:52:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built_ins.h"
 
 static void	fill_export_env(t_global *g, size_t exp_env_size, size_t envp_size)
 {
