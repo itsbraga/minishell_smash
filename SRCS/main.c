@@ -6,11 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/13 14:44:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:08:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_global	g;
 
 static char	*get_user_name(void)
 {
@@ -26,7 +28,6 @@ static char	*get_user_name(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_global	g;
 	char		*user;
 	char		*prompt;
 

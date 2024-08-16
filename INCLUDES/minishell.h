@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/13 15:35:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:12:41 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 /******************************************************************************\
  * STRUCTS
 \******************************************************************************/
-// pour parsing et autres infos
+
 typedef struct s_token
 {
 	int				idx;
@@ -60,6 +60,16 @@ void	init_global(t_global *global);
 void	init_token(t_token *t);
 
 /******************************************************************************\
+ * PARSING
+\******************************************************************************/
+
+bool	is_closed_squote(char **str);
+bool	is_closed_dbquote(char **str);
+char	*squote(char **str);
+char	*dbquote(char **str);
+char	*cat_tcontent(t_token *to_cat);
+
+/******************************************************************************\
  * ENVIRONMENT
 \******************************************************************************/
 
@@ -74,16 +84,6 @@ void	alpha_sort(t_global *g, char *current, size_t exp_env_index);
 
 
 /******************************************************************************\
- * PARSING
-\******************************************************************************/
-
-bool	is_closed_squote(char **str);
-bool	is_closed_dbquote(char **str);
-char	*squote(char **str);
-char	*dbquote(char **str);
-char	*cat_tcontent(t_token *to_cat);
-
-/******************************************************************************\
  * TOOLS
 \******************************************************************************/
 
@@ -94,5 +94,11 @@ void	clear_tokens(t_token **t);
 void	delone_token(t_token *t);
 void	delcurrent_token(t_token **t, t_token *cur);
 int		is_special_char(int c);
+
+/******************************************************************************\
+ * BUILTINS
+\******************************************************************************/
+
+int		my_pwd(void);
 
 #endif
