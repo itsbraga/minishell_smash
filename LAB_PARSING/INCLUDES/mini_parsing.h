@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/08 21:12:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/16 18:26:30 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <errno.h>
+# include <readline/readline.h>
 # include "../LIBFT/INCLUDES/libft.h"
 # include "../LIBFT/INCLUDES/ft_printf.h"
 # include "../LIBFT/INCLUDES/get_next_line_bonus.h"
@@ -51,6 +52,10 @@ t_token	*t_last_node(t_token *t);
 void	add_back(t_token **t, t_token *new_node);
 void	display_tokens(t_token *t);
 size_t	get_tlist_size(t_token **t);
-void	handle_quotes(t_token **t);
+char	*handle_quotes_and_expand(char *input, char **envp);
+char	*handle_expand(char *str, char **envp);
+char 	*search_var(char *to_find, char **envp);
+char	*take_var(char *str, char *var);
+bool	switch_bool(bool closed);
 
 #endif

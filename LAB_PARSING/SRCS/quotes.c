@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/15 17:27:56 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/16 18:25:03 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,34 +99,34 @@ void	empty_quotes(char *str)
 	}
 }
 
-void	others_quotes(char *str)
-{
-	int	i;
-	int	j;
+// void	others_quotes(char *str)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'')
-		{
-			j = i + 1;
-			while (str[j] != '\'')
-				j++;
-			str = remove_filled_quotes_and_expand(str, &str[i], &str[j], '\'');
-			i = j + 1;
-		}
-		else if (str[i] == '"')
-		{
-			j = i + 1;
-			while (str[j] != '"')
-				j++;
-			str = remove_filled_quotes_and_expand(str, &str[i], &str[j], '"');
-			i = j + 1;
-		}
-		i++;
-	}
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '\'')
+// 		{
+// 			j = i + 1;
+// 			while (str[j] != '\'')
+// 				j++;
+// 			str = remove_filled_quotes_and_expand(str, &str[i], &str[j], '\'');
+// 			i = j + 1;
+// 		}
+// 		else if (str[i] == '"')
+// 		{
+// 			j = i + 1;
+// 			while (str[j] != '"')
+// 				j++;
+// 			str = remove_filled_quotes_and_expand(str, &str[i], &str[j], '"');
+// 			i = j + 1;
+// 		}
+// 		i++;
+// 	}
 	
-}
+// }
 
 bool	switch_bool(bool closed)
 {
@@ -137,31 +137,30 @@ bool	switch_bool(bool closed)
 	return (closed);
 }
 
-void	handle_quotes_and_expand(t_token **tok, char **envp)
+char	*handle_quotes_and_expand(char *input, char **envp)
 {
-	size_t	size_list;
-	t_token *current;
+	// size_t	size_list;
+	// t_token *current;
 	//recupere tout les tokens, verifie d'abord si il y a des unclosed quotes
-	size_list = get_tlist_size(tok);
-	current = *tok;
-	while (size_list)
+	// size_list = get_tlist_size(tok);
+	// current = *tok;
+	printf("0\n");
+	if (unclosed_quotes(input) == true)
 	{
-		if (unclosed_quotes(current->content) == true)
-		{
-			ft_putendl_fd("Unclosed quote !", 2);
-			ft_putendl_fd("Aborting...", 2);
-			exit(EXIT_FAILURE);
-			// quote_exit();
-		}
-		// SUPPRIME LES QUOTES VIDES INUTILES COMME BASH
-		empty_quotes(current->content);
-		//VERIFIE SI $ ET SI OUI EXPAND OU NON SELON LES QUOTES
-		//IL FAUDRAIT PEUT ETRE RE-UTILISE EMPTY_QUOTES DANS LE CAS OU UNE VARIABLE ENTOUREE
-		// DE DOUBLE QUOTE SE RETROUVE SUPPRIME CAR VIDE
-		handle_expand(current->content, envp);
-		//INTERPRETE LES QUOTES RESTANTS ET LES SUPPRIME
-		others_quotes(current->content);
-		current = current->next;
-		size_list--;
+		ft_putendl_fd("Unclosed quote !", 2);
+		ft_putendl_fd("Aborting...", 2);
+		exit(EXIT_FAILURE);
+		// quote_exit();
 	}
+	printf("1\n");
+	// SUPPRIME LES QUOTES VIDES INUTILES COMME BASH
+	empty_quotes(input);
+	printf("2\n");
+	//VERIFIE SI $ ET SI OUI EXPAND OU NON SELON LES QUOTES
+	//IL FAUDRAIT PEUT ETRE RE-UTILISE EMPTY_QUOTES DANS LE CAS OU UNE VARIABLE ENTOUREE
+	// DE DOUBLE QUOTE SE RETROUVE SUPPRIME CAR VIDE
+	input = handle_expand(input, envp);
+	//INTERPRETE LES QUOTES RESTANTS ET LES SUPPRIME
+	// others_quotes(current->content);
+	return (input);
 }
