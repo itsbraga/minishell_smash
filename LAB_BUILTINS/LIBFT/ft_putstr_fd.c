@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/13 15:48:38 by annabrag         ###   ########.fr       */
+/*   Created: 2023/05/28 22:13:39 by u4s2e0r           #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "INCLUDES/libft.h"
 
-// add a path:	PATH=$PATH:~/opt/bin
-//			or	PATH=~/opt/bin:$PATH	
-
-char	*find_path(char **envp)
+void	ft_putstr_fd(char *str, int fd)
 {
 	int	i;
 
 	i = 0;
-	while (envp[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (!strncmp(envp, "PATH=", 5))
-			return (ft_substr(envp[i], 5, ft_strlen(envp[i] - 5)));
+		write(fd, &str[i], 1);
+		i++;
 	}
 }

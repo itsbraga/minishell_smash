@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_strldup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/09 13:44:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 16:27:24 by art3mis          ###   ########.fr       */
+/*   Created: 2024/05/15 20:06:42 by pmateo            #+#    #+#             */
+/*   Updated: 2024/06/11 16:27:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
+#include "INCLUDES/libft.h"
 
-typedef struct s_env
+char	*ft_strldup(const char *s1, size_t length)
 {
-	char *name;
-	char *value;
-	struct s_env *next;
-}	t_env;
+	char	*s2;
 
-
-int	main(int argc, char **argv, char *env)
-{
-	t_env *var;
-
-	
-
-	
+	s2 = malloc((length + 1) * sizeof(char));
+	if (s2 == NULL)
+		return (NULL);
+	ft_strlcpy(s2, s1, (length + 1));
+	return (s2);
 }
