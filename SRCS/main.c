@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 17:39:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:38:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_global	g;
 
-static char	*get_user_name(void)
+static char	*__get_username(void)
 {
 	const char		*name;
 	char			*bracket;
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	init_global(&g);
 	create_env(&g, envp);
-	user = get_user_name();
+	user = __get_username();
 	prompt = ft_strjoin(user, "@42] $> ");
 	while (1)
 	{

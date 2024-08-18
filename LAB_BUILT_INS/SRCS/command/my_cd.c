@@ -5,43 +5,86 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD:SRCS/PARSING/envp.c
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/15 14:22:06 by art3mis          ###   ########.fr       */
-=======
-/*   Created: 2024/08/16 16:21:49 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/16 17:51:57 by annabrag         ###   ########.fr       */
->>>>>>> 54a68bd9167e18fc7cb8e6aeea8088abc77a9926:LAB_BUILT_INS/SRCS/command/my_cd.c
+/*   Updated: 2024/08/18 23:15:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_ins.h"
 
-static char	*home_path(char *path)
+/*	Recherche une variable d'environnement spécifique dans env (g->env),
+	puis retourne la valeur associée si elle est trouvée
+*/
+static char	*__find_var_path(char *to_find, t_global *g)
 {
-<<<<<<< HEAD:SRCS/PARSING/envp.c
+	char	*path;
 	int		i;
-	char	*path_prefix;
+	int		len_var;
 
+	path = NULL;
 	i = 0;
-	path_prefix = "PATH=";
-	while (envp[i] != NULL)
+	len_var = ft_strlen(to_find);
+	while (g->env[i] != NULL)
 	{
-		if (ft_strncmp(envp[i], path_prefix, 5) == 0)
-			return (ft_substr(envp[i], 5, ft_strlen(envp[i] - 5)));
-		i++;
-=======
-	char	*res;
-
-	if ((ft_strcmp(path, "~") == 0) || (ft_strcmp(path, "~/") == 0))
-	{
-		res = getenv("HOME");
-		if (res != NULL)
+		if (ft_strncmp(g->env[i], to_find, len_var) == 0)
 		{
-			res = ft_substr(path, 1, ft_strlen(path));
-			return (res);
+			path = ft_substr(g->env[i], len_var, (ft_strlen(g->env[i]) - len_var));
+			return (path);
 		}
->>>>>>> 54a68bd9167e18fc7cb8e6aeea8088abc77a9926:LAB_BUILT_INS/SRCS/command/my_cd.c
+		i++;
 	}
 	return (NULL);
 }
+
+int	go_to_env_var(t_global *g, char *var)
+{
+	char	*var_path;
+	int		cd_ret;
+
+	var_path = __find_var_path(var, g);
+	cd_ret = chdir(var_path);
+	free(var_path);
+	if (cd_ret != 0)
+	{
+		printf("%s%s%s%s\n", BOLD RED, "minishell: cd: ", RESET, strerror(errno));
+		return (EXIT_FAILURE);
+	}
+	return (cd_ret);
+}
+
+void	update_path_in_env(t_global *g)
+{
+	char	cwd[PATH_MAX];
+	char	*tmp;
+	char	*old_pwd;
+	int		i;
+
+	if ((*cwd = getcwd(NULL, sizeof(cwd))) == NULL)
+	{
+		printf("%s%s%s\n", BOLD RED "minishell: ", RESET "getcwd: ", strerror(errno));
+		return (EXIT_FAILURE);
+	}
+	old_pwd = getenv("PWD");
+	i = 0;
+	while (g->env[i] != NULL)
+	{
+		if (ft_strncmp(g->env[i], "PWD=", 4) == 0)
+		{
+			tmp = ft_strjoin("PWD=", cwd);
+			free(g->env[i]);
+			g->env[i] = tmp;
+		}
+		else if (ft_strncmp(g->env[i], "OLDPWD=", 7) == 0)
+		{
+			if (old_pwd != NULL)
+				tmp = ft_strjoin("OLDPWD=", old_pwd);
+			else
+				tmp = ft_strjoin("OLDPWD=", "");
+			free(g->env[i]);
+			g->env[i] = tmp;
+		}
+		i++;
+	}
+}
+
+int	my_cd(t_global *g);

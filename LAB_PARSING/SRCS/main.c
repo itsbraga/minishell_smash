@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:05:00 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 19:58:16 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/18 22:37:41 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_parsing.h"
-
-// static void	print_token(t_token *tok)
-// {
-// 	while(tok != NULL)
-// 	{
-// 		printf("%s", tok->content);
-// 		tok = tok->next;
-// 		if (tok == NULL)
-// 			printf("\n");
-// 		else
-// 			printf("->");
-// 	}
-// }
 
 void	free_tab(char **tab)
 {
@@ -74,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	while (1)
 	{
-		input = readline("minishell>");
+		input = readline("minishell> ");
 		printf("%s\n", input);
 		input = handle_quotes_and_expand(input, envp);
 		printf("%s\n", input);

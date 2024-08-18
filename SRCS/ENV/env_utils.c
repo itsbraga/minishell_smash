@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_env.c                                        :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/13 14:34:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:38:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	cmp_to_equal(const char *s1, const char *s2)
+static int	__cmp_to_equal(const char *s1, const char *s2)
 {
 	size_t	i;
 
@@ -45,7 +45,7 @@ void	copy_toppest(t_global *g)
 			tmp_top = g->env[0];
 		else
 		{
-			if (cmp_to_equal(tmp_top, g->env[i] ) > 0)
+			if (__cmp_to_equal(tmp_top, g->env[i] ) > 0)
 				tmp_top = g->env[i];
 			else
 				i++;
@@ -63,14 +63,14 @@ void	alpha_sort(t_global *g, char *current, size_t exp_env_index)
 	tmp = NULL;
 	while(g->env[i])
 	{
-		if (cmp_to_equal(current, g->env[i]) < 0)
+		if (__cmp_to_equal(current, g->env[i]) < 0)
 		{
 			if (!tmp)
 				tmp = g->env[i];
 			else
 			{
-				if ((cmp_to_equal(tmp, g->env[i]) > 0)
-						&& (cmp_to_equal(tmp, current) != 0))
+				if ((__cmp_to_equal(tmp, g->env[i]) > 0)
+						&& (__cmp_to_equal(tmp, current) != 0))
 					tmp = g->env[i];
 			}	
 		}

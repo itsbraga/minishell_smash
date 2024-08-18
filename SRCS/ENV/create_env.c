@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/13 14:34:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:38:19 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	fill_export_env(t_global *g, size_t exp_env_size, size_t envp_size)
+static void	__fill_export_env(t_global *g, size_t exp_env_size, size_t envp_size)
 {
 	while (exp_env_size != envp_size)
 	{
@@ -40,7 +40,7 @@ void	create_env(t_global *g, char **envp)
 		i++;
 	}
 	g->env = minishell_env;
-	g->export_env = malloc((envp_size +1) * sizeof(char *));
-	fill_export_env(g, 0, envp_size);
+	g->export_env = malloc((envp_size + 1) * sizeof(char *));
+	__fill_export_env(g, 0, envp_size);
 }
 

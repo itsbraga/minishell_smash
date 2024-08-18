@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/16 18:01:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:39:05 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 t_global	g;
 
-static void    init_global(t_global *g)
+static void    __init_global(t_global *g)
 {
 	g->input = NULL;
 	g->env = NULL;
 	g->export_env = NULL;
 }
 
-static char	*get_user_name(void)
+static char	*__get_username(void)
 {
 	const char		*name;
 	char			*bracket;
@@ -41,9 +41,9 @@ int	main(int argc, char **argv, char **envp)
 	if (argc > 1)
 		exit(EXIT_FAILURE);
 	(void)argv;
-	init_global(&g);
+	__init_global(&g);
 	create_env(&g, envp);
-	user = get_user_name();
+	user = __get_username();
 	prompt = ft_strjoin(user, "@42] $> ");
 	while (1)
 	{

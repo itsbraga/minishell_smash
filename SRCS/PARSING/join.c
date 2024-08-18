@@ -6,14 +6,14 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:19:08 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/18 19:41:43 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/18 22:38:53 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
-static char	*ft_strcat(char *dest, char *src)
+static char	*__ft_strcat(char *dest, char *src)
 {
 	int	i;
 	int	j;
@@ -51,7 +51,7 @@ char	*cat_tcontent(t_token *to_cat)
 		return (NULL);
 	while (to_cat != NULL && to_cat->content != NULL)
 	{
-		ft_strcat(buffer, (char *)to_cat->next);
+		__ft_strcat(buffer, (char *)to_cat->next);
 		to_cat = to_cat->next;
 	}
 	return (buffer);
