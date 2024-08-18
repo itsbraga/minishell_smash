@@ -6,7 +6,7 @@
 #    By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/20 14:22:48 by pmateo            #+#    #+#              #
-#    Updated: 2024/07/06 14:23:07 by pmateo           ###   ########.fr        #
+#    Updated: 2024/08/16 16:50:59 by pmateo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ DIRINC_MINIPARSING = ./INCLUDES
 INCFILES = 			${DIRINC_MINIPARSING}/mini_parsing.h
 
 DIR_SRCS = 			./SRCS/
-SRCS = 				main.c quotes.c token_utils.c
+SRCS = 				main.c quotes.c expand.c expand_utils.c token_utils.c
 
 OBJ = ${SRCS:.c=.o}
 
@@ -41,7 +41,7 @@ ${LIBFT}:
 	${MAKE} -s -C ${DIR_LIBFT}
 
 ${NAME}: ${OBJ} ${OBJ_INIT} ${LIBFT} ${INCFILES}
-	${CC} ${FLAGS} -o ${NAME} ${OBJ} ${OBJ_INIT} -I ${DIRINC_MINIPARSING} -I ${DIRINC_LIBFT} -L ${DIR_LIBFT} -lft
+	${CC} ${FLAGS} -o ${NAME} ${OBJ} ${OBJ_INIT} -I ${DIRINC_MINIPARSING} -I ${DIRINC_LIBFT} -L ${DIR_LIBFT} -lft -lreadline
 
 all: ${LIBFT} ${NAME}
 		@echo "\033[1;5;32m# MINI_PARSING READY ! #\033[0m"

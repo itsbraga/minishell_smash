@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:44:18 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/13 15:02:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:50:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	is_closed_squote(char **str)
 			return (true);
 	else
 	{
-		printf("%s\n", "minishell: syntax error ➤ unclosed single quote");
+		printf("%s%s\n", "minishell: ", strerror(errno));
 		return (false);
 	}
 }
@@ -43,7 +43,7 @@ bool	is_closed_dbquote(char **str)
 		return (true);
 	else
 	{
-		printf("%s\n", "minishell: syntax error ➤ unclosed double quote");
+		printf("%s%s\n", "minishell: ", strerror(errno));
 		return (false);
 	}
 }

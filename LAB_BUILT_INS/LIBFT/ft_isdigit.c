@@ -1,13 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 15:30:44 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/13 15:30:46 by annabrag         ###   ########.fr       */
+/*   Created: 2023/05/05 20:48:09 by pmateo            #+#    #+#             */
+/*   Updated: 2024/03/25 02:52:41 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "INCLUDES/libft.h"
+
+int	ft_isdigit(int c)
+{
+	if (c > 47 && c < 58)
+		return (2048);
+	else
+		return (0);
+}

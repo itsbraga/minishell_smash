@@ -6,16 +6,16 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:33:44 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/13 14:44:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:41:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_special_char(int c)
+bool	is_special_char(int c)
 {
 	if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96)
 		|| (c >= 123 && c <= 126))
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }

@@ -6,13 +6,32 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:19:08 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/18 19:40:00 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/18 19:41:43 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
 
-// recoder strcat
+static char	*ft_strcat(char *dest, char *src)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (dest[i])
+		i++;
+	while (src[j])
+	{
+		dest[i] = src[j];
+		j++;
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
 char	*cat_tcontent(t_token *to_cat)
 {
 	t_token	*tmp;
@@ -32,7 +51,7 @@ char	*cat_tcontent(t_token *to_cat)
 		return (NULL);
 	while (to_cat != NULL && to_cat->content != NULL)
 	{
-		strcat(buffer, (char *)to_cat->content);
+		ft_strcat(buffer, (char *)to_cat->next);
 		to_cat = to_cat->next;
 	}
 	return (buffer);

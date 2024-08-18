@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/09 13:44:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 16:27:24 by art3mis          ###   ########.fr       */
+/*   Created: 2023/05/28 22:13:39 by u4s2e0r           #+#    #+#             */
+/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
+#include "INCLUDES/libft.h"
 
-typedef struct s_env
+void	ft_putstr_fd(char *str, int fd)
 {
-	char *name;
-	char *value;
-	struct s_env *next;
-}	t_env;
+	int	i;
 
-
-int	main(int argc, char **argv, char *env)
-{
-	t_env *var;
-
-	
-
-	
+	i = 0;
+	while (str[i] != '\0')
+	{
+		write(fd, &str[i], 1);
+		i++;
+	}
 }
