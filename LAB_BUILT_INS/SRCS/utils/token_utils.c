@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:25:39 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 17:52:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:46:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ t_token	*new_node(char *content)
 	new_node = malloc(sizeof(t_token));
 	if (!new_node)
 		return (NULL);
-	new_node->idx = 0;
-	new_node->to_expand = false;
 	new_node->content = content;
 	new_node->next = NULL;
 	return (new_node);

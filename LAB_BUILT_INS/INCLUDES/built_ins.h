@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/18 20:28:39 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/19 20:09:01 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@
 
 typedef struct s_token
 {
-	int				idx;
-	bool			to_expand;
-	bool			s_quoted;
-	bool			db_quoted;
-	int				t_quoted;
 	char			*content;
 	struct s_token	*next;
 }				t_token;
@@ -48,15 +43,25 @@ typedef struct s_global
 	t_token		*token;
 }				t_global;
 
+
+/******************************************************************************\
+ * FUNCTIONS
+\******************************************************************************/
+
 size_t		get_env_size(char **envp);
 void		copy_toppest(t_global *g);
 void		alpha_sort(t_global *g, char *current, size_t exp_env_index);
 void		create_env(t_global *g, char **envp);
+void		show_env(char **env);
+
 t_token		*new_node(char *content);
 t_token		*t_last_node(t_token *t);
 void		add_back(t_token **t, t_token *new_node);
 void		display_tokens(t_token *t);
+
 int			my_pwd(void);
 void		exec_built_in(char **built_in);
+int			my_cd(t_token *t, t_global *g);
+void	update_env_paths(t_global *g);
 
 #endif

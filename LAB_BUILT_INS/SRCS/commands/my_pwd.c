@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/18 23:13:02 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/19 12:39:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	my_pwd(void)
 {
 	char	cwd[PATH_MAX];
 
-	if ((*cwd = getcwd(NULL, sizeof(cwd))) == NULL)
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
-		printf("%s%s%s\n", BOLD RED, "minishell: ", RESET "getcwd: ", strerror(errno));
+		printf("%s%s", BOLD RED "minishell: ", RESET "getcwd: ");
+		printf("%s\n", strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	ft_putendl_fd(cwd, STDOUT_FILENO);
