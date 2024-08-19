@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 18:25:03 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/19 19:45:32 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	*remove_empty_quotes(char *str, int quote_idx)
 
 	i = 0;
 	j = 0;
+	printf("quoteidx = [%d]\n", quote_idx);
 	new_str = malloc((ft_strlen(str) - 1) * (sizeof(char)));
 	while (i != quote_idx)
 	{
@@ -78,11 +79,13 @@ char	*remove_empty_quotes(char *str, int quote_idx)
 		i++;
 		j++;
 	}
+	new_str[i] = '\0';
+	printf("newstr = %s\n", new_str);
 	free(str);
 	return (new_str);
 }
-
-void	empty_quotes(char *str)
+// EXEMPLE : he""he -> hehe
+char	*empty_quotes(char *str)
 {
 	int		i;
 	
@@ -91,12 +94,14 @@ void	empty_quotes(char *str)
 	{
 		if ((str[i] == '"' && str[i + 1] == '"') || (str[i] == '\'' && str[i + 1] == '\''))
 		{
+			printf("emptyquote\n");
 			str = remove_empty_quotes(str, i);
 			i = 0;
 		}
 		else
 			i++;
 	}
+	return (str);
 }
 
 // void	others_quotes(char *str)
@@ -139,12 +144,7 @@ bool	switch_bool(bool closed)
 
 char	*handle_quotes_and_expand(char *input, char **envp)
 {
-	// size_t	size_list;
-	// t_token *current;
-	//recupere tout les tokens, verifie d'abord si il y a des unclosed quotes
-	// size_list = get_tlist_size(tok);
-	// current = *tok;
-	printf("0\n");
+	(void)envp;
 	if (unclosed_quotes(input) == true)
 	{
 		ft_putendl_fd("Unclosed quote !", 2);
@@ -154,12 +154,12 @@ char	*handle_quotes_and_expand(char *input, char **envp)
 	}
 	printf("1\n");
 	// SUPPRIME LES QUOTES VIDES INUTILES COMME BASH
-	empty_quotes(input);
+	input = empty_quotes(input);
 	printf("2\n");
 	//VERIFIE SI $ ET SI OUI EXPAND OU NON SELON LES QUOTES
 	//IL FAUDRAIT PEUT ETRE RE-UTILISE EMPTY_QUOTES DANS LE CAS OU UNE VARIABLE ENTOUREE
 	// DE DOUBLE QUOTE SE RETROUVE SUPPRIME CAR VIDE
-	input = handle_expand(input, envp);
+	// input = handle_expand(input, envp);
 	//INTERPRETE LES QUOTES RESTANTS ET LES SUPPRIME
 	// others_quotes(current->content);
 	return (input);
