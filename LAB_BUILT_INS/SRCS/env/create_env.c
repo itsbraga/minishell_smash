@@ -6,40 +6,54 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/19 12:22:44 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:32:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_ins.h"
 
-static void	__fill_export_env(t_global *g, size_t exp_env_size, size_t envp_size)
-{
-	while (exp_env_size != envp_size)
-	{
-		if (!exp_env_size)
-			copy_toppest(g);
-		else
-			alpha_sort(g, g->export_env[exp_env_size - 1], exp_env_size);
-		exp_env_size++;
-	}
-	g->export_env[envp_size] = NULL;
-}
+// void	create_env(t_global *g, char **envp)
+// {
+// 	int		i;
+// 	size_t	envp_size;
+// 	char 	**minishell_env;
 
-void	create_env(t_global *g, char **envp)
+// 	i = 0;
+// 	envp_size = get_env_size(envp);
+// 	minishell_env = malloc((envp_size + 1) * sizeof(char *));
+// 	while (envp[i])
+// 	{
+// 		minishell_env[i] = ft_strdup(envp[i]);
+// 		i++;
+// 	}
+// 	g->env = minishell_env;
+// }
+
+void	create_env_list(t_env *env, char **envp)
 {
 	int		i;
-	size_t	envp_size;
-	char 	**minishell_env;
+	t_env	*var;
 
 	i = 0;
-	envp_size = get_env_size(envp);
-	minishell_env = malloc((envp_size + 1) * sizeof(char *));
-	while (envp[i])
+	while (envp[i] != NULL)
 	{
-		minishell_env[i] = ft_strdup(envp[i]);
+		var = e_new_node(envp[i]);
+		if (var == NULL)
+			return ;
+		e_add_back(&env, var);
 		i++;
 	}
-	g->env = minishell_env;
-	g->export_env = malloc((envp_size +1) * sizeof(char *));
-	__fill_export_env(g, 0, envp_size);
+}
+
+void	display_env(t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp != NULL)
+	{
+		ft_putstr_fd(tmp->content, 1);
+		ft_putendl_fd("", 1);
+		tmp = tmp->next;
+	}
 }

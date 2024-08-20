@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_cd.c                                            :+:      :+:    :+:   */
+/*   old_my_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/20 20:22:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:37:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,23 @@
 /*	Recherche une variable d'environnement spécifique dans env (g->env),
 	puis retourne la valeur associée si elle est trouvée
 */
-static char	*__find_var_path(char *to_find, t_env *env)
+static char	*__find_var_path(char *to_find, t_global *g)
 {
-	t_env	*head;
 	char	*path;
-	int		l_var_env;
-	int		l_to_find;
+	int		i;
+	int		len_var;
 
-	head = env;
 	path = NULL;
-	l_var_env = ft_strlen(env->content);
-	l_to_find = ft_strlen(to_find);
-	while (head != NULL)
+	i = 0;
+	len_var = ft_strlen(to_find);
+	while (g->env[i] != NULL)
 	{
-		if (ft_strncmp(head->content, to_find, l_to_find) == 0)
+		if (ft_strncmp(g->env[i], to_find, len_var) == 0)
 		{
-			path = ft_substr(env->content, l_to_find, (l_var_env - l_to_find));
+			path = ft_substr(g->env[i], len_var, (ft_strlen(g->env[i]) - len_var));
 			return (path);
 		}
-		head = head->next;
+		i++;
 	}
 	return (NULL);
 }
@@ -43,7 +41,7 @@ static int	__cd_to_env_var(t_global *g, char *var)
 	char	*var_path;
 	int		ret;
 
-	var_path = __find_var_path(var, g->env);
+	var_path = __find_var_path(var, g);
 	printf("%s %s\n", BOLD BLUE "PATH:" RESET, var_path);
 	ret = chdir((const char *)var_path);
 	printf("%s %d\n", BOLD YELLOW "1. RETURN de chdir:" RESET, ret);

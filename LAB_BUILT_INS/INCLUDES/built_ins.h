@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/19 20:09:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:30:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,16 @@ typedef struct s_token
 	struct s_token	*next;
 }				t_token;
 
+typedef struct s_env
+{
+	char			*content;
+	struct s_env	*next;
+}				t_env;
+
 typedef struct s_global
 {
 	char		*input;
-	char		**env;
-	char		**export_env;
+	t_env		*env;
 	t_token		*token;
 }				t_global;
 
@@ -48,20 +53,20 @@ typedef struct s_global
  * FUNCTIONS
 \******************************************************************************/
 
-size_t		get_env_size(char **envp);
-void		copy_toppest(t_global *g);
-void		alpha_sort(t_global *g, char *current, size_t exp_env_index);
-void		create_env(t_global *g, char **envp);
-void		show_env(char **env);
+t_env		*e_new_node(char *content);
+t_env		*e_last_node(t_env *e);
+void		e_add_back(t_env **e, t_env *new_node);
+void		create_env_list(t_env *env, char **envp);
+void		display_env(t_env *env);
 
 t_token		*new_node(char *content);
 t_token		*t_last_node(t_token *t);
 void		add_back(t_token **t, t_token *new_node);
 void		display_tokens(t_token *t);
+void		clear_tokens(t_token **t);
 
 int			my_pwd(void);
-void		exec_built_in(char **built_in);
-int			my_cd(t_token *t, t_global *g);
-void	update_env_paths(t_global *g);
+void		exec_built_in(char **built_in, t_global *g);
+int			my_cd(t_global *g);
 
 #endif

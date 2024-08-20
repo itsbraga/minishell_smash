@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_pwd.c                                           :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/20 17:07:26 by annabrag         ###   ########.fr       */
+/*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
+/*   Updated: 2024/08/20 20:03:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_ins.h"
 
-/*	PWD means Print Working Directory	
-	The $PWD environment variable is a dynamic variable
-	that stores the path to the current working directory.
-*/
-
-int	my_pwd(void)
+void	clear_tokens(t_token **t)
 {
-	char	cwd[PATH_MAX];
-
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	t_token	*tmp;
+	
+	if (t == NULL || (*t) == NULL)
+		return ;
+	while ((*t) != NULL)
 	{
-		printf("%s%s", BOLD RED "minishell: ", RESET "getcwd: ");
-		printf("%s\n", strerror(errno));
-		return (EXIT_FAILURE);
+		tmp = (*t)->next;
+		free((*t)->content); 
+		free(*t);
+		(*t) = tmp;
 	}
-	printf("%s\n", cwd);
-	return (EXIT_SUCCESS);
+	(*t) = NULL;
 }
+
