@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/19 19:45:32 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/20 19:35:27 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,60 @@ char	*remove_empty_quotes(char *str, int quote_idx)
 	free(str);
 	return (new_str);
 }
-// EXEMPLE : he""he -> hehe
-char	*empty_quotes(char *str)
-{
-	int		i;
+// EXEMPLE : """'''"""''$USER''"""'''""" = '''$USER'''
+// char	*empty_quotes(char *str)
+// {
+// 	int		i;
 	
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if ((str[i] == '"' && str[i + 1] == '"') || (str[i] == '\'' && str[i + 1] == '\''))
+// 		{
+// 			printf("emptyquote\n");
+// 			str = remove_empty_quotes(str, i);
+// 			i = 0;
+// 		}
+// 		else
+// 			i++;
+// 	}
+// 	return (str);
+// }
+// J'AI BESOIN D'UN COMPTEUR DE CARACTERE AU SEIN D'UN QUOTE 
+// D'UNE VARIABLE closed en bool
+// SI DEUX QUOTES SONT COTE A COTE ET QU'UN ANCIEN QUOTE DE L'AUTRE TYPE N'EST PAS FERME, NE PAS LES SUPP
+// EXEMPLE : """'''"""''$USER''"""'''""" = '''$USER'''
+char *empty_quotes(char *str)
+{
+	int	i;
+	bool closed;
+	char quote;
+
 	i = 0;
+	closed = true;
+	quote = 0;
 	while (str[i])
 	{
-		if ((str[i] == '"' && str[i + 1] == '"') || (str[i] == '\'' && str[i + 1] == '\''))
+		if ((str[i] == '"' && str[i + 1] == '"') || (str[i] == '\'' && str [i + 1] == '\''))
 		{
-			printf("emptyquote\n");
-			str = remove_empty_quotes(str, i);
-			i = 0;
+			if (str[i] == '"')
+			{
+				switch_bool(closed);
+				quote = '"';
+			}
+			else if (str[i] == '\'')
+			{
+				switch_bool(closed);
+				quote = '\'';
+			}
+			if ((quote == '"' && closed == true) || (quote == '\'' && closed == true))
+			{
+				str = remove_empty_quotes(str, i);
+				i = 0;
+			}
+			else
+				i++;
 		}
-		else
-			i++;
 	}
 	return (str);
 }

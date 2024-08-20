@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/16 18:26:30 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/20 19:32:27 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@
 # include "../LIBFT/INCLUDES/libft.h"
 # include "../LIBFT/INCLUDES/ft_printf.h"
 # include "../LIBFT/INCLUDES/get_next_line_bonus.h"
-
-# define MALLOC_ERR -1
-# define PARSING_ERR -2
-# define LEXER_ERR -3
-# define EXP_ERR -4
-# define EXEC_ERR -5
 
 typedef struct s_token
 {
