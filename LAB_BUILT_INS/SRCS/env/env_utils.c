@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:26:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/20 20:29:11 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:35:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	e_add_back(t_env **e, t_env *new_node)
 	else
 	{
 		tmp = e_last_node(*e);
-		tmp->next = e_new_node;
+		tmp->next = new_node;
 	}
 }
