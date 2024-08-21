@@ -6,43 +6,68 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/20 20:32:25 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:49:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_ins.h"
 
-// void	create_env(t_global *g, char **envp)
-// {
-// 	int		i;
-// 	size_t	envp_size;
-// 	char 	**minishell_env;
+static void free_env_list(t_env **env);
 
-// 	i = 0;
-// 	envp_size = get_env_size(envp);
-// 	minishell_env = malloc((envp_size + 1) * sizeof(char *));
-// 	while (envp[i])
-// 	{
-// 		minishell_env[i] = ft_strdup(envp[i]);
-// 		i++;
-// 	}
-// 	g->env = minishell_env;
-// }
+static t_env	*__env_new_var(char *content)
+{
+	t_env	*new_var;
 
-void	create_env_list(t_env *env, char **envp)
+	new_var = malloc(sizeof(t_env));
+	if (new_var == NULL)
+		return (NULL);
+	new_var->content = ft_strdup(content);
+	new_var->next = NULL;
+	return (new_var);
+}
+
+int	create_env_list(t_env **env, char **envp)
 {
 	int		i;
 	t_env	*var;
+	t_env	*last;
 
 	i = 0;
+	if (env == NULL || envp == NULL)
+		return (EXIT_FAILURE);
+	*env = NULL;
+	last = NULL;
 	while (envp[i] != NULL)
 	{
-		var = e_new_node(envp[i]);
+		var = __env_new_var(envp[i]);
 		if (var == NULL)
-			return ;
-		e_add_back(&env, var);
+		{
+			free_env_list(env);
+			return (EXIT_FAILURE);
+		}
+		if (last != NULL)
+			last->next = var;
+		else
+			*env = var;
+		last = var;
 		i++;
 	}
+	return (EXIT_SUCCESS);
+}
+
+static void free_env_list(t_env **env)
+{
+    t_env *tmp;
+
+    if (env == NULL || (*env) == NULL)
+        return ;
+    while ((*env) != NULL)
+    {
+        tmp = (*env)->next;
+        free((*env)->content);
+        free(*env);
+        *env = tmp;
+    }
 }
 
 void	display_env(t_env *env)

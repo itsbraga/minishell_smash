@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/20 20:30:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:25:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void    __init_global(t_global *g)
 {
 	g->input = NULL;
-	g->env = NULL;
+	g->token = NULL;
 }
 
 void	free_tab(char **tab)
@@ -23,11 +23,8 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
+	while (tab[i] != NULL)
+		free(tab[i++]);
 	free(tab);
 	tab = NULL;
 }
@@ -43,8 +40,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		exit(EXIT_FAILURE);
 	__init_global(&g);
-	create_env_list(g.env, envp);
-	display_env(g.env);
+	create_env_list(&g.env, envp);
+	// display_env(g.env);
 	while (1)
 	{
 		i = 0;
@@ -63,11 +60,10 @@ int	main(int argc, char **argv, char **envp)
 				add_back(&g.token, cell);
 				i++;
 			}
-			// exec_built_in(cmd, &g);
+			exec_built_in(cmd, &g);
 			display_tokens(g.token);
 			clear_tokens(&g.token);
 		}
-		free_tab(cmd);
 	}
-	// display_tokens(g.token);
+	free_tab(cmd);
 }

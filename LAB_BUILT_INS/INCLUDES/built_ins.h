@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/20 20:30:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:49:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,23 @@ typedef struct s_global
  * FUNCTIONS
 \******************************************************************************/
 
-t_env		*e_new_node(char *content);
-t_env		*e_last_node(t_env *e);
-void		e_add_back(t_env **e, t_env *new_node);
-void		create_env_list(t_env *env, char **envp);
+int			create_env_list(t_env **env, char **envp);
 void		display_env(t_env *env);
 
 t_token		*new_node(char *content);
 t_token		*t_last_node(t_token *t);
 void		add_back(t_token **t, t_token *new_node);
-void		display_tokens(t_token *t);
 void		clear_tokens(t_token **t);
+void		display_tokens(t_token *t);
 
-int			my_pwd(void);
 void		exec_built_in(char **built_in, t_global *g);
+int			my_pwd(void);
 int			my_cd(t_global *g);
+
+/******************************************************************************\
+ * TESTS
+\******************************************************************************/
+
+int		go_to_env_var(t_global *g, char *var);
 
 #endif
