@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:05:00 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/19 20:17:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/21 19:28:44 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ int	main(int argc, char **argv, char **envp)
 }
 
 //PROBLEMES : 
-// - Soucis sur empty quotes : """'''"""''$USER''"""'''"""
+// - SEGFAULT sur $HOM
+// - "'''"$USE"'''" = "''''''" au lieu de "'''""'''"

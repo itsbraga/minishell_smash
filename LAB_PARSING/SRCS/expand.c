@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/19 19:41:26 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/21 19:07:16 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,32 +93,22 @@ char *handle_expand(char *str, char **envp)
 {
 	//EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
 	int		i;
-	bool 	closed;
-	char	quote;
+	bool 	closed[2];
 
 	i = 0;
-	closed = true;
-	quote = 0;
+	closed[0] = true;
+	closed[1] = true;
 	while (str[i])
 	{
-		if (str[i] == '\'' && quote != '"')
+		if (str[i] == '"' && closed[1] != false)
+			closed[0] = switch_bool(closed[0]);
+		if (str[i] == '\'' && closed[0] != false)
+			closed[1] = switch_bool(closed[1]);
+		if (str[i] == '$' && closed[1] != false)
 		{
-			quote = '\'';
-			closed = switch_bool(closed);
-		}
-		if (str[i] == '"' && quote != '\'')
-		{
-			quote = '"';
-			closed = switch_bool(closed);
-		}
-		if (str[i] == '$')
-		{
-			if ((quote != '\'' && closed == false) || (quote == 0))
-			{
-				str = expand(str, &str[i], envp);
-				if (!str[0])
-					return (NULL);
-			}
+			str = expand(str, &str[i], envp);
+			if (!str[0])
+				return (NULL);
 		}
 		i++;
 	}
