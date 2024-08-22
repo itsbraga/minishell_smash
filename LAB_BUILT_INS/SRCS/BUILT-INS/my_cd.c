@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 11:03:34 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/22 13:40:30 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	__update_oldpwd(t_env *env, char *old_pwd)
 			free(head->content);
 			head->content = ft_strjoin("OLDPWD=", old_pwd + 4); // +4 pour ignorer PWD=
 			free(old_pwd);
+			old_pwd = NULL;
 			break ;
 		}
 		head = head->next;
@@ -78,7 +79,8 @@ int	my_cd(t_global *g)
 {
 	int	ret;
 	
-	if (g->token->next == NULL)
+	if ((g->token->next == NULL)
+		|| (ft_strcmp((const char *)g->token->next->content, "~") == 0))
 		ret = go_to_env_var(g, "HOME=");
 	else if (ft_strcmp((const char *)g->token->next->content, "-") == 0)
 		ret = go_to_env_var(g, "OLDPWD=");

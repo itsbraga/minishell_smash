@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/22 10:44:42 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/22 13:03:44 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int go_to_env_var(t_global *g, char *var)
 	int		ret;
 
 	var_path = __find_var_path(var, g->env);
-	printf("%s %s\n", BOLD BLUE "var_path:" RESET, var_path);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
 	{
