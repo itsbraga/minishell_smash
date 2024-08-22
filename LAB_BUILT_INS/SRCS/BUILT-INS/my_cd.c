@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 13:40:30 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:21:46 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ static void	__change_paths(t_env *env)
 	free(new_pwd);
 }
 
+/*	The tilde character (“~”) has a special meaning.
+	When used at the beginning of a word, it expands
+	into the name of the home directory of the named
+	user, or if no user is named, the home directory
+	of the current user
+	
+	>> bonus wildcards
+*/
 int	my_cd(t_global *g)
 {
 	int	ret;

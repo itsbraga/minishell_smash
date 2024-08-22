@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 10:31:48 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/22 18:05:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_ins.h"
 
-// bool	__is_built_in(char *cmd)
+// bool	is_built_in(char *cmd)
 // {
 // 	int			i;
 // 	const char	*built_in[] =
 // 	{
 // 		"pwd",
 // 		"cd",
-// 		NULL
+// 		"env",
+// 		"exit"
 // 	};
 
 // 	i = 0;
@@ -31,6 +32,7 @@
 // 	return (false);
 // }
 
+/*	Ajouter le detail des absolute path (avant /bin)	*/
 void	exec_built_in(char **built_in, t_global *g)
 {
 	if ((ft_strcmp(built_in[0], "pwd") == 0)

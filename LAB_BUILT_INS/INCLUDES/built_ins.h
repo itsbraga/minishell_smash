@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 15:22:24 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:50:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # include "colors.h"
 # include "my_features.h"
 
+/******************************************************************************\
+ * STRUCTS
+\******************************************************************************/
+
 typedef struct s_token
 {
 	char			*content;
@@ -47,6 +51,7 @@ typedef struct s_global
 	char		*input;
 	t_env		*env;
 	t_token		*token;
+	int			exit_code;
 }				t_global;
 
 
