@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/21 19:07:16 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/22 13:23:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,20 @@ char	*remove_var(char *str, char *var, size_t var_size)
 	new_str = malloc((ft_strlen(str) - var_size + 1) * (sizeof(char)));
 	while ((str[idx[2]] >= 'A' && str[idx[2]] <= 'Z') || (str[idx[2]] >= '0' && str[idx[2]] <= '9') || (str[idx[2]] == '_'))
 		idx[2]++;
+	printf("2\n");
 	while (idx[0] != idx[1])
 	{
 		new_str[idx[0]] = str[idx[0]];
 		idx[0]++;
 	}
+	printf("3\n");
 	while (str[idx[2]])
 	{
 		new_str[idx[0]] = str[idx[2]];
 		idx[0]++;
 		idx[2]++;	
 	}
+	printf("4\n");
 	new_str[idx[0]] = '\0';
 	free(str);
 	return (new_str);
@@ -80,12 +83,14 @@ char	*expand(char *str, char *var, char **envp)
 	char 	*to_find;
 	char	*var_value;
 
+	printf("1\n");
 	to_find = take_var(str, var);
 	var_value = search_var(to_find, envp);
 	if (var_value == NULL)
 		str = remove_var(str, var, ft_strlen(to_find) + 1);
 	else
 		str = add_var_value(str, var, var_value, ft_strlen(var_value));
+	printf("str = ;%s; len = %zu ; pointeur = %p\n", str, ft_strlen(str), str);
 	return (str);
 }
 
@@ -98,18 +103,14 @@ char *handle_expand(char *str, char **envp)
 	i = 0;
 	closed[0] = true;
 	closed[1] = true;
-	while (str[i])
+	while (str[i] != '\0')
 	{
 		if (str[i] == '"' && closed[1] != false)
 			closed[0] = switch_bool(closed[0]);
 		if (str[i] == '\'' && closed[0] != false)
 			closed[1] = switch_bool(closed[1]);
 		if (str[i] == '$' && closed[1] != false)
-		{
 			str = expand(str, &str[i], envp);
-			if (!str[0])
-				return (NULL);
-		}
 		i++;
 	}
 	return (str);
