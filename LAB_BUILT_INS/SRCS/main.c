@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/21 18:25:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:29:42 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	free_tab(char **tab)
 
 	i = 0;
 	while (tab[i] != NULL)
-		free(tab[i++]);
+	{
+		free(tab[i]);
+		i++;
+	}
 	free(tab);
 	tab = NULL;
 }
@@ -41,7 +44,6 @@ int	main(int argc, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	__init_global(&g);
 	create_env_list(&g.env, envp);
-	// display_env(g.env);
 	while (1)
 	{
 		i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/21 18:49:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:26:20 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,4 @@ static void free_env_list(t_env **env)
         free(*env);
         *env = tmp;
     }
-}
-
-void	display_env(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp != NULL)
-	{
-		ft_putstr_fd(tmp->content, 1);
-		ft_putendl_fd("", 1);
-		tmp = tmp->next;
-	}
 }

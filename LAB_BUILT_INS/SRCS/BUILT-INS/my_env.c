@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   my_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/20 20:03:18 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
+/*   Updated: 2024/08/22 10:28:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_ins.h"
 
-void	clear_tokens(t_token **t)
+int	my_env(t_env *env)
 {
-	t_token	*tmp;
-	
-	if (t == NULL || (*t) == NULL)
-		return ;
-	while ((*t) != NULL)
-	{
-		tmp = (*t)->next;
-		free((*t)->content); 
-		free(*t);
-		(*t) = tmp;
-	}
-	(*t) = NULL;
-}
+	t_env	*tmp;
 
+	if (env == NULL)
+		return (EXIT_FAILURE);
+	tmp = env;
+	while (tmp != NULL)
+	{
+		printf("%s\n", tmp->content);
+		tmp = tmp->next;
+	}
+	return (EXIT_SUCCESS);
+}
