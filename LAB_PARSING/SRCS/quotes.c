@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/22 19:05:07 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/24 21:34:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,72 +99,91 @@ char	*empty_quotes(char *str)
 		if ((str[i] == '"' && str[i + 1] == '"') && (closed[1] != false && closed[0] != false))
 		{
 			str = remove_empty_quotes(str, i);
-			i = 0;
+			
+			i = -1;
 			closed[0] = true;
 			closed[1] = true;
 		}
 		else if ((str[i] == '\'' && str[i + 1] == '\'') && (closed[0] != false && closed[1] != false))
 		{
 			str = remove_empty_quotes(str, i);
-			i = 0;
+			i = -1;
 			closed[0] = true;
 			closed[1] = true;
-		}
-			
+		}	
 		if (str[i] == '"' && closed[1] != false)
 			closed[0] = switch_bool(closed[0]);
 		else if (str[i] == '\'' && closed[0] != false)
 			closed[1] = switch_bool(closed[1]);
+		printf("str[%d] :\t%c\n", i, str[i]);
 		i++;
 	}
 	return (str);
 }
-char	*remove_one_quote(char *str, int pos)
+//EXEMPLE : "he"beh = he"beh;
+char	*remove_quote_pair(char *str, int first, int second)
 {
-	
+	int i;
+	int	j;
+	char	*new_str;
+
+	i= 0;
+	new_str = malloc((ft_strlen(str) - 1) * (sizeof(char)));
+	printf("first = %d ; second = %d\n", first, second);
+	while (i != first)
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	j = i + 1;
+	while (i != second)
+	{
+		new_str[i] = str[j];
+		i++, j++;
+	}
+	// A FINIR
+	free(str);
+	return (new_str);
 }	
 
-char	*remove_others_quotes(char *str, int pos[2])
+int	find_closing_quote(char *str, char quote)
 {
-	str = remove_one_quote(str, pos[0]);
-	str = remove_one_quote(str, pos[1]);
-	return (str);
+	int	i;
+
+	i = 1;
+	while (str[i] != quote)
+		i++;
+	return (i);
 }
 
-// IL VA ME FALLOIR UNE FONCTION QUI RECUPERE LA POSITION DE DEUX QUOTE ET QUI
-// APPEL DEUX FOIS UNE FONCTION QUI SUPPRIME UN SEUL QUOTE PAR SA POSITION
-// IL ME FAUDRA SUREMENT AUSSI UN COMPTEUR DE CARACTERE ME PERMETTANT D'IGNORER LES
-// QUOTES A NE PAS SUPPRIMER ET A SUIVRE L'AVANCEE DANS LA STRING 
 // EXEMPLE : "''""''" = ''''
 char	*others_quotes(char *str)
 {
-	int	i[2];
-	int meter;
-	bool	closed[2];
+	int	i;
+	int closing_quote;
 
-	i[0] = 0;
-	meter = 0;
-	closed[0] = true;
-	closed[1] = true;
-	while (str[i[0]] != '\0')
+	i = 0;
+	closing_quote = 0;
+	printf("before oth quote : %s\n", str);
+	while (str[i] != '\0')
 	{
-		if (str[i[0]] == '"')
+		if (str[i] == '"')
 		{
-			i[1] = (i[0] + 1);
-			while (str[i[1]] != '"')
-				i[0]++;
-			str = remove_others_quotes(str, i);
-			meter = i[1];
+			// printf("remove dquote\n");
+			closing_quote = find_closing_quote(&str[i], '"');
+			str = remove_quote_pair(str, i, (i + closing_quote));
+			// printf("if dquote : %s\n", str);
+			i = (i + closing_quote) - 2;
 		}
-		else if (str[i[0]] == '\'')
+		else if (str[i] == '\'')
 		{
-			i[1] = (i[0] + 1);
-			while (str[i[1]] != '\'')
-				i[0]++;
-			str = remove_others_quotes(str, i);
-			meter = i[1];
+			printf("remove squote\n");
+			closing_quote = find_closing_quote(&str[i], '\'');
+			str = remove_quote_pair(str, i, (i + closing_quote));
+			printf("else if squote : %s\n", str);
+			i  = (i + closing_quote) - 2;
 		}
-		i[0]++;
+		i++;
 	}
 	return (str);
 }
