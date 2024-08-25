@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/13 15:35:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:33:53 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_token	*new_node(char *content)
 	t_token	*new_node;
 	
 	new_node = malloc(sizeof(t_token));
-	if (!new_node)
+	if (new_node == NULL)
 		return (NULL);
 	new_node->idx = 0;
 	new_node->to_expand = false;
@@ -31,7 +31,7 @@ t_token	*new_node(char *content)
 
 t_token	*t_last_node(t_token *t)
 {
-	if (!t)
+	if (t == NULL)
 		return (NULL);
 	while (t->next != NULL)
 		t = t->next;
@@ -42,13 +42,28 @@ void	add_back(t_token **t, t_token *new_node)
 {
 	t_token	*tmp;
 
-	if (!(*t))
+	if ((*t) == NULL)
 		*t = new_node;
 	else
 	{
 		tmp = t_last_node(*t);
 		tmp->next = new_node;
 	}
+}
+
+size_t	get_tlist_size(t_token **t)
+{
+	size_t	size;
+	t_token *node;
+
+	size = 0;
+	node = *t;
+	while (node != NULL)
+	{
+		size++;
+		node = node->next;
+	}
+	return (size);
 }
 
 void	display_tokens(t_token *t)
@@ -59,10 +74,7 @@ void	display_tokens(t_token *t)
 	while (tmp != NULL)
 	{
 		ft_putstr_fd(tmp->content, 1);
+		ft_putendl_fd("", 1);
 		tmp = tmp->next;
-		if (!tmp)
-			ft_putendl_fd("\n", 1);
-		else
-			ft_putstr_fd("->", 1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/13 14:34:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:31:51 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,17 @@
 void	clear_tokens(t_token **t)
 {
 	t_token	*tmp;
-	t_token	*new_next;
 	
-	if (!t)
+	if (t == NULL || (*t) == NULL)
 		return ;
-	tmp = *t;
-	while (tmp != NULL)
+	while ((*t) != NULL)
 	{
-		new_next = tmp->next;
-		delone_token(tmp);
-		tmp = new_next;
+		tmp = (*t)->next;
+		free((*t)->content); 
+		free(*t);
+		(*t) = tmp;
 	}
-	tmp = NULL;
-}
-
-void	delone_token(t_token *t)
-{
-	if (t->content != NULL)
-		free(t->content);
-	free(t);
+	(*t) = NULL;
 }
 
 void	delcurrent_token(t_token **t, t_token *cur)

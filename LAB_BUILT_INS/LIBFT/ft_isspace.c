@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.c                                          :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/25 15:35:41 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/25 16:07:20 by annabrag          #+#    #+#             */
+/*   Updated: 2024/08/25 16:07:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "INCLUDES/libft.h"
 
-void    init_global(t_global *g)
+int	ft_isspace(int c)
 {
-	g->input = NULL;
-	g->env = NULL;
-	g->export_env = NULL;
-	g->token = NULL;
-}
-
-void	init_token(t_token *t)
-{
-		t->idx = 0;
-		t->to_expand = false;
-		t->s_quoted = false;
-		t->db_quoted = false;
-		t->t_quoted = 0;
-		t->content = NULL;
+	if (!(c == 32 || (c >= 9 && c <= 13)))
+		return (0);
+	return (1);
 }

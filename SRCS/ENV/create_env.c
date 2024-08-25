@@ -3,44 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/18 22:38:19 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/25 15:23:22 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	__fill_export_env(t_global *g, size_t exp_env_size, size_t envp_size)
+static void free_env_list(t_env **env);
+
+static t_env	*__env_new_var(char *content)
 {
-	while (exp_env_size != envp_size)
-	{
-		if (!exp_env_size)
-			copy_toppest(g);
-		else
-			alpha_sort(g, g->export_env[exp_env_size - 1], exp_env_size);
-		exp_env_size++;
-	}
-	g->export_env[envp_size] = NULL;
+	t_env	*new_var;
+
+	new_var = malloc(sizeof(t_env));
+	if (new_var == NULL)
+		return (NULL);
+	new_var->content = ft_strdup(content);
+	new_var->next = NULL;
+	return (new_var);
 }
 
-void	create_env(t_global *g, char **envp)
+int	create_env_list(t_env **env, char **envp)
 {
 	int		i;
-	size_t	envp_size;
-	char 	**minishell_env;
+	t_env	*var;
+	t_env	*last;
 
 	i = 0;
-	envp_size = get_env_size(envp);
-	minishell_env = malloc((envp_size + 1) * sizeof(char *));
-	while (envp[i])
+	if (env == NULL || envp == NULL)
+		return (EXIT_FAILURE);
+	*env = NULL;
+	last = NULL;
+	while (envp[i] != NULL)
 	{
-		minishell_env[i] = ft_strdup(envp[i]);
+		var = __env_new_var(envp[i]);
+		if (var == NULL)
+		{
+			free_env_list(env);
+			return (EXIT_FAILURE);
+		}
+		if (last != NULL)
+			last->next = var;
+		else
+			*env = var;
+		last = var;
 		i++;
 	}
-	g->env = minishell_env;
-	g->export_env = malloc((envp_size + 1) * sizeof(char *));
-	__fill_export_env(g, 0, envp_size);
+	return (EXIT_SUCCESS);
 }
 
+static void free_env_list(t_env **env)
+{
+    t_env *tmp;
+
+    if (env == NULL || (*env) == NULL)
+        return ;
+    while ((*env) != NULL)
+    {
+        tmp = (*env)->next;
+        free((*env)->content);
+        free(*env);
+        *env = tmp;
+    }
+}
