@@ -6,39 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:59:53 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/13 14:35:29 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 21:45:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void    expand_token(t_global *g, t_token *current)
-// {
-// 	int     i;
-// 	char    *match;
-// 	char    *to_find;
-
-// 	i = 0;
-// 	match = NULL;
-	
-	
-	
-// }
-// // Le flag "to_expand" ne doit etre mis a 1 selon deux facteurs, si le parser a
-// // rencontre un $ en debut de string, et 
-// void    handle_expansion(t_global *g)
-// {
-// 	t_token *current;
-	
-// 	current = g->token;
-// 	while (current->content)
-// 	{
-// 		if (current->to_expand)
-// 		{
-// 			if (current->t_quoted != D_QUOTE_INSIDE)
-// 				expand_token(g, current);  
-// 		}
-// 		else
-// 			current = current->next;
-// 	}    
-// }
+/*
+	Handle $? which should *expand* to the exit status
+	of the most recently executed foreground pipeline
+*/

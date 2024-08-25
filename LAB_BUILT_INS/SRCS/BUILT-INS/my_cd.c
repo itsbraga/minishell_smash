@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 17:21:46 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:50:56 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,7 @@ int	my_cd(t_global *g)
 	else
 		ret = chdir((const char *)g->token->next->content);
 	if (ret != 0)
-	{
-		printf("%s %s: ", BOLD RED "minishell:" RESET, g->token->content);
-		printf("%s: %s\n", g->token->next->content, strerror(errno));
-		return (EXIT_FAILURE);
-	}
+		errmsg_status(g->token->content, g->token->next->content, errno);
 	__change_paths(g->env);
 	return (EXIT_SUCCESS);
 }

@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/25 15:28:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:51:14 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "built_ins.h"
 
 static char	*__update_pwd(t_env *env, char **old_pwd)
 {
@@ -95,11 +95,7 @@ int	my_cd(t_global *g)
 	else
 		ret = chdir((const char *)g->token->next->content);
 	if (ret != 0)
-	{
-		printf("%s %s: ", BOLD RED "minishell:" RESET, g->token->content);
-		printf("%s: %s\n", g->token->next->content, strerror(errno));
-		return (EXIT_FAILURE);
-	}
+		errmsg_status(g->token->content, g->token->next->content, errno);
 	__change_paths(g->env);
 	return (EXIT_SUCCESS);
 }

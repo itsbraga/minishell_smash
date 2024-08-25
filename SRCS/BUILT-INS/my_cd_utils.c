@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/25 15:28:48 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:41:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ static char	*__find_var_path(char *to_find, t_env *env)
 	return (NULL);
 }
 
+/*	126: Command cannot execute
+
+	The command was found, but it could not be executed,
+	possibly due to insufficient permissions or other issues.
+*/
 int go_to_env_var(t_global *g, char *var)
 {
 	char	*var_path;
@@ -44,11 +49,8 @@ int go_to_env_var(t_global *g, char *var)
 	var_path = __find_var_path(var, g->env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
-	{
-		printf("%s %s: ", BOLD RED "minishell:" RESET, g->token->content);
-		printf("%s: %s\n", g->token->next->content, strerror(errno));
-		return (EXIT_FAILURE);
-	}
+		errmsg_status(g->token->content, g->token->next->content, 126);
+	// verifier s'il ne faut pas plutot indiquer errno
 	if (var_path != NULL)
 		free(var_path);
 	return (ret);

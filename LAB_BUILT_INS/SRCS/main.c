@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 18:13:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 21:44:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static void    __init_global(t_global *g)
 {
 	g->input = NULL;
+	g->env = NULL;
 	g->token = NULL;
+	g->last_exit_status = 0;
 }
 
 void	free_tab(char **tab)

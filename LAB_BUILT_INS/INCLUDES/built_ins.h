@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 18:50:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 21:50:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_global
 	char		*input;
 	t_env		*env;
 	t_token		*token;
-	int			exit_code;
+	int			last_exit_status;
 }				t_global;
 
 
@@ -72,6 +72,10 @@ int			my_pwd(void);
 int 		go_to_env_var(t_global *g, char *var);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
+void		my_exit(t_global *g, char **args);
+
+void		errmsg(char *cmd, char *arg);
+int			errmsg_status(char *cmd, char *arg, int err_status);
 
 /******************************************************************************\
  * TESTS

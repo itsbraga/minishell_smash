@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/25 15:31:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/25 18:20:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	clear_tokens(t_token **t)
 	(*t) = NULL;
 }
 
-void	delcurrent_token(t_token **t, t_token *cur)
+void	del_current_token(t_token **t, t_token *cur)
 {
 	t_token	*prev;
 	t_token	*tmp;

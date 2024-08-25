@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/22 10:28:33 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/25 20:49:14 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	my_env(t_env *env)
 	t_env	*tmp;
 
 	if (env == NULL)
+	{
+		printf("%s %s\n", BOLD RED "minishell:" RESET, "environment deleted.");
 		return (EXIT_FAILURE);
+	}
 	tmp = env;
 	while (tmp != NULL)
 	{
