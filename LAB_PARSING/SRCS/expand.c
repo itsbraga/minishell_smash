@@ -6,13 +6,13 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/22 13:23:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/25 18:32:55 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_parsing.h"
 // EXEMPLE : BLANC"$ROUGE"BLEU = BLANC""BLEU
-char	*remove_var(char *str, char *var, size_t var_size)
+static char	*__del_var(char *str, char *var, size_t var_size)
 {
 	// IDX[0] = debut str ; IDX[1] = CHAR AVANT $ ; IDX[2] = CHAR APRES VAR 
 	int	idx[3];
@@ -24,26 +24,23 @@ char	*remove_var(char *str, char *var, size_t var_size)
 	new_str = malloc((ft_strlen(str) - var_size + 1) * (sizeof(char)));
 	while ((str[idx[2]] >= 'A' && str[idx[2]] <= 'Z') || (str[idx[2]] >= '0' && str[idx[2]] <= '9') || (str[idx[2]] == '_'))
 		idx[2]++;
-	printf("2\n");
 	while (idx[0] != idx[1])
 	{
 		new_str[idx[0]] = str[idx[0]];
 		idx[0]++;
 	}
-	printf("3\n");
 	while (str[idx[2]])
 	{
 		new_str[idx[0]] = str[idx[2]];
 		idx[0]++;
 		idx[2]++;	
 	}
-	printf("4\n");
 	new_str[idx[0]] = '\0';
 	free(str);
 	return (new_str);
 }
 //EXEMPLE : gg"$USER"wp = gg"pmateo"wp
-char	*add_var_value(char *str, char *var, char *var_value, size_t vv_size)
+static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_size)
 {
 	int idx[3];
 	char *new_str;
@@ -78,19 +75,17 @@ char	*add_var_value(char *str, char *var, char *var_value, size_t vv_size)
 	return (new_str);
 }
 
-char	*expand(char *str, char *var, char **envp)
+static char	*__expand(char *str, char *var, char **envp)
 {
 	char 	*to_find;
 	char	*var_value;
 
-	printf("1\n");
 	to_find = take_var(str, var);
 	var_value = search_var(to_find, envp);
 	if (var_value == NULL)
-		str = remove_var(str, var, ft_strlen(to_find) + 1);
+		str = del_var(str, var, ft_strlen(to_find) + 1);
 	else
 		str = add_var_value(str, var, var_value, ft_strlen(var_value));
-	printf("str = ;%s; len = %zu ; pointeur = %p\n", str, ft_strlen(str), str);
 	return (str);
 }
 
@@ -113,5 +108,6 @@ char *handle_expand(char *str, char **envp)
 			str = expand(str, &str[i], envp);
 		i++;
 	}
+	str = empty_quotes(str);
 	return (str);
 }
