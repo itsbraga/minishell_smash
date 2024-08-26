@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 19:27:51 by annabrag         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/26 18:48:37 by pmateo           ###   ########.fr       */
->>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
+/*   Updated: 2024/08/26 20:18:15 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-<<<<<<< HEAD
-static char	*__generate_prompt(void)
-=======
 void    display_env(t_env *env)
 {
     t_env    *tmp;
@@ -32,8 +25,7 @@ void    display_env(t_env *env)
     }
 }
 
-static char	*__get_username(void)
->>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
+static char	*__generate_prompt(void)
 {
 	char	*username;
 	char	*part1;
@@ -63,13 +55,7 @@ int	main(int argc, char **argv, char **envp)
 	if (prompt == NULL)
 		free(prompt);
 	init_global(&g);
-<<<<<<< HEAD
-	create_env_list(&g.env, envp);
-=======
 	create_env(&g, envp);
-	user = __get_username();
-	prompt = ft_strjoin(user, "@42] $> ");
->>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
 	while (1)
 	{
 		g.input = readline(prompt);

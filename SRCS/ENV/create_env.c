@@ -6,12 +6,12 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-<<<<<<< HEAD
+
 /*   Updated: 2024/08/26 17:01:22 by annabrag         ###   ########.fr       */
-=======
-<<<<<<< HEAD
+
+
 /*   Updated: 2024/08/26 19:11:51 by pmateo           ###   ########.fr       */
-=======
+
 /*   Updated: 2024/08/26 16:06:39 by annabrag         ###   ########.fr       */
 >>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 >>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
@@ -32,11 +32,11 @@ t_env	*env_new_var(char *content)
 	return (new_var);
 }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
+
+
 void lstclear_env(t_env **env)
-=======
+
 void	lstclear_env(t_env **env)
 >>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 {
@@ -52,8 +52,8 @@ void	lstclear_env(t_env **env)
 		*env = tmp;
     }
 }
-<<<<<<< HEAD
-=======
+
+
 
 >>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 >>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
@@ -64,10 +64,10 @@ int	create_env_list(t_env **env, char **envp)
 	t_env	*last;
 
 	i = 0;
-<<<<<<< HEAD
+
 	if (envp == NULL)
 		return (EXIT_FAILURE);
-=======
+
 	if (env == NULL || envp == NULL)
 		return (FAILURE);
 >>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
@@ -79,7 +79,7 @@ int	create_env_list(t_env **env, char **envp)
 		if (var == NULL)
 		{
 			lstclear_env(env);
-<<<<<<< HEAD
+
 			return (EXIT_FAILURE);
 		}
 		if (last == NULL)
@@ -104,7 +104,7 @@ void	create_env(t_global *g, char **envp)
 	return ;
 }
  
-=======
+
 			return (FAILURE);
 		}
 		if (last != NULL)
@@ -116,7 +116,7 @@ void	create_env(t_global *g, char **envp)
 	}
 	return (SUCCESS);
 }
-<<<<<<< HEAD
+
 
 void	create_env(t_global *g, char **envp)
 {
@@ -129,6 +129,6 @@ void	create_env(t_global *g, char **envp)
 		ft_printf(1, "ERROR OCCURED WITH EXPORT ENV_LIST\n");
 	return ;
 }
-=======
+
 >>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 >>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1

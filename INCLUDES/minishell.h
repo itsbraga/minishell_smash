@@ -3,18 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 19:34:56 by annabrag         ###   ########.fr       */
-=======
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 16:27:04 by pmateo           ###   ########.fr       */
-=======
-/*   Updated: 2024/08/26 16:24:23 by annabrag         ###   ########.fr       */
->>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
->>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
+/*   Updated: 2024/08/26 20:23:24 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,44 +47,6 @@ typedef enum e_category
 // 	struct s_env	*next;
 // }				t_input;
 
-<<<<<<< HEAD
-typedef struct s_env
-=======
-<<<<<<< HEAD
-=======
-typedef struct s_global
->>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
-{
-	char			*content;
-	struct s_env	*next;
-} 				t_env;
-
->>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
-typedef struct s_token
-{
-	char			*content;
-	struct s_token	*next;
-}				t_token;
-
-typedef struct s_global
-{
-	char		*input; // ira dans une fonction spe
-	// t_input		*input;
-	t_env		*env;
-	t_env		*exp_env;
-	t_token		*token;
-	int			last_exit_status;
-}				t_global;
-
-// typedef struct s_command
-// {
-// 	char				*cmd;
-// 	char				**args;
-// 	struct s_command	*next;
-// }				t_command;
-
-<<<<<<< HEAD
-=======
 typedef struct s_env
 {
 	char			*content;
@@ -109,7 +63,19 @@ typedef struct s_global
 	int			last_exit_status;
 }				t_global;
 
->>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
+typedef struct s_token
+{
+	char			*content;
+	struct s_token	*next;
+}				t_token;
+
+// typedef struct s_command
+// {
+// 	char				*cmd;
+// 	char				**args;
+// 	struct s_command	*next;
+// }				t_command;
+
 /******************************************************************************\
  * GLOBAL VARIABLE
 \******************************************************************************/
@@ -139,34 +105,16 @@ char	*cat_tcontent(t_token *to_cat);
  * ENVIRONMENT
 \******************************************************************************/
 
-<<<<<<< HEAD
-// create_env_export.c
+// create_export_env.c
 size_t	get_env_size(char **env);
 t_env	*copy_toppest(char **envp);
 t_env	*ascii_sort(char **envp, char *last_added);
-int		create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t idx_exp_env);
-=======
-<<<<<<< HEAD
-size_t	get_env_size(char **env);
 t_env	*env_new_var(char *content);
-void 	lstclear_env(t_env **env);
-t_env	*copy_toppest(char **envp);
-t_env	*ascii_sort(char **envp, char *last_added);
 int		create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t idx_exp_env);
-int		create_env_list(t_env **env, char **envp);
-void	create_env(t_global *g, char **envp);
-=======
-void	lstclear_env(t_env **env);
->>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
-t_env	*env_new_var(char *content);
 
 // create_env.c
 int		create_env_list(t_env **env, char **envp);
-<<<<<<< HEAD
 void	create_env(t_global *g, char **envp);
-=======
->>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
->>>>>>> 331b04d903f2a2b001b4dd4fcb2fdae6e653d3e1
 
 /******************************************************************************\
  * EXPAND
@@ -200,8 +148,8 @@ int		errmsg_status(char *cmd, char *arg, int err_status);
 void	errmsg(char *cmd, char *arg);
 
 // free.c
-void	lstclear_tokens(t_token **t);
 void	del_current_token(t_token **t, t_token *cur);
+void	lstclear_tokens(t_token **t);
 void 	lstclear_env(t_env **env);
 void	free_tab(char **tab);
 
