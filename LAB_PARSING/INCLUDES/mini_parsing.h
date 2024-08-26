@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/20 19:32:27 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:39:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_exec
 
 void    init_e(t_exec *e);
 t_token	*new_node(char *content);
-t_token	*t_last_node(t_token *t);
+t_token	*last_node(t_token *t);
 void	add_back(t_token **t, t_token *new_node);
 void	display_tokens(t_token *t);
 size_t	get_tlist_size(t_token **t);

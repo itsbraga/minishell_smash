@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/25 15:33:53 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:39:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_token	*new_node(char *content)
 	return (new_node);
 }
 
-t_token	*t_last_node(t_token *t)
+t_token	*last_node(t_token *t)
 {
 	if (t == NULL)
 		return (NULL);
@@ -46,7 +46,7 @@ void	add_back(t_token **t, t_token *new_node)
 		*t = new_node;
 	else
 	{
-		tmp = t_last_node(*t);
+		tmp = last_node(*t);
 		tmp->next = new_node;
 	}
 }

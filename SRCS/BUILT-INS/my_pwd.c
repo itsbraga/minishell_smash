@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/25 20:52:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:06:22 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ int	my_pwd(void)
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 		errmsg_status("getcwd", NULL, 126); // ou errno
 	printf("%s\n", cwd);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
