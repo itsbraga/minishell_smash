@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/25 21:50:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:27:04 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,6 @@
 // 	struct s_env	*next;
 // }				t_input;
 
-typedef struct s_global
-{
-	char		*input; // ira dans une fonction spe
-	// t_input		*input;
-	t_env		*env;
-	char		**env;
-	char		**export_env;
-	t_token		*token;
-	int			last_exit_status;
-}				t_global;
-
 typedef struct s_token
 {
 	char			*content;
@@ -71,6 +60,16 @@ typedef struct s_env
 	char			*content;
 	struct s_env	*next;
 }				t_env;
+
+typedef struct s_global
+{
+	char		*input; // ira dans une fonction spe
+	// t_input		*input;
+	t_env		*env;
+	t_env		*exp_env;
+	t_token		*token;
+	int			last_exit_status;
+}				t_global;
 
 /******************************************************************************\
  * INIT
@@ -94,11 +93,14 @@ char	*cat_tcontent(t_token *to_cat);
  * ENVIRONMENT
 \******************************************************************************/
 
+size_t	get_env_size(char **env);
+t_env	*env_new_var(char *content);
+void 	lstclear_env(t_env **env);
+t_env	*copy_toppest(char **envp);
+t_env	*ascii_sort(char **envp, char *last_added);
+int		create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t idx_exp_env);
 int		create_env_list(t_env **env, char **envp);
 void	create_env(t_global *g, char **envp);
-size_t	get_env_size(char **envp);
-void	copy_toppest(t_global *g);
-void	alpha_sort(t_global *g, char *current, size_t exp_env_index);
 
 /******************************************************************************\
  * EXPAND

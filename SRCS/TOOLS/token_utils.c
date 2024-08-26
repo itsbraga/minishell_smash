@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/25 15:33:53 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:11:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ t_token	*new_node(char *content)
 	new_node = malloc(sizeof(t_token));
 	if (new_node == NULL)
 		return (NULL);
-	new_node->idx = 0;
-	new_node->to_expand = false;
-	new_node->s_quoted = false;
-	new_node->db_quoted = false;
-	new_node->t_quoted = 0;
 	new_node->content = content;
 	new_node->next = NULL;
 	return (new_node);

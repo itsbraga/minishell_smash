@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/25 21:43:44 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:48:37 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void    display_env(t_env *env)
+{
+    t_env    *tmp;
+
+    tmp = env;
+    while (tmp != NULL)
+    {
+        ft_putstr_fd(tmp->content, 1);
+        ft_putendl_fd("", 1);
+        tmp = tmp->next;
+    }
+}
 
 static char	*__get_username(void)
 {
@@ -35,7 +48,7 @@ int	main(int argc, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
 	init_global(&g);
-	create_env_list(&g.env, envp);
+	create_env(&g, envp);
 	user = __get_username();
 	prompt = ft_strjoin(user, "@42] $> ");
 	while (1)
