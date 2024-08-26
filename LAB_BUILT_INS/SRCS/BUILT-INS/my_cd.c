@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/25 20:50:56 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:41:35 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 	t_env	*head;
 	char	*new_pwd;
 
-	if ((new_pwd = getcwd(NULL, 0)) == NULL)
+	new_pwd = getcwd(NULL, 0);
+	if (new_pwd == NULL)
 	{
 		printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
 		return (NULL);
@@ -32,8 +33,7 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 			if ((head->content = ft_strjoin("PWD=", new_pwd)) == NULL)
 			{
 				printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
-				free(new_pwd);
-				return (NULL);
+				return (free(new_pwd), NULL);
 			}
 		}
 		head = head->next;
@@ -97,5 +97,5 @@ int	my_cd(t_global *g)
 	if (ret != 0)
 		errmsg_status(g->token->content, g->token->next->content, errno);
 	__change_paths(g->env);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
