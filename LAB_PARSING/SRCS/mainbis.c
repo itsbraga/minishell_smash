@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:59:47 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 15:39:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:59:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(void)
 	t = NULL;
 	cell = new_node(content);
 	if (!cell)
-		return (EXIT_FAILURE);
+		return (FAILURE);
 	cell1 = new_node(content);
 	cell2 = new_node(content);
 	cell3 = new_node(content);

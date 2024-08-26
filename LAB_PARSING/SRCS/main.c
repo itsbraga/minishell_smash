@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:05:00 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/21 19:28:44 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/26 16:59:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	free_tab(char **tab)
 // 	tok = NULL;
 // 	cell = NULL;
 // 	if (argc != 2)
-// 		return (EXIT_FAILURE);
+// 		return (FAILURE);
 // 	input = ft_split(argv[1], ' ');
 // 	while (input[i])
 // 	{
 // 		cell = new_node(input[i]);
 // 		if (!cell)
-// 			return (EXIT_FAILURE);
+// 			return (FAILURE);
 // 		add_back(&tok, cell);
 // 		i++;
 // 	}
@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	char *input;
 	
 	if (argc > 1)
-		exit(EXIT_FAILURE);
+		exit(FAILURE);
 	(void)argv;
 	while (1)
 	{

@@ -6,18 +6,19 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 15:06:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:56:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_ins.h"
+#include "minishell.h"
 
 static char	*__update_pwd(t_env *env, char **old_pwd)
 {
 	t_env	*head;
-	char	new_pwd[PATH_MAX];
+	char	*new_pwd;
 
-	if (getcwd(new_pwd, sizeof(new_pwd)) == NULL)
+	new_pwd = getcwd(NULL, 0);
+	if (new_pwd == NULL)
 	{
 		printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
 		return (NULL);
@@ -32,8 +33,7 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 			if ((head->content = ft_strjoin("PWD=", new_pwd)) == NULL)
 			{
 				printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
-				free(new_pwd);
-				return (NULL);
+				return (free(new_pwd), NULL);
 			}
 		}
 		head = head->next;

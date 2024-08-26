@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 15:22:46 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:13:36 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@
 ║                                                                                  ║\n\
 ╚══════════════════════════════════════════════════════════════════════════════════╝\n\n"
 
-// # define PROMPT BOLD PINK "[elgato" RESET "@" BOLD PINK "42]" RESET " $> "
+# define BYE_MSG "Bye le sangreee"
 
 #endif

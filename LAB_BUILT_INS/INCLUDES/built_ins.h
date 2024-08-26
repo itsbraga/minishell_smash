@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 16:44:24 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:29:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int			my_exit(t_global *g, char **args);
 
 void		errmsg(char *cmd, char *arg);
 int			errmsg_status(char *cmd, char *arg, int err_status);
+
+void		free_tab(char **tab);
 
 /******************************************************************************\
  * TESTS

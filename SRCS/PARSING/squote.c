@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 15:52:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 16:06:57 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:59:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	add_squote_content(char **str, t_token **t)
 	if (!content || !new_elem)
 	{
 		lstclear_tokens(t);
-		return (EXIT_FAILURE);
+		return (FAILURE);
 	}
 	add_back(t, new_elem);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }

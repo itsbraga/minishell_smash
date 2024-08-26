@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/25 21:00:04 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/26 16:59:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*handle_quotes_and_expand(char *input, char **envp)
 	{
 		ft_putendl_fd("Unclosed quote !", 2);
 		ft_putendl_fd("Aborting...", 2);
-		exit(EXIT_FAILURE);
+		exit(FAILURE);
 	}
 	input = empty_quotes(input);
 	input = handle_expand(input, envp);

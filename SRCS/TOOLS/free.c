@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del_token.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 16:06:57 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:05:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	lstclear_env(t_env **env)
+{
+    t_env *tmp;
+
+    if (env == NULL || (*env) == NULL)
+        return ;
+    while ((*env) != NULL)
+    {
+        tmp = (*env)->next;
+        free((*env)->content);
+        free(*env);
+        *env = tmp;
+    }
+}
 
 void	lstclear_tokens(t_token **t)
 {
@@ -53,3 +68,20 @@ void	del_current_token(t_token **t, t_token *cur)
 	prev->next = cur->next;
 	(free(cur->content), free(cur));
 }
+
+// void	lstclear_input(t_input **input)
+// {
+// 	t_input	*tmp;
+	
+// 	if (input == NULL || (*input) == NULL)
+// 		return ;
+// 	while ((*input) != NULL)
+// 	{
+// 		tmp = (*input)->next;
+// 		free((*input)->content); 
+// 		free(*input);
+// 		(*input) = tmp;
+// 	}
+// 	(*input) = NULL;
+// }
+

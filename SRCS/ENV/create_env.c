@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 16:06:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:01:22 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,6 @@ t_env	*env_new_var(char *content)
 	new_var->content = ft_strdup(content);
 	new_var->next = NULL;
 	return (new_var);
-}
-
-void	lstclear_env(t_env **env)
-{
-    t_env *tmp;
-
-    if (env == NULL || (*env) == NULL)
-        return ;
-    while ((*env) != NULL)
-    {
-        tmp = (*env)->next;
-        free((*env)->content);
-        free(*env);
-        *env = tmp;
-    }
 }
 
 int	create_env_list(t_env **env, char **envp)
@@ -66,4 +51,16 @@ int	create_env_list(t_env **env, char **envp)
 		i++;
 	}
 	return (SUCCESS);
+}
+
+void	create_env(t_global *g, char **envp)
+{
+	size_t	envp_size;
+
+	envp_size = get_env_size(envp);
+	if (!create_env_list(&g->env, envp))
+		ft_printf(1, "ERROR OCCURED WITH ENV_LIST\n");
+	if (!create_exp_env_list(&g->exp_env, envp, envp_size, 0))
+		ft_printf(1, "ERROR OCCURED WITH EXPORT ENV_LIST\n");
+	return ;
 }

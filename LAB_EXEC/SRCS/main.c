@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/13 14:22:11 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:59:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void    fill_token_list(t_token **token, t_exec *e)
 
     cmd_tab = ft_split(e->input, ' ');
     if (!cmd_tab)
-        exit(EXIT_FAILURE);
+        exit(FAILURE);
     while (cmd_tab)
     {
         new_elem = 
@@ -63,7 +63,7 @@ int main(int argc, char **argv, char **envp)
     t_token *token;
     
     if (argc > 1)
-        exit(EXIT_FAILURE);
+        exit(FAILURE);
     (void)argv;
     init_e(&e);
 	e.envp = envp;

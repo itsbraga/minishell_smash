@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 16:06:57 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:28:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,53 @@ static void    __init_global(t_global *g)
 	g->last_exit_status = 0;
 }
 
-void	free_tab(char **tab)
+static char	*__generate_prompt(void)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	tab = NULL;
+	char	*username;
+	char	*part1;
+	char	*part2;
+	char	*prompt;
+	
+	username = getenv("USER");
+	if (username == NULL)
+		username = "unknown";
+	part1 = ft_strjoin(BOLD PINK "[", username);
+	part2 = ft_strjoin(part1, "@42]" RESET " $> ");
+	free(part1);
+	prompt = part2;
+	return (prompt);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_global	g;
+	char		*prompt;
 	t_token		*cell = NULL;
 	char		**cmd = NULL;
 	int			i;
 
 	(void)argv;
 	if (argc != 1)
-		exit(EXIT_FAILURE);
+		exit(FAILURE);
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
+	prompt = __generate_prompt();
 	__init_global(&g);
 	create_env_list(&g.env, envp);
 	while (1)
 	{
 		i = 0;
-		g.input = readline(BOLD PINK "[minishell] " RESET "$> ");
+		g.input = readline(prompt);
 		if (*g.input != '\0')
 		{
 			add_history(g.input);
 			cmd = ft_split(g.input, ' ');
 			if (cmd == NULL)
-				return (EXIT_FAILURE);
+				return (FAILURE);
 			while (cmd[i] != NULL)
 			{
 				cell = new_node(cmd[i]);
 				if (cell == NULL)
-					return (EXIT_FAILURE);
+					return (FAILURE);
 				add_back(&g.token, cell);
 				i++;
 			}
