@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:25:39 by pmateo            #+#    #+#             */
-/*   Updated: 2024/07/03 23:29:12 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:39:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_token	*new_node(char *content)
 	return (new_node);
 }
 
-t_token	*t_last_node(t_token *t)
+t_token	*last_node(t_token *t)
 {
 	if (!t)
 		return (NULL);
@@ -43,7 +43,7 @@ void	add_back(t_token **t, t_token *new_node)
 		*t = new_node;
 	else
 	{
-		tmp = t_last_node(*t);
+		tmp = last_node(*t);
 		tmp->next = new_node;
 	}
 }

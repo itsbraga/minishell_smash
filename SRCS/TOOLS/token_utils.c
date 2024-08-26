@@ -6,7 +6,11 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/08/26 16:11:25 by pmateo           ###   ########.fr       */
+=======
+/*   Updated: 2024/08/26 15:39:04 by annabrag         ###   ########.fr       */
+>>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +28,7 @@ t_token	*new_node(char *content)
 	return (new_node);
 }
 
-t_token	*t_last_node(t_token *t)
+t_token	*last_node(t_token *t)
 {
 	if (t == NULL)
 		return (NULL);
@@ -41,7 +45,7 @@ void	add_back(t_token **t, t_token *new_node)
 		*t = new_node;
 	else
 	{
-		tmp = t_last_node(*t);
+		tmp = last_node(*t);
 		tmp->next = new_node;
 	}
 }

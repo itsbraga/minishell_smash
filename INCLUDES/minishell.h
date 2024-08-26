@@ -6,7 +6,11 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/08/26 16:27:04 by pmateo           ###   ########.fr       */
+=======
+/*   Updated: 2024/08/26 16:24:23 by annabrag         ###   ########.fr       */
+>>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +24,19 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <limits.h>
-# include <linux/limits.h>
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
 # include "../LIBFT/INCLUDES/libft.h"
 # include "../LIBFT/INCLUDES/ft_printf.h"
 # include "../LIBFT/INCLUDES/get_next_line_bonus.h"
 # include "defines.h"
 # include "colors.h"
-# include "my_features.h"
 
 /******************************************************************************\
  * STRUCTS
 \******************************************************************************/
-
-// extern int		gsig_exit;
 
 // typedef enum e_category
 // {
@@ -49,11 +50,30 @@
 // 	struct s_env	*next;
 // }				t_input;
 
+<<<<<<< HEAD
+=======
+typedef struct s_global
+{
+	char		*input; // ira dans une fonction spe
+	// t_input		*input;
+	t_env		*env;
+	t_token		*token;
+	int			last_exit_status;
+}				t_global;
+
+>>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 typedef struct s_token
 {
 	char			*content;
 	struct s_token	*next;
 }				t_token;
+
+// typedef struct s_command
+// {
+// 	char				*cmd;
+// 	char				**args;
+// 	struct s_command	*next;
+// }				t_command;
 
 typedef struct s_env
 {
@@ -70,6 +90,12 @@ typedef struct s_global
 	t_token		*token;
 	int			last_exit_status;
 }				t_global;
+
+/******************************************************************************\
+ * GLOBAL VARIABLE
+\******************************************************************************/
+
+extern int		gsig_exit_status;
 
 /******************************************************************************\
  * INIT
@@ -93,6 +119,7 @@ char	*cat_tcontent(t_token *to_cat);
  * ENVIRONMENT
 \******************************************************************************/
 
+<<<<<<< HEAD
 size_t	get_env_size(char **env);
 t_env	*env_new_var(char *content);
 void 	lstclear_env(t_env **env);
@@ -101,6 +128,11 @@ t_env	*ascii_sort(char **envp, char *last_added);
 int		create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t idx_exp_env);
 int		create_env_list(t_env **env, char **envp);
 void	create_env(t_global *g, char **envp);
+=======
+void	lstclear_env(t_env **env);
+t_env	*env_new_var(char *content);
+int		create_env_list(t_env **env, char **envp);
+>>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 
 /******************************************************************************\
  * EXPAND
@@ -111,27 +143,26 @@ void	create_env(t_global *g, char **envp);
  * TOOLS
 \******************************************************************************/
 
-t_token	*new_node(char *content);
-t_token	*t_last_node(t_token *t);
-void	add_back(t_token **t, t_token *new_node);
-void	clear_tokens(t_token **t);
+void	lstclear_tokens(t_token **t);
 void	del_current_token(t_token **t, t_token *cur);
 size_t	get_tlist_size(t_token **t);
 void	display_tokens(t_token *t);
-bool	is_special_char(int c);
+void	add_back(t_token **t, t_token *new_node);
+t_token	*last_node(t_token *t);
+t_token	*new_node(char *content);
 
-void	errmsg(char *cmd, char *arg);
 int		errmsg_status(char *cmd, char *arg, int err_status);
+void	errmsg(char *cmd, char *arg);
 
 /******************************************************************************\
  * BUILT-INS
 \******************************************************************************/
 
-void	exec_built_in(char **built_in, t_global *g);
-int		my_pwd(void);
-int 	go_to_env_var(t_global *g, char *var);
-int		my_cd(t_global *g);
-int		my_env(t_env *env);
 void	my_exit(t_global *g, char **args);
+int		my_cd(t_global *g);
+int 	go_to_env_var(t_global *g, char *var);
+int		my_pwd(void);
+int		my_env(t_env *env);
+void	exec_built_in(char **built_in, t_global *g);
 
 #endif

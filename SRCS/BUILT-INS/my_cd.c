@@ -6,7 +6,11 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/08/26 16:12:32 by pmateo           ###   ########.fr       */
+=======
+/*   Updated: 2024/08/26 15:06:06 by annabrag         ###   ########.fr       */
+>>>>>>> 6e6a8733545fee32380e072c25f1579acc0c37b4
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +19,9 @@
 static char	*__update_pwd(t_env *env, char **old_pwd)
 {
 	t_env	*head;
-	char	*new_pwd;
+	char	new_pwd[PATH_MAX];
 
-	if ((new_pwd = getcwd(NULL, 0)) == NULL)
+	if (getcwd(new_pwd, sizeof(new_pwd)) == NULL)
 	{
 		printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
 		return (NULL);
@@ -97,5 +101,5 @@ int	my_cd(t_global *g)
 	if (ret != 0)
 		errmsg_status(g->token->content, g->token->next->content, errno);
 	__change_paths(g->env);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }

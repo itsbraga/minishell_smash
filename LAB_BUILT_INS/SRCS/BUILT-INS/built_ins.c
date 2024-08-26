@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 18:05:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:32:19 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,6 @@ void	exec_built_in(char **built_in, t_global *g)
 	else if ((ft_strcmp(built_in[0], "env") == 0)
 			|| (ft_strcmp(built_in[0], "/bin/env") == 0))
 		my_env(g->env);
+	// else if (ft_strcmp(built_in[0], "exit") == 0)
+	// 	my_exit(g, ?);
 }

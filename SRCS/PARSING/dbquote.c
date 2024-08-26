@@ -46,7 +46,7 @@ int	add_dbquote_content(char **str, t_token **t)
 		new_elem = new_node(content);
 	if (!content || !new_elem)
 	{
-		clear_tokens(t);
+		lstclear_tokens(t);
 		return (EXIT_FAILURE);
 	}
 	add_back(t, new_elem);

@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/22 10:26:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/26 16:44:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_ins.h"
 
-void	clear_tokens(t_token **t)
+void	lstclear_env(t_env **env)
+{
+    t_env *tmp;
+
+    if (env == NULL || (*env) == NULL)
+        return ;
+    while ((*env) != NULL)
+    {
+        tmp = (*env)->next;
+        free((*env)->content);
+        free(*env);
+        *env = tmp;
+    }
+}
+
+void	lstclear_tokens(t_token **t)
 {
 	t_token	*tmp;
 	
@@ -27,4 +42,20 @@ void	clear_tokens(t_token **t)
 	}
 	(*t) = NULL;
 }
+
+// void	lstclear_input(t_input **input)
+// {
+// 	t_input	*tmp;
+	
+// 	if (input == NULL || (*input) == NULL)
+// 		return ;
+// 	while ((*input) != NULL)
+// 	{
+// 		tmp = (*input)->next;
+// 		free((*input)->content); 
+// 		free(*input);
+// 		(*input) = tmp;
+// 	}
+// 	(*input) = NULL;
+// }
 

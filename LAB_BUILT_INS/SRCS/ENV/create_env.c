@@ -6,15 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/22 13:30:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:17:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_ins.h"
 
-static void free_env_list(t_env **env);
-
-static t_env	*__env_new_var(char *content)
+t_env	*env_new_var(char *content)
 {
 	t_env	*new_var;
 
@@ -33,39 +31,24 @@ int	create_env_list(t_env **env, char **envp)
 	t_env	*last;
 
 	i = 0;
-	if (env == NULL || envp == NULL)
-		return (EXIT_FAILURE);
-	*env = NULL;
+	if (envp == NULL)
+		return (FAILURE);
+	var = NULL;
 	last = NULL;
 	while (envp[i] != NULL)
 	{
-		var = __env_new_var(envp[i]);
+		var = env_new_var(envp[i]);
 		if (var == NULL)
 		{
-			free_env_list(env);
-			return (EXIT_FAILURE);
+			lstclear_env(env);
+			return (FAILURE);
 		}
-		if (last != NULL)
-			last->next = var;
-		else
+		if (last == NULL)
 			*env = var;
+		else
+			last->next = var;
 		last = var;
 		i++;
 	}
-	return (EXIT_SUCCESS);
-}
-
-static void free_env_list(t_env **env)
-{
-    t_env *tmp;
-
-    if (env == NULL || (*env) == NULL)
-        return ;
-    while ((*env) != NULL)
-    {
-        tmp = (*env)->next;
-        free((*env)->content);
-        free(*env);
-        *env = tmp;
-    }
+	return (SUCCESS);
 }

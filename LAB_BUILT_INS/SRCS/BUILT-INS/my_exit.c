@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/25 21:52:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:37:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ static long	__ft_atol(char *arg, bool *error)
 	}
 	while (arg[i] != '\0' && ft_isdigit(arg[i]) == 1)
 	{
-		res = res * 10 + (arg[i] - 48);
+		res = res * 10 + (arg[i++] - 48);
 		if (res < LONG_MIN || res > LONG_MAX)
+		{
 			*error = true;
-			// exit (255);
-		i++;
+			break ;
+		}
 	}
 	return (res * sign);
 }
@@ -56,45 +57,46 @@ static int	__get_exit_status(t_global *g, char *arg, bool *error)
 	i = 0;
 	if (arg == NULL)
 		return (g->last_exit_status);
-	while (ft_isspace(arg[i]) == 1)
-		i++;
-	if (arg[i] == '\0')
-		*error = true;
-		// exit (EXIT_FAILURE); || return (g->last_exit_status);
-	if (arg[i] == '-' || arg[i] == '+')
-		i++;
 	while (arg[i] != '\0')
 	{
 		if (ft_isdigit(arg[i]) == 0 && ft_isspace(arg[i]) == 0)
 			*error = true;
-			// exit (128); || break ;
 		i++;
 	}
 	status = __ft_atol(arg, error);
 	return (status % 256);	
 }
 
-void	my_exit(t_global *g, char **args)
+void	exit_minishell(t_global *g, int err_status)
 {
-	int		status;
+	if (g != NULL)
+		// free_global(g);
+		lstclear_tokens(&g->token);
+	exit(err_status);
+}
+
+// gerer le cas ou exit est appele seul
+int	my_exit(t_global *g, char **args)
+{
+	int		exit_status;
 	bool	error;
 	bool	correct_input;
-
-	status = 0;
+ 
+	exit_status = 0;
 	error = false;
 	if (args == NULL || args[1] == NULL)
-		status = g->last_exit_status;
+		exit_status = g->last_exit_status;
 	correct_input = __has_only_one_arg(args);
 	if (correct_input == false)
-	{
-		error = true;
 		errmsg("exit", NULL);
-	}
 	else
 	{
-		status = __get_exit_status(g, *args, &error);
+		exit_status = __get_exit_status(g, args[1], &error);
 		if (error == true)
-			errmsg_status("exit", NULL, errno);
-			// verifier sur arg == NULL
+			errmsg_status("exit", args[1], MISUSE_BUILTIN);
+		else if (args[2] != NULL)
+			errmsg_status("exit", NULL, MISUSE_BUILTIN);
 	}
+	exit_minishell(g, exit_status);
+	return (MISUSE_BUILTIN);
 }
