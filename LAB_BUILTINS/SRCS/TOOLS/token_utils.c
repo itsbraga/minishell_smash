@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:25:39 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 15:39:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_ins.h"
+#include "my_builtins.h"
 
 t_token	*new_node(char *content)
 {
@@ -43,19 +43,6 @@ void	add_back(t_token **t, t_token *new_node)
 	{
 		tmp = last_node(*t);
 		tmp->next = new_node;
-	}
-}
-
-void	display_tokens(t_token *t)
-{
-	t_token	*tmp;
-
-	tmp = t;
-	while (tmp != NULL)
-	{
-		ft_putstr_fd(tmp->content, 1);
-		ft_putendl_fd("", 1);
-		tmp = tmp->next;
 	}
 }
 

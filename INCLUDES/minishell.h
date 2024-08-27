@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 20:23:24 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/27 02:08:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@
  * STRUCTS
 \******************************************************************************/
 
-typedef enum e_category
+typedef enum 	e_category
 {
 	WORD,
 	SEPARATOR,
-}			 t_category;
+}			 	t_category;
 
 // typedef struct s_input
 // {
@@ -53,6 +53,12 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
+typedef struct s_token
+{
+	char			*content;
+	struct s_token	*next;
+}				t_token;
+
 typedef struct s_global
 {
 	char		*input; // ira dans une fonction spe
@@ -60,14 +66,8 @@ typedef struct s_global
 	t_env		*env;
 	t_env		*exp_env;
 	t_token		*token;
-	int			last_exit_status;
+	// int			last_exit_status;
 }				t_global;
-
-typedef struct s_token
-{
-	char			*content;
-	struct s_token	*next;
-}				t_token;
 
 // typedef struct s_command
 // {
@@ -80,7 +80,7 @@ typedef struct s_token
  * GLOBAL VARIABLE
 \******************************************************************************/
 
-extern int		gsig_exit_status;
+extern int	g_last_exit_status;
 
 /******************************************************************************\
  * INIT
@@ -130,6 +130,8 @@ int		my_cd(t_global *g);
 int 	go_to_env_var(t_global *g, char *var);
 int		my_pwd(void);
 int		my_env(t_env *env);
+
+// built_ins.c
 void	exec_built_in(char **built_in, t_global *g);
 
 /******************************************************************************\
@@ -138,10 +140,13 @@ void	exec_built_in(char **built_in, t_global *g);
 
 // token_utils.c
 size_t	get_tlist_size(t_token **t);
-void	display_tokens(t_token *t);
 void	add_back(t_token **t, t_token *new_node);
 t_token	*last_node(t_token *t);
 t_token	*new_node(char *content);
+
+// display.c
+void    display_export_env(t_env *exp_env);
+void	display_tokens(t_token *t);
 
 // error.c
 int		errmsg_status(char *cmd, char *arg, int err_status);
@@ -152,6 +157,11 @@ void	del_current_token(t_token **t, t_token *cur);
 void	lstclear_tokens(t_token **t);
 void 	lstclear_env(t_env **env);
 void	free_tab(char **tab);
+
+// features.c
+void	rainbow_txt(const char *str);
+void	rainbow_txt_nonl(const char *str);
+char	*rainbow_prompt(const char *str);
 
 
 #endif

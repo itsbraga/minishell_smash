@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins.h                                        :+:      :+:    :+:   */
+/*   my_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 19:29:27 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/27 02:27:36 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_INS_H
-# define BUILT_INS_H
+#ifndef MY_BUILTINS_H
+# define MY_BUILTINS_H
 
 # include <stddef.h>
 # include <stdio.h>
@@ -28,7 +28,8 @@
 # include "../LIBFT/INCLUDES/ft_printf.h"
 # include "../LIBFT/INCLUDES/get_next_line_bonus.h"
 # include "colors.h"
-# include "my_features.h"
+
+# define WELCOME_BANNER "\e[96m╔══════════════════════════════════════════════════════════════════════════════════╗\n║                                                                                  ║\n║  \e[35m___________   __________                    ___________\t\t           \e[96m║\n║  \e[35m\\__    ___/   \\______   \\  ____  ___  ___   \\__    ___/____  _____     _____    \e[96m║\n║    \e[35m|    | ______|       _/_/ __ \\ \\  \\/  /     |    | _/ __ \\ \\__  \\   /     \\   \e[96m║\n║    \e[35m|    |/_____/|    |   \\\\  ___/  >    <      |    | \\  ___/  / __ \\_|  Y Y  \\  \e[96m║\n║    \e[35m|____|       |____|_  / \\___  >/__/\\_ \\     |____|  \\___  >(____  /|__|_|  /  \e[96m║\n║\t\t         \e[35m\\/      \\/       \\/                 \\/      \\/       \\/   \e[96m║\n║                                                                                  ║\n╚══════════════════════════════════════════════════════════════════════════════════╝\n\n"
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
@@ -48,14 +49,14 @@
 # define OUT_OF_RANGE 255
 
 /******************************************************************************\
- * STRUCTS
+ * GLOBAL VARIABLE
 \******************************************************************************/
 
-typedef struct s_token
-{
-	char			*content;
-	struct s_token	*next;
-}				t_token;
+extern int	g_last_exit_status;
+
+/******************************************************************************\
+ * STRUCTS
+\******************************************************************************/
 
 typedef struct s_env
 {
@@ -63,12 +64,18 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
+typedef struct s_token
+{
+	char			*content;
+	struct s_token	*next;
+}				t_token;
+
 typedef struct s_global
 {
 	char		*input;
 	t_env		*env;
 	t_token		*token;
-	int			last_exit_status;
+	// int			last_exit_status;
 }				t_global;
 
 /******************************************************************************\
@@ -90,12 +97,16 @@ int			my_pwd(void);
 int 		go_to_env_var(t_global *g, char *var);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
-int			my_exit(t_global *g, char **args);
+int			my_exit(t_global *g);
 
 void		errmsg(char *cmd, char *arg);
 int			errmsg_status(char *cmd, char *arg, int err_status);
 
 void		free_tab(char **tab);
+
+void		rainbow_txt(const char *str);
+void		rainbow_txt_nonl(const char *str);
+char		*rainbow_prompt(const char *str);
 
 /******************************************************************************\
  * TESTS

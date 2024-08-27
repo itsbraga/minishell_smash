@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 20:12:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/26 23:28:49 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,4 @@ size_t	get_tlist_size(t_token **t)
 		node = node->next;
 	}
 	return (size);
-}
-
-void	display_tokens(t_token *t)
-{
-	t_token	*tmp;
-
-	tmp = t;
-	while (tmp != NULL)
-	{
-		ft_putstr_fd(tmp->content, 1);
-		ft_putendl_fd("", 1);
-		tmp = tmp->next;
-	}
 }

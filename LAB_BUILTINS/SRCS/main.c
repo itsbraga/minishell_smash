@@ -3,37 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 19:28:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_ins.h"
+#include "my_builtins.h"
+
+int		g_last_exit_status;
 
 static void    __init_global(t_global *g)
 {
 	g->input = NULL;
 	g->env = NULL;
 	g->token = NULL;
-	g->last_exit_status = 0;
+	// g->last_exit_status = 0;
+	g_last_exit_status = 0;
 }
 
 static char	*__generate_prompt(void)
 {
 	char	*username;
+	char	*rb_username;
 	char	*part1;
-	char	*part2;
 	char	*prompt;
 	
 	username = getenv("USER");
 	if (username == NULL)
 		username = "unknown";
-	part1 = ft_strjoin(BOLD PINK "[", username);
-	part2 = ft_strjoin(part1, "@42]" RESET " $> ");
+	rb_username = rainbow_prompt(username);
+	part1 = ft_strjoin(BOLD "[", rb_username);
+	free(rb_username);
+	prompt = ft_strjoin(part1, "@42]" RESET " $> ");
 	free(part1);
-	prompt = part2;
 	return (prompt);
 }
 
@@ -49,7 +53,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		exit(FAILURE);
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
-	prompt = __generate_prompt();
+	if ((prompt = __generate_prompt()) == NULL)
+		exit(FAILURE);
 	__init_global(&g);
 	create_env_list(&g.env, envp);
 	while (1)
@@ -75,5 +80,6 @@ int	main(int argc, char **argv, char **envp)
 			lstclear_tokens(&g.token);
 		}
 	}
+	free(prompt);
 	free_tab(cmd);
 }

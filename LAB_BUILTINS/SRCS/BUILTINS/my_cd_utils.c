@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/26 12:26:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_ins.h"
+#include "my_builtins.h"
 
 static char	*__find_var_path(char *to_find, t_env *env)
 {
@@ -49,8 +49,8 @@ int go_to_env_var(t_global *g, char *var)
 	var_path = __find_var_path(var, g->env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
-		errmsg_status(g->token->content, g->token->next->content, 126);
-	// verifier s'il ne faut pas plutot indiquer errno
+		errmsg_status(g->token->content, g->token->next->content, errno);
+	// verifier s'il ne faut pas plutot indiquer un code erreur specifique
 	if (var_path != NULL)
 		free(var_path);
 	return (ret);

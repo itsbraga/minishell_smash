@@ -72,8 +72,8 @@ fclean: clean
 			@make fclean -sC $(LIBFT_PATH)
 			@printf "$(BOLD)$(BLUE)[execs]: $(RESET)Full clean completed!\n\n"
 
-re:		fclean all
-			@printf "$(BOLD)make re: $(RESET)Rebuilding done!\n\n"
+re:	fclean all
+		@printf "$(BOLD)$(YELLOW)make re: $(RESET)Rebuilding done! ✨\n\n"
 
 norm:
 		@clear

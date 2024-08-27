@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_export_env.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 16:31:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/26 23:48:38 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,26 @@ size_t	get_env_size(char **env)
 	size_t	size;
 	
 	size = 0;
-	while (env[size])
+	while (env[size] != NULL)
 		size++;
 	return (size);
 }
 
 // TROUVE ET COPIE LA STRING AVEC LE PLUS HAUT CODE ASCII
-
 t_env	*copy_toppest(char **envp)
 {
-	int	i;
-	char *tmp_top;
+	int		i;
+	char	*tmp_top;
 
 	i = 0;
 	tmp_top = NULL;
 	while (envp[i])
 	{
-		if (!tmp_top)
+		if (tmp_top == NULL)
 			tmp_top = envp[0];
 		else
 		{
-			if (__cmp_to_equal(tmp_top, envp[i] ) > 0)
+			if (__cmp_to_equal(tmp_top, envp[i]) > 0)
 				tmp_top = envp[i];
 			else
 				i++;
@@ -55,21 +54,21 @@ t_env	*copy_toppest(char **envp)
 	}
 	return (env_new_var(tmp_top));
 }
+
 // COMPARE LES VALEURS DANS ENV_LIST POUR TROUVER 
 // LE DERNIER ELEMENT LE PLUS HAUT DANS L'ORDRE ASCII
-
 t_env	*ascii_sort(char **envp, char *last_added)
 {
-	int	i;
-	char *tmp;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	tmp = NULL;
-	while(envp[i])
+	while (envp[i])
 	{
 		if (__cmp_to_equal(last_added, envp[i]) < 0)
 		{
-			if (!tmp)
+			if (tmp == NULL)
 				tmp = envp[i];
 			else
 			{
@@ -99,7 +98,7 @@ int	create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t i
 		if (to_add == NULL)
 		{
 			lstclear_env(exp_env);
-			return (EXIT_FAILURE);
+			return (FAILURE);
 		}
 		if (last == NULL)
 			*exp_env = to_add;
@@ -108,5 +107,5 @@ int	create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t i
 		last = to_add;
 		idx_exp_env++;
 	}
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }

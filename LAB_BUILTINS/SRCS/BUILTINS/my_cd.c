@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 16:41:35 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_ins.h"
+#include "my_builtins.h"
 
 static char	*__update_pwd(t_env *env, char **old_pwd)
 {
@@ -96,6 +96,7 @@ int	my_cd(t_global *g)
 		ret = chdir((const char *)g->token->next->content);
 	if (ret != 0)
 		errmsg_status(g->token->content, g->token->next->content, errno);
+	// verifier s'il ne faut pas plutot indiquer un code erreur specifique
 	__change_paths(g->env);
 	return (SUCCESS);
 }

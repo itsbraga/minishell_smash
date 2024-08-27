@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 20:03:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_ins.h"
+#include "my_builtins.h"
 
 static long	__ft_atol(char *arg)
 {
@@ -44,7 +44,7 @@ static void	__set_exit_status(t_global *g, char **args)
 
 	exit_status = 0;
 	if (args == NULL || args[1] == NULL)
-		exit_status = 0; // last_exit_status
+		exit_status = 0; // g_last_exit_status
 	else if (args[2] != NULL)
 		errmsg_status("exit", args[2], FAILURE);
 	else if (ft_isdigit(args[1]) == 1)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins.c                                        :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/25 15:28:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/27 02:28:17 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@
 void	exec_built_in(char **built_in, t_global *g)
 {
 	if ((ft_strcmp(built_in[0], "pwd") == 0)
-			|| (ft_strcmp(built_in[0], "/bin/pwd") == 0))
+			|| (ft_strcmp(built_in[0], "usr/bin/pwd") == 0))
 		my_pwd();
 	else if ((ft_strcmp(built_in[0], "cd") == 0)
-			|| (ft_strcmp(built_in[0], "/bin/cd") == 0))
+			|| (ft_strcmp(built_in[0], "usr/bin/cd") == 0))
 		my_cd(g);
 	else if ((ft_strcmp(built_in[0], "env") == 0)
-			|| (ft_strcmp(built_in[0], "/bin/env") == 0))
+			|| (ft_strcmp(built_in[0], "usr/bin/env") == 0))
 		my_env(g->env);
 }
