@@ -6,7 +6,7 @@
 #    By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/20 14:22:48 by pmateo            #+#    #+#              #
-#    Updated: 2024/08/16 16:50:59 by pmateo           ###   ########.fr        #
+#    Updated: 2024/08/28 15:40:01 by pmateo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ DIRINC_MINIPARSING = ./INCLUDES
 INCFILES = 			${DIRINC_MINIPARSING}/mini_parsing.h
 
 DIR_SRCS = 			./SRCS/
-SRCS = 				main.c quotes.c expand.c expand_utils.c token_utils.c
+SRCS = 				main.c quotes.c quotes_utils.c expand.c expand_utils.c  \
+					del_quotes.c token_utils.c
 
 OBJ = ${SRCS:.c=.o}
 

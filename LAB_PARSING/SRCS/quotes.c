@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 16:59:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:59:13 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ static bool	__unclosed_quotes(char *str)
 	}
 	return (unclosed_quotes_return(closed));
 }
-static bool	__handle_empty_quotes(char *str, int i, bool **closed)
+static bool	__handle_empty_quotes(char *str, int i, bool *closed)
 {
 	if ((str[i] == '"' && str[i + 1] == '"') 
-		&& (*closed[1] != false && *closed[0] != false))
+		&& (closed[1] != false && closed[0] != false))
 		return (true);
 	else if ((str[i] == '\'' && str[i + 1] == '\'') 
-		&& (*closed[1] != false && *closed[0] != false))
+		&& (closed[1] != false && closed[0] != false))
 		return (true);
-	if (str[i] == '"' && *closed[1] != false)
-		*closed[0] = switch_bool(*closed[0]);
+	if (str[i] == '"' && closed[1] != false)
+		closed[0] = switch_bool(closed[0]);
 	else if (str[i] == '\'' && closed[0] != false)
-		*closed[1] = switch_bool(*closed[1]);
+		closed[1] = switch_bool(closed[1]);
 	return (false);
 }
 
@@ -64,9 +64,9 @@ char	*empty_quotes(char *str)
 	closed[1] = true;
 	while (str[i] != '\0')
 	{
-		if (__handle_empty_quotes2(str, i, &closed))
+		if (__handle_empty_quotes(str, i, closed))
 		{
-			str = del_empty_quote(str, i);
+			str = del_empty_quotes(str, i);
 			i = -1;
 			closed[0] = true;
 			closed[1] = true;
@@ -79,6 +79,7 @@ char	*empty_quotes(char *str)
 char	*others_quotes(char *str)
 {
 	int	i;
+	// int	
 	int closing_quote;
 
 	i = 0;
@@ -88,16 +89,19 @@ char	*others_quotes(char *str)
 		if (str[i] == '"')
 		{
 			closing_quote = find_closing_quote(&str[i], '"');
+			printf("closing_quote = %d ; i = %d\n", closing_quote, i);
 			str = del_quote_pair(str, i, (i + closing_quote));
-			i = (i + closing_quote) - 2;
+			i = i + (closing_quote - 1);
+			printf("i after del = %d\n", i);
 		}
 		else if (str[i] == '\'')
 		{
 			closing_quote = find_closing_quote(&str[i], '\'');
 			str = del_quote_pair(str, i, (i + closing_quote));
-			i  = (i + closing_quote) - 2;
+			i  = i + (closing_quote - 1);
 		}
-		i++;
+		else
+			i++;
 	}
 	return (str);
 }
@@ -105,14 +109,17 @@ char	*others_quotes(char *str)
 char	*handle_quotes_and_expand(char *input, char **envp)
 {
 	(void)envp;
-	if (unclosed_quotes(input) == true)
+	if (__unclosed_quotes(input) == true)
 	{
 		ft_putendl_fd("Unclosed quote !", 2);
 		ft_putendl_fd("Aborting...", 2);
 		exit(FAILURE);
 	}
 	input = empty_quotes(input);
-	input = handle_expand(input, envp);
-	input = other_quotes(input);
+	printf("1\n");
+	input = expand(input, envp);
+	printf("2\n");
+	input = others_quotes(input);
+	printf("3\n");
 	return (input);
 }
