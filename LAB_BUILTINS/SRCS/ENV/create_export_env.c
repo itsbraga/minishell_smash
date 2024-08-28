@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_export_env.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 23:48:38 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/28 20:23:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+# include "my_builtins.h"
 
 static int	__cmp_to_equal(const char *s1, const char *s2)
 {
