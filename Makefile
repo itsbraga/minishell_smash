@@ -7,10 +7,10 @@ BOLD		:=	\e[1m
 ITAL		:=	\e[3m
 BLINK		:=	\e[5m
 
-YELLOW		:=	\e[33m
 GREEN		:=	\e[32m
+YELLOW		:=	\e[33m
 BLUE		:=	\e[34m
-PURPLE		:=	\e[35m
+CYAN		:=	\e[36m
 PINK		:=	\e[38;2;255;182;193m
 
 #******************************************************************************#
@@ -100,12 +100,12 @@ $(NAME): $(OBJS_F) $(LIBFT)
 clean:
 		@rm -rf $(OBJS_DIR)
 		@make clean -sC $(LIBFT_PATH)
-		@printf "\n$(BOLD)$(GREEN)[objs]:\t $(RESET)Clean completed\n"
+		@printf "\n$(BOLD)$(BLUE)[objs]:\t $(RESET)Clean completed\n"
 
 fclean: clean
 			@rm -rf $(NAME)
 			@make fclean -sC $(LIBFT_PATH)
-			@printf "$(BOLD)$(BLUE)[execs]: $(RESET)Full clean completed!\n\n\n"
+			@printf "$(BOLD)$(CYAN)[execs]: $(RESET)Full clean completed!\n\n\n"
 
 re:	fclean all
 		@printf "\n$(BOLD)$(YELLOW)make re: $(RESET)All files have been rebuilt! ✨\n\n"

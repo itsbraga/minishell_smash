@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   my_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:38:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/28 20:23:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-int	my_unset(t_global *g);
+int	my_unset(t_env *env, t_env *exp_env);

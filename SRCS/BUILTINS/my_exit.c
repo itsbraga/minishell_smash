@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 14:30:38 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int	__set_exit_status(char **args)
 	if (args == NULL || args[1] == NULL)
 		exit_status = g_last_exit_status;
 	else if (args[2] != NULL)
-		errmsg_status("exit", args[2], FAILURE);
+		errmsg_status_exit("exit", args[2], FAILURE);
 	else if (ft_strisnumeric(args[1]) == 1)
 		exit_status = __ft_atol(args[1]);
 	else
-		errmsg_status("exit", args[1], MISUSE_BUILTIN);
+		errmsg_status_exit("exit", args[1], MISUSE_BUILTIN);
 	return (exit_status % 256);
 }
 

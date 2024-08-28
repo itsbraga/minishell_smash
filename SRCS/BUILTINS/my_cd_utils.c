@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/26 23:37:57 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*__find_var_path(char *to_find, t_env *env)
+char	*find_var_path(char *to_find, t_env *env)
 {
 	t_env	*head;
 	char	*path;
@@ -46,10 +46,10 @@ int go_to_env_var(t_global *g, char *var)
 	char	*var_path;
 	int		ret;
 
-	var_path = __find_var_path(var, g->env);
+	var_path = find_var_path(var, g->env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
-		errmsg_status(g->token->content, g->token->next->content, errno);
+		errmsg_status_exit(g->token->content, g->token->next->content, errno);
 	// verifier s'il ne faut pas plutot indiquer un code erreur specifique
 	if (var_path != NULL)
 		free(var_path);

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 14:26:59 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:53:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void    __init_global(t_global *g)
 		(free(g->prompt), exit(FAILURE));
 	g->input = NULL;
 	g->env = NULL;
+	g->exp_env = NULL;
 	g->token = NULL;
 	g_last_exit_status = 0;
 }
