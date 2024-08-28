@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 12:26:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	errmsg(char *cmd, char *arg)
 		printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
 }
 
-int	errmsg_status(char *cmd, char *arg, int err_status)
+int	errmsg_status_exit(char *cmd, char *arg, int err_status)
 {
 	if (cmd != NULL && arg == NULL)
 	{

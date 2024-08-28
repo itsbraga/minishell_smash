@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 13:19:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:13:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static long long	__ft_atol(char *arg)
 		if (res < LONG_MIN || res > LONG_MAX)
 			exit(OUT_OF_RANGE);
 	}
-	return (res * sign);
+	return ((res * sign) % 256);
 }
 
 static int	__set_exit_status(char **args)
@@ -45,13 +45,16 @@ static int	__set_exit_status(char **args)
 	exit_status = 0;
 	if (args == NULL || args[1] == NULL)
 		exit_status = g_last_exit_status;
-	else if (args[2] != NULL)
-		errmsg_status("exit", args[2], FAILURE);
-	else if (ft_strisnumeric(args[1]) == 1)
-		exit_status = __ft_atol(args[1]);
+	else if (args[1] != NULL)
+	{
+		if (args[2] != NULL && ft_strisnumeric(args[1]) == 0)
+			errmsg_status_exit("exit", args[2], FAILURE); // sinon ecrire "too many arguments"
+		else
+			exit_status = __ft_atol(args[1]);
+	}
 	else
-		errmsg_status("exit", args[1], MISUSE_BUILTIN);
-	return (exit_status % 256);
+		errmsg_status_exit("exit", args[1], MISUSE_BUILTIN);
+	return (exit_status);
 }
 
 void	exit_minishell(t_global *g, int err_status)

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 13:19:25 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_global
 	char		*prompt;
 	char		*input;
 	t_env		*env;
+	t_env		*exp_env;
 	t_token		*token;
 	// int			last_exit_status;
 }				t_global;
@@ -87,6 +88,11 @@ t_env		*env_new_var(char *content);
 void		lstclear_env(t_env **env);
 int			create_env_list(t_env **env, char **envp);
 
+size_t		get_env_size(char **env);
+t_env		*copy_toppest(char **envp);
+t_env		*ascii_sort(char **envp, char *last_added);
+int			create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t idx_exp_env);
+
 t_token		*new_node(char *content);
 t_token		*last_node(t_token *t);
 void		add_back(t_token **t, t_token *new_node);
@@ -95,13 +101,14 @@ void		display_tokens(t_token *t);
 
 void		exec_built_in(char **built_in, t_global *g);
 int			my_pwd(void);
+char		*find_var_path(char *to_find, t_env *env);
 int 		go_to_env_var(t_global *g, char *var);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
 int			my_exit(t_global *g, char **args);
 
 void		errmsg(char *cmd, char *arg);
-int			errmsg_status(char *cmd, char *arg, int err_status);
+int			errmsg_status_exit(char *cmd, char *arg, int err_status);
 
 void		free_tab(char **tab);
 void    	free_global(t_global *g, bool clear_history);

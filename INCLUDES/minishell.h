@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/28 14:28:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_global
 	t_env		*env;
 	t_env		*exp_env;
 	t_token		*token;
-	// int			last_exit_status;
 }				t_global;
 
 // typedef struct s_command
@@ -96,10 +95,13 @@ void	init_global(t_global *global);
 // ?
 bool	is_closed_squote(char **str);
 bool	is_closed_dbquote(char **str);
+
 char	*squote(char **str);
 char	*dbquote(char **str);
+
 int		add_squote_content(char **str, t_token **t);
 int		add_dbquote_content(char **str, t_token **t);
+
 char	*cat_tcontent(t_token *to_cat);
 
 /******************************************************************************\
@@ -127,8 +129,12 @@ void	create_env(t_global *g, char **envp);
 \******************************************************************************/
 
 int		my_exit(t_global *g, char **args);
-int		my_cd(t_global *g);
+
+// my_cd_utils.c
+char	*find_var_path(char *to_find, t_env *env);
 int 	go_to_env_var(t_global *g, char *var);
+int		my_cd(t_global *g); // my_cd.c
+
 int		my_pwd(void);
 int		my_env(t_env *env);
 
@@ -150,7 +156,7 @@ void    display_export_env(t_env *exp_env);
 void	display_tokens(t_token *t);
 
 // error.c
-int		errmsg_status(char *cmd, char *arg, int err_status);
+int		errmsg_status_exit(char *cmd, char *arg, int err_status);
 void	errmsg(char *cmd, char *arg);
 
 // free.c
