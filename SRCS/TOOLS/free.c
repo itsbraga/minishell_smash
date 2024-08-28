@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 20:19:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:28:45 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,6 @@ void	lstclear_tokens(t_token **t)
 	(*t) = NULL;
 }
 
-void	del_current_token(t_token **t, t_token *cur)
-{
-	t_token	*prev;
-	t_token	*tmp;
-
-	if (t == NULL || (*t) == NULL || cur == NULL)
-		return ;
-	prev = NULL;
-	tmp = *t;
-	if (*t == cur)
-	{
-		*t = cur->next;
-		(free(cur->content), free(cur));
-		return ;
-	}
-	while (tmp != NULL && tmp != cur)
-	{
-		prev = tmp;
-		tmp = tmp->next;
-	}
-	if (tmp == NULL)
-		return ;
-	prev->next = cur->next;
-	(free(cur->content), free(cur));
-}
-
 // void	lstclear_input(t_input **input)
 // {
 // 	t_input	*tmp;
@@ -83,5 +57,49 @@ void	del_current_token(t_token **t, t_token *cur)
 // 		(*input) = tmp;
 // 	}
 // 	(*input) = NULL;
+// }
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}
+
+void    free_global(t_global *g, bool clear_history)
+{
+	if (g != NULL && g->prompt != NULL)
+		free(g->prompt);
+    if (g != NULL && g->token != NULL)
+        lstclear_tokens(&g->token);
+    if (clear_history == true)
+    {
+        if (g != NULL && g->env != NULL)
+            lstclear_env(&g->env);
+        rl_clear_history();
+    }
+}
+
+// void    free_global(t_global *g, bool clear_history)
+// {
+//     if (g != NULL && g->input != NULL)
+//         lstclear_input(g->input);
+// 	if (g != NULL && g->cmd != NULL)
+// 		//
+//     if (g != NULL && g->token != NULL)
+//         lstclear_token(&g->token);
+//     if (clear_history == true)
+//     {
+//         if (g != NULL && g->env != NULL)
+//             lstclear_env(g->env);
+//         rl_clear_history();
+//     }
 // }
 

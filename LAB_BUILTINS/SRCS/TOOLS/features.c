@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   features.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/27 00:51:13 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/28 11:56:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "my_builtins.h"
 
 void	rainbow_txt(const char *str)
 {

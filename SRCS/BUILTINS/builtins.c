@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/27 02:28:17 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/28 14:27:56 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,6 @@ void	exec_built_in(char **built_in, t_global *g)
 	else if ((ft_strcmp(built_in[0], "env") == 0)
 			|| (ft_strcmp(built_in[0], "usr/bin/env") == 0))
 		my_env(g->env);
+	else if (ft_strcmp(built_in[0], "exit") == 0)
+		my_exit(g, built_in);
 }

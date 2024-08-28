@@ -36,13 +36,16 @@ DEBUG		=	-g -g3
 #******************************************************************************#
 
 BUILTINS_DIR	=	BUILTINS/
-BUILTINS_F		=	builtins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c
+BUILTINS_F		=	builtins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c my_exit.c
 
 ENV_DIR			=	ENV/
 ENV_F			=	create_env.c create_export_env.c env_utils.c
 
 EXPAND_DIR		=	EXPAND/
 EXPAND_F		=	expansion.c
+
+TOKEN_DIR		=	TOKENIZATION/
+TOKEN_F			=
 
 INIT_DIR		=	INIT/
 INIT_F			=	structs.c

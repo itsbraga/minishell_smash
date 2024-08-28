@@ -6,22 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 11:55:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:26:59 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
 int		g_last_exit_status;
-
-static void    __init_global(t_global *g)
-{
-	g->input = NULL;
-	g->env = NULL;
-	g->token = NULL;
-	// g->last_exit_status = 0;
-	g_last_exit_status = 0;
-}
 
 static char	*__generate_prompt(void)
 {
@@ -41,26 +32,34 @@ static char	*__generate_prompt(void)
 	return (prompt);
 }
 
+static void    __init_global(t_global *g)
+{
+	g->prompt = __generate_prompt();
+	if (g->prompt == NULL)
+		(free(g->prompt), exit(FAILURE));
+	g->input = NULL;
+	g->env = NULL;
+	g->token = NULL;
+	g_last_exit_status = 0;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_global	g;
-	char		*prompt;
 	t_token		*cell = NULL;
 	char		**cmd = NULL;
 	int			i;
 
 	(void)argv;
 	if (argc != 1)
-		exit(FAILURE);
+		return (FAILURE);
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
-	if ((prompt = __generate_prompt()) == NULL)
-		exit(FAILURE);
 	__init_global(&g);
 	create_env_list(&g.env, envp);
 	while (1)
 	{
 		i = 0;
-		g.input = readline(prompt);
+		g.input = readline(g.prompt);
 		if (*g.input != '\0')
 		{
 			add_history(g.input);
@@ -80,6 +79,6 @@ int	main(int argc, char **argv, char **envp)
 			lstclear_tokens(&g.token);
 		}
 	}
-	free(prompt);
 	free_tab(cmd);
+	free(g.input);
 }

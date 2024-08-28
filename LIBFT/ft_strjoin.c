@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:11:51 by pmateo            #+#    #+#             */
-/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/21 17:30:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,21 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned int	i;
-	unsigned int	j;
-	size_t			size;
-	char			*str;
+	char			*join;
+	unsigned int	s1_len;
+	unsigned int	s2_len;
 
-	i = 0;
-	j = 0;
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = malloc(size * sizeof(char));
-	if (str == NULL)
+	if (!s1 || !s2)
 		return (NULL);
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
-	str[i] = '\0';
-	return (str);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	join = malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!join)
+		return (NULL);
+	ft_memcpy(join, s1, s1_len);
+	ft_memcpy(join + s1_len, s2, s2_len);
+	join[s1_len + s2_len] = '\0';
+	return (join);
 }
 
 // int	main(void)

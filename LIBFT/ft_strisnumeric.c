@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   ft_strisnumeric.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/28 11:56:25 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/28 11:58:43 by annabrag          #+#    #+#             */
+/*   Updated: 2024/08/28 11:59:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_builtins.h"
+#include "INCLUDES/libft.h"
 
-void    display_export_env(t_env *exp_env)
+int	ft_strisnumeric(char *s)
 {
-    t_env    *tmp;
+	int	i;
 
-    tmp = exp_env;
-    while (tmp != NULL)
-    {
-        ft_putstr_fd(tmp->content, 1);
-        ft_putendl_fd("", 1);
-        tmp = tmp->next;
-    }
-}
-
-void	display_tokens(t_token *t)
-{
-	t_token	*tmp;
-
-	tmp = t;
-	while (tmp != NULL)
+	i = 0;
+	if (s[i] == '-')
+		i++;
+	while (s[i])
 	{
-		ft_putstr_fd(tmp->content, 1);
-		ft_putendl_fd("", 1);
-		tmp = tmp->next;
+		if (!ft_isdigit(s[i]))
+			return (0);
+		i++;
 	}
+	return (1);
 }

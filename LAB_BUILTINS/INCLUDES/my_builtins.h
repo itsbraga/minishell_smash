@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 11:54:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:19:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_token
 
 typedef struct s_global
 {
+	char		*prompt;
 	char		*input;
 	t_env		*env;
 	t_token		*token;
@@ -97,12 +98,13 @@ int			my_pwd(void);
 int 		go_to_env_var(t_global *g, char *var);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
-int			my_exit(t_global *g);
+int			my_exit(t_global *g, char **args);
 
 void		errmsg(char *cmd, char *arg);
 int			errmsg_status(char *cmd, char *arg, int err_status);
 
 void		free_tab(char **tab);
+void    	free_global(t_global *g, bool clear_history);
 
 void		rainbow_txt(const char *str);
 void		rainbow_txt_nonl(const char *str);

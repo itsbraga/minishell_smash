@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/27 02:08:58 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/28 14:28:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_token
 
 typedef struct s_global
 {
+	char		*prompt;
 	char		*input; // ira dans une fonction spe
 	// t_input		*input;
 	t_env		*env;
@@ -125,7 +126,7 @@ void	create_env(t_global *g, char **envp);
  * BUILT-INS
 \******************************************************************************/
 
-void	my_exit(t_global *g, char **args);
+int		my_exit(t_global *g, char **args);
 int		my_cd(t_global *g);
 int 	go_to_env_var(t_global *g, char *var);
 int		my_pwd(void);
@@ -156,6 +157,7 @@ void	errmsg(char *cmd, char *arg);
 void	del_current_token(t_token **t, t_token *cur);
 void	lstclear_tokens(t_token **t);
 void 	lstclear_env(t_env **env);
+void    free_global(t_global *g, bool clear_history);
 void	free_tab(char **tab);
 
 // features.c
