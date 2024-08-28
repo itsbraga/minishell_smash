@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/28 11:55:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*__generate_prompt(void)
 	rb_username = rainbow_prompt(username);
 	part1 = ft_strjoin(BOLD "[", rb_username);
 	free(rb_username);
-	prompt = ft_strjoin(part1, "@42]" RESET " $> ");
+	prompt = ft_strjoin(part1, BOLD "@42]" RESET " $> ");
 	free(part1);
 	return (prompt);
 }
