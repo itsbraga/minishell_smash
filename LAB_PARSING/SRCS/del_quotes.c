@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/25 18:25:29 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/29 19:15:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,10 @@ char	*del_quote_pair(char *str, int first, int second)
 	}
 	j = i + 1;
 	while (j != second)
-	{
-		new_str[i] = str[j];
-		i++, j++;
-	}
-	j = i + 1;
+		new_str[i++] = str[j++];
+	j = j + 1;
 	while (str[j] != '\0')
-	{
-		new_str[i] = str[j];
-		i++, j++;	
-	}
+		new_str[i++] = str[j++];
 	new_str[i] = '\0';
 	return (free(str), new_str);
 }

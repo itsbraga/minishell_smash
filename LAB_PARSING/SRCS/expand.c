@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/28 15:45:45 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/29 22:56:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 	idx[1] = (var - str);
 	idx[2] = (var - str) + 1;
 	new_str = malloc((ft_strlen(str) - var_size + 1) * (sizeof(char)));
-	while ((str[idx[2]] >= 'A' && str[idx[2]] <= 'Z') || (str[idx[2]] >= '0' && str[idx[2]] <= '9') || (str[idx[2]] == '_'))
+	while ((str[idx[2]] >= 'A' && str[idx[2]] <= 'Z') 
+			|| (str[idx[2]] >= '0' && str[idx[2]] <= '9') 
+			|| (str[idx[2]] == '_'))
 		idx[2]++;
 	while (idx[0] != idx[1])
 	{
@@ -39,7 +41,23 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 	free(str);
 	return (new_str);
 }
-//EXEMPLE : gg"$USER"wp = gg"pmateo"wp
+
+// static char	*__del_var(char *str, char *var, size_t var_size)
+// {
+// 	char	*new_str;
+// 	char	*start_var;
+
+// 	start_var = var + var_size;
+// 	while ((*start_var >= 'A' && *start_var <= 'Z') 
+// 			|| (*start_var >= '0' && *start_var <= '9') 
+// 			|| *start_var == '_')
+// 		start_var++;
+// 	new_str = malloc
+	
+// }
+
+
+// EXEMPLE : gg"$USER"wp = gg"pmateo"wp
 // static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_size)
 // {
 // 	int idx[3];
@@ -108,7 +126,7 @@ static char	*__handle_expand(char *str, char *var, char **envp)
 {
 	char 	*to_find;
 	char	*var_value;
-	printf("2.1\n");
+	printf("2\n");
 	to_find = take_var(str, var);
 	var_value = search_var(to_find, envp);
 	if (var_value == NULL)
@@ -119,7 +137,7 @@ static char	*__handle_expand(char *str, char *var, char **envp)
 	else
 	{
 		str = __add_var_value(str, var, var_value, ft_strlen(var_value));
-		printf("2.3\n");
+		// printf("str after add var = %s\n", str);
 	}
 	return (str);
 }
@@ -137,10 +155,17 @@ char *expand(char *str, char **envp)
 	{
 		if (str[i] == '"' && closed[1] != false)
 			closed[0] = switch_bool(closed[0]);
-		if (str[i] == '\'' && closed[0] != false)
+		else if (str[i] == '\'' && closed[0] != false)
 			closed[1] = switch_bool(closed[1]);
 		if (str[i] == '$' && closed[1] != false)
-			str = __handle_expand(str, &str[i], envp);
+		{
+			printf("char pointed = %c\n", str[i]);
+			str = __handle_expand(str, &str[i + 1], envp);
+			printf("newstr = %s\n", str);
+			sleep(1);
+			// i = -1;
+		}
+		printf("i = %d\n", i);
 		i++;
 	}
 	str = empty_quotes(str);

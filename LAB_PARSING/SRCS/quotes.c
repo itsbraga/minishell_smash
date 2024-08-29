@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/28 17:59:13 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/29 20:28:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ char	*empty_quotes(char *str)
 char	*others_quotes(char *str)
 {
 	int	i;
-	// int	
 	int closing_quote;
 
 	i = 0;
@@ -89,10 +88,8 @@ char	*others_quotes(char *str)
 		if (str[i] == '"')
 		{
 			closing_quote = find_closing_quote(&str[i], '"');
-			printf("closing_quote = %d ; i = %d\n", closing_quote, i);
-			str = del_quote_pair(str, i, (i + closing_quote));
+			str = del_quote_pair(str, i, i + closing_quote);
 			i = i + (closing_quote - 1);
-			printf("i after del = %d\n", i);
 		}
 		else if (str[i] == '\'')
 		{
@@ -108,7 +105,6 @@ char	*others_quotes(char *str)
 
 char	*handle_quotes_and_expand(char *input, char **envp)
 {
-	(void)envp;
 	if (__unclosed_quotes(input) == true)
 	{
 		ft_putendl_fd("Unclosed quote !", 2);

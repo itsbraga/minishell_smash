@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:08:17 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/28 18:02:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/29 18:37:34 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	find_closing_quote(char *str, char quote)
 	int	i;
 
 	i = 1;
-	while (str[i] != quote)
+	while (str[i] != quote && str[i])
 		i++;
 	return (i);
 }
