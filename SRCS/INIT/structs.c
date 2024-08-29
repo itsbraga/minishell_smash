@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/28 14:26:56 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:21:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void    init_global(t_global *g)
 	g->env = NULL;
 	g->exp_env = NULL;
 	g->token = NULL;
-	g_last_exit_status = 0;
+	g->last_exit_status = 0;
 }

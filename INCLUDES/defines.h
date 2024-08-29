@@ -6,12 +6,14 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 11:52:30 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:13:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
+
+# include "colors.h"
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
@@ -34,7 +36,7 @@
  * ERROR
 \******************************************************************************/
 
-
+# define ERR_PREFIX (BOLD RED "minishell:" RESET)
 
 /******************************************************************************\
  * CUSTOM

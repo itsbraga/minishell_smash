@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_cd.c                                            :+:      :+:    :+:   */
+/*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 18:31:31 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
+/*   Updated: 2024/08/29 20:35:22 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "my_builtins.h"
 
 static char	*__update_pwd(t_env *env, char **old_pwd)
 {
@@ -20,7 +20,7 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 	new_pwd = getcwd(NULL, 0);
 	if (new_pwd == NULL)
 	{
-		printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
+		printf("%s %s\n", ERR_PREFIX, strerror(errno));
 		return (NULL);
 	}
 	head = env;
@@ -32,7 +32,7 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 			free(head->content);
 			if ((head->content = ft_strjoin("PWD=", new_pwd)) == NULL)
 			{
-				printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
+				printf("%s %s\n", ERR_PREFIX, strerror(errno));
 				return (free(new_pwd), NULL);
 			}
 		}
@@ -62,45 +62,73 @@ static void	__update_oldpwd(t_env *env, char *old_pwd)
 		free(old_pwd);
 }
 
-static void	__change_paths(t_env *env)
+static char	*__update_exp_pwd(t_env *exp_env, char **old_pwd)
+{
+	t_env	*head;
+	char	*new_pwd;
+
+	new_pwd = getcwd(NULL, 0);
+	if (new_pwd == NULL)
+	{
+		printf("%s %s\n", ERR_PREFIX, strerror(errno));
+		return (NULL);
+	}
+	head = exp_env;
+	while (head != NULL)
+	{
+		if (ft_strncmp(head->content, "PWD=", 4) == 0)
+		{
+			*old_pwd = ft_strdup(head->content);
+			free(head->content);
+			if ((head->content = ft_strjoin("PWD=", new_pwd)) == NULL)
+			{
+				printf("%s %s\n", ERR_PREFIX, strerror(errno));
+				return (free(new_pwd), NULL);
+			}
+		}
+		head = head->next;
+	}
+	return (new_pwd);
+}
+
+static void	__update_exp_oldpwd(t_env *exp_env, char *old_pwd)
+{
+	t_env	*head;
+
+	head = exp_env;
+	while (head != NULL)
+	{
+		if (ft_strncmp(head->content, "OLDPWD=", 7) == 0 && old_pwd != NULL)
+		{
+			free(head->content);
+			head->content = ft_strjoin("OLDPWD=", old_pwd + 4);
+			free(old_pwd);
+			old_pwd = NULL;
+			break ;
+		}
+		head = head->next;
+	}
+	if (old_pwd != NULL)
+		free(old_pwd);
+}
+
+void	change_paths(t_env *env, t_env *exp_env)
 {
 	char	*old_pwd;
 	char	*new_pwd;
+	char	*exp_old_pwd;
+	char	*exp_new_pwd;
 
 	old_pwd = NULL;
 	new_pwd = __update_pwd(env, &old_pwd);
 	if (new_pwd == NULL)
 		return ;
+	exp_old_pwd = NULL;
+	exp_new_pwd = __update_exp_pwd(exp_env, &exp_old_pwd);
+	if (exp_new_pwd == NULL)
+		return ;
 	__update_oldpwd(env, old_pwd);
+	__update_exp_pwd(exp_env, exp_old_pwd);
 	free(new_pwd);
-}
-
-/*	The tilde character (“~”) has a special meaning.
-	When used at the beginning of a word, it expands
-	into the name of the home directory of the named
-	user, or if no user is named, the home directory
-	of the current user
-	
-	>> bonus wildcards
-*/
-int	my_cd(t_global *g)
-{
-	int	ret;
-	
-	if ((g->token->next == NULL)
-		|| (ft_strcmp((const char *)g->token->next->content, "~") == 0))
-		ret = go_to_env_var(g, "HOME=");
-	else if (ft_strcmp((const char *)g->token->next->content, "-") == 0)
-	{
-		ret = go_to_env_var(g, "OLDPWD=");
-		printf("%s\n", find_var_path("OLDPWD=", g->env));
-	}
-	else
-		ret = chdir((const char *)g->token->next->content);
-	if (ret != 0)
-	{
-		errmsg_exit_status(g->token->content, g->token->next->content, errno);
-	}
-	__change_paths(g->env);
-	return (SUCCESS);
+	free(exp_new_pwd);
 }

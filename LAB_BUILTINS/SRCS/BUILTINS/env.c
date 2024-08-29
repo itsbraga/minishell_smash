@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_env.c                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/26 15:06:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:37:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "my_builtins.h"
 
 int	my_env(t_env *env)
 {
@@ -18,7 +18,7 @@ int	my_env(t_env *env)
 
 	if (env == NULL)
 	{
-		printf("%s %s\n", BOLD RED "minishell:" RESET, "environment deleted.");
+		printf("%s %s\n", ERR_PREFIX, "environment deleted.");
 		return (FAILURE);
 	}
 	tmp = env;

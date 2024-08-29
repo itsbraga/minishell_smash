@@ -36,7 +36,7 @@ DEBUG		=	-g -g3
 #******************************************************************************#
 
 BUILTINS_DIR	=	BUILTINS/
-BUILTINS_F		=	builtins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c my_exit.c
+BUILTINS_F		=	builtins.c env.c pwd.c cd_utils.c cd.c exit.c
 
 ENV_DIR			=	ENV/
 ENV_F			=	create_env.c create_export_env.c env_utils.c

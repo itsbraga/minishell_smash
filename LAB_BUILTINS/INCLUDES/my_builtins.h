@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 18:32:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:34:33 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@
 # define CTRL_C_EXIT 130 // 128 + signal 2 (SIGINT)
 # define KILL_EXIT 143 // 128 + signal 15 (SIGTERM)
 # define OUT_OF_RANGE 255
+# define ERR_PREFIX BOLD RED "minishell:" RESET
 
 /******************************************************************************\
  * GLOBAL VARIABLE
 \******************************************************************************/
 
-extern int	g_last_exit_status;
+extern int	g_sig_exit_status;
 
 /******************************************************************************\
  * STRUCTS
@@ -77,7 +78,7 @@ typedef struct s_global
 	t_env		*env;
 	t_env		*exp_env;
 	t_token		*token;
-	// int			last_exit_status;
+	int			last_exit_status;
 }				t_global;
 
 /******************************************************************************\
@@ -102,8 +103,7 @@ void		display_tokens(t_token *t);
 
 void		exec_built_in(char **built_in, t_global *g);
 int			my_pwd(void);
-char		*find_var_path(char *to_find, t_env *env);
-int 		go_to_env_var(t_global *g, char *var);
+void		change_paths(t_env *env, t_env *exp_env);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
 void		my_exit(t_global *g, char **args);
@@ -116,13 +116,11 @@ int			errmsg_exit_status(char *cmd, char *arg, int err_status);
 void		free_tab(char **tab);
 void    	free_global(t_global *g, bool clear_history);
 void		clean_exit_shell(t_global *g, int err_status);
+void		del_env_var(t_env **env, t_env *var);
+void		del_exp_env_var(t_env **exp_env, t_env *var);
 
 void		rainbow_txt(const char *str);
 void		rainbow_txt_nonl(const char *str);
 char		*rainbow_prompt(const char *str);
-
-/******************************************************************************\
- * TESTS
-\******************************************************************************/
 
 #endif

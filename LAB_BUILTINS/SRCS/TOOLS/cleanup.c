@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 18:08:44 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 21:58:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,34 @@ void	lstclear_tokens(t_token **t)
 // 	}
 // 	(*input) = NULL;
 // }
+
+void	del_current_token(t_token **t, t_token *cur)
+{
+	t_token	*prev;
+	t_token	*tmp;
+
+	if (t == NULL || (*t) == NULL || cur == NULL)
+		return ;
+	prev = NULL;
+	tmp = *t;
+	if (*t == cur)
+	{
+		*t = cur->next;
+		free(cur->content);
+		free(cur);
+		return ;
+	}
+	while (tmp != NULL && tmp != cur)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+		return ;
+	prev->next = cur->next;
+	free(cur->content);
+	free(cur);
+}
 
 void	free_tab(char **tab)
 {

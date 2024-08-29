@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 18:31:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:40:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	errmsg(char *cmd, char *arg)
 {
 	if (cmd != NULL && arg == NULL)
 	{
-		printf("%s %s: ", BOLD RED "minishell:" RESET, cmd);
+		printf("%s %s: ", ERR_PREFIX, cmd);
 		printf("%s\n", strerror(errno));
 	}
 	else if (cmd != NULL && arg != NULL)
 	{
-		printf("%s %s: %s: ", BOLD RED "minishell:" RESET, cmd, arg);
+		printf("%s %s: %s: ", ERR_PREFIX, cmd, arg);
 		printf("%s\n", strerror(errno));
 	}
 	else if (cmd == NULL && arg == NULL)
-		printf("%s %s\n", BOLD RED "minishell:" RESET, strerror(errno));
+		printf("%s %s\n", ERR_PREFIX, strerror(errno));
 }
 
 // change proto (cmd, arg --> in global)
@@ -33,12 +33,12 @@ void	errmsg(char *cmd, char *arg)
 // {
 // 	if (cmd != NULL && arg == NULL)
 // 	{
-// 		printf("%s %s: ", BOLD RED "minishell:" RESET, cmd);
+// 		printf("%s %s: ", ERR_PREFIX, cmd);
 // 		printf("%s\n", strerror(errno));
 // 	}
 // 	else if (cmd != NULL && arg != NULL)
 // 	{
-// 		printf("%s %s: %s: ", BOLD RED "minishell:" RESET, cmd, arg);
+// 		printf("%s %s: %s: ", ERR_PREFIX, cmd, arg);
 // 		printf("%s\n", strerror(errno));
 // 	}
 // 	if (cleanup == true)
@@ -50,12 +50,12 @@ int	errmsg_exit_status(char *cmd, char *arg, int err_status)
 {
 	if (cmd != NULL && arg == NULL)
 	{
-		printf("%s %s: ", BOLD RED "minishell:" RESET, cmd);
+		printf("%s %s: ", ERR_PREFIX, cmd);
 		printf("%s\n", strerror(errno));
 	}
 	else if (cmd != NULL && arg != NULL)
 	{
-		printf("%s %s: %s: ", BOLD RED "minishell:" RESET, cmd, arg);
+		printf("%s %s: %s: ", ERR_PREFIX, cmd, arg);
 		printf("%s\n", strerror(errno));
 	}
 	return (err_status);

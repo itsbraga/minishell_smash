@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 18:22:21 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:21:21 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void    __init_global(t_global *g)
 	g->env = NULL;
 	g->exp_env = NULL;
 	g->token = NULL;
-	g_last_exit_status = 0;
+	g->last_exit_status = 0;
 }
 
 int	main(int argc, char **argv, char **envp)

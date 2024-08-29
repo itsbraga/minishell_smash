@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_exit.c                                          :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 18:30:35 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:23:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static long long	__ft_atol(char *arg)
 	return ((res * sign) % 256);
 }
 
-static int	__set_exit_status(char **args)
+static int	__set_exit_status(t_global *g, char **args)
 {
 	long long	exit_status;
 
@@ -64,6 +64,6 @@ void	my_exit(t_global *g, char **args)
 	
 	exit_status = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
-	exit_status = __set_exit_status(args);
+	exit_status = __set_exit_status(g, args);
 	clean_exit_shell(g, exit_status);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_cd_utils.c                                      :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/29 18:30:07 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
+/*   Updated: 2024/08/29 20:34:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-char	*find_var_path(char *to_find, t_env *env)
+static char	*__find_var_path(char *to_find, t_env *env)
 {
 	t_env	*head;
 	char	*path;
@@ -36,12 +36,12 @@ char	*find_var_path(char *to_find, t_env *env)
 	return (NULL);
 }
 
-int go_to_env_var(t_global *g, char *var)
+static int	__go_to_env_var(t_global *g, char *var)
 {
 	char	*var_path;
 	int		ret;
 
-	var_path = find_var_path(var, g->env);
+	var_path = __find_var_path(var, g->env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
 	{
@@ -51,4 +51,32 @@ int go_to_env_var(t_global *g, char *var)
 	if (var_path != NULL)
 		free(var_path);
 	return (ret);
+}
+
+/*	The tilde character (“~”) has a special meaning.
+	When used at the beginning of a word, it expands
+	into the name of the home directory of the named
+	user, or if no user is named, the home directory
+	of the current user
+	
+	>> bonus wildcards
+*/
+int	my_cd(t_global *g)
+{
+	int	ret;
+	
+	if ((g->token->next == NULL)
+		|| (ft_strcmp((const char *)g->token->next->content, "~") == 0))
+		ret = __go_to_env_var(g, "HOME=");
+	else if (ft_strcmp((const char *)g->token->next->content, "-") == 0)
+	{
+		ret = __go_to_env_var(g, "OLDPWD=");
+		printf("%s\n", __find_var_path("OLDPWD=", g->env));
+	}
+	else
+		ret = chdir((const char *)g->token->next->content);
+	if (ret != 0)
+		errmsg_exit_status(g->token->content, g->token->next->content, errno);
+	change_paths(g->env, g->exp_env);
+	return (SUCCESS);
 }

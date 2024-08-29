@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 18:52:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:55:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,24 @@
  * STRUCTS
 \******************************************************************************/
 
-typedef enum 	e_category
+typedef enum 	e_token_type
 {
+	COMMAND = 0,
+	ARGUMENT,
 	WORD,
 	SEPARATOR,
-}			 	t_category;
+	INFILE,
+	OUTFILE,
+	HEREDOC,
+	APPEND
+}			 	t_token_type;
 
-// typedef struct s_input
-// {
-// 	t_category		type;
-// 	char			*content;
-// 	struct s_env	*next;
-// }				t_input;
+typedef struct s_input
+{
+	t_token_type	type;
+	char			*content;
+	struct s_env	*next;
+}				t_input;
 
 typedef struct s_env
 {
@@ -67,6 +73,7 @@ typedef struct s_global
 	t_env		*env;
 	t_env		*exp_env;
 	t_token		*token;
+	int			last_exit_status;
 }				t_global;
 
 // typedef struct s_command
@@ -80,7 +87,7 @@ typedef struct s_global
  * GLOBAL VARIABLE
 \******************************************************************************/
 
-extern int	g_last_exit_status;
+extern int	g_sig_exit_status;
 
 /******************************************************************************\
  * INIT

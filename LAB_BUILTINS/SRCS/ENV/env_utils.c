@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 18:36:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:49:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,32 @@ t_env	*env_new_var(char *content)
 	new_var->content = ft_strdup(content);
 	new_var->next = NULL;
 	return (new_var);
+}
+
+void	del_env_var(t_env **env, t_env *var)
+{
+	t_env	*prev;
+	t_env	*tmp;
+
+	if (env == NULL || (*env) == NULL || var == NULL)
+		return ;
+	prev = NULL;
+	tmp = *env;
+	if (*env == var)
+	{
+		*env = var->next;
+		free(var->content);
+		free(var);
+		return ;
+	}
+	while (tmp != NULL && tmp != var)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+		return ;
+	prev->next = var->next;
+	free(var->content);
+	free(var);
 }
