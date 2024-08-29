@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 19:49:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/28 15:45:45 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,22 +104,28 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 	return (new_str);
 }
 
-static char	*__expand(char *str, char *var, char **envp)
+static char	*__handle_expand(char *str, char *var, char **envp)
 {
 	char 	*to_find;
 	char	*var_value;
-
+	printf("2.1\n");
 	to_find = take_var(str, var);
 	var_value = search_var(to_find, envp);
 	if (var_value == NULL)
-		str = del_var(str, var, ft_strlen(to_find) + 1);
+	{
+		str = __del_var(str, var, ft_strlen(to_find) + 1);
+		printf("2.2\n");
+	}	
 	else
-		str = add_var_value(str, var, var_value, ft_strlen(var_value));
+	{
+		str = __add_var_value(str, var, var_value, ft_strlen(var_value));
+		printf("2.3\n");
+	}
 	return (str);
 }
 
 //EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
-char *handle_expand(char *str, char **envp)
+char *expand(char *str, char **envp)
 {
 	int		i;
 	bool 	closed[2];
@@ -134,7 +140,7 @@ char *handle_expand(char *str, char **envp)
 		if (str[i] == '\'' && closed[0] != false)
 			closed[1] = switch_bool(closed[1]);
 		if (str[i] == '$' && closed[1] != false)
-			str = expand(str, &str[i], envp);
+			str = __handle_expand(str, &str[i], envp);
 		i++;
 	}
 	str = empty_quotes(str);
