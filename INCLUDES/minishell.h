@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:29:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,15 @@ char	*cat_tcontent(t_token *to_cat);
  * ENVIRONMENT
 \******************************************************************************/
 
+// env_utils.c
+t_env	*env_new_var(char *content);
+
 // create_export_env.c
 size_t	get_env_size(char **env);
 t_env	*copy_toppest(char **envp);
 t_env	*ascii_sort(char **envp, char *last_added);
-t_env	*env_new_var(char *content);
-int		create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t idx_exp_env);
+int		create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size,
+size_t idx_exp_env);
 
 // create_env.c
 int		create_env_list(t_env **env, char **envp);
@@ -128,14 +131,20 @@ void	create_env(t_global *g, char **envp);
  * BUILT-INS
 \******************************************************************************/
 
-int		my_exit(t_global *g, char **args);
+// my_exit.c
+void	my_exit(t_global *g, char **args);
 
 // my_cd_utils.c
 char	*find_var_path(char *to_find, t_env *env);
 int 	go_to_env_var(t_global *g, char *var);
-int		my_cd(t_global *g); // my_cd.c
 
+// my_cd.c
+int		my_cd(t_global *g);
+
+// my_pwd.c
 int		my_pwd(void);
+
+// my_env.c
 int		my_env(t_env *env);
 
 // built_ins.c
@@ -155,16 +164,21 @@ t_token	*new_node(char *content);
 void    display_export_env(t_env *exp_env);
 void	display_tokens(t_token *t);
 
-// error.c
-int		errmsg_status_exit(char *cmd, char *arg, int err_status);
+// err_msg.c
 void	errmsg(char *cmd, char *arg);
+int		errmsg_exit_status(char *cmd, char *arg, int err_status);
+// int		errmsg_exit_status(t_global *g, char *cmd, char *arg, int err_status,
+// bool cleanup);
 
-// free.c
+// cleanup.c
 void	del_current_token(t_token **t, t_token *cur);
 void	lstclear_tokens(t_token **t);
 void 	lstclear_env(t_env **env);
 void    free_global(t_global *g, bool clear_history);
 void	free_tab(char **tab);
+
+// clean_exit_shell.c
+void	clean_exit_shell(t_global *g, int err_status);
 
 // features.c
 void	rainbow_txt(const char *str);

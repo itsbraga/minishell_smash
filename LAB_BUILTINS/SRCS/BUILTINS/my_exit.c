@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 17:13:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:30:35 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,22 @@ static int	__set_exit_status(char **args)
 	else if (args[1] != NULL)
 	{
 		if (args[2] != NULL && ft_strisnumeric(args[1]) == 0)
-			errmsg_status_exit("exit", args[2], FAILURE); // sinon ecrire "too many arguments"
+			errmsg_exit_status("exit", args[2], FAILURE); // sinon ecrire "too many arguments"
 		else
 			exit_status = __ft_atol(args[1]);
 	}
 	else
-		errmsg_status_exit("exit", args[1], MISUSE_BUILTIN);
+		errmsg_exit_status("exit", args[1], MISUSE_BUILTIN);
 	return (exit_status);
 }
 
-void	exit_minishell(t_global *g, int err_status)
-{
-	if (g != NULL)
-		free_global(g, true);
-	exit(err_status);
-}
-
-int	my_exit(t_global *g, char **args)
+// changer le proto quand args sera dans la struct g
+void	my_exit(t_global *g, char **args)
 {
 	int	exit_status;
 	
 	exit_status = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
 	exit_status = __set_exit_status(args);
-	exit_minishell(g, exit_status);
-	return (SUCCESS);
+	clean_exit_shell(g, exit_status);
 }

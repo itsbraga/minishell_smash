@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:28:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,10 @@ int	my_cd(t_global *g)
 	else
 		ret = chdir((const char *)g->token->next->content);
 	if (ret != 0)
-		errmsg_status_exit(g->token->content, g->token->next->content, errno);
-	// verifier s'il ne faut pas plutot indiquer un code erreur specifique
+	{
+		errmsg_exit_status(g, g->token->content, g->token->next->content, errno,
+		false);
+	}
 	__change_paths(g->env);
 	return (SUCCESS);
 }

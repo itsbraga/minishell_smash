@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   clean_exit_shell.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 18:00:40 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
+/*   Updated: 2024/08/29 17:55:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// UTILITAIRES D'AJOUTS / SUPPRESSIONS DE VARIABLES
-
-t_env	*env_new_var(char *content)
+void	clean_exit_shell(t_global *g, int err_status)
 {
-	t_env	*new_var;
-
-	new_var = malloc(sizeof(t_env));
-	if (new_var == NULL)
-		return (NULL);
-	new_var->content = ft_strdup(content);
-	new_var->next = NULL;
-	return (new_var);
+	if (g != NULL)
+		free_global(g, true);
+	exit(err_status);
 }

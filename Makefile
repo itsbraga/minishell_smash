@@ -54,7 +54,8 @@ PARSING_DIR		=	PARSING/
 PARSING_F		=	check_if_closed.c dbquote.c join.c squote.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	token_utils.c free.c error_msg.c display.c features.c
+TOOLS_F			=	token_utils.c cleanup.c err_msg.c display.c features.c \
+					clean_exit_shell.c
 
 #******************************************************************************#
 #	COMBINE FILES AND DIRECTORIES

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 16:53:11 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:22:21 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void    __init_global(t_global *g)
 {
 	g->prompt = __generate_prompt();
 	if (g->prompt == NULL)
-		(free(g->prompt), exit(FAILURE));
+		(exit(FAILURE));
 	g->input = NULL;
 	g->env = NULL;
 	g->exp_env = NULL;

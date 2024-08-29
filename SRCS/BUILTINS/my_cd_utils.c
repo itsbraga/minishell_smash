@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:31:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ char	*find_var_path(char *to_find, t_env *env)
 	return (NULL);
 }
 
-/*	126: Command cannot execute
-
-	The command was found, but it could not be executed,
-	possibly due to insufficient permissions or other issues.
-*/
 int go_to_env_var(t_global *g, char *var)
 {
 	char	*var_path;
@@ -49,8 +44,10 @@ int go_to_env_var(t_global *g, char *var)
 	var_path = find_var_path(var, g->env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
-		errmsg_status_exit(g->token->content, g->token->next->content, errno);
-	// verifier s'il ne faut pas plutot indiquer un code erreur specifique
+	{
+		errmsg_exit_status(g->token->content, g->token->next->content, errno);
+		// exit(errno);
+	}
 	if (var_path != NULL)
 		free(var_path);
 	return (ret);

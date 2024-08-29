@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/29 18:10:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
-
-t_env	*env_new_var(char *content)
-{
-	t_env	*new_var;
-
-	new_var = malloc(sizeof(t_env));
-	if (new_var == NULL)
-		return (NULL);
-	new_var->content = ft_strdup(content);
-	new_var->next = NULL;
-	return (new_var);
-}
 
 int	create_env_list(t_env **env, char **envp)
 {
@@ -51,4 +39,16 @@ int	create_env_list(t_env **env, char **envp)
 		i++;
 	}
 	return (SUCCESS);
+}
+
+void	create_env(t_global *g, char **envp)
+{
+	size_t	envp_size;
+
+	envp_size = get_env_size(envp);
+	if (create_env_list(&g->env, envp) == FAILURE)
+		ft_printf(1, "ERROR OCCURED WITH ENV_LIST\n");
+	if (create_exp_env_list(&g->exp_env, envp, envp_size, 0) == FAILURE)
+		ft_printf(1, "ERROR OCCURED WITH EXPORT ENV_LIST\n");
+	return ;
 }

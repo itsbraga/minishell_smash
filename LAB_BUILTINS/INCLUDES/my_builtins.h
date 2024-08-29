@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 17:12:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:32:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int			create_env_list(t_env **env, char **envp);
 size_t		get_env_size(char **env);
 t_env		*copy_toppest(char **envp);
 t_env		*ascii_sort(char **envp, char *last_added);
-int			create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t idx_exp_env);
+int			create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size,
+size_t idx_exp_env);
 
 t_token		*new_node(char *content);
 t_token		*last_node(t_token *t);
@@ -105,13 +106,16 @@ char		*find_var_path(char *to_find, t_env *env);
 int 		go_to_env_var(t_global *g, char *var);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
-int			my_exit(t_global *g, char **args);
+void		my_exit(t_global *g, char **args);
 
 void		errmsg(char *cmd, char *arg);
-int			errmsg_status_exit(char *cmd, char *arg, int err_status);
+int			errmsg_exit_status(char *cmd, char *arg, int err_status);
+// int			errmsg_exit_status(t_global *g, char *cmd, char *arg,
+// int err_status, bool cleanup);
 
 void		free_tab(char **tab);
 void    	free_global(t_global *g, bool clear_history);
+void		clean_exit_shell(t_global *g, int err_status);
 
 void		rainbow_txt(const char *str);
 void		rainbow_txt_nonl(const char *str);
