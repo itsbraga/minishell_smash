@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/26 23:28:54 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/28 11:56:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "my_builtins.h"
 
 void    display_export_env(t_env *exp_env)
 {

@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 18:00:40 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:36:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "my_builtins.h"
 
 // UTILITAIRES D'AJOUTS / SUPPRESSIONS DE VARIABLES
 

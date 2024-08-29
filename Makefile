@@ -54,8 +54,10 @@ PARSING_DIR		=	PARSING/
 PARSING_F		=	check_if_closed.c dbquote.c join.c squote.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	token_utils.c cleanup.c err_msg.c display.c features.c \
-					clean_exit_shell.c
+TOOLS_F			=	token_utils.c cleanup.c err_msg.c clean_exit_shell.c
+
+EXTRAS_DIR		=	EXTRAS/
+EXTRAS_F		=	display.c features.c
 
 #******************************************************************************#
 #	COMBINE FILES AND DIRECTORIES
@@ -68,6 +70,7 @@ SRCS_F			=	$(addprefix $(ENV_DIR), $(ENV_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
+					$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					main.c
 
 OBJS_DIR		=	OBJS/

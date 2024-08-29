@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 18:29:38 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:52:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,6 @@ void	init_global(t_global *global);
 \******************************************************************************/
 
 // ?
-bool	is_closed_squote(char **str);
-bool	is_closed_dbquote(char **str);
-
-char	*squote(char **str);
-char	*dbquote(char **str);
-
-int		add_squote_content(char **str, t_token **t);
-int		add_dbquote_content(char **str, t_token **t);
-
 char	*cat_tcontent(t_token *to_cat);
 
 /******************************************************************************\
