@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 20:41:27 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
+/*   Updated: 2024/08/30 20:55:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_builtins.h"
+#include "minishell.h"
 
-/*	PWD means Print Working Directory	
-	The $PWD environment variable is a dynamic variable
-	that stores the path to the current working directory.
-*/
-int	my_pwd(void)
+int	my_env(t_env *env)
 {
-	char	cwd[PATH_MAX];
+	t_env	*tmp;
 
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-		errmsg_exit_status("getcwd", NULL, errno);
-	printf("%s\n", cwd);
+	tmp = env;
+	while (tmp != NULL)
+	{
+		printf("%s\n", tmp->content);
+		tmp = tmp->next;
+	}
 	// g->last_exit_status = 0;
 	return (SUCCESS);
 }

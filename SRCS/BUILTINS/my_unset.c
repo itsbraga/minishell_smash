@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 19:52:27 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/26 18:38:48 by annabrag          #+#    #+#             */
+/*   Updated: 2024/08/30 20:55:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	PWD means Print Working Directory	
-	The $PWD environment variable is a dynamic variable
-	that stores the path to the current working directory.
-*/
-int	my_pwd(void)
+int	my_unset(t_global *g, char **args)
 {
-	char	cwd[PATH_MAX];
+	int		i;
 
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-		errmsg_exit_status("getcwd", NULL, errno);
-	printf("%s\n", cwd);
+	if (args[1] == NULL)
+		errmsg_exit_status("unset", &args[1], SUCCESS);
+	i = 0;
+	while (args[i] != NULL)
+	{
+		del_env_var(&g->env, args[i]);
+		del_env_var(&g->exp_env, args[i]);
+		i++;
+	}
+	g->last_exit_status = 0;
 	return (SUCCESS);
 }

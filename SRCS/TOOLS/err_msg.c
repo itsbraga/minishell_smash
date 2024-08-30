@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 20:39:49 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/30 19:54:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 void	errmsg(char *cmd, char *arg)
 {
 	if (cmd != NULL && arg == NULL)
-	{
-		printf("%s %s: ", ERR_PREFIX, cmd);
-		printf("%s\n", strerror(errno));
-	}
+		printf("%s %s: %s\n", ERR_PREFIX, cmd, strerror(errno));
 	else if (cmd != NULL && arg != NULL)
-	{
-		printf("%s %s: %s: ", ERR_PREFIX, cmd, arg);
-		printf("%s\n", strerror(errno));
-	}
+		printf("%s %s: %s: %s\n", ERR_PREFIX, cmd, arg, strerror(errno));
 	else if (cmd == NULL && arg == NULL)
 		printf("%s %s\n", ERR_PREFIX, strerror(errno));
 }
@@ -46,17 +40,21 @@ void	errmsg(char *cmd, char *arg)
 // 	return (err_status);
 // }
 
-int	errmsg_exit_status(char *cmd, char *arg, int err_status)
+int	errmsg_exit_status(char *cmd, char **args, int err_status)
 {
-	if (cmd != NULL && arg == NULL)
+	int	i;
+	
+	if (cmd != NULL && args == NULL)
+		printf("%s %s: %s\n", ERR_PREFIX, cmd, strerror(errno));
+	else if (cmd != NULL && args != NULL)
 	{
-		printf("%s %s: ", ERR_PREFIX, cmd);
-		printf("%s\n", strerror(errno));
-	}
-	else if (cmd != NULL && arg != NULL)
-	{
-		printf("%s %s: %s: ", ERR_PREFIX, cmd, arg);
-		printf("%s\n", strerror(errno));
+		i = 0;
+		while (args[i] != '\0')
+		{
+			printf("%s %s: %s: ", ERR_PREFIX, cmd, args[i]);
+			printf("%s\n", strerror(errno));
+			i++;
+		}
 	}
 	return (err_status);
 }

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 20:21:21 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/30 20:54:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 int		g_last_exit_status;
 
+/*	Readline should not count escape sequences as visible characters.
+	This is achieved by encapsulating the non-visible parts (escape
+	sequences) of the prompt between special sequences :
+	
+	-	\001 (start of non-visible sequence)
+	-	\002 (end of non-visible sequence)
+	
+	This enables readline to manage the length of the prompt correctly.
+*/
 static char	*__generate_prompt(void)
 {
 	char	*username;
@@ -25,9 +34,9 @@ static char	*__generate_prompt(void)
 	if (username == NULL)
 		username = "unknown";
 	rb_username = rainbow_prompt(username);
-	part1 = ft_strjoin(BOLD "[", rb_username);
+	part1 = ft_strjoin("\001" BOLD "\002" "[", rb_username);
 	free(rb_username);
-	prompt = ft_strjoin(part1, BOLD "@42]" RESET " $> ");
+	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" RESET "\002 $> ");
 	free(part1);
 	return (prompt);
 }
@@ -56,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 		return (FAILURE);
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
 	__init_global(&g);
-	create_env_list(&g.env, envp);
+	create_env(&g, envp);
 	while (1)
 	{
 		i = 0;
@@ -80,6 +89,6 @@ int	main(int argc, char **argv, char **envp)
 			lstclear_tokens(&g.token);
 		}
 	}
-	free_tab(cmd);
 	free(g.input);
+	free_tab(cmd);
 }

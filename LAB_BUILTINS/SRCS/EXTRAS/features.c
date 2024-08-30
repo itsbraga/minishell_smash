@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/28 11:56:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:38:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,25 @@ void	rainbow_txt_nonl(const char *str)
 
 char	*rainbow_prompt(const char *str)
 {
-    const char	*colors[7] = {RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, PINK};
-    char		*colored_str;
-    char		*tmp;
-    size_t		i;
+	const char	*colors[7] = {RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, PINK};
+	char		*colored_str;
+	size_t		i;
 	size_t		len;
 
-	tmp = NULL;
+	len = ft_strlen(str) * (10 + 4) + ft_strlen(RESET) + 5;
+	colored_str = malloc(len);
+	if (colored_str == NULL)
+		return (NULL);
+	colored_str[0] = '\0';
 	i = 0;
-	len = ft_strlen(str);
-	colored_str = malloc(len * 10);
-    if (colored_str == NULL)
-        return (NULL);
-    colored_str[0] = '\0';
-    while (str[i] != '\0')
-    {
-        tmp = ft_strjoin(colored_str, colors[i % 7]);
-        free(colored_str);
-        colored_str = ft_strjoin(tmp, (char[]){str[i], '\0'});
-        free(tmp);
-        i++;
-    }
-    tmp = ft_strjoin(colored_str, RESET);
-    free(colored_str);
-    return (tmp);
+	while (str[i] != '\0')
+	{
+		ft_strcat(colored_str, "\001");
+		ft_strcat(colored_str, colors[i % 7]);
+		ft_strcat(colored_str, "\002");
+		ft_strcat(colored_str, (char[]){str[i], '\0'});
+		i++;
+	}
+	ft_strcat(colored_str, "\001" RESET "\002");
+	return (colored_str);
 }

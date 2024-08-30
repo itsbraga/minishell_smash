@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:25:39 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/27 02:26:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/08/30 21:10:35 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,32 @@ size_t	get_tlist_size(t_token **t)
 		node = node->next;
 	}
 	return(size);
+}
+
+void	del_current_token(t_token **t, t_token *cur)
+{
+	t_token	*prev;
+	t_token	*tmp;
+
+	if (t == NULL || (*t) == NULL || cur == NULL)
+		return ;
+	prev = NULL;
+	tmp = *t;
+	if (*t == cur)
+	{
+		*t = cur->next;
+		free(cur->content);
+		free(cur);
+		return ;
+	}
+	while (tmp != NULL && tmp != cur)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+		return ;
+	prev->next = cur->next;
+	free(cur->content);
+	free(cur);
 }

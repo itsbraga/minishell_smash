@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 22:55:08 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:20:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ typedef enum 	e_token_type
 {
 	COMMAND = 0,
 	ARGUMENT,
-	WORD,
 	SEPARATOR,
-	INFILE,
-	OUTFILE,
+	RED_IN,
+	RED_OUT,
+	APPEND,
 	HEREDOC,
-	APPEND
+	LIMITER,
+	WORD
 }			 	t_token_type;
 
 typedef struct s_input
@@ -93,14 +94,14 @@ extern int	g_sig_exit_status;
  * INIT
 \******************************************************************************/
 
+// init_global.c
 void	init_global(t_global *global);
 
 /******************************************************************************\
  * PARSING
 \******************************************************************************/
 
-// ?
-char	*cat_tcontent(t_token *to_cat);
+// 
 
 /******************************************************************************\
  * ENVIRONMENT
@@ -108,6 +109,7 @@ char	*cat_tcontent(t_token *to_cat);
 
 // env_utils.c
 t_env	*env_new_var(char *content);
+void	del_env_var(t_env **env, char *var_to_rm);
 
 // create_export_env.c
 size_t	get_env_size(char **env);
@@ -124,17 +126,20 @@ void	create_env(t_global *g, char **envp);
  * EXPAND
 \******************************************************************************/
 
+//
 
 /******************************************************************************\
  * BUILT-INS
 \******************************************************************************/
 
+// my_unset.c
+int		my_unset(t_global *g, char **args);
+
 // my_exit.c
 void	my_exit(t_global *g, char **args);
 
 // my_cd_utils.c
-char	*find_var_path(char *to_find, t_env *env);
-int 	go_to_env_var(t_global *g, char *var);
+void	change_paths(t_env *env, t_env *exp_env);
 
 // my_cd.c
 int		my_cd(t_global *g);
@@ -153,6 +158,7 @@ void	exec_built_in(char **built_in, t_global *g);
 \******************************************************************************/
 
 // token_utils.c
+void	del_current_token(t_token **t, t_token *cur);
 size_t	get_tlist_size(t_token **t);
 void	add_back(t_token **t, t_token *new_node);
 t_token	*last_node(t_token *t);
@@ -164,12 +170,11 @@ void	display_tokens(t_token *t);
 
 // err_msg.c
 void	errmsg(char *cmd, char *arg);
-int		errmsg_exit_status(char *cmd, char *arg, int err_status);
+int		errmsg_exit_status(char *cmd, char **args, int err_status);
 // int		errmsg_exit_status(t_global *g, char *cmd, char *arg, int err_status,
 // bool cleanup);
 
 // cleanup.c
-void	del_current_token(t_token **t, t_token *cur);
 void	lstclear_tokens(t_token **t);
 void 	lstclear_env(t_env **env);
 void    free_global(t_global *g, bool clear_history);

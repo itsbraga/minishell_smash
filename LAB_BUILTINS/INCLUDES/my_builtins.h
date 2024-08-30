@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 22:34:33 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:13:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define CTRL_C_EXIT 130 // 128 + signal 2 (SIGINT)
 # define KILL_EXIT 143 // 128 + signal 15 (SIGTERM)
 # define OUT_OF_RANGE 255
+
 # define ERR_PREFIX BOLD RED "minishell:" RESET
 
 /******************************************************************************\
@@ -88,6 +89,7 @@ typedef struct s_global
 t_env		*env_new_var(char *content);
 void		lstclear_env(t_env **env);
 int			create_env_list(t_env **env, char **envp);
+void		create_env(t_global *g, char **envp);
 
 size_t		get_env_size(char **env);
 t_env		*copy_toppest(char **envp);
@@ -107,17 +109,17 @@ void		change_paths(t_env *env, t_env *exp_env);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
 void		my_exit(t_global *g, char **args);
+void		del_env_var(t_env **env, char *var_to_rm);
+int			my_unset(t_global *g, char **args);
 
 void		errmsg(char *cmd, char *arg);
-int			errmsg_exit_status(char *cmd, char *arg, int err_status);
+int			errmsg_exit_status(char *cmd, char **args, int err_status);
 // int			errmsg_exit_status(t_global *g, char *cmd, char *arg,
 // int err_status, bool cleanup);
 
 void		free_tab(char **tab);
 void    	free_global(t_global *g, bool clear_history);
 void		clean_exit_shell(t_global *g, int err_status);
-void		del_env_var(t_env **env, t_env *var);
-void		del_exp_env_var(t_env **exp_env, t_env *var);
 
 void		rainbow_txt(const char *str);
 void		rainbow_txt_nonl(const char *str);

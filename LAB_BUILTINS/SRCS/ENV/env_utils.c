@@ -6,13 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 23:03:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/30 20:39:14 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
-
-// UTILITAIRES D'AJOUTS / SUPPRESSIONS DE VARIABLES
 
 t_env	*env_new_var(char *content)
 {
@@ -26,43 +24,31 @@ t_env	*env_new_var(char *content)
 	return (new_var);
 }
 
-char	*var_to_remove(t_env *env, char *to_find)
-{
-	t_env	*head;
-	int		len_to_find;
-	
-	head = env;
-	len_to_find = ft_strlen(to_find);
-	while (head != NULL)
-	{
-		if (ft_strncmp(head->content, to_find, len_to_find) == 0);
-	}
-}
-
-void	del_env_var(t_env **env, t_env *var)
+void	del_env_var(t_env **env, char *var_to_rm)
 {
 	t_env	*prev;
-	t_env	*tmp;
+	t_env	*current;
+	int		len_var_to_rm;
 
-	if (env == NULL || (*env) == NULL || var == NULL)
+	if (env == NULL || (*env) == NULL || var_to_rm == NULL)
 		return ;
 	prev = NULL;
-	tmp = *env;
-	if (*env == var)
-	{
-		*env = var->next;
-		free(var->content);
-		free(var);
-		return ;
-	}
-	while (tmp != NULL && tmp != var)
-	{
-		prev = tmp;
-		tmp = tmp->next;
-	}
-	if (tmp == NULL)
-		return ;
-	prev->next = var->next;
-	free(var->content);
-	free(var);
+	current = *env;
+	len_var_to_rm = ft_strlen(var_to_rm);
+    while (current != NULL)
+    {
+        if ((ft_strncmp(current->content, var_to_rm, len_var_to_rm) == 0)
+				&& (current->content[len_var_to_rm] == '='))
+        {
+            if (prev == NULL)
+                *env = current->next; // Si le node à supprimer est le premier de la liste
+            else
+                prev->next = current->next; // Si le node à supprimer est au milieu ou à la fin
+            free(current->content);
+            free(current);
+            return ;
+        }
+        prev = current;
+        current = current->next;
+    }
 }

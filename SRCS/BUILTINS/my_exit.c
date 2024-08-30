@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/29 20:22:41 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/30 20:55:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ static long long	__ft_atol(char *arg)
 	}
 	while (arg[i] != '\0' && ft_isdigit(arg[i]) == 1)
 	{
-		res = res * 10 + (arg[i++] - 48);
+		res = res * 10 + (arg[i] - 48);
 		if (res < LONG_MIN || res > LONG_MAX)
 			exit(OUT_OF_RANGE);
+		i++;
 	}
-	return (res * sign);
+	return ((res * sign) % 256);
 }
 
 static int	__set_exit_status(t_global *g, char **args)
@@ -48,12 +49,12 @@ static int	__set_exit_status(t_global *g, char **args)
 	else if (args[1] != NULL)
 	{
 		if (args[2] != NULL && ft_strisnumeric(args[1]) == 0)
-			errmsg_exit_status("exit", args[2], FAILURE); // sinon ecrire "too many arguments"
+			errmsg_exit_status("exit", &args[2], FAILURE); // sinon ecrire "too many arguments"
 		else
 			exit_status = __ft_atol(args[1]);
 	}
 	else
-		errmsg_exit_status("exit", args[1], MISUSE_BUILTIN);
+		errmsg_exit_status("exit", &args[1], MISUSE_BUILTIN);
 	return (exit_status);
 }
 
