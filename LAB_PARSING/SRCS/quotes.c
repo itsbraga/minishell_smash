@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 20:28:25 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/30 20:20:32 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,7 @@ char	*handle_quotes_and_expand(char *input, char **envp)
 		exit(FAILURE);
 	}
 	input = empty_quotes(input);
-	printf("1\n");
 	input = expand(input, envp);
-	printf("2\n");
 	input = others_quotes(input);
-	printf("3\n");
 	return (input);
 }

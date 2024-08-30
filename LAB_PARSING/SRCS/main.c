@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:05:00 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 16:59:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/08/30 20:10:36 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	main(int argc, char **argv, char **envp)
 		printf("before : %s\n", input);
 		input = handle_quotes_and_expand(input, envp);
 		printf("after :%s\n", input);
-		free(input);
+		if (input != NULL)
+			free(input);
 	}
 	return (0);
 }

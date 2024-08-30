@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 22:11:19 by u4s2e0r           #+#    #+#             */
-/*   Updated: 2024/06/10 21:30:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/08/30 16:51:48 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memmove(void *dest, const void *src, size_t n);
 char				*ft_strldup(const char *s1, size_t length);
+char				*ft_strcpy(char *dest, char *src);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 int					ft_toupper(int c);
