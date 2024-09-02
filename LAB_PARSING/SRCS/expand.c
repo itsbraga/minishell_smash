@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/31 17:50:04 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/02 14:16:17 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 
 	start_str = str;
 	var_len = 0;
-	while ((var[var_len] >= 'A' && var[var_len] <= 'Z')
+	while ((var[var_len] >= 'A' && var[var_len] <= 'Z') 
+			|| (var[var_len] >= 'a' && var[var_len] <= 'z')
 			|| (var[var_len] >= '0' && var[var_len] <= '9')
 			|| var[var_len] == '_')
 		var_len++;
@@ -53,8 +54,7 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	free(start_str);
-	return (new_str);
+	return (free(start_str), new_str);
 }
 
 static char	*__handle_expand(char *str, char *var, char **envp)
@@ -87,7 +87,9 @@ char *expand(char *str, char **envp)
 			closed[0] = switch_bool(closed[0]);
 		else if (str[i] == '\'' && closed[0] != false)
 			closed[1] = switch_bool(closed[1]);
-		if (str[i] == '$' && closed[1] != false && str[i + 1])
+		if ((str[i] == '$' && closed[1] != false) 
+			&& (str[i + 1] != ' ' && str[i + 1] != '"' 
+			&& str[i + 1] != '\'')) 
 		{
 			str = __handle_expand(str, &str[i + 1], envp);
 			if (str == NULL)

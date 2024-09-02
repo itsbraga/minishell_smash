@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/30 17:07:23 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/02 14:17:09 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ char *take_var(char *str, char *var)
 	while ((str + i) != var)
 		i++;
 	j = i;
-	while (str[j] && ((str[j] >= 'A' && str[j] <= 'Z') 
-			|| (str[j] >= '0' && str[j] <= '9') || str[j] == '_'))
+	while (str[j] && ((str[j] >= 'A' && str[j] <= 'Z')
+			|| (str[j] >= 'a' && str[j] <= 'z')
+			|| (str[j] >= '0' && str[j] <= '9')
+			|| str[j] == '_'))
 		j++;
 	to_find = ft_strldup(&str[i], (j - i));
 	return (to_find);
