@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+         #
+#    By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/20 14:22:48 by pmateo            #+#    #+#              #
-#    Updated: 2024/09/02 15:42:49 by annabrag         ###   ########.fr        #
+#    Updated: 2024/09/02 16:42:41 by pmateo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ ${LIBFT}:
 	${MAKE} -s -C ${DIR_LIBFT}
 
 ${NAME}: ${OBJ} ${OBJ_INIT} ${LIBFT} ${INCFILES}
-	${CC} ${FLAGS} -o ${NAME} ${OBJ} ${OBJ_INIT} -I ${DIRINC_MINIEXEC} -I ${DIRINC_LIBFT} -L ${DIR_LIBFT} -lft
+	${CC} ${FLAGS} -o ${NAME} ${OBJ} ${OBJ_INIT} -I ${DIRINC_MINIEXEC} -I ${DIRINC_LIBFT} -L ${DIR_LIBFT} -lft -lreadline
 
 all: ${LIBFT} ${NAME}
 		@echo "\033[1;5;32m# MINI_EXEC READY ! #\033[0m"

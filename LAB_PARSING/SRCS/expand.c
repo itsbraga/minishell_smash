@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/02 14:16:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/02 15:33:09 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char *expand(char *str, char **envp)
 			closed[1] = switch_bool(closed[1]);
 		if ((str[i] == '$' && closed[1] != false) 
 			&& (str[i + 1] != ' ' && str[i + 1] != '"' 
-			&& str[i + 1] != '\'')) 
+			&& str[i + 1] != '\'' && str[i + 1] != '$')) 
 		{
 			str = __handle_expand(str, &str[i + 1], envp);
 			if (str == NULL)

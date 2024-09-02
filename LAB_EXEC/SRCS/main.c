@@ -3,78 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/26 16:59:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:47:35 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_exec.h"
 
-t_token	*ft_lstnew(char *content)
+void	assign_flag(char *content, t_tok **node)
 {
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	token->content = content;
-    token->pos = NULL;
-	token->next = NULL;
-	return (token);
+	
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	token_recognition(t_tok **cmd)
 {
-	t_list	*tmp;
+	t_tok *node;
 
-	if (!*lst)
-		*lst = new;
-	else
+	node = *cmd;
+	while (node != NULL)
 	{
-		tmp = ft_lstlast(*lst);
-		tmp->next = new;
+		assign_flag(node->content, &node);
+		node = node->next;
 	}
 }
 
-void    fill_token_list(t_token **token, t_exec *e)
+int	main(int argc, char **argv, char **envp)
 {
-    char **cmd_tab;
-    t_token *new_elem;
-
-    cmd_tab = ft_split(e->input, ' ');
-    if (!cmd_tab)
-        exit(FAILURE);
-    while (cmd_tab)
-    {
-        new_elem = 
-    }
-}
-
-void    exec(t_token **token, t_exec *e)
-{
-    
-}
-
-int main(int argc, char **argv, char **envp)
-{
-    t_exec e;
-    t_token *token;
-    
-    if (argc > 1)
-        exit(FAILURE);
-    (void)argv;
-    init_e(&e);
-	e.envp = envp;
-    while (1)
-    {
-        ft_printf(1, "@_@ $> ");
-        e.input = get_next_line(0, NULL);
-		// if (e.input)
-		// 	add_history(e.input);
-        fill_token_list(&token, &e);
-        exec(&token, &e);
-    }
-    return (0);
+	char *input;
+	t_tok	*cmd;
+	
+	if (argc > 1)
+		exit(FAILURE);
+	(void)argv;
+	(void)envp;
+	cmd = NULL;
+	while (1)
+	{
+		input = readline("mini_exec> ");
+		build_lst(input, &cmd);
+		display_tokens(cmd);
+		token_recognition(&cmd);
+		if (input != NULL)
+			free(input);
+	}
+	return (0);
 }
