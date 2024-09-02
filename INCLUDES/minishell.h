@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/30 21:20:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:24:56 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,18 @@ typedef enum 	e_token_type
 	WORD
 }			 	t_token_type;
 
-typedef struct s_input
+typedef struct s_main_lst
+{
+	char				*content;
+	struct s_main_lst	*next;
+}				t_main_lst;
+
+typedef struct s_sub_lst
 {
 	t_token_type	type;
 	char			*content;
 	struct s_env	*next;
-}				t_input;
+}				t_sub_lst;
 
 typedef struct s_env
 {
@@ -69,8 +75,8 @@ typedef struct s_token
 typedef struct s_global
 {
 	char		*prompt;
-	char		*input; // ira dans une fonction spe
-	// t_input		*input;
+	// char		*input;
+	t_main_lst	*main;
 	t_env		*env;
 	t_env		*exp_env;
 	t_token		*token;
@@ -95,7 +101,27 @@ extern int	g_sig_exit_status;
 \******************************************************************************/
 
 // init_global.c
-void	init_global(t_global *global);
+void		init_global(t_global *global);
+
+// init_main_lst.c
+int			create_main_lst(t_global *g, char *user_input);
+
+// main_lst_utils.c
+size_t		get_main_lst_size(t_main_lst **main);
+void		main_add_back(t_main_lst **main, t_main_lst *new_node);
+t_main_lst	*main_last_node(t_main_lst *main);
+t_main_lst	*main_new_node(char *content);
+
+/******************************************************************************\
+ * TOKENIZATION
+\******************************************************************************/
+
+// token_utils.c
+void	del_current_token(t_token **t, t_token *cur);
+size_t	get_tlist_size(t_token **t);
+void	add_back(t_token **t, t_token *new_node);
+t_token	*last_node(t_token *t);
+t_token	*new_node(char *content);
 
 /******************************************************************************\
  * PARSING
@@ -157,16 +183,10 @@ void	exec_built_in(char **built_in, t_global *g);
  * TOOLS
 \******************************************************************************/
 
-// token_utils.c
-void	del_current_token(t_token **t, t_token *cur);
-size_t	get_tlist_size(t_token **t);
-void	add_back(t_token **t, t_token *new_node);
-t_token	*last_node(t_token *t);
-t_token	*new_node(char *content);
-
 // display.c
 void    display_export_env(t_env *exp_env);
 void	display_tokens(t_token *t);
+void    display_main_lst(t_main_lst *main);
 
 // err_msg.c
 void	errmsg(char *cmd, char *arg);

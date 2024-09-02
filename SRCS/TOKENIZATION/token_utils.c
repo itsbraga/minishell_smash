@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/26 23:28:49 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/02 19:21:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_token	*new_node(char *content)
 	t_token	*new_node;
 	
 	new_node = malloc(sizeof(t_token));
-	if (new_node == NULL)
+	if (!new_node)
 		return (NULL);
-	new_node->content = content;
+	new_node->content = ft_strdup(content);
 	new_node->next = NULL;
 	return (new_node);
 }
