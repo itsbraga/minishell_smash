@@ -52,7 +52,7 @@ INIT_DIR		=	INIT/
 INIT_F			=	init_global.c
 
 PARSING_DIR		=	PARSING/
-PARSING_F		=	check_if_closed.c dbquote.c join.c squote.c
+PARSING_F		=	join.c
 
 TOOLS_DIR		=	TOOLS/
 TOOLS_F			=	token_utils.c cleanup.c err_msg.c clean_exit_shell.c

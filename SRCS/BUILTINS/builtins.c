@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 20:55:24 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:39:20 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,22 @@ void	exec_built_in(char **built_in, t_global *g)
 	else if (ft_strcmp(built_in[0], "unset") == 0)
 		my_unset(g, built_in + 1);
 }
+//shlvl a update
+
+// certain builtin peuvent agir differement avec des parametres
+// (genre env 1 doit pas afficher l'enn mais un message d'erreur)
+// a voir si vous le faite le sujet est vague dessus
+
+// cd seul : va dans home
+
+// old_pwd doit ce mettre a jour avec un "cd ."
+
+// cd /bin/ met dans /usr/bin parce qu'ils sont liers
+
+// exit avec des parametres pas numeriques affiche des messages
+// d'erreurs (je crois que c'est des messages differents en
+// fonctions du parametre genre char, string, num negatif, ...)
+
+// leak exit
+
+// unset a tester avec export

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/28 15:38:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/02 15:43:21 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <limits.h>
 # include <errno.h>
 # include <readline/readline.h>
-# include "../LIBFT/INCLUDES/libft.h"
-# include "../LIBFT/INCLUDES/ft_printf.h"
-# include "../LIBFT/INCLUDES/get_next_line_bonus.h"
+# include "../../LIBFT/INCLUDES/libft.h"
+# include "../../LIBFT/INCLUDES/ft_printf.h"
+# include "../../LIBFT/INCLUDES/get_next_line_bonus.h"
 
 # define SUCCESS 0
 # define FAILURE 1

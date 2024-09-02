@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:31:40 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/30 16:32:14 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/02 15:24:35 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "INCLUDES/libft.h"
+#include "INCLUDES/libft.h"
 
 char	*ft_strcpy(char *dest, char *src)
 {

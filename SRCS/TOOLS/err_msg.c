@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 19:54:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:36:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	errmsg_exit_status(char *cmd, char **args, int err_status)
 	else if (cmd != NULL && args != NULL)
 	{
 		i = 0;
-		while (args[i] != '\0')
+		while (args[i] != NULL)
 		{
 			printf("%s %s: %s: ", ERR_PREFIX, cmd, args[i]);
 			printf("%s\n", strerror(errno));

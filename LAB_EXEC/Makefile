@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+         #
+#    By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/20 14:22:48 by pmateo            #+#    #+#              #
-#    Updated: 2024/06/24 01:55:24 by pmateo           ###   ########.fr        #
+#    Updated: 2024/09/02 15:42:49 by annabrag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM = rm -f
 
 NAME = mini_exec
 
-DIR_LIBFT = ./LIBFT
+DIR_LIBFT = ../LIBFT
 LIBFT = 	${DIR_LIBFT}/libft.a
 
 DIRINC_LIBFT = 		${DIR_LIBFT}/INCLUDES

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/15 22:00:12 by pmateo            #+#    #+#             */
-/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
+/*   Created: 2023/02/11 21:20:35 by annabrag          #+#    #+#             */
+/*   Updated: 2024/09/02 15:24:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "INCLUDES/libft.h"
 
-int	ft_memcmp(const void *mb1, const void *mb2, size_t n)
+char	*ft_strcat(char *dest, char *src)
 {
-	const unsigned char	*pmb1;
-	const unsigned char	*pmb2;
-	size_t				i;
+	int	i;
+	int	j;
 
 	i = 0;
-	pmb1 = (const unsigned char *)mb1;
-	pmb2 = (const unsigned char *)mb2;
-	while (i < n)
+	j = 0;
+	while (dest[i])
+		i++;
+	while (src[j])
 	{
-		if (pmb1[i] != pmb2[i])
-			return (pmb1[i] - pmb2[i]);
+		dest[i] = src[j];
+		j++;
 		i++;
 	}
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }

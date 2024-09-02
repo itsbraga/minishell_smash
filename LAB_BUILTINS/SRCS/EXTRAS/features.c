@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/30 21:38:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:33:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*rainbow_prompt(const char *str)
 	while (str[i] != '\0')
 	{
 		ft_strcat(colored_str, "\001");
-		ft_strcat(colored_str, colors[i % 7]);
+		ft_strcat(colored_str, (char *)colors[i % 7]);
 		ft_strcat(colored_str, "\002");
 		ft_strcat(colored_str, (char[]){str[i], '\0'});
 		i++;
