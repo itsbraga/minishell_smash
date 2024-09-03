@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:38:19 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/02 19:54:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/03 16:42:07 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	display_tokens(t_tok *t)
 	}
 }
 //TOUT LES CHAR * AUTRE QUE CONTENT SONT DE SIMPLES POINTEURS SUR LES ELEMENTS EN QUESTION
-//SI LE POINTEUR EST A NUL C'EST QUE L'ELEMENT N'EST PAS PRESENT, SINON CELA POIN
+//SI LE POINTEUR EST A NUL C'EST QUE L'ELEMENT N'EST PAS PRESENT, SINON CELA POINTE SUR LE PREMIERE CHAR DE L'ELEMENT
 static t_tok	*new_node(char *content)
 {
 	t_tok	*new_node;
@@ -35,6 +35,7 @@ static t_tok	*new_node(char *content)
 		return (NULL);
 	new_node->content = ft_strdup(content);
 	new_node->here_doc = NULL;
+	new_node->limiter = NULL;
 	new_node->append = NULL;
 	new_node->red_in = NULL;
 	new_node->infile = NULL;
