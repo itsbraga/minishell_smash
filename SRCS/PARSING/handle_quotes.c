@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes.c                                           :+:      :+:    :+:   */
+/*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/03 23:35:34 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/04 00:10:19 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/mini_parsing.h"
+#include "minishell.h"
 
 static bool	__unclosed_quotes(char *str)
 {
@@ -55,6 +55,32 @@ static bool	__handle_empty_quotes(char *str, int i, bool *closed)
 	return (false);
 }
 
+char	*__other_quotes(char *str)
+{
+	int		i;
+	int 	closing_quote;
+
+	i = 0;
+	closing_quote = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '"')
+		{
+			closing_quote = find_closing_quote(&str[i], '"');
+			str = del_quote_pair(str, i, i + closing_quote);
+			i = i + (closing_quote - 1);
+		}
+		else if (str[i] == '\'')
+		{
+			closing_quote = find_closing_quote(&str[i], '\'');
+			str = del_quote_pair(str, i, (i + closing_quote));
+			i  = i + (closing_quote - 1);
+		}
+		i++;
+	}
+	return (str);
+}
+
 char	*empty_quotes(char *str)
 {
 	int		i;
@@ -77,43 +103,16 @@ char	*empty_quotes(char *str)
 	return (str);
 }
 
-char	*others_quotes(char *str)
+char	*handle_quotes(char *user_input)
 {
-	int	i;
-	int closing_quote;
-
-	i = 0;
-	closing_quote = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '"')
-		{
-			closing_quote = find_closing_quote(&str[i], '"');
-			str = del_quote_pair(str, i, i + closing_quote);
-			i = i + (closing_quote - 1);
-		}
-		else if (str[i] == '\'')
-		{
-			closing_quote = find_closing_quote(&str[i], '\'');
-			str = del_quote_pair(str, i, (i + closing_quote));
-			i  = i + (closing_quote - 1);
-		}
-		else
-			i++;
-	}
-	return (str);
-}
-
-char	*handle_quotes_and_expand(char *input, char **envp)
-{
-	if (__unclosed_quotes(input) == true)
+	if (__unclosed_quotes(user_input) == true)
 	{
 		ft_putendl_fd("Unclosed quote !", 2);
 		ft_putendl_fd("Aborting...", 2);
 		exit(FAILURE);
 	}
-	input = empty_quotes(input);
-	input = expand(input, envp);
-	input = others_quotes(input);
-	return (input);
+	user_input = empty_quotes(user_input);
+	// user_input = expand(user_input, envp);
+	user_input = __other_quotes(user_input);
+	return (user_input);
 }

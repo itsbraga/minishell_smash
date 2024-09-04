@@ -39,17 +39,17 @@ BUILTINS_DIR	=	BUILTINS/
 BUILTINS_F		=	builtins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c \
 					my_exit.c my_unset.c
 
-ENV_DIR			=	ENV/
+ENV_DIR			=	ENVIRONMENT/
 ENV_F			=	create_env.c create_export_env.c env_utils.c
 
 EXPAND_DIR		=	EXPAND/
-EXPAND_F		=	expansion.c
+EXPAND_F		=	expand.c expand_utils.c
 
 INIT_DIR		=	INIT/
 INIT_F			=	init_global.c create_main_lst.c main_lst_utils.c
 
 PARSING_DIR		=	PARSING/
-PARSING_F		=	join.c
+PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c
 
 TOKEN_DIR		=	TOKENIZATION/
 TOKEN_F			=	token_utils.c

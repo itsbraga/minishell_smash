@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/02 15:39:20 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/04 00:41:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	exec_built_in(char **built_in, t_global *g)
 		my_exit(g, built_in);
 	else if (ft_strcmp(built_in[0], "unset") == 0)
 		my_unset(g, built_in + 1);
+	else if (ft_strcmp(built_in[0], "clear") == 0)
+		printf("\033[H\033[J");
 }
 //shlvl a update
 

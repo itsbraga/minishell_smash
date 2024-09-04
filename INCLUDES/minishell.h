@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/02 19:24:56 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/04 00:42:05 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,23 +94,28 @@ typedef struct s_global
  * GLOBAL VARIABLE
 \******************************************************************************/
 
-extern int	g_sig_exit_status;
+/*	The global variable have to be used only to indicate a received signal.
+	Consider the implications: this approach ensures that your signal handler
+	will not access your main data structures.
+*/
+extern int	g_sig_code;
 
 /******************************************************************************\
  * INIT
 \******************************************************************************/
-
-// init_global.c
-void		init_global(t_global *global);
-
-// init_main_lst.c
-int			create_main_lst(t_global *g, char *user_input);
 
 // main_lst_utils.c
 size_t		get_main_lst_size(t_main_lst **main);
 void		main_add_back(t_main_lst **main, t_main_lst *new_node);
 t_main_lst	*main_last_node(t_main_lst *main);
 t_main_lst	*main_new_node(char *content);
+
+// init_main_lst.c
+int			create_main_lst(t_global *g, char *user_input);
+int 		del_unwanted_char(t_main_lst *main);
+
+// init_global.c
+void		init_global(t_global *global);
 
 /******************************************************************************\
  * TOKENIZATION
@@ -127,7 +132,18 @@ t_token	*new_node(char *content);
  * PARSING
 \******************************************************************************/
 
-// 
+// quotes_utils.c
+bool	switch_bool(bool closed);
+int		find_closing_quote(char *str, char quote);
+bool	unclosed_quotes_return(bool closed[]);
+
+// del_quotes.c
+char	*del_empty_quotes(char *str, int quote_idx);
+char	*del_quote_pair(char *str, int first, int second);
+
+// handle_quotes.c
+char	*empty_quotes(char *str);
+char	*handle_quotes(char *user_input);
 
 /******************************************************************************\
  * ENVIRONMENT
@@ -152,7 +168,14 @@ void	create_env(t_global *g, char **envp);
  * EXPAND
 \******************************************************************************/
 
-//
+// expand_utils.c
+size_t	len_to_equal(char *str);
+char	*take_var_value(char *str);
+char	*take_var(char *str, char *var);
+char 	*search_var(char *to_find, char **envp);
+
+// expand.c
+char	*expand(char *str, char **envp);
 
 /******************************************************************************\
  * BUILT-INS
@@ -195,10 +218,11 @@ int		errmsg_exit_status(char *cmd, char **args, int err_status);
 // bool cleanup);
 
 // cleanup.c
+void	free_tab(char **tab);
 void	lstclear_tokens(t_token **t);
+void	lstclear_main(t_main_lst **main);
 void 	lstclear_env(t_env **env);
 void    free_global(t_global *g, bool clear_history);
-void	free_tab(char **tab);
 
 // clean_exit_shell.c
 void	clean_exit_shell(t_global *g, int err_status);

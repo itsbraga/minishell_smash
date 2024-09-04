@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/03 22:11:43 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/03 23:42:32 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../INCLUDES/mini_parsing.h"
+#include "minishell.h"
 
 char	*del_empty_quotes(char *str, int quote_idx)
 {
