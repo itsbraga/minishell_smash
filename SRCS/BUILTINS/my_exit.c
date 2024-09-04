@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   my_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 20:55:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:43:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static int	__set_exit_status(t_global *g, char **args)
 	else if (args[1] != NULL)
 	{
 		if (args[2] != NULL && ft_strisnumeric(args[1]) == 0)
-			errmsg_exit_status("exit", &args[2], FAILURE); // sinon ecrire "too many arguments"
+			return (errmsg_exit("exit", &args[2], FAILURE)); // sinon ecrire "too many arguments"
 		else
 			exit_status = __ft_atol(args[1]);
 	}
 	else
-		errmsg_exit_status("exit", &args[1], MISUSE_BUILTIN);
+		return (errmsg_exit("exit", &args[1], MISUSE_BUILTIN));
 	return (exit_status);
 }
 

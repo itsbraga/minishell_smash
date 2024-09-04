@@ -3,125 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/04 02:00:57 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/04 20:02:26 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*  1-  Les espaces dans les quotes (' et ") ne doivent pas etre supprimés
-	2-  ?
-*/
-
-// int	check_closed_quotes(char *user_input)
-// {
-// 	bool	closed_quotes[2] = {true, true};
-// 	int		i;
-
-//     while (user_input[i] != '\0')
-//     {
-// 		if (user_input[i] == '\'')
-// 			closed_quotes[0] = switch_bool(closed_quotes[0]);
-// 		else if (user_input[i] == '"')
-// 			closed_quotes[1] = switch_bool(closed_quotes[1]);
-// 		i++;
-//     }
-//     if (closed_quotes[0] == false || closed_quotes[1] == false)
-//     {
-// 		perror("Unmatched quotes in your input");
-// 		return (FAILURE);
-//     }
-//     return (SUCCESS);
-// }
-char	**parse_input_with_quotes(char *str)
+int	quote_parser(t_parser *p)
 {
-	char	**tokens;
-	int		i;
-	int		start;
-	int		token_count;
-	bool	closed_quotes[2] = {true, true};
-
-	tokens = malloc(sizeof(char *) * ft_strlen(str) + 1);
-	if (tokens == NULL)
-		return (NULL);
-	i = 0;
-	while (str[i] != '\0')
+	p->closed_quotes[0] = true;
+	p->closed_quotes[1] = true;
+	while (ft_isspace(p->user_input[p->i]) == 1)
+			p->i += 1;
+	if (p->user_input[p->i] == '\0')
+		return (FAILURE);
+	else if (p->user_input[p->i] == '|')
+		return (errmsg_std(1, &p->user_input[p->i], FAILURE));
+	p->start = p->i;
+	while (p->user_input[p->i] != '\0' && (p->user_input[p->i] != '|'
+			|| p->closed_quotes[0] == false || p->closed_quotes[1] == false))
 	{
-		while (ft_isspace(str[i]) == 1)
-			i++;
-		if (str[i] == '\0')
-			break ;
-		start = i;
-		while (str[i] != '\0' && (str[i] != '|' || closed_quotes[0] == false
-			|| closed_quotes[1] == false))
-		{
-			if (str[i] == '\'')
-				closed_quotes[0] = switch_bool(closed_quotes[0]);
-			else if (str[i] == '"')
-				closed_quotes[1] = switch_bool(closed_quotes[1]);
-			i++;
-		}
-		tokens[token_count++] = ft_strldup(str + start, i - start);
-		if (str[i] == '|')
-			i++;
+		if (p->user_input[p->i] == '\'')
+			p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
+		else if (p->user_input[p->i] == '"')
+			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
+		p->i += 1;
 	}
-	tokens[token_count] = NULL;
-	return (tokens);
+	p->tokens[p->token_count++] = ft_strldup(p->user_input + p->start, p->i - p->start);
+	if (p->user_input[p->i] == '|')
+		p->i += 1;
+	return (SUCCESS);
 }
 
-// int	create_main_lst(t_global *g, char *user_input)
-// {
-// 	t_main_lst	*new_node;
-// 	char		**tokens;
-// 	size_t      i;
+char	**parse_user_input(char *input)
+{
+	t_parser	p;
 
-// 	if (user_input == NULL)
-// 		return (FAILURE);
-// 	lstclear_main(&g->main);
-// 	if ((ft_strchr(user_input, '"') != NULL) || (ft_strchr(user_input, '\'') != NULL))
-// 		tokens = parse_input_with_quotes(user_input);
-// 	else
-// 		tokens = ft_split(user_input, '|');
-// 	if (tokens == NULL)
-// 		return (FAILURE);
-// 	i = 0;
-// 	while (tokens[i] != NULL)
-// 	{
-// 		new_node = main_new_node(tokens[i]);
-// 		if (new_node == NULL)
-// 		{
-// 			perror("Failed to allocate memory for a new node");
-// 			free_tab(tokens);
-// 			return (FAILURE);
-// 		}
-// 		main_add_back(&g->main, new_node);
-// 		i++;
-// 	}
-// 	free_tab(tokens);
-// 	return (SUCCESS);
-// }
+	ft_bzero(&p, sizeof(p));
+	p.user_input = input;
+	if (p.user_input == NULL || p.user_input[0] == '\0')
+		return (NULL);
+	if (ft_strchr(input, '"') != NULL || ft_strchr(input, '\'') != NULL)
+	{
+		p.tokens = malloc(sizeof(char *) * (ft_strlen(p.user_input) + 1));
+		if (p.tokens == NULL)
+			return (NULL);
+		while (p.user_input[p.i] != '\0')
+		{
+			if (quote_parser(&p) == FAILURE)
+				return (NULL);
+		}
+		p.tokens[p.token_count] = NULL;
+	}
+	else
+		p.tokens = ft_split(input, '|');
+	return (p.tokens);
+}
 
-// gerer le cas ou apres le pipe il n'y a rien >> n'est pas cense creer un node vide
-int	create_main_lst(t_global *g, char *user_input)
+int	create_main_lst(t_global *g, char *input)
 {
 	t_main_lst	*new_node;
-	char        **tokens;
+	char		**tokens;
 	size_t      i;
 
-	if (user_input == NULL)
-		return (FAILURE);
 	lstclear_main(&g->main);
-	tokens = ft_split(user_input, '|');
+	tokens = parse_user_input(input);
 	if (tokens == NULL)
 		return (FAILURE);
 	i = 0;
 	while (tokens[i] != NULL)
 	{
-		// if (ft_strcmp(tokens[i], "|") == 0 && tokens[i + 1] == NULL)
-		// 	break ;
 		new_node = main_new_node(tokens[i]);
 		if (new_node == NULL)
 		{

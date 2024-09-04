@@ -6,24 +6,27 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 18:50:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:14:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-void	errmsg(char *cmd, char *arg)
+void	errmsg_no_exit(char *cmd, char *arg)
 {
 	if (cmd != NULL && arg == NULL)
-		printf("%s %s: %s\n", ERR_PREFIX, cmd, strerror(errno));
+		ft_printf(STDERR_FILENO, ERR_PREFIX, "%s: %s\n", cmd, strerror(errno));
 	else if (cmd != NULL && arg != NULL)
-		printf("%s %s: %s: %s\n", ERR_PREFIX, cmd, arg, strerror(errno));
+	{
+		ft_printf(STDERR_FILENO, ERR_PREFIX, "%s: %s: ", cmd, arg);
+		ft_printf(STDERR_FILENO, "%s\n", strerror(errno));
+	}
 	else if (cmd == NULL && arg == NULL)
-		printf("%s %s\n", ERR_PREFIX, strerror(errno));
+		ft_printf(STDERR_FILENO, ERR_PREFIX, "%s\n", strerror(errno));
 }
 
 // change proto (cmd, arg --> in global)
-// int	errmsg_exit_status(t_global  *g, char *cmd, char *arg, int err_status, bool cleanup)
+// int	errmsg_exit(t_global  *g, char *cmd, char *arg, int err_status, bool cleanup)
 // {
 // 	if (cmd != NULL && arg == NULL)
 // 	{
@@ -40,21 +43,32 @@ void	errmsg(char *cmd, char *arg)
 // 	return (err_status);
 // }
 
-int	errmsg_exit_status(char *cmd, char **args, int err_status)
+int	errmsg_exit(char *cmd, char **args, int err_status)
 {
 	int	i;
 	
 	if (cmd != NULL && args == NULL)
-		printf("%s %s: %s\n", ERR_PREFIX, cmd, strerror(errno));
+		ft_printf(STDERR_FILENO, ERR_PREFIX, "%s: %s\n", cmd, strerror(errno));
 	else if (cmd != NULL && args != NULL)
 	{
 		i = 0;
 		while (args[i] != NULL)
 		{
-			printf("%s %s: %s: ", ERR_PREFIX, cmd, args[i]);
-			printf("%s\n", strerror(errno));
+			ft_printf(STDERR_FILENO, ERR_PREFIX, "%s: %s: ", cmd, args[i]);
+			ft_printf(STDERR_FILENO, "%s\n", strerror(errno));
 			i++;
 		}
+	}
+	return (err_status);
+}
+
+int	errmsg_std(int reason, char *arg, int err_status)
+{
+	if (reason == 1)
+	{
+		printf("%s ", ERR_PREFIX);
+		perror("error near unexpected token");
+		printf(" `%c'", &arg);
 	}
 	return (err_status);
 }

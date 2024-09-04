@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:38:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 20:50:35 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:42:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	my_unset(t_global *g, char **args)
 {
 	int		i;
 
-	if (args[1] == NULL)
-		errmsg_exit_status("unset", &args[1], SUCCESS);
 	i = 0;
 	while (args[i] != NULL)
 	{

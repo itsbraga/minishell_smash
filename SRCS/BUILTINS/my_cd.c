@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 20:55:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:42:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ static int	__go_to_env_var(t_global *g, char *var)
 	var_path = __find_var_path(var, g->env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
-	{
-		errmsg_exit_status(g->token->content, &g->token->next->content, errno);
+		return (errmsg_exit(g->token->content, &g->token->next->content, errno));
 		// exit(errno);
-	}
 	if (var_path != NULL)
 		free(var_path);
 	return (ret);
@@ -76,7 +74,7 @@ int	my_cd(t_global *g)
 	else
 		ret = chdir((const char *)g->token->next->content);
 	if (ret != 0)
-		errmsg_exit_status(g->token->content, &g->token->next->content, errno);
+		return (errmsg_exit(g->token->content, &g->token->next->content, errno));
 	change_paths(g->env, g->exp_env);
 	g->last_exit_status = 0;
 	return (SUCCESS);

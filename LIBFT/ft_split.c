@@ -73,7 +73,7 @@ char	**ft_split(char const *s, char c)
 	char	**tab;
 	size_t	size;
 
-	if (!s)
+	if (s == NULL || s[0] == '\0')
 		return (NULL);
 	size = count_substr(s, c);
 	tab = malloc((size + 1) * sizeof(char **));

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/04 00:11:48 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/04 18:29:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		g_last_exit_status;
+int	g_sig_code;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -31,13 +31,15 @@ int	main(int argc, char **argv, char **envp)
 		if (user_input != NULL)
 		{
 			add_history(user_input);
-			create_main_lst(&g, user_input);
-			printf(BOLD RED "tokens with whitespaces: \n" RESET);
-			display_main_lst(g.main);
-			del_unwanted_char(g.main);
-			printf(BOLD BLUE "tokens after trim: \n" RESET);
-			display_main_lst(g.main);
-			free(user_input);
+			if (create_main_lst(&g, user_input) == SUCCESS)
+			{
+				printf(BOLD RED "tokens with whitespaces: \n" RESET);
+				display_main_lst(g.main);
+				del_unwanted_char(g.main);
+				printf(BOLD BLUE "tokens after trim: \n" RESET);
+				display_main_lst(g.main);
+				free(user_input);
+			}
 		}
 	}
 	// printf("%s\n", PURPLE BYE_MSG RESET);

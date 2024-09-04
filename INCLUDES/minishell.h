@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/04 00:42:05 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/04 18:50:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ typedef enum 	e_token_type
 	WORD
 }			 	t_token_type;
 
+typedef struct s_parser
+{
+	char	*user_input;
+	int		i;
+	int		start;
+	int		token_count;
+	char	**tokens;
+	bool	closed_quotes[2];
+}				t_parser;
+
 typedef struct s_main_lst
 {
 	char				*content;
@@ -75,7 +85,6 @@ typedef struct s_token
 typedef struct s_global
 {
 	char		*prompt;
-	// char		*input;
 	t_main_lst	*main;
 	t_env		*env;
 	t_env		*exp_env;
@@ -212,10 +221,11 @@ void	display_tokens(t_token *t);
 void    display_main_lst(t_main_lst *main);
 
 // err_msg.c
-void	errmsg(char *cmd, char *arg);
-int		errmsg_exit_status(char *cmd, char **args, int err_status);
-// int		errmsg_exit_status(t_global *g, char *cmd, char *arg, int err_status,
+void	errmsg_no_exit(char *cmd, char *arg);
+int		errmsg_exit(char *cmd, char **args, int err_status);
+// int		errmsg_exit(t_global *g, char *cmd, char *arg, int err_status,
 // bool cleanup);
+int		errmsg_std(int reason, char *arg, int err_status);
 
 // cleanup.c
 void	free_tab(char **tab);

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/29 18:00:35 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:03:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	create_env(t_global *g, char **envp)
 
 	envp_size = get_env_size(envp);
 	if (create_env_list(&g->env, envp) == FAILURE)
-		ft_printf(1, "ERROR OCCURED WITH ENV_LIST\n");
+		ft_printf(STDERR_FILENO, "An error occured with env_list\n");
 	if (create_exp_env_list(&g->exp_env, envp, envp_size, 0) == FAILURE)
-		ft_printf(1, "ERROR OCCURED WITH EXPORT ENV_LIST\n");
+		ft_printf(STDERR_FILENO, "An error occured with export_env_list\n");
 	return ;
 }

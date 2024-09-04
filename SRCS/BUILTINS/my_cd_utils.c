@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_utils.c                                         :+:      :+:    :+:   */
+/*   my_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/30 20:55:29 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:02:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 	new_pwd = getcwd(NULL, 0);
 	if (new_pwd == NULL)
 	{
-		printf("%s %s\n", ERR_PREFIX, strerror(errno));
+		ft_printf(STDERR_FILENO, ERR_PREFIX, strerror(errno));
 		return (NULL);
 	}
 	head = env;
@@ -32,7 +32,7 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 			free(head->content);
 			if ((head->content = ft_strjoin("PWD=", new_pwd)) == NULL)
 			{
-				printf("%s %s\n", ERR_PREFIX, strerror(errno));
+				ft_printf(STDERR_FILENO, ERR_PREFIX, strerror(errno));
 				return (free(new_pwd), NULL);
 			}
 		}
