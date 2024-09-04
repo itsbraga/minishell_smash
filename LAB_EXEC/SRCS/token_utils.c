@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:38:19 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/03 16:42:07 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/04 19:11:06 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,50 @@ void	display_tokens(t_tok *t)
 	tmp = t;
 	while (tmp != NULL)
 	{
-		ft_putstr_fd(tmp->content, 1);
-		ft_putendl_fd("", 1);
+		ft_putendl_fd(tmp->content, 1);
 		tmp = tmp->next;
+	}
+}
+
+void	display_tokens_with_infos(t_tok *t)
+{
+	t_tok	*tmp;
+	int	i;
+	int	j;
+
+	tmp = t;
+	i = 0;
+	j = 0;
+	while (tmp != NULL)
+	{
+		printf("###### %d ######\n", i++);
+		if(tmp->here_doc)
+		{
+			printf("HERE_DOC = %s\n", tmp->here_doc);
+			printf("LIMITER = %s|\n", tmp->limiter);
+		}
+		if (tmp->append)
+		{
+			printf("APPEND = %s\n", tmp->append);
+			printf("OUTFILE = %s|\n", tmp->outfile);
+		}
+		if (tmp->red_in)
+		{
+			printf("RED_IN = %s\n", tmp->red_in);
+			printf("INFILE = %s|\n", tmp->infile);
+		}
+		if (tmp->red_out)
+		{
+			printf("RED_OUT = %s\n", tmp->red_out);
+			printf("OUTFILE = %s|\n", tmp->outfile);
+		}
+		while (tmp->cmd[j] != NULL)
+		{
+			printf("cmd[%d] = %s|\n", j, tmp->cmd[j]);
+			j++;
+		}
+		tmp = tmp->next;
+		j = 0;
 	}
 }
 //TOUT LES CHAR * AUTRE QUE CONTENT SONT DE SIMPLES POINTEURS SUR LES ELEMENTS EN QUESTION

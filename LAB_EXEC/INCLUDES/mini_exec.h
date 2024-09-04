@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/03 16:42:12 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/04 19:00:49 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 typedef struct s_tok
 {
-    char			*content;
+	char			*content;
 	char			*here_doc;
 	char			*limiter;
 	char			*append;
@@ -44,6 +44,7 @@ typedef struct s_tok
 }					t_tok;
 
 void	display_tokens(t_tok *t);
+void	display_tokens_with_infos(t_tok *t);
 void	build_lst(char *input, t_tok **cmd);
 
 #endif

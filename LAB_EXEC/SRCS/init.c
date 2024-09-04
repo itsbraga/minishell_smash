@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 02:38:47 by pmateo            #+#    #+#             */
-/*   Updated: 2024/06/24 16:22:41 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/04 17:31:31 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_exec.h"
 
-void    init_e(t_exec *e)
-{
-    e->input = NULL;
-	e->envp = NULL;
-}
+// void    init_e(t_exec *e)
+// {
+//     e->input = NULL;
+// 	e->envp = NULL;
+// }
 
-void    init_token_list(t_list *);
+// void    init_token_list(t_list *);
