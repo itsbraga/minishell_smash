@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 02:56:20 by pmateo            #+#    #+#             */
-/*   Updated: 2023/12/20 15:48:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/05 20:29:11 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	fill(char *str, long ln, int n)
 		str[i] = '-';
 }
 
-static int	digit_count(long ln)
+static int	digitoken_count(long ln)
 {
 	int	count;
 
@@ -80,7 +80,7 @@ char	*ft_itoa(int n)
 	ln = n;
 	if (ln < 0)
 		ln *= -1;
-	size = digit_count(ln) + isneg(n);
+	size = digitoken_count(ln) + isneg(n);
 	str = malloc((size + 1) * sizeof(char));
 	if (str == NULL)
 		return (NULL);

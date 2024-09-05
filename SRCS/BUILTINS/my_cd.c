@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/04 18:42:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:49:46 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ static char	*__find_var_path(char *to_find, t_env *env)
 	return (NULL);
 }
 
-static int	__go_to_env_var(t_global *g, char *var)
+static int	__go_to_env_var(t_env *env, char *var, t_token *t)
 {
 	char	*var_path;
 	int		ret;
 
-	var_path = __find_var_path(var, g->env);
+	var_path = __find_var_path(var, env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
-		return (errmsg_exit(g->token->content, &g->token->next->content, errno));
+		return (errmsg_cmd_exit(t->content, &t->next->content, errno));
 		// exit(errno);
 	if (var_path != NULL)
 		free(var_path);
@@ -65,16 +65,16 @@ int	my_cd(t_global *g)
 	
 	if ((g->token->next == NULL)
 		|| (ft_strcmp((const char *)g->token->next->content, "~") == 0))
-		ret = __go_to_env_var(g, "HOME=");
+		ret = __go_to_env_var(g->env, "HOME=", g->token);
 	else if (ft_strcmp((const char *)g->token->next->content, "-") == 0)
 	{
-		ret = __go_to_env_var(g, "OLDPWD=");
+		ret = __go_to_env_var(g->env, "OLDPWD=", g->token);
 		printf("%s\n", __find_var_path("OLDPWD=", g->env));
 	}
 	else
 		ret = chdir((const char *)g->token->next->content);
 	if (ret != 0)
-		return (errmsg_exit(g->token->content, &g->token->next->content, errno));
+		return (errmsg_cmd_exit(g->token->content, &g->token->next->content, errno));
 	change_paths(g->env, g->exp_env);
 	g->last_exit_status = 0;
 	return (SUCCESS);

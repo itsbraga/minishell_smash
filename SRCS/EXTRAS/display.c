@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/02 16:45:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:31:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void    display_export_env(t_env *exp_env)
 {
-    t_env    *tmp;
+	t_env    *tmp;
 
-    tmp = exp_env;
-    while (tmp != NULL)
-    {
-        ft_putstr_fd(tmp->content, 1);
-        ft_putendl_fd("", 1);
-        tmp = tmp->next;
-    }
+	tmp = exp_env;
+	while (tmp != NULL)
+	{
+		ft_putstr_fd(tmp->content, 1);
+		ft_putendl_fd("", 1);
+		tmp = tmp->next;
+	}
 }
 
 void	display_tokens(t_token *t)
@@ -40,13 +40,13 @@ void	display_tokens(t_token *t)
 
 void    display_main_lst(t_main_lst *main)
 {
-    t_main_lst    *tmp;
+	t_main_lst    *tmp;
 
-    tmp = main;
-    while (tmp != NULL)
-    {
-        ft_putstr_fd(tmp->content, 1);
-        ft_putendl_fd("", 1);
-        tmp = tmp->next;
-    }
+	tmp = main;
+	while (tmp != NULL)
+	{
+		ft_putstr_fd(tmp->content, 1);
+		ft_putendl_fd("", 1);
+		tmp = tmp->next;
+	}
 }

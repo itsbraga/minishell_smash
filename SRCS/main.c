@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/04 18:29:40 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:35:12 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(user_input);
 			if (create_main_lst(&g, user_input) == SUCCESS)
 			{
-				printf(BOLD RED "tokens with whitespaces: \n" RESET);
-				display_main_lst(g.main);
-				del_unwanted_char(g.main);
-				printf(BOLD BLUE "tokens after trim: \n" RESET);
+				printf(GREEN "CLEANED TOKENS:\n");
 				display_main_lst(g.main);
 				free(user_input);
 			}

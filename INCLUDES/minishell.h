@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/04 18:50:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 22:09:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,18 +141,21 @@ t_token	*new_node(char *content);
  * PARSING
 \******************************************************************************/
 
+// del_quotes.c
+char	*del_empty_quotes(char *str, int quote_idx);
+char	*del_quote_pair(char *str, int first, int second);
+
 // quotes_utils.c
 bool	switch_bool(bool closed);
 int		find_closing_quote(char *str, char quote);
 bool	unclosed_quotes_return(bool closed[]);
 
-// del_quotes.c
-char	*del_empty_quotes(char *str, int quote_idx);
-char	*del_quote_pair(char *str, int first, int second);
-
 // handle_quotes.c
 char	*empty_quotes(char *str);
-char	*handle_quotes(char *user_input);
+char	*handle_quotes_modif(char *user_input);
+
+// check_input.c
+char	**split_user_input(char *input);
 
 /******************************************************************************\
  * ENVIRONMENT
@@ -215,17 +218,12 @@ void	exec_built_in(char **built_in, t_global *g);
  * TOOLS
 \******************************************************************************/
 
-// display.c
-void    display_export_env(t_env *exp_env);
-void	display_tokens(t_token *t);
-void    display_main_lst(t_main_lst *main);
-
 // err_msg.c
 void	errmsg_no_exit(char *cmd, char *arg);
-int		errmsg_exit(char *cmd, char **args, int err_status);
-// int		errmsg_exit(t_global *g, char *cmd, char *arg, int err_status,
+int		errmsg_cmd_exit(char *cmd, char **args, int err_status);
+// int		errmsg_cmd_exit(t_global *g, char *cmd, char *arg, int err_status,
 // bool cleanup);
-int		errmsg_std(int reason, char *arg, int err_status);
+int		errmsg_exit(int reason, int err_status);
 
 // cleanup.c
 void	free_tab(char **tab);
@@ -237,10 +235,18 @@ void    free_global(t_global *g, bool clear_history);
 // clean_exit_shell.c
 void	clean_exit_shell(t_global *g, int err_status);
 
+/******************************************************************************\
+ * EXTRAS
+\******************************************************************************/
+
+// display.c
+void    display_export_env(t_env *exp_env);
+void	display_tokens(t_token *t);
+void    display_main_lst(t_main_lst *main);
+
 // features.c
 void	rainbow_txt(const char *str);
 void	rainbow_txt_nonl(const char *str);
 char	*rainbow_prompt(const char *str);
-
 
 #endif

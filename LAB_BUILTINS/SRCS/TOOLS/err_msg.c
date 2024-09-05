@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_msg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/04 19:14:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:52:01 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	errmsg_no_exit(char *cmd, char *arg)
 }
 
 // change proto (cmd, arg --> in global)
-// int	errmsg_exit(t_global  *g, char *cmd, char *arg, int err_status, bool cleanup)
+// int	errmsg_cmd_exit(t_global  *g, char *cmd, char *arg, int err_status, bool cleanup)
 // {
 // 	if (cmd != NULL && arg == NULL)
 // 	{
@@ -43,7 +43,7 @@ void	errmsg_no_exit(char *cmd, char *arg)
 // 	return (err_status);
 // }
 
-int	errmsg_exit(char *cmd, char **args, int err_status)
+int	errmsg_cmd_exit(char *cmd, char **args, int err_status)
 {
 	int	i;
 	
@@ -62,13 +62,12 @@ int	errmsg_exit(char *cmd, char **args, int err_status)
 	return (err_status);
 }
 
-int	errmsg_std(int reason, char *arg, int err_status)
+int	errmsg_exit(int reason, int err_status)
 {
 	if (reason == 1)
 	{
 		printf("%s ", ERR_PREFIX);
-		perror("error near unexpected token");
-		printf(" `%c'", &arg);
+		printf("error near unexpected token `|'\n");
 	}
 	return (err_status);
 }

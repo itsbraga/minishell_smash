@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_msg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/04 20:00:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 22:05:02 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 void	errmsg_no_exit(char *cmd, char *arg)
 {
 	if (cmd != NULL && arg == NULL)
-		ft_printf(STDERR_FILENO, ERR_PREFIX, "%s: %s\n", cmd, strerror(errno));
+		ft_printf(2, ERR_PREFIX, "%s: %s\n", cmd, strerror(errno));
 	else if (cmd != NULL && arg != NULL)
-	{
-		ft_printf(STDERR_FILENO, ERR_PREFIX, "%s: %s: ", cmd, arg);
-		ft_printf(STDERR_FILENO, "%s\n", strerror(errno));
-	}
+		ft_printf(2, ERR_PREFIX, "%s: %s: %s\n", cmd, arg, strerror(errno));
 	else if (cmd == NULL && arg == NULL)
-		ft_printf(STDERR_FILENO, ERR_PREFIX, "%s\n", strerror(errno));
+		ft_printf(2, ERR_PREFIX, "%s\n", strerror(errno));
 }
 
 // change proto (cmd, arg --> in global)
-// int	errmsg_exit(t_global  *g, char *cmd, char *arg, int err_status, bool cleanup)
+// int	errmsg_cmd_exit(t_global  *g, char *cmd, char *arg, int err_status, bool cleanup)
 // {
 // 	if (cmd != NULL && arg == NULL)
 // 	{
@@ -43,38 +40,36 @@ void	errmsg_no_exit(char *cmd, char *arg)
 // 	return (err_status);
 // }
 
-int	errmsg_exit(char *cmd, char **args, int err_status)
+int	errmsg_cmd_exit(char *cmd, char **args, int err_status)
 {
 	int	i;
 	
 	if (cmd != NULL && args == NULL)
-		ft_printf(STDERR_FILENO, ERR_PREFIX, "%s: %s\n", cmd, strerror(errno));
+		ft_printf(2, "%s%s: %s\n", ERR_PREFIX, cmd, strerror(errno));
 	else if (cmd != NULL && args != NULL)
 	{
 		i = 0;
 		while (args[i] != NULL)
 		{
-			ft_printf(STDERR_FILENO, ERR_PREFIX, "%s: %s: ", cmd, args[i]);
-			ft_printf(STDERR_FILENO, "%s\n", strerror(errno));
+			ft_printf(2, "%s%s: %s: ", ERR_PREFIX, cmd, args[i]);
+			ft_printf(2, "%s\n", strerror(errno));
 			i++;
 		}
 	}
 	return (err_status);
 }
 
-int	errmsg_std(int reason, char *arg, int err_status)
+int	errmsg_exit(int reason, int err_status)
 {
 	if (reason == 1)
-	{
-		ft_printf(STDERR_FILENO, ERR_PREFIX);
-		ft_printf(STDERR_FILENO, "syntax error near unexpected token ");
-		ft_printf(STDERR_FILENO, "`%s'\n", arg);
-	}
-	// else if (reason == 2)
-	// {
-	// 	ft_printf(STDERR_FILENO, "%s ", ERR_PREFIX);
-	// 	perror("error near unexpected token");
-	// 	ft_printf(STDERR_FILENO, " `%c'", &arg);
-	// }
+		ft_printf(2, "%s%s\n", ERR_PREFIX, ERR_NEAR_PIPE);
+	else if (reason == 2)
+		ft_printf(2, "%s%s\n", ERR_PREFIX, "unclosed quotes or empty quotes");
+	else if (reason == 3)
+		ft_printf(2, "%s%s\n", ERR_PREFIX, "failed to parse user input");
+	else if (reason == 4)
+		ft_printf(2, "%s%s\n", ERR_PREFIX, "failed to trim whitespaces");
+	else if (reason == 5)
+		ft_printf(2, "%s%s\n", ERR_PREFIX, ERR_MALLOC_LST);
 	return (err_status);
 }

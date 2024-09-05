@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/04 00:10:19 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/05 22:25:57 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static bool	__unclosed_quotes(char *str)
 	bool	closed[2];
 	
 	i = 0;
-	closed[0] = true, closed[1] = true;
+	closed[0] = true;
+	closed[1] = true;
 	while(str[i] != '\0')
 	{
 		if (str[i] == '\'')
@@ -38,21 +39,6 @@ static bool	__unclosed_quotes(char *str)
 		i++;
 	}
 	return (unclosed_quotes_return(closed));
-}
-
-static bool	__handle_empty_quotes(char *str, int i, bool *closed)
-{
-	if ((str[i] == '"' && str[i + 1] == '"') 
-		&& (closed[1] != false && closed[0] != false))
-		return (true);
-	else if ((str[i] == '\'' && str[i + 1] == '\'') 
-		&& (closed[1] != false && closed[0] != false))
-		return (true);
-	if (str[i] == '"' && closed[1] != false)
-		closed[0] = switch_bool(closed[0]);
-	else if (str[i] == '\'' && closed[0] != false)
-		closed[1] = switch_bool(closed[1]);
-	return (false);
 }
 
 char	*__other_quotes(char *str)
@@ -81,6 +67,21 @@ char	*__other_quotes(char *str)
 	return (str);
 }
 
+static bool	__handle_empty_quotes(char *str, int i, bool *closed)
+{
+	// if ((str[i] == '"' && str[i + 1] == '"') 
+	// 	&& (closed[1] != false && closed[0] != false))
+	// 	return (true);
+	// else if ((str[i] == '\'' && str[i + 1] == '\'') 
+	// 	&& (closed[1] != false && closed[0] != false))
+	// 	return (true);
+	if (str[i] == '"' && closed[1] != false)
+		closed[0] = switch_bool(closed[0]);
+	else if (str[i] == '\'' && closed[0] != false)
+		closed[1] = switch_bool(closed[1]);
+	return (false);
+}
+
 char	*empty_quotes(char *str)
 {
 	int		i;
@@ -91,7 +92,7 @@ char	*empty_quotes(char *str)
 	closed[1] = true;
 	while (str[i] != '\0')
 	{
-		if (__handle_empty_quotes(str, i, closed))
+		if (__handle_empty_quotes(str, i, closed) == true)
 		{
 			str = del_empty_quotes(str, i);
 			i = -1;
@@ -103,16 +104,12 @@ char	*empty_quotes(char *str)
 	return (str);
 }
 
-char	*handle_quotes(char *user_input)
+char	*handle_quotes_modif(char *user_input)
 {
 	if (__unclosed_quotes(user_input) == true)
-	{
-		ft_putendl_fd("Unclosed quote !", 2);
-		ft_putendl_fd("Aborting...", 2);
-		exit(FAILURE);
-	}
+		return (NULL);
 	user_input = empty_quotes(user_input);
 	// user_input = expand(user_input, envp);
-	user_input = __other_quotes(user_input);
+	// user_input = __other_quotes(user_input);
 	return (user_input);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/04 18:57:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:43:18 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void		del_env_var(t_env **env, char *var_to_rm);
 int			my_unset(t_global *g, char **args);
 
 void		errmsg_no_exit(char *cmd, char *arg);
-int			errmsg_exit(char *cmd, char **args, int err_status);
-// int			errmsg_exit(t_global *g, char *cmd, char *arg,
+int			errmsg_cmd_exit(char *cmd, char **args, int err_status);
+// int			errmsg_cmd_exit(t_global *g, char *cmd, char *arg,
 // int err_status, bool cleanup);
 
 void		free_tab(char **tab);

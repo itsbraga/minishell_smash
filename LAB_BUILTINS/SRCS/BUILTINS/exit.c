@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/04 18:41:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:43:30 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static int	__set_exit_status(t_global *g, char **args)
 	else if (args[1] != NULL)
 	{
 		if (args[2] != NULL && ft_strisnumeric(args[1]) == 0)
-			return (errmsg_exit("exit", &args[2], FAILURE)); // sinon ecrire "too many arguments"
+			return (errmsg_cmd_exit("exit", &args[2], FAILURE)); // sinon ecrire "too many arguments"
 		else
 			exit_status = __ft_atol(args[1]);
 	}
 	else
-		return (errmsg_exit("exit", &args[1], MISUSE_BUILTIN));
+		return (errmsg_cmd_exit("exit", &args[1], MISUSE_BUILTIN));
 	return (exit_status);
 }
 

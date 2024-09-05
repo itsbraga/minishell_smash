@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/04 18:41:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:43:48 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	my_pwd(void)
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
-		return (errmsg_exit("getcwd", NULL, errno));
+		return (errmsg_cmd_exit("getcwd", NULL, errno));
 	printf("%s\n", cwd);
 	// g->last_exit_status = 0;
 	return (SUCCESS);

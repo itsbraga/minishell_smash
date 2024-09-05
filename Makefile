@@ -49,13 +49,16 @@ INIT_DIR		=	INIT/
 INIT_F			=	init_global.c create_main_lst.c main_lst_utils.c
 
 PARSING_DIR		=	PARSING/
-PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c
+PARSING_F		=	check_input.c handle_quotes.c quotes_utils.c del_quotes.c
 
 TOKEN_DIR		=	TOKENIZATION/
 TOKEN_F			=	token_utils.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	cleanup.c err_msg.c clean_exit_shell.c display.c features.c
+TOOLS_F			=	cleanup.c err_msg.c clean_exit_shell.c
+
+EXTRAS_DIR		=	EXTRAS/
+EXTRAS_F		=	display.c features.c
 
 #******************************************************************************#
 #	COMBINE FILES AND DIRECTORIES
@@ -69,6 +72,7 @@ SRCS_F			=	$(addprefix $(ENV_DIR), $(ENV_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(TOKEN_DIR), $(TOKEN_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
+					$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					main.c
 
 OBJS_DIR		=	OBJS/
