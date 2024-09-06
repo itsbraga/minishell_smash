@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 01:33:43 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 17:59:33 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,11 @@
 
 void	exec_built_in(char **built_in, t_global *g)
 {
-	if ((ft_strcmp(built_in[0], "pwd") == 0)
-			|| (ft_strcmp(built_in[0], "/bin/pwd") == 0))
+	if (ft_strcmp(built_in[0], "pwd") == 0)
 		my_pwd();
-	else if ((ft_strcmp(built_in[0], "cd") == 0)
-			|| (ft_strcmp(built_in[0], "/bin/cd") == 0))
+	else if (ft_strcmp(built_in[0], "cd") == 0)
 		my_cd(g);
-	else if ((ft_strcmp(built_in[0], "env") == 0)
-			|| (ft_strcmp(built_in[0], "/bin/env") == 0))
+	else if (ft_strcmp(built_in[0], "env") == 0)
 	{
 		if (built_in[1] != NULL)
 			return (err_msg(built_in[1], "No such file or directory"));
@@ -63,8 +60,6 @@ void	exec_built_in(char **built_in, t_global *g)
 // cd seul : va dans home 															OK
 
 // old_pwd doit ce mettre a jour avec un "cd ." 									OK
-
-// cd /bin/ met dans /usr/bin parce qu'ils sont liers
 
 // exit avec des parametres pas numeriques affiche des messages
 // d'erreurs (je crois que c'est des messages differents en

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 02:14:31 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 17:27:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	__del_unwanted_char(t_main_lst *main)
+static int	__del_unwanted_whitespaces(t_main_lst *main)
 {
 	t_main_lst  *head;
 	char        *trimmed_token;
@@ -61,6 +61,6 @@ int	create_main_lst(t_global *g, char *input)
 		i++;
 	}
 	free_tab(tokens);
-	__del_unwanted_char(g->main);
+	__del_unwanted_whitespaces(g->main);
 	return (SUCCESS);
 }

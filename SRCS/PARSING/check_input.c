@@ -3,45 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/06 01:51:12 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 17:27:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_input(t_parser *p)
+int	check_input_before_quotes(t_parser *p)
 {
-	if (handle_quotes_modif(p->user_input) == NULL)
-	{
-		err_msg(NULL, "unable to handle the quoted part of this input");
-		return (FAILURE);
-	}
 	while (ft_isspace(p->user_input[p->i]) == 1)
 			p->i++;
 	if (p->user_input[p->i] == '\0')
 		return (FAILURE);
 	else if (p->user_input[p->i] == '|')
 	{
-		// printf("ici\n");
-		// p->i++;
-		// while (ft_isspace(p->user_input[p->i]) == 1)
-		// 	p->i++;
-		// printf("tobby\n");
-		// if (p->user_input[p->i] == '\0')
+		printf("ici\n");
+		p->i++;
+		while (ft_isspace(p->user_input[p->i]) == 1)
+			p->i++;
+		printf("tobby\n");
+		if (p->user_input[p->i] == '\0')
+		{
 			err_msg(NULL, ERR_NEAR_PIPE);
 			return (FAILURE);
+		}
 	}
 	return (SUCCESS);
 }
 
-int	parser(t_parser *p)
+int	quote_parser(t_parser *p)
 {
 	char    *tmp;
 	
-	if (check_input(p) == FAILURE)
+	if (check_input_before_quotes(p) == FAILURE)
 		return (FAILURE);
 	p->closed_quotes[0] = true;
 	p->closed_quotes[1] = true;
@@ -69,6 +66,8 @@ char	**split_user_input(char *input)
 {
 	t_parser	p;
 
+	if (unclosed_quotes(input) == true)
+		return (err_msg(NULL, "unclosed quotes, please try again"), NULL);
 	ft_bzero(&p, sizeof(p));
 	p.user_input = input;
 	if (p.user_input == NULL || p.user_input[0] == '\0')
@@ -80,7 +79,7 @@ char	**split_user_input(char *input)
 			return (NULL);
 		while (p.user_input[p.i] != '\0')
 		{
-			if (parser(&p) == FAILURE)
+			if (quote_parser(&p) == FAILURE)
 				return (NULL);
 		}
 		p.tokens[p.token_count] = NULL;

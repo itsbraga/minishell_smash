@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 02:20:14 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 17:17:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	__unclosed_quotes(char *str)
+bool	unclosed_quotes(char *str)
 {
 	int		i;
 	bool	closed[2];
@@ -69,12 +69,12 @@ char	*__other_quotes(char *str)
 
 static bool	__handle_empty_quotes(char *str, int i, bool *closed)
 {
-	// if ((str[i] == '"' && str[i + 1] == '"') 
-	// 	&& (closed[1] != false && closed[0] != false))
-	// 	return (true);
-	// else if ((str[i] == '\'' && str[i + 1] == '\'') 
-	// 	&& (closed[1] != false && closed[0] != false))
-	// 	return (true);
+	if ((str[i] == '"' && str[i + 1] == '"') 
+		&& (closed[1] != false && closed[0] != false))
+		return (true);
+	else if ((str[i] == '\'' && str[i + 1] == '\'') 
+		&& (closed[1] != false && closed[0] != false))
+		return (true);
 	if (str[i] == '"' && closed[1] != false)
 		closed[0] = switch_bool(closed[0]);
 	else if (str[i] == '\'' && closed[0] != false)
@@ -106,7 +106,7 @@ char	*empty_quotes(char *str)
 
 char	*handle_quotes_modif(char *user_input)
 {
-	if (__unclosed_quotes(user_input) == true)
+	if (unclosed_quotes(user_input) == true)
 		return (NULL);
 	user_input = empty_quotes(user_input);
 	// user_input = expand(user_input, envp);

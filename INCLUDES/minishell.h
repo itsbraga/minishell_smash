@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 02:43:24 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 17:18:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		find_closing_quote(char *str, char quote);
 bool	unclosed_quotes_return(bool closed[]);
 
 // handle_quotes.c
+bool	unclosed_quotes(char *str);
 char	*empty_quotes(char *str);
 char	*handle_quotes_modif(char *user_input);
 

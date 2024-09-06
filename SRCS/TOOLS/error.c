@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 02:14:41 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 17:50:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// verifier si le cas ou detail et reason ne sont pas NULL dans err_msg
+// alloc dynamique et statique
 static char	*__combine_and_free_strs(char *s1, char *s2)
 {
 	char	*tmp;
@@ -22,8 +24,6 @@ static char	*__combine_and_free_strs(char *s1, char *s2)
 		return (ft_strdup(s2));
 	tmp = s1;
 	s1 = ft_strjoin(tmp, s2);
-	free(tmp);
-	tmp = NULL;
 	return (s1);
 }
 
@@ -31,9 +31,14 @@ void	err_msg(char *detail, char *reason)
 {
 	char	*msg;
 
-	msg = __combine_and_free_strs(ERR_PREFIX, detail);
-	msg = __combine_and_free_strs(msg, ": ");
-	msg = __combine_and_free_strs(msg, reason);
+	if (detail != NULL)
+	{
+		msg = __combine_and_free_strs(ERR_PREFIX, detail);
+		msg = __combine_and_free_strs(msg, ": ");
+		msg = __combine_and_free_strs(msg, reason);
+	}
+	else
+		msg = __combine_and_free_strs(ERR_PREFIX, reason);
 	ft_putendl_fd(msg, STDERR_FILENO);
 	free(msg);
 	msg = NULL;
