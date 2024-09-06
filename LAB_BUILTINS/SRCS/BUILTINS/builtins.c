@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/04 00:41:54 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 01:33:43 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ void	exec_built_in(char **built_in, t_global *g)
 		my_cd(g);
 	else if ((ft_strcmp(built_in[0], "env") == 0)
 			|| (ft_strcmp(built_in[0], "/bin/env") == 0))
+	{
+		if (built_in[1] != NULL)
+			return (err_msg(built_in[1], "No such file or directory"));
 		my_env(g->env);
+	}
 	else if (ft_strcmp(built_in[0], "exit") == 0)
 		my_exit(g, built_in);
 	else if (ft_strcmp(built_in[0], "unset") == 0)
@@ -53,18 +57,18 @@ void	exec_built_in(char **built_in, t_global *g)
 //shlvl a update
 
 // certain builtin peuvent agir differement avec des parametres
-// (genre env 1 doit pas afficher l'enn mais un message d'erreur)
-// a voir si vous le faite le sujet est vague dessus
+// (genre env 1 doit pas afficher l'env mais un message d'erreur)
+// a voir si vous le faite le sujet est vague dessus 								EN COURS (LEAK)
 
-// cd seul : va dans home
+// cd seul : va dans home 															OK
 
-// old_pwd doit ce mettre a jour avec un "cd ."
+// old_pwd doit ce mettre a jour avec un "cd ." 									OK
 
 // cd /bin/ met dans /usr/bin parce qu'ils sont liers
 
 // exit avec des parametres pas numeriques affiche des messages
 // d'erreurs (je crois que c'est des messages differents en
-// fonctions du parametre genre char, string, num negatif, ...)
+// fonctions du parametre genre char, string, num negatif, ...) 					EN COURS (LEAK)
 
 // leak exit
 

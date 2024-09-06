@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/05 21:52:09 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 02:14:31 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	__del_unwanted_char(t_main_lst *main)
 		}
 		trimmed_token = ft_strtrim(head->content, " ");
 		if (trimmed_token == NULL)
-			return (errmsg_exit(4, FAILURE));
+			return (err_msg(NULL, "cannot trim token"), FAILURE);
 		free(head->content);
 		head->content = trimmed_token;
 		head = head->next;
@@ -55,7 +55,7 @@ int	create_main_lst(t_global *g, char *input)
 		if (new_node == NULL)
 		{
 			free_tab(tokens);
-			return (errmsg_exit(5, FAILURE));
+			return (err_msg("malloc", ERR_MALLOC), FAILURE);
 		}
 		main_add_back(&g->main, new_node);
 		i++;

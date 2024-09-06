@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/05 22:25:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 01:51:12 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	check_input(t_parser *p)
 {
 	if (handle_quotes_modif(p->user_input) == NULL)
-		return (errmsg_exit(2, FAILURE));
+	{
+		err_msg(NULL, "unable to handle the quoted part of this input");
+		return (FAILURE);
+	}
 	while (ft_isspace(p->user_input[p->i]) == 1)
 			p->i++;
 	if (p->user_input[p->i] == '\0')
@@ -28,7 +31,8 @@ int	check_input(t_parser *p)
 		// 	p->i++;
 		// printf("tobby\n");
 		// if (p->user_input[p->i] == '\0')
-			return (errmsg_exit(1, FAILURE));
+			err_msg(NULL, ERR_NEAR_PIPE);
+			return (FAILURE);
 	}
 	return (SUCCESS);
 }

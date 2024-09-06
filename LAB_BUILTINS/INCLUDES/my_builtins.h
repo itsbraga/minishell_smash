@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/05 21:43:18 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 02:43:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define OUT_OF_RANGE 255
 
 # define ERR_PREFIX BOLD RED "minishell: " RESET
+# define ERR_NEAR_PIPE "syntax error near unexpected token `|'"
+# define ERR_MALLOC_LST "failed to allocate memory for a new node"
 
 /******************************************************************************\
  * GLOBAL VARIABLE
@@ -108,14 +110,12 @@ int			my_pwd(void);
 void		change_paths(t_env *env, t_env *exp_env);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
-void		my_exit(t_global *g, char **args);
+int			my_exit(t_global *g, char **args);
 void		del_env_var(t_env **env, char *var_to_rm);
 int			my_unset(t_global *g, char **args);
 
-void		errmsg_no_exit(char *cmd, char *arg);
-int			errmsg_cmd_exit(char *cmd, char **args, int err_status);
-// int			errmsg_cmd_exit(t_global *g, char *cmd, char *arg,
-// int err_status, bool cleanup);
+void		err_msg(char *detail, char *reason);
+int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
 
 void		free_tab(char **tab);
 void    	free_global(t_global *g, bool clear_history);

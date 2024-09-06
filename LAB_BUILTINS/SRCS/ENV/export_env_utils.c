@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_export_env.c                                :+:      :+:    :+:   */
+/*   export_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/08/28 20:23:48 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/06 01:11:55 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "my_builtins.h"
+#include "my_builtins.h"
 
 static int	__cmp_to_equal(const char *s1, const char *s2)
 {
@@ -80,32 +80,4 @@ t_env	*ascii_sort(char **envp, char *last_added)
 		i++;
 	}
 	return (env_new_var(tmp));
-}
-
-int	create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, size_t idx_exp_env)
-{
-	t_env	*to_add;
-	t_env	*last;
-
-	to_add = NULL;
-	last = NULL;
-	while (idx_exp_env != envp_size)
-	{
-		if (idx_exp_env == 0)
-			to_add = copy_toppest(envp);
-		else
-			to_add = ascii_sort(envp, last->content);
-		if (to_add == NULL)
-		{
-			lstclear_env(exp_env);
-			return (FAILURE);
-		}
-		if (last == NULL)
-			*exp_env = to_add;
-		else
-			last->next = to_add;
-		last = to_add;
-		idx_exp_env++;
-	}
-	return (SUCCESS);
 }

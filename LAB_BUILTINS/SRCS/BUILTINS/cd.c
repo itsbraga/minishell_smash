@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/05 21:43:24 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 01:23:23 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,23 @@ static char	*__find_var_path(char *to_find, t_env *env)
 	return (NULL);
 }
 
-static int	__go_to_env_var(t_global *g, char *var)
+static int	__go_to_env_var(t_env *env, char *var, t_token *t)
 {
 	char	*var_path;
 	int		ret;
+	char	*current;
+	char	*next;
+	int		error;
 
-	var_path = __find_var_path(var, g->env);
+	var_path = __find_var_path(var, env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
-		return (errmsg_cmd_exit(g->token->content, &g->token->next->content, errno));
+	{
+		current = t->content;
+		next = t->next->content;
+		error = err_msg_cmd(current, next, "No such file or directory", 1);
+		return (free(current), free(next), error);
+	}
 	if (var_path != NULL)
 		free(var_path);
 	return (ret);
@@ -60,20 +68,28 @@ static int	__go_to_env_var(t_global *g, char *var)
 */
 int	my_cd(t_global *g)
 {
-	int	ret;
+	int		ret;
+	char	*current;
+	char	*next;
+	int		error;
 	
 	if ((g->token->next == NULL)
 		|| (ft_strcmp((const char *)g->token->next->content, "~") == 0))
-		ret = __go_to_env_var(g, "HOME=");
+		ret = __go_to_env_var(g->env, "HOME=", g->token);
 	else if (ft_strcmp((const char *)g->token->next->content, "-") == 0)
 	{
-		ret = __go_to_env_var(g, "OLDPWD=");
+		ret = __go_to_env_var(g->env, "OLDPWD=", g->token);
 		printf("%s\n", __find_var_path("OLDPWD=", g->env));
 	}
 	else
 		ret = chdir((const char *)g->token->next->content);
 	if (ret != 0)
-		return (errmsg_cmd_exit(g->token->content, &g->token->next->content, errno));
+	{
+		current = g->token->content;
+		next = g->token->next->content;
+		error = err_msg_cmd(current, next, "No such file or directory", 1);
+		return (free(current), free(next), error);
+	}
 	change_paths(g->env, g->exp_env);
 	g->last_exit_status = 0;
 	return (SUCCESS);

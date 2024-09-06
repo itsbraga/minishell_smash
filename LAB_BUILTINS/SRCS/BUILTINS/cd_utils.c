@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/04 18:55:44 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/06 01:07:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 	new_pwd = getcwd(NULL, 0);
 	if (new_pwd == NULL)
 	{
-		ft_printf(STDERR_FILENO, ERR_PREFIX, strerror(errno));
+		err_msg("0: getcwd() failed", "No such file or directory");
 		return (NULL);
 	}
 	head = env;
@@ -30,11 +30,9 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 		{
 			*old_pwd = ft_strdup(head->content);
 			free(head->content);
-			if ((head->content = ft_strjoin("PWD=", new_pwd)) == NULL)
-			{
-				ft_printf(STDERR_FILENO, ERR_PREFIX, strerror(errno));
+			head->content = ft_strjoin("PWD=", new_pwd);
+			if (head->content == NULL)
 				return (free(new_pwd), NULL);
-			}
 		}
 		head = head->next;
 	}

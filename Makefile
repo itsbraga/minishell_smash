@@ -40,22 +40,24 @@ BUILTINS_F		=	builtins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c \
 					my_exit.c my_unset.c
 
 ENV_DIR			=	ENVIRONMENT/
-ENV_F			=	create_env.c create_export_env.c env_utils.c
+ENV_F			=	create_env.c env_utils.c export_env_utils.c
 
 EXPAND_DIR		=	EXPAND/
 EXPAND_F		=	expand.c expand_utils.c
 
 INIT_DIR		=	INIT/
-INIT_F			=	init_global.c create_main_lst.c main_lst_utils.c
+INIT_F			=	init_global.c
 
 PARSING_DIR		=	PARSING/
-PARSING_F		=	check_input.c handle_quotes.c quotes_utils.c del_quotes.c
+PARSING_F		=	check_input.c handle_quotes.c quotes_utils.c del_quotes.c \
+					create_main_lst.c
 
 TOKEN_DIR		=	TOKENIZATION/
-TOKEN_F			=	token_utils.c
+TOKEN_F			=	
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	cleanup.c err_msg.c clean_exit_shell.c
+TOOLS_F			=	main_lst_utils.c token_utils.c error.c cleanup.c \
+					clean_exit_shell.c
 
 EXTRAS_DIR		=	EXTRAS/
 EXTRAS_F		=	display.c features.c
@@ -70,10 +72,10 @@ SRCS_F			=	$(addprefix $(ENV_DIR), $(ENV_F)) \
 					$(addprefix $(BUILTINS_DIR), $(BUILTINS_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
-					$(addprefix $(TOKEN_DIR), $(TOKEN_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					main.c
+#					$(addprefix $(TOKEN_DIR), $(TOKEN_F))
 
 OBJS_DIR		=	OBJS/
 OBJS_F			=	$(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_F))

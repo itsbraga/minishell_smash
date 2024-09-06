@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 21:10:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/06 01:13:03 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,6 @@ void	lstclear_tokens(t_token **t)
 	(*t) = NULL;
 }
 
-// void	lstclear_input(t_input **input)
-// {
-// 	t_input	*tmp;
-	
-// 	if (input == NULL || (*input) == NULL)
-// 		return ;
-// 	while ((*input) != NULL)
-// 	{
-// 		tmp = (*input)->next;
-// 		free((*input)->content); 
-// 		free(*input);
-// 		(*input) = tmp;
-// 	}
-// 	(*input) = NULL;
-// }
-
 void	free_tab(char **tab)
 {
 	int	i;
@@ -86,20 +70,4 @@ void    free_global(t_global *g, bool clear_history)
         rl_clear_history();
     }
 }
-
-// void    free_global(t_global *g, bool clear_history)
-// {
-//     if (g != NULL && g->input != NULL)
-//         lstclear_input(g->input);
-// 	if (g != NULL && g->cmd != NULL)
-// 		//
-//     if (g != NULL && g->token != NULL)
-//         lstclear_token(&g->token);
-//     if (clear_history == true)
-//     {
-//         if (g != NULL && g->env != NULL)
-//             lstclear_env(g->env);
-//         rl_clear_history();
-//     }
-// }
 

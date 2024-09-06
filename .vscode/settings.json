@@ -5,5 +5,10 @@
         "column": 80,
         "color": "#f1abe2"
         }
-    ]
+    ],
+    "files.associations": {
+        "ft_printf.h": "c",
+        "get_next_line_bonus.h": "c",
+        "structs.h": "c"
+    }
 }

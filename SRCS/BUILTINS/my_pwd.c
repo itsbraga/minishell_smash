@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/05 21:44:13 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 01:47:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	my_pwd(void)
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
-		return (errmsg_cmd_exit("getcwd", NULL, errno));
+	{
+		err_msg("0: getcwd() failed", "No such file or directory");
+		return (errno);
+	}
 	printf("%s\n", cwd);
 	// g->last_exit_status = 0;
 	return (SUCCESS);
