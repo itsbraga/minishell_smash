@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/03 23:54:31 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 22:16:27 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 	return (free(start_str), new_str);
 }
 
-static char	*__handle_expand(char *str, char *var, char **envp)
+static char	*__handle_expand(char *str, char *var, t_env **env)
 {
 	char	*to_find;
 	char	*var_value;
 
 	to_find = take_var(str, var);
 	// printf("to_find = %s\n", to_find);
-	var_value = search_var(to_find, envp);
+	var_value = search_var(to_find, env);
 	// printf("var_value = %s\n", var_value);
 	if (var_value == NULL)
 		str = __del_var(str, var, ft_strlen(to_find));
@@ -79,7 +79,7 @@ static char	*__handle_expand(char *str, char *var, char **envp)
 }
 
 //EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
-char	*expand(char *str, char **envp)
+char	*expand(char *str, t_env **env)
 {
 	int		i;
 	bool 	closed[2];
@@ -97,7 +97,7 @@ char	*expand(char *str, char **envp)
 			&& (str[i + 1] != ' ' && str[i + 1] != '"' 
 			&& str[i + 1] != '\'' && str[i + 1] != '$')) 
 		{
-			str = __handle_expand(str, &str[i + 1], envp);
+			str = __handle_expand(str, &str[i + 1], env);
 			if (str == NULL)
 				return (NULL);
 		}

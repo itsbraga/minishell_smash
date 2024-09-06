@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 17:18:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/06 22:17:14 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ void	create_env(t_global *g, char **envp);
 size_t	len_to_equal(char *str);
 char	*take_var_value(char *str);
 char	*take_var(char *str, char *var);
-char 	*search_var(char *to_find, char **envp);
+char 	*search_var(char *to_find, t_env **env);
 
 // expand.c
-char	*expand(char *str, char **envp);
+char	*expand(char *str, t_env **env);
 
 /******************************************************************************\
  * BUILT-INS

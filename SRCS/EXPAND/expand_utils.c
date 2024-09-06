@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/03 23:53:42 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/06 22:16:45 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,28 @@ char	*take_var(char *str, char *var)
 }
 
 // Adapter avec notre env en liste chainee
-char 	*search_var(char *to_find, char **envp)
+char 	*search_var(char *to_find, t_env **env)
 {
-	int		i;
+	int	i;
 	char	*to_cmp;
+	t_env *node;
 
 	i = 0;
 	to_cmp = NULL;
-	while (envp[i] != NULL)
+	node = *env;
+	while (node != NULL)
 	{
-		to_cmp = ft_strldup(envp[i], len_to_equal(envp[i]));
-		if (ft_strcmp(to_find, to_cmp) == 0)
+		to_cmp = ft_strldup(node->content, len_to_equal(node->content));
+		if (strcmp(to_find, to_cmp) == 0)
 		{
 			free(to_cmp);
-			return (take_var_value(envp[i]));
+			return (take_var_value(node->content));
 		}
 		else
 		{
 			free(to_cmp);
 			to_cmp = NULL;
-			i++;
+			node = node->next;
 		}
 	}
 	return (NULL);
