@@ -6,16 +6,32 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 22:16:27 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/08 22:15:30 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-	Handle $? which should *expand* to the exit status
-	of the most recently executed foreground pipeline
-*/
+static char	*__clean_translated_variable(char *str, char *var)
+{
+	char	*new_str;
+	size_t	i;
+	
+	new_str = malloc((ft_strlen(str) - 2) * sizeof(char));
+	if (new_str == NULL)
+		return(NULL);
+	i = 0;
+	while (str != (var - 1))
+		new_str[i++] = *str++;
+	str += 2;
+	while (*str != *var)
+		new_str[i++] = *str++;
+	str += 1;
+	while (*str)
+		new_str[i++] = *str++;
+	new_str[i] = '\0';
+	return(free(str), new_str);
+}
 
 static char	*__del_var(char *str, char *var, size_t var_size)
 {
@@ -62,24 +78,36 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 	return (free(start_str), new_str);
 }
 
-static char	*__handle_expand(char *str, char *var, t_env **env)
+static char	*__handle_expand(t_global *g, char *str, char *var)
 {
 	char	*to_find;
 	char	*var_value;
 
-	to_find = take_var(str, var);
-	// printf("to_find = %s\n", to_find);
-	var_value = search_var(to_find, env);
-	// printf("var_value = %s\n", var_value);
-	if (var_value == NULL)
-		str = __del_var(str, var, ft_strlen(to_find));
-	else
+	if (*var == '?')
+	{
+		var_value = ft_itoa(g->last_exit_status);
 		str = __add_var_value(str, var, var_value, ft_strlen(var_value));
+	}
+	else if (*var == '"' || *var == '\'')
+		str = __clean_translated_variable(str, var);
+	else
+	{
+		to_find = take_var(str, var);
+		var_value = search_var(to_find, g->env);
+		if (var_value == NULL)
+			str = __del_var(str, var, ft_strlen(to_find));
+		else
+			str = __add_var_value(str, var, var_value, ft_strlen(var_value));
+	}
+	if (to_find != NULL)
+		free(to_find);
+	if (var_value != NULL)
+		free(var_value);
 	return (str);
 }
 
 //EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
-char	*expand(char *str, t_env **env)
+char	*expand(t_global *g, char *str)
 {
 	int		i;
 	bool 	closed[2];
@@ -94,10 +122,9 @@ char	*expand(char *str, t_env **env)
 		else if (str[i] == '\'' && closed[0] != false)
 			closed[1] = switch_bool(closed[1]);
 		if ((str[i] == '$' && closed[1] != false) 
-			&& (str[i + 1] != ' ' && str[i + 1] != '"' 
-			&& str[i + 1] != '\'' && str[i + 1] != '$')) 
+			&& (str[i + 1] != ' ' && str[i + 1] != '$')) 
 		{
-			str = __handle_expand(str, &str[i + 1], env);
+			str = __handle_expand(g, str, &str[i + 1]);
 			if (str == NULL)
 				return (NULL);
 		}
