@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 01:47:51 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/08 16:20:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ static int	__go_to_env_var(t_env *env, char *var, t_token *t)
 		current = t->content;
 		next = t->next->content;
 		error = err_msg_cmd(current, next, "No such file or directory", 1);
-		return (free(current), free(next), error);
+		free(current);
+		free(next);
+		return (error);
 	}
 	if (var_path != NULL)
 		free(var_path);
@@ -91,6 +93,6 @@ int	my_cd(t_global *g)
 		return (free(current), free(next), error);
 	}
 	change_paths(g->env, g->exp_env);
-	g->last_exit_status = 0;
+	// g->last_exit_status = 0;
 	return (SUCCESS);
 }

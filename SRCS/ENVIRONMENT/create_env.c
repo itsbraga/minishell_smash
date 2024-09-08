@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 01:44:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/08 21:52:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,38 @@ int	create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size,
 	return (SUCCESS);
 }
 
+static void	__update_shlvl(t_env *env)
+{
+	t_env	*head;
+	int		var_value;
+	char	*new_value;
+
+	head = env;
+	while (head != NULL)
+	{
+		if (ft_strncmp(head->content, "SHLVL=", 6) == 0)
+		{
+			var_value = ft_atoi(head->content + 6, 0);
+			var_value += 1;
+			new_value = ft_itoa(var_value);
+			free(head->content);
+			head->content = ft_strjoin("SHLVL=", new_value);
+			if (head->content == NULL)
+				return ;
+			free(new_value);
+		}
+		head = head->next;
+	}
+}
+
 void	create_env(t_global *g, char **envp)
 {
 	size_t	envp_size;
 
 	envp_size = get_env_size(envp);
 	if (create_env_list(&g->env, envp) == FAILURE)
-		err_msg("An error occured with env_list", NULL);
+		err_msg("An error occured with env_list", NULL, 0);
+	__update_shlvl(g->env);
 	if (create_exp_env_list(&g->exp_env, envp, envp_size, 0) == FAILURE)
-		err_msg("An error occured with export_env_list", NULL);
-	return ;
+		err_msg("An error occured with export_env_list", NULL, 0);
 }

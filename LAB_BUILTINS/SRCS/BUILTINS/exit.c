@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 02:44:00 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/08 22:42:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,35 @@ static int	__set_exit_status(t_global *g, char **args)
 	long long	exit_status;
 
 	exit_status = 0;
-	if (args[1] == NULL)
+	if (args == NULL || args[1] == NULL)
 		exit_status = g->last_exit_status;
-	else if (ft_strisnumeric(args[1]) == 0)
-		exit_status = __ft_atol(args[1]);
+	else if (args[1] != NULL)
+	{
+		if (ft_strisnumeric(args[1]) == 0 && args[2] != NULL)
+		{
+			exit_status = FAILURE;
+			printf("%s%s: %s\n", ERR_PREFIX, "exit", "too many arguments");
+		}
+			// return (err_msg_cmd("exit", NULL, "too many arguments", FAILURE));
+		else
+			exit_status = __ft_atol(args[1]);
+	}
 	else
-		return (err_msg_cmd("exit", args[1], "numeric argument required", MISUSE_BUILTIN));
+	{
+		exit_status = MISUSE_CMD;
+		printf("%s%s: %s: %s\n", ERR_PREFIX, "exit", args[1], "numeric argument required");
+	}
+		// return (err_msg_cmd("exit", args[1], "numeric argument required", MISUSE_CMD));
 	return (exit_status);
 }
 
-// changer le proto quand args sera dans la struct g
-int	my_exit(t_global *g, char **args)
+void	my_exit(t_global *g, char **args)
 {
 	int	exit_status;
 	
 	exit_status = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
-	if (args[1] != NULL && args[2] != NULL)
-		return (err_msg_cmd("exit", NULL, "too many arguments", FAILURE));
 	exit_status = __set_exit_status(g, args);
-	clean_exit_shell(g, exit_status);
-	return (SUCCESS);
+	if (exit_status != 1)
+		clean_exit_shell(g, exit_status);
 }
