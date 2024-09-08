@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 02:12:49 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/08 17:45:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define SUCCESS 0
 # define FAILURE 1
-# define MISUSE_BUILTIN 2
+# define MISUSE_CMD 2
 # define CMD_CANNOT_EXEC 126
 # define CMD_NOT_FOUND 127
 # define CTRL_C_EXIT 130 // 128 + signal 2 (SIGINT)

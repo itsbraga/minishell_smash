@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 01:13:03 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/08 22:39:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,22 @@ void	free_tab(char **tab)
 
 void    free_global(t_global *g, bool clear_history)
 {
-	if (g != NULL && g->prompt != NULL)
-		free(g->prompt);
-    if (g != NULL && g->token != NULL)
-        lstclear_tokens(&g->token);
-    if (clear_history == true)
-    {
-        if (g != NULL && g->env != NULL)
-            lstclear_env(&g->env);
-        rl_clear_history();
-    }
+	if (g != NULL)
+	{
+		if (g->prompt != NULL)
+			free(g->prompt);
+		if (g->input != NULL)
+			free(g->input);
+		if (g->token != NULL)
+			lstclear_tokens(&g->token);
+		if (clear_history == true)
+		{
+			if (g->env != NULL)
+				lstclear_env(&g->env);
+			if (g->exp_env != NULL)
+				lstclear_env(&g->env);
+			rl_clear_history();
+		}
+	}
 }
 

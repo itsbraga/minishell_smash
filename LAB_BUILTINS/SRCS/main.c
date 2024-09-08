@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/30 20:54:27 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/08 22:45:36 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,4 @@ int	main(int argc, char **argv, char **envp)
 			lstclear_tokens(&g.token);
 		}
 	}
-	free(g.input);
-	free_tab(cmd);
 }

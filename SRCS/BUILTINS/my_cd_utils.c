@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/06 01:47:55 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/08 21:52:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 	new_pwd = getcwd(NULL, 0);
 	if (new_pwd == NULL)
 	{
-		err_msg("0: getcwd() failed", "No such file or directory");
+		err_msg("0: getcwd() failed", "No such file or directory", 0);
 		return (NULL);
 	}
 	head = env;

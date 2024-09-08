@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 01:47:33 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/08 21:51:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	my_pwd(void)
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
-		err_msg("0: getcwd() failed", "No such file or directory");
+		err_msg("0: getcwd() failed", "No such file or directory", 0);
 		return (errno);
 	}
 	printf("%s\n", cwd);

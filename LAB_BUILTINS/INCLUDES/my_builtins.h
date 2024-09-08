@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 02:43:33 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/08 22:00:51 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define SUCCESS 0
 # define FAILURE 1
-# define MISUSE_BUILTIN 2
+# define MISUSE_CMD 2
 # define CMD_CANNOT_EXEC 126
 # define CMD_NOT_FOUND 127
 # define CTRL_C_EXIT 130 // 128 + signal 2 (SIGINT)
@@ -110,11 +110,11 @@ int			my_pwd(void);
 void		change_paths(t_env *env, t_env *exp_env);
 int			my_cd(t_global *g);
 int			my_env(t_env *env);
-int			my_exit(t_global *g, char **args);
+void		my_exit(t_global *g, char **args);
 void		del_env_var(t_env **env, char *var_to_rm);
 int			my_unset(t_global *g, char **args);
 
-void		err_msg(char *detail, char *reason);
+void		err_msg(char *detail, char *reason, int quotes);
 int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
 
 void		free_tab(char **tab);

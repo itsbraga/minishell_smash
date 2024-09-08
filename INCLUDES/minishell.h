@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 22:17:14 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/08 21:54:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,25 +141,25 @@ void	exec_built_in(char **built_in, t_global *g);
 \******************************************************************************/
 
 // clean_exit_shell.c
-void	clean_exit_shell(t_global *g, int err_status);
+void		clean_exit_shell(t_global *g, int err_status);
 
 // cleanup.c
-void	free_tab(char **tab);
-void	lstclear_tokens(t_token **t);
-void	lstclear_main(t_main_lst **main);
-void 	lstclear_env(t_env **env);
-void    free_global(t_global *g, bool clear_history);
+void		free_tab(char **tab);
+void		lstclear_tokens(t_token **t);
+void		lstclear_main(t_main_lst **main);
+void 		lstclear_env(t_env **env);
+void		free_global(t_global *g, bool clear_history);
 
 // error.c
-void	err_msg(char *detail, char *reason);
-int		err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
+void		err_msg(char *detail, char *reason, int quotes);
+int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
 
 // token_utils.c
-void	del_current_token(t_token **t, t_token *cur);
-size_t	get_tlist_size(t_token **t);
-void	add_back(t_token **t, t_token *new_node);
-t_token	*last_node(t_token *t);
-t_token	*new_node(char *content);
+void		del_current_token(t_token **t, t_token *cur);
+size_t		get_tlist_size(t_token **t);
+void		add_back(t_token **t, t_token *new_node);
+t_token		*last_node(t_token *t);
+t_token		*new_node(char *content);
 
 // main_lst_utils.c
 size_t		get_main_lst_size(t_main_lst **main);
