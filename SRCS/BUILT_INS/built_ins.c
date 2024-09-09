@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 21:52:08 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/09 23:37:41 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// bool	is_built_in(char *cmd)
-// {
-// 	int			i;
-// 	const char	*built_in[] =
-// 	{
-// 		"pwd",
-// 		"cd",
-// 		"env",
-// 		"exit"
-// 	};
+bool	is_built_in(char *cmd)
+{
+	int			i;
+	const char	*built_in[] =
+	{
+		"pwd",
+		"cd",
+		"env",
+		// "export",
+		"unset",
+		"exit"
+	};
 
-// 	i = 0;
-// 	while (built_in[i] != NULL)
-// 	{
-// 		if (ft_strcmp(built_in[i++], cmd) == 0)
-// 			return (true);
-// 	}
-// 	return (false);
-// }
+	i = 0;
+	while (built_in[i] != NULL)
+	{
+		if (ft_strcmp(built_in[i++], cmd) == 0)
+			return (true);
+	}
+	return (false);
+}
 
 void	exec_built_in(char **cmd, t_global *g)
 {

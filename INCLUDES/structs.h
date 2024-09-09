@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/08 18:46:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/10 01:19:06 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ typedef enum 	e_token_type
 {
 	COMMAND = 0,
 	ARGUMENT,
+	BUILT_IN,
 	SEPARATOR,
-	RED_IN,
-	RED_OUT, // ou TRUNC
+	REDIR_IN, // ou STDIN_FILE ou OPEN_FILE
+	INFILE,
+	REDIR_OUT, // ou TRUNC ou CREAT_FILE
+	OUTFILE,
 	APPEND,
 	HEREDOC,
-	LIMITER,
-	WORD
+	LIMITER
 }			 	t_token_type;
 
 typedef struct s_parser
@@ -32,7 +34,7 @@ typedef struct s_parser
 	int		i;
 	int		start;
 	int		token_count;
-	char	**tokens;
+	char	**elems;
 	bool	closed_quotes[2];
 }				t_parser;
 
@@ -42,24 +44,28 @@ typedef struct s_main_lst
 	struct s_main_lst	*next;
 }				t_main_lst;
 
-typedef struct s_sub_lst
+struct s_token;
+
+typedef struct s_classifier
+{
+	struct s_token	*head_token_lst;
+	struct s_token	*token;
+	char			**elems;
+	size_t			i;
+}				t_classifier;
+
+typedef struct s_token
 {
 	t_token_type	type;
 	char			*content;
-	struct s_env	*next;
-}				t_sub_lst;
+	struct s_token	*next;
+}				t_token;
 
 typedef struct s_env
 {
 	char			*content;
 	struct s_env	*next;
 }				t_env;
-
-typedef struct s_token
-{
-	char			*content;
-	struct s_token	*next;
-}				t_token;
 
 typedef struct s_global
 {

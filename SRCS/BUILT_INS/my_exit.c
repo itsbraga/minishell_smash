@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   my_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 22:42:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/09 21:01:22 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_builtins.h"
+#include "minishell.h"
 
 static long long	__ft_atol(char *arg)
 {
@@ -49,20 +49,12 @@ static int	__set_exit_status(t_global *g, char **args)
 	else if (args[1] != NULL)
 	{
 		if (ft_strisnumeric(args[1]) == 0 && args[2] != NULL)
-		{
-			exit_status = FAILURE;
-			printf("%s%s: %s\n", ERR_PREFIX, "exit", "too many arguments");
-		}
-			// return (err_msg_cmd("exit", NULL, "too many arguments", FAILURE));
+			return (err_msg_cmd("exit", NULL, "too many arguments", FAILURE));
 		else
 			exit_status = __ft_atol(args[1]);
 	}
 	else
-	{
-		exit_status = MISUSE_CMD;
-		printf("%s%s: %s: %s\n", ERR_PREFIX, "exit", args[1], "numeric argument required");
-	}
-		// return (err_msg_cmd("exit", args[1], "numeric argument required", MISUSE_CMD));
+		return (err_msg_cmd("exit", args[1], "numeric argument required", 2));
 	return (exit_status);
 }
 

@@ -14,10 +14,13 @@
 
 static void	freeall(char **tab)
 {
-	while (*tab)
+	char	**tmp;
+
+	tmp = tab;
+	while (*tmp)
 	{
-		free(*tab);
-		tab++;
+		free(*tmp);
+		tmp++;
 	}
 	free(tab);
 }
@@ -76,12 +79,10 @@ char	**ft_split(char const *s, char c)
 	if (s == NULL || s[0] == '\0')
 		return (NULL);
 	size = count_substr(s, c);
-	tab = malloc((size + 1) * sizeof(char **));
+	tab = malloc((size + 1) * sizeof(char *));
 	if (!tab)
 		return (NULL);
 	extract_and_fill(tab, s, c);
-	if (!tab)
-		return (NULL);
 	return (tab);
 }
 

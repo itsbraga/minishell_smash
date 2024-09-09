@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 17:27:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/10 01:16:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	__del_unwanted_whitespaces(t_main_lst *main)
 		}
 		trimmed_token = ft_strtrim(head->content, " ");
 		if (trimmed_token == NULL)
-			return (err_msg(NULL, "cannot trim token"), FAILURE);
+			return (err_msg(NULL, "cannot trim token", 0), FAILURE);
 		free(head->content);
 		head->content = trimmed_token;
 		head = head->next;
@@ -41,26 +41,26 @@ static int	__del_unwanted_whitespaces(t_main_lst *main)
 int	create_main_lst(t_global *g, char *input)
 {
 	t_main_lst	*new_node;
-	char		**tokens;
+	char		**elems;
 	size_t      i;
 
 	lstclear_main(&g->main);
-	tokens = split_user_input(input);
-	if (tokens == NULL)
+	elems = split_user_input(input);
+	if (elems == NULL)
 		return (FAILURE);
 	i = 0;
-	while (tokens[i] != NULL)
+	while (elems[i] != NULL)
 	{
-		new_node = main_new_node(tokens[i]);
+		new_node = main_lst_new_node(elems[i]);
 		if (new_node == NULL)
 		{
-			free_tab(tokens);
-			return (err_msg("malloc", ERR_MALLOC), FAILURE);
+			free_tab(elems);
+			return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
 		}
-		main_add_back(&g->main, new_node);
+		main_lst_add_back(&g->main, new_node);
 		i++;
 	}
-	free_tab(tokens);
+	free_tab(elems);
 	__del_unwanted_whitespaces(g->main);
 	return (SUCCESS);
 }

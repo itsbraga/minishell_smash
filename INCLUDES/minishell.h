@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/08 23:00:18 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/10 01:34:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,32 @@ extern int	g_sig_code;
 void	init_global(t_global *global);
 
 /******************************************************************************\
- * TOKENIZATION
+ * LEXING
 \******************************************************************************/
 
+// create_token_lst.c
+int			create_token_lst(t_main_lst *main);
 
+// classify_token.c
+int 		classify_token(t_classifier *c, bool *is_command);
+
+// token_utils.c
+void		del_current_token(t_token **t, t_token *cur);
+size_t		get_token_lst_size(t_token **t);
+void		token_lst_add_back(t_token **t, t_token *new_node);
+t_token		*token_lst_new_node(char *content);
+
+// create_main_lst.c
+int			create_main_lst(t_global *g, char *user_input);
+int 		del_unwanted_char(t_main_lst *main);
+
+// main_lst_utils.c
+size_t		get_main_lst_size(t_main_lst **main);
+void		main_lst_add_back(t_main_lst **main, t_main_lst *new_node);
+t_main_lst	*main_lst_new_node(char *content);
+
+// check_input.c
+char		**split_user_input(char *input);
 
 /******************************************************************************\
  * PARSING
@@ -71,13 +93,6 @@ bool	unclosed_quotes_return(bool closed[]);
 bool	unclosed_quotes(char *str);
 char	*empty_quotes(char *str);
 char	*handle_quotes_modif(char *user_input);
-
-// create_main_lst.c
-int		create_main_lst(t_global *g, char *user_input);
-int 	del_unwanted_char(t_main_lst *main);
-
-// check_input.c
-char	**split_user_input(char *input);
 
 /******************************************************************************\
  * ENVIRONMENT
@@ -153,19 +168,6 @@ void		free_global(t_global *g, bool clear_history);
 // error.c
 void		err_msg(char *detail, char *reason, int quotes);
 int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
-
-// token_utils.c
-void		del_current_token(t_token **t, t_token *cur);
-size_t		get_tlist_size(t_token **t);
-void		add_back(t_token **t, t_token *new_node);
-t_token		*last_node(t_token *t);
-t_token		*new_node(char *content);
-
-// main_lst_utils.c
-size_t		get_main_lst_size(t_main_lst **main);
-void		main_add_back(t_main_lst **main, t_main_lst *new_node);
-t_main_lst	*main_last_node(t_main_lst *main);
-t_main_lst	*main_new_node(char *content);
 
 /******************************************************************************\
  * EXTRAS

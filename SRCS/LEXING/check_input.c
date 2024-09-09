@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/06 17:27:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/10 01:17:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_input_before_quotes(t_parser *p)
 		printf("tobby\n");
 		if (p->user_input[p->i] == '\0')
 		{
-			err_msg(NULL, ERR_NEAR_PIPE);
+			err_msg(NULL, ERR_NEAR_PIPE, 0);
 			return (FAILURE);
 		}
 	}
@@ -55,7 +55,7 @@ int	quote_parser(t_parser *p)
 	tmp = ft_strldup(p->user_input + p->start, p->i - p->start);
 	if (tmp == NULL)
 		return (FAILURE);
-	p->tokens[p->token_count] = tmp;
+	p->elems[p->token_count] = tmp;
 	p->token_count++;
 	if (p->user_input[p->i] == '|')
 		p->i++;
@@ -67,24 +67,24 @@ char	**split_user_input(char *input)
 	t_parser	p;
 
 	if (unclosed_quotes(input) == true)
-		return (err_msg(NULL, "unclosed quotes, please try again"), NULL);
+		return (err_msg(NULL, "unclosed quotes, please try again", 0), NULL);
 	ft_bzero(&p, sizeof(p));
 	p.user_input = input;
 	if (p.user_input == NULL || p.user_input[0] == '\0')
 		return (NULL);
 	if (ft_strchr(input, '"') != NULL || ft_strchr(input, '\'') != NULL)
 	{
-		p.tokens = malloc(sizeof(char *) * (ft_strlen(p.user_input) + 1));
-		if (p.tokens == NULL)
+		p.elems = malloc(sizeof(char *) * (ft_strlen(p.user_input) + 1));
+		if (p.elems == NULL)
 			return (NULL);
 		while (p.user_input[p.i] != '\0')
 		{
 			if (quote_parser(&p) == FAILURE)
 				return (NULL);
 		}
-		p.tokens[p.token_count] = NULL;
+		p.elems[p.token_count] = NULL;
 	}
 	else
-		p.tokens = ft_split(input, '|');
-	return (p.tokens);
+		p.elems = ft_split(input, '|');
+	return (p.elems);
 }

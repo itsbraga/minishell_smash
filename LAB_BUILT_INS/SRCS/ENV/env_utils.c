@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/08 22:15:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:40:48 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ t_env	*env_new_var(char *content)
 	if (new_var == NULL)
 		return (NULL);
 	new_var->content = ft_strdup(content);
+	if (new_var->content == NULL)
+	{
+		free(new_var->content);
+		free(new_var);
+		return (NULL);
+	}
 	new_var->next = NULL;
 	return (new_var);
 }

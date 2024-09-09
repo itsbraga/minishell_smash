@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 01:44:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/09 20:37:07 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ t_env	*env_new_var(char *content)
 	if (new_var == NULL)
 		return (NULL);
 	new_var->content = ft_strdup(content);
+	if (new_var->content == NULL)
+	{
+		free(new_var);
+		return (NULL);
+	}
 	new_var->next = NULL;
 	return (new_var);
 }

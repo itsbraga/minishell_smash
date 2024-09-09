@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 16:20:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:40:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static char	*__find_var_path(char *to_find, t_env *env)
 		{
 			path = ft_substr(head->content, len_to_find,
 					(len_var_env - len_to_find));
+			if (path == NULL)
+			{
+				free(path);
+				return (NULL);
+			}
 			return (path);
 		}
 		head = head->next;

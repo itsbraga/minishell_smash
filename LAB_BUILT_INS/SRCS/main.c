@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 22:45:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/09 21:06:40 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
-
-int		g_last_exit_status;
 
 /*	Readline should not count escape sequences as visible characters.
 	This is achieved by encapsulating the non-visible parts (escape
@@ -87,6 +85,7 @@ int	main(int argc, char **argv, char **envp)
 			exec_built_in(cmd, &g);
 			display_tokens(g.token);
 			lstclear_tokens(&g.token);
+			free(cmd);
 		}
 	}
 }

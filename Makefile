@@ -35,8 +35,8 @@ DEBUG		=	-g -g3
 #	SOURCES
 #******************************************************************************#
 
-BUILTINS_DIR	=	BUILTINS/
-BUILTINS_F		=	builtins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c \
+BUILT_INS_DIR	=	BUILT_INS/
+BUILT_INS_F		=	built_ins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c \
 					my_exit.c my_unset.c
 
 ENV_DIR			=	ENVIRONMENT/
@@ -48,16 +48,15 @@ EXPAND_F		=	expand.c expand_utils.c
 INIT_DIR		=	INIT/
 INIT_F			=	init_global.c
 
-PARSING_DIR		=	PARSING/
-PARSING_F		=	check_input.c handle_quotes.c quotes_utils.c del_quotes.c \
-					create_main_lst.c
+LEXING_DIR		=	LEXING/
+LEXING_F		=	check_input.c main_lst_utils.c create_main_lst.c \
+					token_lst_utils.c classify_token.c create_token_lst.c
 
-TOKEN_DIR		=	TOKENIZATION/
-TOKEN_F			=	
+PARSING_DIR		=	PARSING/
+PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	main_lst_utils.c token_utils.c error.c cleanup.c \
-					clean_exit_shell.c
+TOOLS_F			=	token_utils.c error.c cleanup.c clean_exit_shell.c
 
 EXTRAS_DIR		=	EXTRAS/
 EXTRAS_F		=	display.c features.c
@@ -68,14 +67,14 @@ EXTRAS_F		=	display.c features.c
 
 SRCS_DIR		=	SRCS/
 SRCS_F			=	$(addprefix $(ENV_DIR), $(ENV_F)) \
+					$(addprefix $(LEXING_DIR), $(LEXING_F)) \
 					$(addprefix $(PARSING_DIR), $(PARSING_F)) \
-					$(addprefix $(BUILTINS_DIR), $(BUILTINS_F)) \
+					$(addprefix $(BUILT_INS_DIR), $(BUILT_INS_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					main.c
-#					$(addprefix $(TOKEN_DIR), $(TOKEN_F))
 
 OBJS_DIR		=	OBJS/
 OBJS_F			=	$(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_F))
