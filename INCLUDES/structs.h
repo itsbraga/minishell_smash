@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/10 01:19:06 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/10 17:37:50 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,32 @@ typedef struct s_parser
 	bool	closed_quotes[2];
 }				t_parser;
 
-typedef struct s_main_lst
-{
-	char				*content;
-	struct s_main_lst	*next;
-}				t_main_lst;
-
-struct s_token;
-
-typedef struct s_classifier
-{
-	struct s_token	*head_token_lst;
-	struct s_token	*token;
-	char			**elems;
-	size_t			i;
-}				t_classifier;
-
 typedef struct s_token
 {
 	t_token_type	type;
 	char			*content;
 	struct s_token	*next;
 }				t_token;
+
+typedef struct s_sub_lst
+{
+	t_token				*head_token;	// Liste de tokens pour cette commande
+	struct s_sub_lst	*next;			// Lien vers la prochaine liste de tokens (prochaine commande)
+}				t_sub_lst;
+
+typedef struct s_classifier
+{
+	t_token		*token_lst;
+	t_token		*token;
+	char		**elems;
+	size_t		i;
+}				t_classifier;
+
+typedef struct s_main_lst
+{
+	char				*content;
+	struct s_main_lst	*next;
+}				t_main_lst;
 
 typedef struct s_env
 {
@@ -71,9 +75,9 @@ typedef struct s_global
 {
 	char		*prompt;
 	t_main_lst	*main;
+	t_token		*token;
 	t_env		*env;
 	t_env		*exp_env;
-	t_token		*token;
 	int			last_exit_status;
 }				t_global;
 

@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/03 21:45:19 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/10 19:06:36 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	lstclear_tokens(t_token **t)
 	while ((*t) != NULL)
 	{
 		tmp = (*t)->next;
-		free((*t)->content); 
+		free((*t)->content);
+		free((*t)->type);
 		free(*t);
 		(*t) = tmp;
 	}

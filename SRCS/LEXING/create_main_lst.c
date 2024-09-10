@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/10 01:16:47 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/10 16:47:00 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static int	__del_unwanted_whitespaces(t_main_lst *main)
 	size_t		len;
 
 	head = main;
-	len = ft_strlen(head->content);
+	len = ft_strlen(head->content) - 1;
 	while (head != NULL)
 	{
-		if (((head->content[0] == '"') && (head->content[len - 1] == '"'))
-			|| ((head->content[1] == '\'') && (head->content[len - 1] == '\'')))
+		if (((head->content[0] == '"') && (head->content[len] == '"'))
+			|| ((head->content[1] == '\'') && (head->content[len] == '\'')))
 		{
 			head = head->next;
 			continue ;

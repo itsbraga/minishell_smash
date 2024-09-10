@@ -56,7 +56,7 @@ PARSING_DIR		=	PARSING/
 PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	token_utils.c error.c cleanup.c clean_exit_shell.c
+TOOLS_F			=	error.c cleanup.c clean_exit_shell.c
 
 EXTRAS_DIR		=	EXTRAS/
 EXTRAS_F		=	display.c features.c

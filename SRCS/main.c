@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/08 17:22:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:41:56 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_sig_code;
 
 int	minishell(t_global *g)
 {
-	char		*user_input;
+	char	*user_input;
 	
 	while (1)
 	{
@@ -29,8 +29,13 @@ int	minishell(t_global *g)
 				printf("unable to create the main list, program cannot execute\n");
 				return (FAILURE);
 			}
-			printf(GREEN "CLEANED TOKENS:\n");
 			display_main_lst(g->main);
+			if (create_token_lst(g) == FAILURE)
+			{
+				printf("unable to create the token list, program cannot execute\n");
+				return (FAILURE);
+			}
+			display_token_lst(g->token);
 			free(user_input);
 		}
 	}
@@ -40,7 +45,6 @@ int	minishell(t_global *g)
 int	main(int argc, char **argv, char **envp)
 {
 	t_global	g;
-	// char		*user_input;
 
 	(void)argv;
 	if (argc != 1)
@@ -52,19 +56,5 @@ int	main(int argc, char **argv, char **envp)
 	init_global(&g);
 	create_env(&g, envp);
 	minishell(&g);
-	// while (1)
-	// {
-	// 	user_input = readline(g.prompt);
-	// 	if (user_input != NULL)
-	// 	{
-	// 		add_history(user_input);
-	// 		if (create_main_lst(&g, user_input) == SUCCESS)
-	// 		{
-	// 			printf(GREEN "CLEANED TOKENS:\n");
-	// 			display_main_lst(g.main);
-	// 			free(user_input);
-	// 		}
-	// 	}
-	// }
 	return (SUCCESS);
 }

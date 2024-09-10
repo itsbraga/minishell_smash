@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/10 01:34:24 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/10 17:29:25 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	init_global(t_global *global);
 
 /******************************************************************************\
  * LEXING
-\******************************************************************************/
+\******************************************************************************/;
 
 // create_token_lst.c
-int			create_token_lst(t_main_lst *main);
+int			create_token_lst(t_global *g);
 
 // classify_token.c
-int 		classify_token(t_classifier *c, bool *is_command);
+int 		classify_token(t_classifier *c);
 
 // token_utils.c
 void		del_current_token(t_token **t, t_token *cur);
@@ -175,8 +175,8 @@ int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
 
 // display.c
 void    display_export_env(t_env *exp_env);
-void	display_tokens(t_token *t);
 void    display_main_lst(t_main_lst *main);
+void	display_token_lst(t_token *t);
 
 // features.c
 void	rainbow_txt(const char *str);

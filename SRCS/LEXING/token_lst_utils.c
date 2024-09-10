@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/10 00:20:46 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/10 17:29:25 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	token_lst_add_back(t_token **t, t_token *new_node)
 		*t = new_node;
 	else
 	{
-		tmp = __token_last_node(*t);
+		tmp = __token_lst_last_node(*t);
 		tmp->next = new_node;
 	}
 }
