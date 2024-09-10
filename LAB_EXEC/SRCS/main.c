@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/08 22:56:32 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/09 18:15:17 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ size_t	len_to_char(char *str, char c)
 }
 void	assign_cmd(char *str, t_tok **node)
 {
-	printf("in assign cmd = %s\n", str);
 	(*node)->cmd = ft_split(str, ' ');
 }
 
@@ -150,7 +149,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		input = readline("mini_exec> ");
 		build_lst(input, &cmd);
-		display_tokens(cmd);
 		token_recognition(&cmd);
 		display_tokens_with_infos(cmd);
 		lstclear_tokens(&cmd);

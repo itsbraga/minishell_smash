@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:38:19 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/04 19:11:06 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/09 18:14:20 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static t_tok	*new_node(char *content)
 	new_node->infile = NULL;
 	new_node->red_out = NULL;
 	new_node->outfile = NULL;
+	new_node->cmd = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
