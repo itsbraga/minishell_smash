@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/08 22:15:30 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/11 19:32:44 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static char	*__handle_expand(t_global *g, char *str, char *var)
 	char	*to_find;
 	char	*var_value;
 
+	to_find = NULL;
+	var_value = NULL;
 	if (*var == '?')
 	{
 		var_value = ft_itoa(g->last_exit_status);

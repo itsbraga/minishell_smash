@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/10 17:29:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 20:02:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*token_lst_new_node(char *content)
+t_token_lst	*token_lst_new_node(char *content, t_token_type type)
 {
-	t_token	*new_node;
+	t_token_lst	*new_node;
 	
-	new_node = malloc(sizeof(t_token));
+	new_node = malloc(sizeof(t_token_lst));
 	if (new_node == NULL)
 		return (NULL);
-    // new_node->type = type;
+    new_node->type = type;
 	new_node->content = ft_strdup(content);
     if (new_node->content == NULL)
     {
@@ -30,7 +30,7 @@ t_token	*token_lst_new_node(char *content)
 	return (new_node);
 }
 
-static t_token	*__token_lst_last_node(t_token *t)
+static t_token_lst	*__token_lst_last_node(t_token_lst *t)
 {
 	if (t == NULL)
 		return (NULL);
@@ -39,9 +39,9 @@ static t_token	*__token_lst_last_node(t_token *t)
 	return (t);
 }
 
-void	token_lst_add_back(t_token **t, t_token *new_node)
+void	token_lst_add_back(t_token_lst **t, t_token_lst *new_node)
 {
-	t_token	*tmp;
+	t_token_lst	*tmp;
 
 	if ((*t) == NULL)
 		*t = new_node;
@@ -52,10 +52,10 @@ void	token_lst_add_back(t_token **t, t_token *new_node)
 	}
 }
 
-size_t	get_token_lst_size(t_token **t)
+size_t	get_token_lst_size(t_token_lst **t)
 {
 	size_t	size;
-	t_token *node;
+	t_token_lst *node;
 
 	size = 0;
 	node = *t;
@@ -67,10 +67,10 @@ size_t	get_token_lst_size(t_token **t)
 	return (size);
 }
 
-void	del_current_token(t_token **t, t_token *cur)
+void	del_current_token(t_token_lst **t, t_token_lst *cur)
 {
-	t_token	*prev;
-	t_token	*tmp;
+	t_token_lst	*prev;
+	t_token_lst	*tmp;
 
 	if (t == NULL || (*t) == NULL || cur == NULL)
 		return ;

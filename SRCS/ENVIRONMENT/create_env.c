@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/09 20:45:06 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 18:56:00 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	create_env_list(t_env **env, char **envp)
+int	create_env_list(t_env_lst **env, char **envp)
 {
-	int		i;
-	t_env	*var;
-	t_env	*last;
+	int			i;
+	t_env_lst	*var;
+	t_env_lst	*last;
 
 	i = 0;
 	if (envp == NULL)
@@ -41,11 +41,11 @@ int	create_env_list(t_env **env, char **envp)
 	return (SUCCESS);
 }
 
-int	create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size, 
+int	create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size, 
 	size_t idx_exp_env)
 {
-	t_env	*var_to_add;
-	t_env	*last;
+	t_env_lst	*var_to_add;
+	t_env_lst	*last;
 
 	var_to_add = NULL;
 	last = NULL;
@@ -70,11 +70,11 @@ int	create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size,
 	return (SUCCESS);
 }
 
-static void	__update_shlvl(t_env *env)
+static void	__update_shlvl(t_env_lst *env)
 {
-	t_env	*head;
-	int		var_value;
-	char	*new_value;
+	t_env_lst	*head;
+	int			var_value;
+	char		*new_value;
 
 	head = env;
 	while (head != NULL)

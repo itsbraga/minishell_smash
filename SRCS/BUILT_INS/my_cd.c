@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/10 17:29:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 18:55:46 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*__find_var_path(char *to_find, t_env *env)
+static char	*__find_var_path(char *to_find, t_env_lst *env)
 {
-	t_env	*head;
-	char	*path;
-	int		len_var_env;
-	int		len_to_find;
+	t_env_lst	*head;
+	char		*path;
+	int			len_var_env;
+	int			len_to_find;
 
 	head = env;
 	path = NULL;
@@ -41,7 +41,7 @@ static char	*__find_var_path(char *to_find, t_env *env)
 	return (NULL);
 }
 
-static int	__go_to_env_var(t_env *env, char *var, t_token *t)
+static int	__go_to_env_var(t_env_lst *env, char *var, t_token_lst *t)
 {
 	char	*var_path;
 	int		ret;

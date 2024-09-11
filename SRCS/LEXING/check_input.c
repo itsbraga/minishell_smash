@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/10 01:17:24 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 17:38:44 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	quote_parser(t_parser *p)
 	tmp = ft_strldup(p->user_input + p->start, p->i - p->start);
 	if (tmp == NULL)
 		return (FAILURE);
-	p->elems[p->token_count] = tmp;
+	p->segment[p->token_count] = tmp;
 	p->token_count++;
 	if (p->user_input[p->i] == '|')
 		p->i++;
@@ -74,17 +74,17 @@ char	**split_user_input(char *input)
 		return (NULL);
 	if (ft_strchr(input, '"') != NULL || ft_strchr(input, '\'') != NULL)
 	{
-		p.elems = malloc(sizeof(char *) * (ft_strlen(p.user_input) + 1));
-		if (p.elems == NULL)
+		p.segment = malloc(sizeof(char *) * (ft_strlen(p.user_input) + 1));
+		if (p.segment == NULL)
 			return (NULL);
 		while (p.user_input[p.i] != '\0')
 		{
 			if (quote_parser(&p) == FAILURE)
 				return (NULL);
 		}
-		p.elems[p.token_count] = NULL;
+		p.segment[p.token_count] = NULL;
 	}
 	else
-		p.elems = ft_split(input, '|');
-	return (p.elems);
+		p.segment = ft_split(input, '|');
+	return (p.segment);
 }
