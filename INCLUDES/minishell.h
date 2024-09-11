@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/10 17:29:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 20:33:41 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,110 +46,110 @@ extern int	g_sig_code;
 \******************************************************************************/
 
 // init_global.c
-void	init_global(t_global *global);
+void		init_global(t_global *global);
 
 /******************************************************************************\
  * LEXING
 \******************************************************************************/;
 
 // create_token_lst.c
-int			create_token_lst(t_global *g);
+int				create_token_lst(t_main_lst *main, t_token_lst *t);
 
 // classify_token.c
-int 		classify_token(t_classifier *c);
+t_token_type	classify_token(t_classifier *c);
 
 // token_utils.c
-void		del_current_token(t_token **t, t_token *cur);
-size_t		get_token_lst_size(t_token **t);
-void		token_lst_add_back(t_token **t, t_token *new_node);
-t_token		*token_lst_new_node(char *content);
+void			del_current_token(t_token_lst **t, t_token_lst *cur);
+size_t			get_token_lst_size(t_token_lst **t);
+void			token_lst_add_back(t_token_lst **t, t_token_lst *new_node);
+t_token_lst		*token_lst_new_node(char *content, t_token_type type);
 
 // create_main_lst.c
-int			create_main_lst(t_global *g, char *user_input);
-int 		del_unwanted_char(t_main_lst *main);
+int				create_main_lst(t_global *g, char *user_input);
+int 			del_unwanted_char(t_main_lst *main);
 
 // main_lst_utils.c
-size_t		get_main_lst_size(t_main_lst **main);
-void		main_lst_add_back(t_main_lst **main, t_main_lst *new_node);
-t_main_lst	*main_lst_new_node(char *content);
+size_t			get_main_lst_size(t_main_lst **main);
+void			main_lst_add_back(t_main_lst **main, t_main_lst *new_node);
+t_main_lst		*main_lst_new_node(char *content);
 
 // check_input.c
-char		**split_user_input(char *input);
+char			**split_user_input(char *input);
 
 /******************************************************************************\
  * PARSING
 \******************************************************************************/
 
 // del_quotes.c
-char	*del_empty_quotes(char *str, int quote_idx);
-char	*del_quote_pair(char *str, int first, int second);
+char		*del_empty_quotes(char *str, int quote_idx);
+char		*del_quote_pair(char *str, int first, int second);
 
 // quotes_utils.c
-bool	switch_bool(bool closed);
-int		find_closing_quote(char *str, char quote);
-bool	unclosed_quotes_return(bool closed[]);
+bool		switch_bool(bool closed);
+int			find_closing_quote(char *str, char quote);
+bool		unclosed_quotes_return(bool closed[]);
 
 // handle_quotes.c
-bool	unclosed_quotes(char *str);
-char	*empty_quotes(char *str);
-char	*handle_quotes_modif(char *user_input);
+bool		unclosed_quotes(char *str);
+char		*empty_quotes(char *str);
+char		*handle_quotes_modif(char *user_input);
 
 /******************************************************************************\
  * ENVIRONMENT
 \******************************************************************************/
 
 // export_env_utils.c
-size_t	get_env_size(char **env);
-t_env	*copy_toppest(char **envp);
-t_env	*ascii_sort(char **envp, char *last_added);
+size_t		get_env_size(char **env);
+t_env_lst	*copy_toppest(char **envp);
+t_env_lst	*ascii_sort(char **envp, char *last_added);
 
 // env_utils.c
-t_env	*env_new_var(char *content);
-void	del_env_var(t_env **env, char *var_to_rm);
+t_env_lst	*env_new_var(char *content);
+void		del_env_var(t_env_lst **env, char *var_to_rm);
 
 // create_env.c
-int		create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size,
+int			create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
 size_t idx_exp_env);
-int		create_env_list(t_env **env, char **envp);
-void	create_env(t_global *g, char **envp);
+int			create_env_list(t_env_lst **env, char **envp);
+void		create_env(t_global *g, char **envp);
 
 /******************************************************************************\
  * EXPAND
 \******************************************************************************/
 
 // expand_utils.c
-size_t	len_to_equal(char *str);
-char	*take_var_value(char *str);
-char	*take_var(char *str, char *var);
-char 	*search_var(char *to_find, t_env *env);
+size_t		len_to_equal(char *str);
+char		*take_var_value(char *str);
+char		*take_var(char *str, char *var);
+char 		*search_var(char *to_find, t_env_lst *env);
 
 // expand.c
-char	*expand(t_global *g, char *str);
+char		*expand(t_global *g, char *str);
 
 /******************************************************************************\
  * BUILT-INS
 \******************************************************************************/
 
 // my_unset.c
-int		my_unset(t_global *g, char **args);
+int			my_unset(t_global *g, char **args);
 
 // my_exit.c
-void	my_exit(t_global *g, char **args);
+void		my_exit(t_global *g, char **args);
 
 // my_cd_utils.c
-void	change_paths(t_env *env, t_env *exp_env);
+void		change_paths(t_env_lst *env, t_env_lst *exp_env);
 
 // my_cd.c
-int		my_cd(t_global *g);
+int			my_cd(t_global *g);
 
 // my_pwd.c
-int		my_pwd(void);
+int			my_pwd(void);
 
 // my_env.c
-int		my_env(t_env *env);
+int			my_env(t_env_lst *env);
 
 // built_ins.c
-void	exec_built_in(char **built_in, t_global *g);
+void		exec_built_in(char **built_in, t_global *g);
 
 /******************************************************************************\
  * TOOLS
@@ -160,9 +160,9 @@ void		clean_exit_shell(t_global *g, int err_status);
 
 // cleanup.c
 void		free_tab(char **tab);
-void		lstclear_tokens(t_token **t);
+void		lstclear_tokens(t_token_lst **t);
 void		lstclear_main(t_main_lst **main);
-void 		lstclear_env(t_env **env);
+void 		lstclear_env(t_env_lst **env);
 void		free_global(t_global *g, bool clear_history);
 
 // error.c
@@ -174,13 +174,13 @@ int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
 \******************************************************************************/
 
 // display.c
-void    display_export_env(t_env *exp_env);
-void    display_main_lst(t_main_lst *main);
-void	display_token_lst(t_token *t);
+void		display_export_env(t_env_lst *exp_env);
+void		display_main_lst(t_main_lst *main);
+void		display_token_lst(t_token_lst *t);
 
 // features.c
-void	rainbow_txt(const char *str);
-void	rainbow_txt_nonl(const char *str);
-char	*rainbow_prompt(const char *str);
+void		rainbow_txt(const char *str);
+void		rainbow_txt_nonl(const char *str);
+char		*rainbow_prompt(const char *str);
 
 #endif

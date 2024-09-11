@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/09 16:22:45 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 18:56:26 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ char	*take_var(char *str, char *var)
 }
 
 // Adapter avec notre env en liste chainee
-char 	*search_var(char *to_find, t_env *env)
+char 	*search_var(char *to_find, t_env_lst *env)
 {
-	char	*to_cmp;
-	t_env *node;
+	char		*to_cmp;
+	t_env_lst	*node;
 
 	to_cmp = NULL;
 	node = env;

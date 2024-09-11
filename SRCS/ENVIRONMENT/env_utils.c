@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/09 20:37:07 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 18:56:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*env_new_var(char *content)
+t_env_lst	*env_new_var(char *content)
 {
-	t_env	*new_var;
+	t_env_lst	*new_var;
 
-	new_var = malloc(sizeof(t_env));
+	new_var = malloc(sizeof(t_env_lst));
 	if (new_var == NULL)
 		return (NULL);
 	new_var->content = ft_strdup(content);
@@ -29,11 +29,11 @@ t_env	*env_new_var(char *content)
 	return (new_var);
 }
 
-void	del_env_var(t_env **env, char *var_to_rm)
+void	del_env_var(t_env_lst **env, char *var_to_rm)
 {
-	t_env	*prev;
-	t_env	*current;
-	int		len_var_to_rm;
+	t_env_lst	*prev;
+	t_env_lst	*current;
+	int			len_var_to_rm;
 
 	if (env == NULL || (*env) == NULL || var_to_rm == NULL)
 		return ;

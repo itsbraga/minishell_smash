@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 22:00:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:53:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_env
 {
 	char			*content;
 	struct s_env	*next;
-}				t_env;
+}				t_env_lst;
 
 typedef struct s_token
 {
@@ -78,8 +78,8 @@ typedef struct s_global
 {
 	char		*prompt;
 	char		*input;
-	t_env		*env;
-	t_env		*exp_env;
+	t_env_lst	*env;
+	t_env_lst	*exp_env;
 	t_token		*token;
 	int			last_exit_status;
 }				t_global;
@@ -88,15 +88,15 @@ typedef struct s_global
  * FUNCTIONS
 \******************************************************************************/
 
-t_env		*env_new_var(char *content);
-void		lstclear_env(t_env **env);
-int			create_env_list(t_env **env, char **envp);
+t_env_lst	*env_new_var(char *content);
+void		lstclear_env(t_env_lst **env);
+int			create_env_list(t_env_lst **env, char **envp);
 void		create_env(t_global *g, char **envp);
 
 size_t		get_env_size(char **env);
-t_env		*copy_toppest(char **envp);
-t_env		*ascii_sort(char **envp, char *last_added);
-int			create_exp_env_list(t_env **exp_env, char **envp, size_t envp_size,
+t_env_lst	*copy_toppest(char **envp);
+t_env_lst	*ascii_sort(char **envp, char *last_added);
+int			create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
 size_t idx_exp_env);
 
 t_token		*new_node(char *content);
@@ -107,11 +107,11 @@ void		display_tokens(t_token *t);
 
 void		exec_built_in(char **built_in, t_global *g);
 int			my_pwd(void);
-void		change_paths(t_env *env, t_env *exp_env);
+void		change_paths(t_env_lst *env, t_env_lst *exp_env);
 int			my_cd(t_global *g);
-int			my_env(t_env *env);
+int			my_env(t_env_lst *env);
 void		my_exit(t_global *g, char **args);
-void		del_env_var(t_env **env, char *var_to_rm);
+void		del_env_var(t_env_lst **env, char *var_to_rm);
 int			my_unset(t_global *g, char **args);
 
 void		err_msg(char *detail, char *reason, int quotes);

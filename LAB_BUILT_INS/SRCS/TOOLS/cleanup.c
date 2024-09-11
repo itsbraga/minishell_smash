@@ -6,15 +6,15 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 22:39:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-void	lstclear_env(t_env **env)
+void	lstclear_env(t_env_lst **env)
 {
-    t_env *tmp;
+    t_env_lst *tmp;
 
     if (env == NULL || (*env) == NULL)
         return ;

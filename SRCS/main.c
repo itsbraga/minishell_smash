@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/10 16:41:56 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 19:08:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	minishell(t_global *g)
 				return (FAILURE);
 			}
 			display_main_lst(g->main);
-			if (create_token_lst(g) == FAILURE)
+			if (create_token_lst(g->main, g->token) == FAILURE)
 			{
 				printf("unable to create the token list, program cannot execute\n");
 				return (FAILURE);

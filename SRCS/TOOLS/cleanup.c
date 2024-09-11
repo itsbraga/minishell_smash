@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/10 19:06:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 19:01:53 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lstclear_env(t_env **env)
+void	lstclear_env(t_env_lst **env)
 {
-    t_env *tmp;
+    t_env_lst *tmp;
 
     if (env == NULL || (*env) == NULL)
         return ;
@@ -28,9 +28,9 @@ void	lstclear_env(t_env **env)
 	(*env) = NULL;
 }
 
-void	lstclear_tokens(t_token **t)
+void	lstclear_tokens(t_token_lst **t)
 {
-	t_token	*tmp;
+	t_token_lst	*tmp;
 	
 	if (t == NULL || (*t) == NULL)
 		return ;
@@ -38,7 +38,6 @@ void	lstclear_tokens(t_token **t)
 	{
 		tmp = (*t)->next;
 		free((*t)->content);
-		free((*t)->type);
 		free(*t);
 		(*t) = tmp;
 	}

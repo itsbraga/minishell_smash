@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 01:44:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	get_env_size(char **env)
 }
 
 // TROUVE ET COPIE LA STRING AVEC LE PLUS HAUT CODE ASCII
-t_env	*copy_toppest(char **envp)
+t_env_lst	*copy_toppest(char **envp)
 {
 	int		i;
 	char	*tmp_top;
@@ -57,7 +57,7 @@ t_env	*copy_toppest(char **envp)
 
 // COMPARE LES VALEURS DANS ENV_LIST POUR TROUVER 
 // LE DERNIER ELEMENT LE PLUS HAUT DANS L'ORDRE ASCII
-t_env	*ascii_sort(char **envp, char *last_added)
+t_env_lst	*ascii_sort(char **envp, char *last_added)
 {
 	int		i;
 	char	*tmp;

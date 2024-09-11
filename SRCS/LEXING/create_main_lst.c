@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/10 16:47:00 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 19:04:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,28 @@ static int	__del_unwanted_whitespaces(t_main_lst *main)
 int	create_main_lst(t_global *g, char *input)
 {
 	t_main_lst	*new_node;
-	char		**elems;
+	char		**segment;
 	size_t      i;
 
 	lstclear_main(&g->main);
-	elems = split_user_input(input);
-	if (elems == NULL)
+	segment = split_user_input(input);
+	if (segment == NULL)
 		return (FAILURE);
 	i = 0;
-	while (elems[i] != NULL)
+	while (segment[i] != NULL)
 	{
-		new_node = main_lst_new_node(elems[i]);
+		new_node = main_lst_new_node(segment[i]);
 		if (new_node == NULL)
 		{
-			free_tab(elems);
+			free_tab(segment);
 			return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
 		}
 		main_lst_add_back(&g->main, new_node);
 		i++;
+		g->info.cmd_count = i;
+		g->info.pipe_count = g->info.cmd_count - 1;
 	}
-	free_tab(elems);
+	free_tab(segment);
 	__del_unwanted_whitespaces(g->main);
 	return (SUCCESS);
 }

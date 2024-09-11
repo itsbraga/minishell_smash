@@ -6,16 +6,16 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/08 21:48:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:54:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-static char	*__update_pwd(t_env *env, char **old_pwd)
+static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 {
-	t_env	*head;
-	char	*new_pwd;
+	t_env_lst	*head;
+	char		*new_pwd;
 
 	new_pwd = getcwd(NULL, 0);
 	if (new_pwd == NULL)
@@ -39,9 +39,9 @@ static char	*__update_pwd(t_env *env, char **old_pwd)
 	return (new_pwd);
 }
 
-static void	__update_oldpwd(t_env *env, char *old_pwd)
+static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 {
-	t_env	*head;
+	t_env_lst	*head;
 
 	head = env;
 	while (head != NULL)
@@ -60,7 +60,7 @@ static void	__update_oldpwd(t_env *env, char *old_pwd)
 		free(old_pwd);
 }
 
-void	change_paths(t_env *env, t_env *exp_env)
+void	change_paths(t_env_lst *env, t_env_lst *exp_env)
 {
 	char	*old_pwd;
 	char	*new_pwd;

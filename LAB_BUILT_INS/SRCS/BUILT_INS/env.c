@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/06 01:27:07 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-int	my_env(t_env *env)
+int	my_env(t_env_lst *env)
 {
-	t_env	*tmp;
+	t_env_lst	*tmp;
 
 	tmp = env;
 	while (tmp != NULL)

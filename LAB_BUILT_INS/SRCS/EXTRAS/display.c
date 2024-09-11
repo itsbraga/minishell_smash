@@ -6,15 +6,15 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/08/28 11:56:25 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:55:26 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-void    display_export_env(t_env *exp_env)
+void    display_export_env(t_env_lst *exp_env)
 {
-    t_env    *tmp;
+    t_env_lst	*tmp;
 
     tmp = exp_env;
     while (tmp != NULL)
