@@ -6,7 +6,7 @@
 #    By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/20 14:22:48 by pmateo            #+#    #+#              #
-#    Updated: 2024/09/04 17:31:17 by pmateo           ###   ########.fr        #
+#    Updated: 2024/09/14 18:15:34 by pmateo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ DIRINC_MINIEXEC = ./INCLUDES
 INCFILES = 			${DIRINC_MINIEXEC}/mini_exec.h
 
 DIR_SRCS = 			./SRCS/
-SRCS = 				main.c init.c token_utils.c
+SRCS = 				main.c init.c token_utils.c \
+					EXEC/exec.c EXEC/pathfinder.c
 
 OBJ = ${SRCS:.c=.o}
 

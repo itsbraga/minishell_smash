@@ -6,15 +6,15 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/09 18:15:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/14 19:25:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_exec.h"
 
-void	lstclear_tokens(t_tok **t)
+void	lstclear_tokens(t_exec_lst **t)
 {
-	t_tok	*tmp;
+	t_exec_lst	*tmp;
 	
 	if (t == NULL || (*t) == NULL)
 		return ;
@@ -37,12 +37,12 @@ size_t	len_to_char(char *str, char c)
 		i++;
 	return (i);
 }
-void	assign_cmd(char *str, t_tok **node)
+void	assign_cmd(char *str, t_exec_lst **node)
 {
 	(*node)->cmd = ft_split(str, ' ');
 }
 
-void	assign_heredoc(char *str, t_tok **node)
+void	assign_heredoc(char *str, t_exec_lst **node)
 {
 	int	i;
 
@@ -59,7 +59,7 @@ void	assign_heredoc(char *str, t_tok **node)
 	assign_cmd(ft_strdup(&str[i]), node);
 }
 
-void	assign_append(char *str, char *append, t_tok **node)
+void	assign_append(char *str, char *append, t_exec_lst **node)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ void	assign_append(char *str, char *append, t_tok **node)
 	(*node)->outfile = ft_strldup(&append[i], len_to_char(&append[i], ' ') + 1);
 }
 
-void	assign_red_in(char *str, char *red_in, t_tok **node)
+void	assign_red_in(char *str, char *red_in, t_exec_lst **node)
 {
 	int i;
 
@@ -87,7 +87,7 @@ void	assign_red_in(char *str, char *red_in, t_tok **node)
 	(*node)->infile = ft_strldup(&red_in[i], len_to_char(&red_in[i], ' '));
 }
 
-void	assign_red_out(char *str, char *red_out, t_tok **node)
+void	assign_red_out(char *str, char *red_out, t_exec_lst **node)
 {
 	int	i;
 
@@ -101,7 +101,7 @@ void	assign_red_out(char *str, char *red_out, t_tok **node)
 	(*node)->outfile = ft_strldup(&red_out[i], len_to_char(&red_out[i], ' '));
 }
 
-void	assign_flag(char *str, t_tok **node)
+void	assign_flag(char *str, t_exec_lst **node)
 {
 	int	i;
 	
@@ -121,11 +121,13 @@ void	assign_flag(char *str, t_tok **node)
 	if ((*node)->here_doc == NULL && (*node)->append == NULL
 		&& (*node)->red_in == NULL && (*node)->red_out == NULL)
 		assign_cmd(str, node);
+	if (ft_strchr((*node)->cmd[0], '/'))
+		(*node)->is_absolute_path = true;
 }
 
-void	token_recognition(t_tok **cmd)
+void	token_recognition(t_exec_lst **cmd)
 {
-	t_tok *node;
+	t_exec_lst *node;
 
 	node = *cmd;
 	while (node != NULL)
@@ -138,20 +140,29 @@ void	token_recognition(t_tok **cmd)
 int	main(int argc, char **argv, char **envp)
 {
 	char *input;
-	t_tok	*cmd;
+	t_env_lst	*env;
+	t_exec_lst	*e_lst;
+	t_exec_info e_info;
 	
 	if (argc > 1)
 		exit(FAILURE);
 	(void)argv;
 	(void)envp;
-	cmd = NULL;
+	env = NULL;
+	e_lst = NULL;
+	create_env_list(&env, envp);
 	while (1)
 	{
 		input = readline("mini_exec> ");
-		build_lst(input, &cmd);
-		token_recognition(&cmd);
-		display_tokens_with_infos(cmd);
-		lstclear_tokens(&cmd);
+		build_lst(input, &e_lst);
+		token_recognition(&e_lst);
+		display_tokens_with_infos(e_lst);
+		init_and_fill_e_info(&e_info, (int)get_lst_size(e_lst));
+		e_info.cmd_count = (int)get_lst_size(e_lst);
+		e_info.pipe_count = e_info.cmd_count - 1;
+		printf("|\n|\n|\n------------------------------\n");
+		while_cmd(&e_lst, &e_info, &env);
+		lstclear_tokens(&e_lst);
 		if (input != NULL)
 			free(input);
 	}

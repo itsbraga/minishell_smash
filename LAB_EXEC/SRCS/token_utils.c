@@ -6,15 +6,32 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:38:19 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/09 18:14:20 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/14 19:04:37 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../INCLUDES/mini_exec.h"
 
-void	display_tokens(t_tok *t)
+size_t	get_lst_size(t_exec_lst *e_lst)
 {
-	t_tok	*tmp;
+	size_t	size;
+	t_exec_lst *node;
+
+	size = 0;
+	if (e_lst)
+		node = e_lst;
+	while (node != NULL)
+	{
+		size++;
+		node = node->next;
+	}
+	return (size);
+	
+}
+
+void	display_tokens(t_exec_lst *t)
+{
+	t_exec_lst	*tmp;
 
 	tmp = t;
 	while (tmp != NULL)
@@ -24,9 +41,9 @@ void	display_tokens(t_tok *t)
 	}
 }
 
-void	display_tokens_with_infos(t_tok *t)
+void	display_tokens_with_infos(t_exec_lst *t)
 {
-	t_tok	*tmp;
+	t_exec_lst	*tmp;
 	int	i;
 	int	j;
 
@@ -67,11 +84,11 @@ void	display_tokens_with_infos(t_tok *t)
 }
 //TOUT LES CHAR * AUTRE QUE CONTENT SONT DE SIMPLES POINTEURS SUR LES ELEMENTS EN QUESTION
 //SI LE POINTEUR EST A NUL C'EST QUE L'ELEMENT N'EST PAS PRESENT, SINON CELA POINTE SUR LE PREMIERE CHAR DE L'ELEMENT
-static t_tok	*new_node(char *content)
+static t_exec_lst	*new_node(char *content)
 {
-	t_tok	*new_node;
+	t_exec_lst	*new_node;
 	
-	new_node = malloc(sizeof(t_tok));
+	new_node = malloc(sizeof(t_exec_lst));
 	if (!new_node)
 		return (NULL);
 	new_node->content = ft_strdup(content);
@@ -82,12 +99,13 @@ static t_tok	*new_node(char *content)
 	new_node->infile = NULL;
 	new_node->red_out = NULL;
 	new_node->outfile = NULL;
+	new_node->is_absolute_path = false;
 	new_node->cmd = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
 
-static t_tok	*last_node(t_tok *t)
+static t_exec_lst	*last_node(t_exec_lst *t)
 {
 	if (!t)
 		return (NULL);
@@ -96,9 +114,9 @@ static t_tok	*last_node(t_tok *t)
 	return (t);
 }
 
-static void	add_back(t_tok **t, t_tok *new_node)
+static void	add_back(t_exec_lst **t, t_exec_lst *new_node)
 {
-	t_tok	*tmp;
+	t_exec_lst	*tmp;
 
 	if (!(*t))
 		*t = new_node;
@@ -109,9 +127,9 @@ static void	add_back(t_tok **t, t_tok *new_node)
 	}
 }
 
-void	build_lst(char *input, t_tok **cmd)
+void	build_lst(char *input, t_exec_lst **cmd)
 {
-	t_tok	*node;
+	t_exec_lst	*node;
 	char	*extracted;
 	char *start = NULL;
 	char *end = NULL;
