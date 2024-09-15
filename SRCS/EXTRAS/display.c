@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/15 22:48:11 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,17 @@ void    display_main_lst(t_main_lst *main)
 	}
 }
 
-void	display_token_lst(t_token_lst *t)
+void	display_token_dblst(t_token_dblst *t)
 {
-	t_token_lst	*tmp;
+	t_token_dblst	*tmp;
 
 	tmp = t;
 	while (tmp != NULL)
 	{
-		ft_putstr_fd(RESET BOLD BLUE "T_TOKEN_LST: " RESET, STDOUT_FILENO);
+		ft_putstr_fd(RESET BOLD BLUE "t_token_dblst: " RESET, STDOUT_FILENO);
 		ft_putstr_fd(tmp->content, STDOUT_FILENO);
 		ft_putendl_fd("", STDOUT_FILENO);
-		ft_putstr_fd(BOLD YELLOW "       type: ", STDOUT_FILENO);
-		ft_putendl_fd("", STDOUT_FILENO);
+		printf("\t %s: %d\n", BOLD YELLOW "type", tmp->type);
 		tmp = tmp->next;
 	}
 }

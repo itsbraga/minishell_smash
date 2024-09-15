@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/11 19:01:53 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:09:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	lstclear_env(t_env_lst **env)
 	(*env) = NULL;
 }
 
-void	lstclear_tokens(t_token_lst **t)
+void	lstclear_tokens(t_token_dblst **t)
 {
-	t_token_lst	*tmp;
+	t_token_dblst	*tmp;
 	
 	if (t == NULL || (*t) == NULL)
 		return ;

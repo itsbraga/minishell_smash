@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/11 20:33:41 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/16 01:07:32 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,26 @@ void		init_global(t_global *global);
 
 /******************************************************************************\
  * LEXING
-\******************************************************************************/;
-
-// create_token_lst.c
-int				create_token_lst(t_main_lst *main, t_token_lst *t);
-
-// classify_token.c
-t_token_type	classify_token(t_classifier *c);
+\******************************************************************************/
 
 // token_utils.c
-void			del_current_token(t_token_lst **t, t_token_lst *cur);
-size_t			get_token_lst_size(t_token_lst **t);
-void			token_lst_add_back(t_token_lst **t, t_token_lst *new_node);
-t_token_lst		*token_lst_new_node(char *content, t_token_type type);
+void			del_current_token(t_token_dblst **t, t_token_dblst *to_delete);
+size_t			get_token_dblst_size(t_token_dblst **t);
+void			token_dblst_add_back(t_token_dblst **t,
+t_token_dblst *new_node);
+t_token_dblst	*token_dblst_new_node(char *content, t_token_type type);
 
-// create_main_lst.c
-int				create_main_lst(t_global *g, char *user_input);
-int 			del_unwanted_char(t_main_lst *main);
+// check_main_lst.c
+char			**split_main_content(t_main_lst *main);
+
+// identify_token.c
+t_token_type	classify_token(char *token, char *prev);
+void			lst_tokenization(t_token_dblst *t);
+
+// create_token_lst.c
+int				create_token_dblst(t_main_lst *main, t_token_dblst **t);
+
+/******************************************************************************/
 
 // main_lst_utils.c
 size_t			get_main_lst_size(t_main_lst **main);
@@ -75,6 +78,10 @@ t_main_lst		*main_lst_new_node(char *content);
 
 // check_input.c
 char			**split_user_input(char *input);
+
+// create_main_lst.c
+int				create_main_lst(t_global *g, char *user_input);
+int 			del_unwanted_char(t_main_lst *main);
 
 /******************************************************************************\
  * PARSING
@@ -160,7 +167,7 @@ void		clean_exit_shell(t_global *g, int err_status);
 
 // cleanup.c
 void		free_tab(char **tab);
-void		lstclear_tokens(t_token_lst **t);
+void		lstclear_tokens(t_token_dblst **t);
 void		lstclear_main(t_main_lst **main);
 void 		lstclear_env(t_env_lst **env);
 void		free_global(t_global *g, bool clear_history);
@@ -176,7 +183,7 @@ int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
 // display.c
 void		display_export_env(t_env_lst *exp_env);
 void		display_main_lst(t_main_lst *main);
-void		display_token_lst(t_token_lst *t);
+void		display_token_dblst(t_token_dblst *t);
 
 // features.c
 void		rainbow_txt(const char *str);

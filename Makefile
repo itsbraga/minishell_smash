@@ -49,8 +49,9 @@ INIT_DIR		=	INIT/
 INIT_F			=	init_global.c
 
 LEXING_DIR		=	LEXING/
-LEXING_F		=	check_input.c main_lst_utils.c create_main_lst.c \
-					token_lst_utils.c classify_token.c create_token_lst.c
+LEXING_F		=	main_lst_utils.c check_input.c create_main_lst.c \
+					token_dblst_utils.c check_main_lst.c identify_token.c \
+					create_token_dblst.c
 
 PARSING_DIR		=	PARSING/
 PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c

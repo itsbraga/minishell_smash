@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/11 18:55:46 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/15 23:39:22 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static char	*__find_var_path(char *to_find, t_env_lst *env)
 {
 	t_env_lst	*head;
 	char		*path;
-	int			len_var_env;
-	int			len_to_find;
+	size_t		len_var_env;
+	size_t		len_to_find;
 
 	head = env;
 	path = NULL;
@@ -41,7 +41,7 @@ static char	*__find_var_path(char *to_find, t_env_lst *env)
 	return (NULL);
 }
 
-static int	__go_to_env_var(t_env_lst *env, char *var, t_token_lst *t)
+static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 {
 	char	*var_path;
 	int		ret;

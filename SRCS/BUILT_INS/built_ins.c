@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/09 23:37:41 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/15 23:39:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_built_in(char *cmd)
 {
-	int			i;
+	size_t		i;
 	const char	*built_in[] =
 	{
 		"pwd",

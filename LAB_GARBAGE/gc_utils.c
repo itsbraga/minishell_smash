@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/14 17:38:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/15 22:09:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
 
-int		remove_gc_node(t_gc_lst**yama, void *ptr)
+int		remove_gc_node(t_gc_lst **yama, void *ptr)
 {
 	t_gc_lst *node;
 	t_gc_lst *previous;
