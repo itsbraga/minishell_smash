@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/14 17:45:09 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/16 15:14:23 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	*create(t_gc_lst **yama, size_t	size)
 
 	ptr = malloc(size);
 	if (ptr == NULL)
-		return (NULL, printf("ALLOCATION FAILED !\n"));
+		return (printf("ALLOCATION FAILED !\n"), NULL);
 	node = new_gc_node(ptr);
 	if (node == NULL)
-		return (NULL, printf("NODE CREATION FAILED !\n"));
+		return (printf("NODE CREATION FAILED !\n"), NULL);
 	add_gc_node(yama, node);
 	return (ptr);
 }
@@ -33,7 +33,7 @@ void	*add(t_gc_lst **yama, void *ptr)
 
 	node = new_gc_node(ptr);
 	if (node == NULL)
-		return (NULL, printf("NODE CREATION FAILED !\n"));
+		return (printf("NODE CREATION FAILED !\n"), NULL);
 	add_gc_node(yama, node);
 	return (ptr);
 }
@@ -51,6 +51,7 @@ int	clean_all(t_gc_lst **yama)
 		tmp = node->next;
 		node->next = NULL;
 		free(node->ptr);
+		node->ptr = NULL;
 		free(node);
 		node = tmp;
 	}
@@ -59,9 +60,8 @@ int	clean_all(t_gc_lst **yama)
 
 void	*yama(int flag, void *ptr, size_t size)
 {
-	t_gc_lst *yama;
+	static t_gc_lst *yama;
 
-	yama = NULL;
 	if (flag == CREATE)
 		ptr = create(&yama, size);
 	else if (flag == ADD)
@@ -72,14 +72,14 @@ void	*yama(int flag, void *ptr, size_t size)
 			printf("NO ALLOCATION FREED, YAMA IS EMPTY !\n");
 		ptr = NULL;
 	}
-	else if (flag == clean_all)
+	else if (flag == CLEAN_ALL)
 	{
 		if (clean_all(&yama) == -1)
 			printf("NO ALLOCATION FREED, YAMA IS EMPTY !\n");
 		ptr = NULL;
 	}
 	else
-		return (NULL, printf("THIS YAMA'S FLAG DOESN'T EXIST !\n"));
+		return (printf("THIS YAMA'S FLAG DOESN'T EXIST !\n"), NULL);
 	return (ptr);
 }
 

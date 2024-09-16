@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:27:20 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/14 17:39:39 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/16 14:41:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int			remove_gc_node(t_gc_lst**yama, void *ptr);
 void		add_gc_node(t_gc_lst **yama, t_gc_lst *node);
 t_gc_lst	*last_gc_lst_node(t_gc_lst *yama);
 void		*new_gc_node(void *ptr);
+void		*yama(int flag, void *ptr, size_t size);
 
 #endif
