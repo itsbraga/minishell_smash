@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/16 00:38:57 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:49:41 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ typedef enum 	e_token_type
 {
 	COMMAND = 0,
 	ARGUMENT,
-	BUILT_IN,
-	IN_QUOTE,
 	REDIR_IN,
 	INFILE,
 	HERE_DOC,
 	LIMITER,
 	TRUNC,
 	APPEND,
-	OUTFILE
+	OUTFILE,
+	IN_QUOTE,
+	WORD
 }			 	t_token_type;
 
 typedef struct s_main_lst

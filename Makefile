@@ -49,15 +49,16 @@ INIT_DIR		=	INIT/
 INIT_F			=	init_global.c
 
 LEXING_DIR		=	LEXING/
-LEXING_F		=	main_lst_utils.c check_input.c create_main_lst.c \
-					token_dblst_utils.c check_main_lst.c identify_token.c \
+LEXING_F		=	main_lst_utils.c check_before_main.c create_main_lst.c \
+					token_dblst_utils.c check_before_token.c identify_token.c \
 					create_token_dblst.c
 
 PARSING_DIR		=	PARSING/
 PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	error.c cleanup.c clean_exit_shell.c
+TOOLS_F			=	error.c cleanup.c clean_exit_shell.c garbage_collector.c \
+					garbage_collector_utils.c
 
 EXTRAS_DIR		=	EXTRAS/
 EXTRAS_F		=	display.c features.c

@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input.c                                      :+:      :+:    :+:   */
+/*   check_before_main.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/16 01:14:40 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/16 16:31:01 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	__check_input_before_quotes(t_parser *p)
+static int	__first_check(t_parser *p)
 {
 	while (ft_isspace(p->user_input[p->i]) == 1)
-			p->i++;
+		p->i++;
 	if (p->user_input[p->i] == '\0')
 		return (FAILURE);
-	else if (p->user_input[p->i] == '|')
-	{
-		// printf("ici\n");
-		p->i++;
-		while (ft_isspace(p->user_input[p->i]) == 1)
-			p->i++;
-		// printf("tobby\n");
-		if (p->user_input[p->i] == '\0')
-			return (err_msg(NULL, ERR_NEAR_PIPE, 0), FAILURE);
-	}
 	return (SUCCESS);
 }
 
 static int	__quote_parser(t_parser *p)
 {
 	char    *tmp;
-	
-	if (__check_input_before_quotes(p) == FAILURE)
+
+	if (__first_check(p) == FAILURE)
 		return (FAILURE);
 	p->closed_quotes[0] = true;
 	p->closed_quotes[1] = true;
@@ -58,6 +48,19 @@ static int	__quote_parser(t_parser *p)
 		p->i++;
 	return (SUCCESS);
 }
+
+// static int	__pipe_check(t_parser *p)
+// {
+// 	if (p->user_input[p->i] == '|')
+// 	{
+// 		p->i++;
+// 		while (ft_isspace(p->user_input[p->i]) == 1)
+// 			p->i++;
+// 		if (p->user_input[p->i] == '\0')
+// 			return (FAILURE);
+// 	}
+// 	return (SUCCESS);
+// }
 
 char	**split_user_input(char *input)
 {

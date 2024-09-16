@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/12 17:09:58 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/16 19:59:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void	lstclear_env(t_env_lst **env)
     while ((*env) != NULL)
     {
         tmp = (*env)->next;
+		(*env)->next = NULL;
         free((*env)->content);
+		(*env)->content = NULL;
         free(*env);
         (*env) = tmp;
     }
-	(*env) = NULL;
 }
 
 void	lstclear_tokens(t_token_dblst **t)
@@ -37,11 +38,12 @@ void	lstclear_tokens(t_token_dblst **t)
 	while ((*t) != NULL)
 	{
 		tmp = (*t)->next;
+		(*t)->next = NULL;
 		free((*t)->content);
+		(*t)->content = NULL;
 		free(*t);
 		(*t) = tmp;
 	}
-	(*t) = NULL;
 }
 
 void	lstclear_main(t_main_lst **main)
@@ -53,11 +55,12 @@ void	lstclear_main(t_main_lst **main)
 	while ((*main) != NULL)
 	{
 		tmp = (*main)->next;
+		(*main)->next = NULL;
 		free((*main)->content); 
+		(*main)->next = NULL;
 		free(*main);
 		(*main) = tmp;
 	}
-	(*main) = NULL;
 }
 
 void	free_tab(char **tab)
@@ -68,6 +71,7 @@ void	free_tab(char **tab)
 	while (tab[i] != NULL)
 	{
 		free(tab[i]);
+		tab[i] = NULL;
 		i++;
 	}
 	free(tab);
@@ -76,8 +80,8 @@ void	free_tab(char **tab)
 
 void    free_global(t_global *g, bool clear_history)
 {
-	if (g != NULL && g->prompt != NULL)
-		free(g->prompt);
+	// if (g != NULL && g->prompt != NULL)
+	// 	free(g->prompt);
 	if (g != NULL && g->main != NULL)
 		lstclear_main(&g->main);
     if (g != NULL && g->token != NULL)

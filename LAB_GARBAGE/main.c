@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:41:52 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/16 16:38:19 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/16 19:50:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,10 @@ int	main(void)
 	printf("-----------------test1---------------\n");
 	alloc1 = (char *)yama(CREATE, NULL, (5 * sizeof(char) + 1));
 	ft_strlcpy(alloc1, "hello", 6);
-	// alloc2 = ft_strdup("world");
 	alloc2 = yama(ADD, ft_strdup("world"), 0);
-	// (void)yama(ADD, alloc2, 0);
-	alloc3 = (int *)yama(CREATE, NULL, (sizeof(int)));
+	alloc3 = malloc(sizeof(int *));
 	*alloc3 = 42;
+	(void)yama(ADD, alloc3, 0);
 	// alloc4 = (char *)yama(CREATE, NULL, sizeof(char));
 	// *alloc4 = '*';
 	printf("alloc1 =  %s ; ptr = %p\n", alloc1, alloc1);
@@ -78,26 +77,26 @@ int	main(void)
 	printf("alloc3 =  %d ; ptr = %p\n", *alloc3, alloc3);
 	// printf("alloc4 =  %c ; ptr = %p\n", *alloc4, alloc4);
 	// (void)yama(CLEAN_ALL, NULL, 0);
-	printf("-----------------remove---------------\n");
-	alloc1 = yama(REMOVE, alloc1, 0);
-	alloc2 = yama(REMOVE, alloc2, 0);
-	alloc3 = yama(REMOVE, alloc3, 0);
-	printf("alloc1 =  %s ; ptr = %p\n", alloc1, alloc1);
-	printf("alloc2 =  %s ; ptr = %p\n", alloc2, alloc2);
-	printf("alloc3 ptr = %p\n", alloc3);
-	printf("-----------------test2---------------\n");
-	alloc1 = (char *)yama(CREATE, NULL, (5 * sizeof(char) + 1));
-	ft_strlcpy(alloc1, "hello", 6);
-	alloc2 = yama(ADD, ft_strdup("world"), 0);
-	alloc3 = (int *)yama(CREATE, NULL, (sizeof(int)));
-	printf("alloc1 =  %s ; ptr = %p\n", alloc1, alloc1);
-	printf("alloc2 =  %s ; ptr = %p\n", alloc2, alloc2);
-	printf("alloc3 =  %d ; ptr = %p\n", *alloc3, alloc3);
+	// printf("-----------------remove---------------\n");
+	// alloc1 = yama(REMOVE, alloc1, 0);
+	// alloc2 = yama(REMOVE, alloc2, 0);
+	// alloc3 = yama(REMOVE, alloc3, 0);
+	// printf("alloc1 =  %s ; ptr = %p\n", alloc1, alloc1);
+	// printf("alloc2 =  %s ; ptr = %p\n", alloc2, alloc2);
+	// printf("alloc3 ptr = %p\n", alloc3);
+	// printf("-----------------test2---------------\n");
+	// alloc1 = (char *)yama(CREATE, NULL, (5 * sizeof(char) + 1));
+	// ft_strlcpy(alloc1, "hello", 6);
+	// alloc2 = yama(ADD, ft_strdup("world"), 0);
+	// alloc3 = (int *)yama(CREATE, NULL, (sizeof(int)));
+	// printf("alloc1 =  %s ; ptr = %p\n", alloc1, alloc1);
+	// printf("alloc2 =  %s ; ptr = %p\n", alloc2, alloc2);
+	// printf("alloc3 =  %d ; ptr = %p\n", *alloc3, alloc3);
 	printf("-----------------clean all---------------\n");
 	yama(CLEAN_ALL, 0, 0);
 	printf("alloc1 =  %s ; ptr = %p\n", alloc1, alloc1);
 	printf("alloc2 =  %s ; ptr = %p\n", alloc2, alloc2);
-	printf("alloc3 ptr = %p\n", alloc3);
+	printf("ptr = %p\n", alloc3);
 	// printf("alloc4 =  %c ; ptr = %p\n", *alloc4, alloc4);
 
 }

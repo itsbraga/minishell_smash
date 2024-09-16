@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/16 01:07:32 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/16 20:01:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "../LIBFT/INCLUDES/ft_printf.h"
 # include "../LIBFT/INCLUDES/get_next_line_bonus.h"
 # include "structs.h"
+# include "garbage_collector.h"
 # include "defines.h"
 # include "colors.h"
 

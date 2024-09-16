@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   identify_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/16 00:41:46 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:53:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// pas encore gere le cas des PIPE / COMMAND / ARGUMENT
 t_token_type	classify_token(char *token, char *prev)
 {
 	if (ft_strcmp(token, "<") == 0)
@@ -34,7 +33,9 @@ t_token_type	classify_token(char *token, char *prev)
 	}
 	else if (ft_strchr(token, '"') != NULL || ft_strchr(token, '\'') != NULL)
 		return (IN_QUOTE);
-	return (-1);
+	else if (prev == NULL || ft_strcmp(prev, "|") == 0)
+		return (COMMAND);
+	return (ARGUMENT);
 }
 
 void	lst_tokenization(t_token_dblst *t)
