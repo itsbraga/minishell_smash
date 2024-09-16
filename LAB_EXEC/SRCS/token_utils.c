@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:38:19 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/14 19:04:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/16 18:27:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ static t_exec_lst	*new_node(char *content)
 	new_node->red_out = NULL;
 	new_node->outfile = NULL;
 	new_node->is_absolute_path = false;
+	new_node->path_bin = NULL;
 	new_node->cmd = NULL;
 	new_node->next = NULL;
 	return (new_node);
