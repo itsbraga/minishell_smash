@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   identify_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/16 17:53:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:53:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,15 @@ void	lst_tokenization(t_token_dblst *t)
 	while (head != NULL)
 	{
 		if (head->prev != NULL)
+		{
 			head->type = classify_token(head->content, head->prev->content);
+			printf("type:\t %d\n", head->type);
+		}
 		else
+		{
 			head->type = classify_token(head->content, NULL);
+			printf("type:\t %d\n", head->type);
+		}
 		head = head->next;
 	}
 }

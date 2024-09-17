@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/11 18:56:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:14:45 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	len_to_equal(char *str)
 	return (i);
 }
 
-char	*take_var_value(char *str)
+static char	*__take_var_value(char *str)
 {
 	char	*value;
 	int		i;
@@ -32,6 +32,9 @@ char	*take_var_value(char *str)
 	while (str[i] != '=')
 		i++;
 	value = ft_strdup((str + i + 1));
+	if (value == NULL)
+		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+	(void)yama(ADD, value, 0);
 	return (value);
 }
 
@@ -52,10 +55,12 @@ char	*take_var(char *str, char *var)
 			|| str[j] == '_'))
 		j++;
 	to_find = ft_strldup(&str[i], (j - i));
+	if (to_find == NULL)
+		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+	(void)yama(ADD, to_find, 0);
 	return (to_find);
 }
 
-// Adapter avec notre env en liste chainee
 char 	*search_var(char *to_find, t_env_lst *env)
 {
 	char		*to_cmp;
@@ -66,10 +71,13 @@ char 	*search_var(char *to_find, t_env_lst *env)
 	while (node != NULL)
 	{
 		to_cmp = ft_strldup(node->content, len_to_equal(node->content));
-		if (strcmp(to_find, to_cmp) == 0)
+		if (to_cmp == NULL)
+			return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+		(void)yama(ADD, to_cmp, 0);
+		if (ft_strcmp(to_find, to_cmp) == 0)
 		{
 			free(to_cmp);
-			return (take_var_value(node->content));
+			return (__take_var_value(node->content));
 		}
 		else
 		{

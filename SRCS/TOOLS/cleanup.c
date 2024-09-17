@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/16 19:59:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:16:42 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	free_tab(char **tab)
 
 void    free_global(t_global *g, bool clear_history)
 {
-	// if (g != NULL && g->prompt != NULL)
-	// 	free(g->prompt);
+	if (g != NULL && g->prompt != NULL)
+		free(g->prompt);
 	if (g != NULL && g->main != NULL)
 		lstclear_main(&g->main);
     if (g != NULL && g->token != NULL)

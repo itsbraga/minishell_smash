@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/09 23:11:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/17 17:16:06 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@ t_main_lst	*main_lst_new_node(char *content)
 {
 	t_main_lst	*new_node;
 	
-	new_node = malloc(sizeof(t_main_lst));
+	new_node = yama(CREATE, NULL, sizeof(t_main_lst));
 	if (new_node == NULL)
+	{
+		err_msg("malloc", ERR_MALLOC, 0);
 		return (NULL);
+	}
 	new_node->content = ft_strdup(content);
 	if (new_node->content == NULL)
 	{
 		free(new_node);
+		err_msg("malloc", ERR_MALLOC, 0);
 		return (NULL);
 	}
+	(void)yama(ADD, new_node->content, 0);
 	new_node->next = NULL;
 	return (new_node);
 }

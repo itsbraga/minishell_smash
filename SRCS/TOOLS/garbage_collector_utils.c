@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/16 20:03:20 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:54:18 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 	t_gc_lst *prev;
 	
 	if (yama == NULL || *yama == NULL)
-		return (-1);
+		return (FAILURE);
 	if ((*yama)->ptr == ptr)
 	{
 		node = *yama;
 		*yama = (*yama)->next;
 		free(node->ptr);
 		free(node);
-		return (EXIT_SUCCESS);
+		return (SUCCESS);
 	}
 	prev = *yama;
 	while (prev->next->ptr != ptr && prev->next != NULL)
@@ -34,7 +34,7 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 	prev->next = (prev->next)->next;
 	free(node->ptr);
 	free(node);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
 
 void	add_gc_node(t_gc_lst **yama, t_gc_lst *node)

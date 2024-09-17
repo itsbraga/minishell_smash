@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/12 17:30:58 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/17 17:16:54 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,19 @@ t_token_dblst	*token_dblst_new_node(char *content, t_token_type type)
 	
 	new_node = malloc(sizeof(t_token_dblst));
 	if (new_node == NULL)
+	{
+		err_msg("malloc", ERR_MALLOC, 0);
 		return (NULL);
+	}
     new_node->type = type;
 	new_node->content = ft_strdup(content);
     if (new_node->content == NULL)
     {
         free(new_node);
+		err_msg("malloc", ERR_MALLOC, 0);
         return (NULL);
     }
+	(void)yama(ADD, new_node->content, 0);
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);

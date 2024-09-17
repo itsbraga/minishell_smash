@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/16 17:49:41 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:34:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ typedef enum 	e_token_type
 	WORD
 }			 	t_token_type;
 
-typedef struct s_main_lst
-{
-	char				*content;
-	struct s_main_lst	*next;
-}				t_main_lst;
-
 typedef struct s_parser
 {
 	char		*user_input;
@@ -54,13 +48,20 @@ typedef struct s_token_dblst
 
 typedef struct s_token_parser
 {
-	t_main_lst	*main;;
-	size_t		i;
-	size_t		start;
-	size_t		token_count;
-	char		**seg_elems;
-	bool		closed_quotes[2];
+	struct s_main_lst	*main;
+	size_t				i;
+	size_t				start;
+	size_t				token_count;
+	char				**seg_elems;
+	bool				closed_quotes[2];
 }				t_token_parser;
+
+typedef struct s_main_lst
+{
+	t_token_dblst		*tokens;
+	char				*content;
+	struct s_main_lst	*next;
+}				t_main_lst;
 
 typedef struct s_exec_lst
 {

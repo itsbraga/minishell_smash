@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_before_token.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/16 20:04:57 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:00:42 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	__quote_parser_main_lst(t_token_parser *p)
 	}
 	tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
 	if (tmp == NULL)
-		return (FAILURE);
+		return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
+	(void)yama(ADD, tmp, 0);
 	p->seg_elems[p->token_count] = tmp;
 	p->token_count++;
 	if (p->main->content[p->i] == ' ')
@@ -72,7 +73,7 @@ static char	**__split_quoted_tokens(t_main_lst *main, t_token_parser *p)
 	ft_bzero(p, sizeof(p));
 	p->main = main;
 	nb_tokens = __count_tokens(p->main, p);
-	p->seg_elems = malloc(sizeof(char *) * (nb_tokens + 1));
+	p->seg_elems = yama(CREATE, NULL, (sizeof(char *) * (nb_tokens + 1)));
 	if (p->seg_elems == NULL)
 		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
 	while (p->main != NULL)
@@ -80,7 +81,10 @@ static char	**__split_quoted_tokens(t_main_lst *main, t_token_parser *p)
 		while (p->main->content[p->i] != '\0')
 		{
 			if (__quote_parser_main_lst(p) == FAILURE)
-				return (free_tab(p->seg_elems), NULL);
+			{
+				free_tab(p->seg_elems);
+				return (NULL);
+			}
 		}
 		p->main = p->main->next;
 		p->i = 0;
@@ -101,9 +105,21 @@ char	**split_main_content(t_main_lst *main)
 	{
 		p.seg_elems = __split_quoted_tokens(p.main, &p);
 		if (p.seg_elems == NULL)
+		{
+			free_tab(p.seg_elems);
 			return (NULL);
+		}
+		// ajouter yama(ADD...) ici ?
 	}
 	else
+	{
 		p.seg_elems = ft_split(p.main->content, ' ');
+		if (p.seg_elems == NULL)
+		{
+			free_tab(p.seg_elems);
+			return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+		}
+		(void)yama(ADD, p.seg_elems, 0);
+	}
 	return (p.seg_elems);
 }

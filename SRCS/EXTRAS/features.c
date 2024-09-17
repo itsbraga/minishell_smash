@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   features.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/02 15:37:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:59:37 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*rainbow_prompt(const char *str)
 	size_t		len;
 
 	len = ft_strlen(str) * (10 + 4) + ft_strlen(RESET) + 5;
-	colored_str = malloc(len);
+	colored_str = yama(CREATE, NULL, len);
 	if (colored_str == NULL)
 		return (NULL);
 	colored_str[0] = '\0';

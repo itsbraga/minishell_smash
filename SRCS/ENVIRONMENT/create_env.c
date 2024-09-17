@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/11 18:56:00 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:13:06 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,14 @@ static void	__update_shlvl(t_env_lst *env)
 			var_value = ft_atoi(head->content + 6, 0);
 			var_value += 1;
 			new_value = ft_itoa(var_value);
+			if (new_value == NULL)
+				(err_msg("malloc", ERR_MALLOC, 0), free(new_value));
+			(void)yama(ADD, new_value, 0);
 			free(head->content);
 			head->content = ft_strjoin("SHLVL=", new_value);
 			if (head->content == NULL)
-			{
-				free(head->content);
-				free(new_value);
-			}
+				(free(head->content), free(new_value));
+			(void)yama(ADD, head->content, 0);
 			free(new_value);
 		}
 		head = head->next;

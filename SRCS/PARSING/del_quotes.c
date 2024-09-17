@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/05 19:19:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/17 15:58:15 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ char	*del_empty_quotes(char *str, int quote_idx)
 
 	i = 0;
 	j = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(str) - 1));
-	if (new_str == NULL)
-		return (NULL);
+	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 1)));
 	while (i != quote_idx)
 	{
 		new_str[i] = str[i];
@@ -47,9 +45,7 @@ char	*del_quote_pair(char *str, int first, int second)
 	char	*new_str;
 
 	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(str) - 1));
-	if (new_str == NULL)
-		return (NULL);
+	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 1)));
 	while (i != first)
 	{
 		new_str[i] = str[i];

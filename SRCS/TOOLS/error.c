@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/09 20:59:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/17 17:25:37 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static char	*__append_strs(char *s1, char *s2)
 	tmp = s1;
 	s1 = ft_strjoin(tmp, s2);
 	if (s1 == NULL)
-		return (NULL);
+		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+	(void)yama(ADD, s1, 0);
 	free(tmp);
 	return (s1);
 }

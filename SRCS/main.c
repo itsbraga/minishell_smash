@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/16 16:09:14 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:37:06 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	g_sig_code;
 int	minishell(t_global *g)
 {
 	char	*user_input;
-	
+
 	while (1)
 	{
 		user_input = readline(g->prompt);
@@ -30,12 +30,11 @@ int	minishell(t_global *g)
 				return (FAILURE);
 			}
 			display_main_lst(g->main);
-			if (create_token_dblst(g->main, &g->token) == FAILURE)
+			if (create_token_dblst(g->main) == FAILURE)
 			{
 				printf("unable to create the token list, program cannot execute\n");
 				return (FAILURE);
 			}
-			display_token_dblst(g->token);
 			free(user_input);
 		}
 	}
@@ -55,6 +54,7 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
 	init_global(&g);
 	create_env(&g, envp);
+	ft_bzero(&g.main, sizeof(g.main));
 	minishell(&g);
 	return (SUCCESS);
 }

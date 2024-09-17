@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/10 17:00:51 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/17 18:28:36 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static char	*__generate_prompt(void)
 	free(rb_username);
 	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" RESET "\002 $> ");
 	free(part1);
+	(void)yama(ADD, prompt, 0); // verifier si on laisse yama le free ou bien free_global
 	return (prompt);
 }
 
@@ -43,8 +44,7 @@ void    init_global(t_global *g)
 {
 	g->prompt = __generate_prompt();
 	if (g->prompt == NULL)
-		exit(FAILURE);
-	// g->input = NULL;
+		clean_exit_shell(g, FAILURE);
 	g->main = NULL;
 	g->token = NULL;
 	g->env = NULL;

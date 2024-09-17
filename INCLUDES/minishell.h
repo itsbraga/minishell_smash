@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/16 20:01:49 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:36:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_token_type	classify_token(char *token, char *prev);
 void			lst_tokenization(t_token_dblst *t);
 
 // create_token_lst.c
-int				create_token_dblst(t_main_lst *main, t_token_dblst **t);
+int				create_token_dblst(t_main_lst *main);
 
 /******************************************************************************/
 
@@ -116,8 +116,8 @@ t_env_lst	*env_new_var(char *content);
 void		del_env_var(t_env_lst **env, char *var_to_rm);
 
 // create_env.c
-int			create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
-size_t idx_exp_env);
+int			create_exp_env_list(t_env_lst **exp_env, char **envp,
+size_t envp_size, size_t idx_exp_env);
 int			create_env_list(t_env_lst **env, char **envp);
 void		create_env(t_global *g, char **envp);
 
@@ -127,7 +127,6 @@ void		create_env(t_global *g, char **envp);
 
 // expand_utils.c
 size_t		len_to_equal(char *str);
-char		*take_var_value(char *str);
 char		*take_var(char *str, char *var);
 char 		*search_var(char *to_find, t_env_lst *env);
 
@@ -166,6 +165,15 @@ void		exec_built_in(char **built_in, t_global *g);
 // clean_exit_shell.c
 void		clean_exit_shell(t_global *g, int err_status);
 
+// garbage_collector_utils.c
+int			remove_gc_node(t_gc_lst **yama, void *ptr);
+void		add_gc_node(t_gc_lst **yama, t_gc_lst *node);
+t_gc_lst	*last_gc_lst_node(t_gc_lst *yama);
+void		*new_gc_node(void *ptr);
+
+// garbage_collector.c
+void		*yama(int flag, void *ptr, size_t size);
+
 // cleanup.c
 void		free_tab(char **tab);
 void		lstclear_tokens(t_token_dblst **t);
@@ -184,7 +192,6 @@ int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
 // display.c
 void		display_export_env(t_env_lst *exp_env);
 void		display_main_lst(t_main_lst *main);
-void		display_token_dblst(t_token_dblst *t);
 
 // features.c
 void		rainbow_txt(const char *str);
