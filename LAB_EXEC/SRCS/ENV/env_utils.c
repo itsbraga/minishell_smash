@@ -3,14 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/11 18:56:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:50:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../INCLUDES/mini_exec.h"
+
+static size_t	get_envlst_size(t_env_lst *env)
+{
+	size_t	size;
+	
+	size = 0;
+	while (env != NULL)
+	{
+		size++;
+		env = env->next;
+	}
+	return (size);
+}
+
+char	**recreate_env_tab(t_env_lst **env)
+{
+	char		**tab;
+	t_env_lst 	*node;
+	int			i;
+
+	tab = malloc(get_env_size(env) * sizeof(char *));
+	node = *env;
+	i = 0;
+	while (node != NULL)
+	{
+		tab[i] = ft_strdup(node->content);
+		i++;
+		node = node->next;
+	}
+	return (tab);
+}
 
 t_env_lst	*env_new_var(char *content)
 {

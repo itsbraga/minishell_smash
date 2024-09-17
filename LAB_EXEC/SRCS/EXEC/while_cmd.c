@@ -6,13 +6,48 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/16 18:48:42 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/17 20:17:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCLUDES/mini_exec.h"
 
-void	go_exec(t_exec_lst *node, t_env_lst **env)
+char	*search_bin()
+{
+	
+}
+
+char	*search_path()
+{
+	
+}
+
+void	check_bin_path()
+{
+	
+}
+
+void	redirection_in()
+{
+	
+}
+
+void	redirection_out()
+{
+	
+}
+
+void	exec(char *path_bin, char **cmd_and_args, char **env)
+{
+	if (execve(path_bin, cmd_and_args, env) == -1)
+	{
+		free(path_bin);
+		//free_child_tab ?
+		return;//à changer
+	}
+}
+
+void	go_exec(t_exec_lst *node, char **env)
 {
 	char *all_path;
 	
@@ -21,19 +56,26 @@ void	go_exec(t_exec_lst *node, t_env_lst **env)
 		check_bin_path(node);
 	else
 	{
-		all_path = search_path();
+		all_path = search_path(env);
 		if (all_path == NULL)
 		{
-			printf("%s: command not found\n", node->cmd[0]);
-			return;
+			printf("\033[1;5;31m - Environment variable doesn't exist, ");
+			printf("please specify absolute path. - \n\033[0m");
+			return; // à changer
 		}
 		else
 			node->path_bin = search_path_bin();
 	}
-	exec(node);
+	if (node->path_bin != NULL)
+		exec(node->path_bin, node->cmd, env);
+	else
+	{
+		printf("minishell: command not found\n");
+		return;//à changer
+	}
 }
 
-void	pathfinder(t_exec_lst *node, t_exec_info *e_info, t_env_lst **env)
+void	pathfinder(t_exec_lst *node, t_exec_info *e_info, char **env)
 {
 	if (node->red_in != NULL)
 		redirection_in();
@@ -54,7 +96,9 @@ void	pathfinder(t_exec_lst *node, t_exec_info *e_info, t_env_lst **env)
 void	while_cmd(t_exec_lst **e_lst, t_exec_info *e_info, t_env_lst **env)
 {
 	t_exec_lst *node;
+	char **envtab;
 
+	envtab = recreate_env_tab(env);
 	while (e_info->executed_cmd != e_info->cmd_count && node != NULL)
 	{
 		node = *e_lst;
@@ -65,11 +109,11 @@ void	while_cmd(t_exec_lst **e_lst, t_exec_info *e_info, t_env_lst **env)
 		if (e_info->child_pid == -1)
 			clean_exit();
 		if (!e_info->child_pid)
-			pathfinder(node, e_info, env);
+			pathfinder(node, e_info, envtab);
 		else
 			parent();
 		node = node->next;
-		e_info->cmd_count--;
+		e_info->executed_cmd++;
 	}	
 }
 

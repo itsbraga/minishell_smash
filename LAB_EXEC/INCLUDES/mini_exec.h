@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/16 18:26:51 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/17 19:44:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_exec_info
 t_env_lst	*env_new_var(char *content);
 size_t		get_lst_size(t_exec_lst *e_lst);
 int			create_env_list(t_env_lst **env, char **envp);
+char	 	**recreate_env_tab(t_env_lst **env);
 void		display_tokens(t_exec_lst *t);
 void		display_tokens_with_infos(t_exec_lst *t);
 void		build_lst(char *input, t_exec_lst **cmd);
