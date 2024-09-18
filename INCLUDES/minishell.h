@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/17 18:36:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/18 16:07:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_token_dblst	*token_dblst_new_node(char *content, t_token_type type);
 char			**split_main_content(t_main_lst *main);
 
 // identify_token.c
-t_token_type	classify_token(char *token, char *prev);
 void			lst_tokenization(t_token_dblst *t);
 
 // create_token_lst.c

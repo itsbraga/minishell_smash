@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_exec_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/17 18:08:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:48:58 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,4 @@
 // 	char	**cmd;
 // }				t_exec_lst;
 
-t_exec_lst  create_exec_lst(t_token_dblst **t);
+t_exec_lst  create_exec_lst(t_main_lst *main);

@@ -1,16 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_before_token.c                               :+:      :+:    :+:   */
+/*   test_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/18 17:44:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:51:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	__count_tokens(t_main_lst *main, t_token_parser *p)
+{
+	int		token_count;
+
+	ft_bzero(p, sizeof(p));
+	p->main = main;
+	p->closed_quotes[0] = true;
+	p->closed_quotes[1] = true;
+	token_count = 0;
+	while (p->main->content[p->i] != '\0')
+	{
+		if (token_count == 0)
+			token_count++;
+		if (p->main->content[p->i] == '\'')
+			p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
+		else if (p->main->content[p->i] == '"')
+			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
+		if ((p->main->content[p->i] == ' ' || p->main->content[p->i] == '\0')
+			&& p->closed_quotes[0] == true && p->closed_quotes[1] == true)
+			token_count++;
+		p->i++;
+	}
+	return (token_count);
+}
 
 static int	__quote_parser_main_lst(t_token_parser *p)
 {
@@ -18,23 +43,17 @@ static int	__quote_parser_main_lst(t_token_parser *p)
 
     p->closed_quotes[0] = true;
     p->closed_quotes[1] = true;
-	p->i = 0;
+    p->i = 0;
     p->start = p->i;
-	printf("main->content: *%s*\n", p->main->content);
     while (p->main->content[p->i] != '\0')
 	{
 		if (p->main->content[p->i] == '\'')
 			p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
 		else if (p->main->content[p->i] == '"')
 			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
-		if (p->main->content[p->i] == ' ' && p->closed_quotes[0] == true && p->closed_quotes[1] == true)
-		{
-			tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
-			if (tmp == NULL)
-				return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
-			p->seg_elems[p->token_count++] = tmp;
-			p->start = p->i + 1;
-		}
+		if (p->main->content[p->i] == ' ' && p->closed_quotes[0] == true
+			&& p->closed_quotes[1] == true)
+			break ;
 		p->i++;
 	}
 	tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
@@ -49,9 +68,12 @@ static int	__quote_parser_main_lst(t_token_parser *p)
 
 static char	**__split_quoted_tokens(t_main_lst *main, t_token_parser *p)
 {
+	size_t	nb_tokens;
+
 	ft_bzero(p, sizeof(p));
 	p->main = main;
-	p->seg_elems = yama(CREATE, NULL, (sizeof(char *) * (ft_strlen(main->content) + 1)));
+	nb_tokens = __count_tokens(p->main, p);
+	p->seg_elems = yama(CREATE, NULL, (sizeof(char *) * (nb_tokens + 1)));
 	if (p->seg_elems == NULL)
 		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
 	while (p->main != NULL)
@@ -71,7 +93,7 @@ static char	**__split_quoted_tokens(t_main_lst *main, t_token_parser *p)
 	return (p->seg_elems);
 }
 
-char	**split_main_content(t_main_lst *main)
+char	**split_main_content2(t_main_lst *main)
 {
 	t_token_parser	p;
 
