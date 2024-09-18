@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/17 20:17:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/18 18:42:15 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,53 @@ void	check_bin_path()
 	
 }
 
-void	redirection_in()
+void	handle_heredoc(char *limiter)
 {
-	
+	int		fd_heredoc;
+	char	*buffer;
+	char	*tmp;
+
+	buffer = NULL;
+	tmp = limiter;
+	limiter = ft_strjoin(limiter, "\n");
+	free(tmp);
+	fd_heredoc = open("here_doc", O_RDWR | O_CREAT | O_TRUNC, 0777);
+	while (1)
+	{
+		ft_printf(2, "> ");
+		buffer = get_next_line(0, 0);
+		if (!buffer)
+			break ;
+		if (ft_strcmp(limiter, buffer) == 0)
+			break ;
+		ft_printf(fd_heredoc, "%s", buffer);
+		free(buffer);
+	}
+	get_next_line(0, 1);
+	free(buffer);
+	buffer = NULL;
+	free(limiter);
+	close(fd_heredoc);
 }
 
-void	redirection_out()
+void	redirection_in(t_exec_lst *node)
+{
+	int	infile_fd;
+
+	infile_fd = 0;
+	if (node->here_doc != NULL)
+		handle_heredoc(node->limiter);
+	else
+	{
+		infile_fd = open(node->infile, O_RDONLY);
+		if (infile_fd == -1)
+		{
+			ft_printf(2, "No such file or directory")
+		}
+	}
+}
+
+void	redirection_out(t_exec_lst *node)
 {
 	
 }
@@ -121,3 +162,8 @@ void	while_cmd(t_exec_lst **e_lst, t_exec_info *e_info, t_env_lst **env)
 // - Je dois reperer la presence de pipe, et ne surtout pas en ouvrir si il n'y
 //		en a pas.
 // - cas d'erreur lorsque chemin relatif et que $PATH n'existe pas
+// - Si un segment de commande echoue le message d'erreur ne s'affiche qu'apres
+		// l'execution de TOUTE la commande, dans l'ordre des erreurs rencontre.
+// - Les heredocs sont ecrits avant toutes choses, et lus au moment du traitement
+//		de la commande.
+// - Je dois connaitre le nombre exact de here_doc dans une commande
