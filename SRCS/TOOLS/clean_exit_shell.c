@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_exit_shell.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/17 16:20:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/19 16:01:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	clean_exit_shell(t_global *g, int err_status)
 {
 	if (g != NULL)
 		free_global(g, true);
-	// ajouter yama
+	yama(CLEAN_ALL, NULL, 0);
 	exit(err_status);
 }

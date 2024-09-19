@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/18 16:07:49 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/19 19:31:36 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ t_token_dblst	*token_dblst_new_node(char *content, t_token_type type);
 char			**split_main_content(t_main_lst *main);
 
 // identify_token.c
-void			lst_tokenization(t_token_dblst *t);
+void			lst_tokenization(t_token_dblst *t, t_exec_lst *exec);
 
 // create_token_lst.c
-int				create_token_dblst(t_main_lst *main);
+int				create_token_dblst(t_main_lst *main, t_exec_lst *exec);
 
 /******************************************************************************/
 
@@ -164,14 +164,7 @@ void		exec_built_in(char **built_in, t_global *g);
 // clean_exit_shell.c
 void		clean_exit_shell(t_global *g, int err_status);
 
-// garbage_collector_utils.c
-int			remove_gc_node(t_gc_lst **yama, void *ptr);
-void		add_gc_node(t_gc_lst **yama, t_gc_lst *node);
-t_gc_lst	*last_gc_lst_node(t_gc_lst *yama);
-void		*new_gc_node(void *ptr);
-
-// garbage_collector.c
-void		*yama(int flag, void *ptr, size_t size);
+// garbage_collector_utils.c && garbage_collector.c ---> garbage_collector.h
 
 // cleanup.c
 void		free_tab(char **tab);

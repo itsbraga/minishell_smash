@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/18 17:35:38 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/19 19:27:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,16 @@ typedef struct s_main_lst
 	struct s_main_lst	*next;
 }				t_main_lst;
 
-typedef struct	s_redir_lst
-{
-	char				*content;
-	struct s_redir_lst	*next;
-}				t_redir_lst;
-
-
 typedef struct s_exec_lst
 {
-	// bool		here_doc;
-	// char		*limiter;
-	// bool		redir_in;
-	// char		*infile;
-	// size_t		redir_out;
-	// char		*outfile;
+	size_t		heredoc_nb;
+	char		**limiter;
+	bool		redir_in;
+	char		*infile;
+	size_t		redir_out;
+	char		*outfile;
 	bool		absolute_path;
 	char		**cmd;
-	t_redir_lst	*redir;
 }				t_exec_lst;
 
 typedef struct s_exec_info
@@ -97,12 +89,14 @@ typedef struct s_env_lst
 typedef struct s_global
 {
 	char			*prompt;
-	t_exec_info		info;
 	t_main_lst		*main;
 	t_token_dblst	*token;
+	t_exec_info		e_info;
 	t_env_lst		*env;
 	t_env_lst		*exp_env;
 	int				last_exit_status;
 }				t_global;
+
+	// t_exec_lst		*exec;
 
 #endif

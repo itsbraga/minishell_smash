@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_global.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/17 18:28:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:35:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void    init_global(t_global *g)
 		clean_exit_shell(g, FAILURE);
 	g->main = NULL;
 	g->token = NULL;
+	g->e_info = NULL;
 	g->env = NULL;
 	g->exp_env = NULL;
 	g->last_exit_status = 0;
