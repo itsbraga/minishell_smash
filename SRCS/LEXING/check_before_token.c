@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/18 17:44:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/19 19:33:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,22 @@ static int	__quote_parser_main_lst(t_token_parser *p)
 			tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
 			if (tmp == NULL)
 				return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
+			(void)yama(ADD, tmp, 0);
 			p->seg_elems[p->token_count++] = tmp;
 			p->start = p->i + 1;
 		}
 		p->i++;
+	}/
+	if (p->i > p->start)
+	{
+		tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
+		if (tmp == NULL)
+			return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
+		(void)yama(ADD, tmp, 0);
+		p->seg_elems[p->token_count++] = tmp;
 	}
-	tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
-	if (tmp == NULL)
-		return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
-	(void)yama(ADD, tmp, 0);
-	p->seg_elems[p->token_count++] = tmp;
-	if (p->main->content[p->i] == ' ')
-		p->i++;
+	// if (p->main->content[p->i] == ' ')
+	// 	p->i++;
 	return (SUCCESS);
 }
 
@@ -83,11 +87,7 @@ char	**split_main_content(t_main_lst *main)
 	{
 		p.seg_elems = __split_quoted_tokens(p.main, &p);
 		if (p.seg_elems == NULL)
-		{
-			free_tab(p.seg_elems);
-			return (NULL);
-		}
-		// ajouter yama(ADD...) ici ?
+			clean_exit_shell();
 	}
 	else
 	{
