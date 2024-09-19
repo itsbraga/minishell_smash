@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/18 18:42:15 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/19 21:01:36 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,14 @@ void	check_bin_path()
 	
 }
 
-void	handle_heredoc(char *limiter)
+void	handle_heredoc()
 {
-	int		fd_heredoc;
-	char	*buffer;
-	char	*tmp;
+	int	fd[2];
 
-	buffer = NULL;
-	tmp = limiter;
-	limiter = ft_strjoin(limiter, "\n");
-	free(tmp);
-	fd_heredoc = open("here_doc", O_RDWR | O_CREAT | O_TRUNC, 0777);
-	while (1)
-	{
-		ft_printf(2, "> ");
-		buffer = get_next_line(0, 0);
-		if (!buffer)
-			break ;
-		if (ft_strcmp(limiter, buffer) == 0)
-			break ;
-		ft_printf(fd_heredoc, "%s", buffer);
-		free(buffer);
-	}
-	get_next_line(0, 1);
-	free(buffer);
-	buffer = NULL;
-	free(limiter);
-	close(fd_heredoc);
+	if (pipe(fd) == -1)
+		return; // a changer
+	
+	
 }
 
 void	redirection_in(t_exec_lst *node)
@@ -68,7 +49,7 @@ void	redirection_in(t_exec_lst *node)
 		infile_fd = open(node->infile, O_RDONLY);
 		if (infile_fd == -1)
 		{
-			ft_printf(2, "No such file or directory")
+			ft_printf(2, "No such file or directory");
 		}
 	}
 }
@@ -167,3 +148,7 @@ void	while_cmd(t_exec_lst **e_lst, t_exec_info *e_info, t_env_lst **env)
 // - Les heredocs sont ecrits avant toutes choses, et lus au moment du traitement
 //		de la commande.
 // - Je dois connaitre le nombre exact de here_doc dans une commande
+// - Pour les here_doc, besoin de deux fonctions, une principale qui bouclera selon
+//		le nombre de here_doc, une seconde qui s'occupe du prompt, et de remplir le fd.
+// - ouvrir un pipe -> ecrire dans fd[1] -> fermer fd[1] -> rediriger fd[0] vers STDIN ->
+// 		fermer fd[0], rebellotte avec le nombre de here_doc

@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:38:19 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/16 18:27:26 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/19 19:14:21 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static t_exec_lst	*new_node(char *content)
 		return (NULL);
 	new_node->content = ft_strdup(content);
 	new_node->here_doc = NULL;
+	new_node->heredoc_count = 0;
 	new_node->limiter = NULL;
 	new_node->append = NULL;
 	new_node->red_in = NULL;

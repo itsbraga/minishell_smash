@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/17 19:44:25 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/19 19:28:18 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef struct s_exec_lst
 {
 	char			*content;
 	char			*here_doc;
-	char			*limiter;
+	int				heredoc_nb;
+	char			**limiter;
 	char			*append;
 	char			*red_in;
 	char			*infile;

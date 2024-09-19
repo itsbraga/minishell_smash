@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/14 19:25:40 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/19 19:31:51 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,23 @@ void	assign_cmd(char *str, t_exec_lst **node)
 	(*node)->cmd = ft_split(str, ' ');
 }
 
-void	assign_heredoc(char *str, t_exec_lst **node)
+void	count_heredoc(char *str, t_exec_lst **node)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '<' && str[i + 1] == '<')
+			count++;
+		i++;
+	}
+	(*node)->heredoc_nb = count;
+}
+
+void	assign_heredoc(char *str, char *h_doc, t_exec_lst **node)
 {
 	int	i;
 
@@ -52,7 +68,7 @@ void	assign_heredoc(char *str, t_exec_lst **node)
 	while (!((str[i] >= 'A' && str[i] <= 'Z') 
 			|| (str[i] >= 'a' && str[i] <= 'z')))
 		i++;
-	(*node)->limiter = ft_strldup(&str[i], (len_to_char(str, ' ') + 1));
+	(*node)->limiter[(*node)->heredoc_nb] = ft_strldup(&str[i], (len_to_char(str, ' ') + 1));
 	while ((str[i] >= 'A' && str[i] <= 'Z')
 			|| (str[i] >= 'a' && str[i] <= 'z'))
 		i++;
@@ -106,10 +122,14 @@ void	assign_flag(char *str, t_exec_lst **node)
 	int	i;
 	
 	i = 0;
+	count_heredoc(str, node);
 	while (str[i] != '\0')
 	{
-		if (str[i] == '<' && str[i + 1] == '<')
-			assign_heredoc(&str[i], node);
+		if ((*node)->heredoc_nb)
+		{
+			if (str[i] == '<' && str[i + 1] == '<')
+				assign_heredoc(str, &str[i], node);
+		}
 		else if (str[i] == '>' && str[i + 1] == '>')
 			assign_append(str, &str[i], node);
 		else if (str[i] == '<' && str[i - 1] != '<' && str[i + 1] != '<')
@@ -168,5 +188,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-// "cat < infile > outfile"
