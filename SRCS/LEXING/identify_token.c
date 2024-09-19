@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/19 19:32:46 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/19 19:38:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static t_token_type	__classify(char *token, char *prev)
 	return (ARGUMENT);
 }
 
+// pour char **limiter verif avec heredoc_nb
 void	lst_tokenization(t_token_dblst *t, t_exec_lst *exec)
 {
 	t_token_dblst	*head;
