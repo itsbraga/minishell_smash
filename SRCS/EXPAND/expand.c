@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/17 17:31:48 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 17:41:53 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static char	*__clean_translated_variable(char *str, char *var)
 {
 	char	*new_str;
-	size_t	i;
+	int		i;
 	
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 2)));
 	if (new_str == NULL)
-		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 	i = 0;
 	while (str != (var - 1))
 		new_str[i++] = *str++;
@@ -42,7 +42,7 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 	end_var = var + var_size;
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - var_size)));
 	if (new_str == NULL)
-		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 	ft_strlcpy(new_str, str, (var - str));
 	ft_strcpy(new_str + ((var - 1) - str), end_var);
 	free(str);
@@ -54,7 +54,7 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 {
 	char	*new_str;
 	char	*start_str;
-	size_t	i;
+	int		i;
 	size_t	len_var;
 
 	start_str = str;
@@ -66,33 +66,21 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 		len_var++;
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) + (vv_size - len_var))));
 	if (new_str == NULL)
-		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 	i = 0;
 	while (str != (var - 1))
-	{
-		new_str[i] = *str;
-		i++;
-		str++;
-	}
+		new_str[i++] = *str++;
 	while (*var_value)
-	{
-		new_str[i] = *var_value;
-		i++;
-		var_value++;
-	}
+		new_str[i++] = *var_value++;
 	str += len_var + 1;
 	while (*str)
-	{
-		new_str[i] = *str;
-		i++;
-		str++;
-	}
+		new_str[i++] = *str++;
 	new_str[i] = '\0';
 	free(start_str);
 	return (new_str);
 }
 
-static char	*__handle_expand(t_global *g, char *str, char *var)
+static char	*__handle_expand(t_data *d, char *str, char *var)
 {
 	char	*to_find;
 	char	*var_value;
@@ -101,9 +89,9 @@ static char	*__handle_expand(t_global *g, char *str, char *var)
 	var_value = NULL;
 	if (*var == '?')
 	{
-		var_value = ft_itoa(g->last_exit_status);
+		var_value = ft_itoa(d->last_exit_status);
 		if (var_value == NULL)
-			return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 		(void)yama(ADD, var_value, 0);
 		str = __add_var_value(str, var, var_value, ft_strlen(var_value));
 	}
@@ -112,7 +100,7 @@ static char	*__handle_expand(t_global *g, char *str, char *var)
 	else
 	{
 		to_find = take_var(str, var);
-		var_value = search_var(to_find, g->env);
+		var_value = search_var(to_find, d->env);
 		if (var_value == NULL)
 			str = __del_var(str, var, ft_strlen(to_find));
 		else
@@ -126,24 +114,24 @@ static char	*__handle_expand(t_global *g, char *str, char *var)
 }
 
 //EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
-char	*expand(t_global *g, char *str)
+char	*expand(t_data *d, char *str)
 {
 	int		i;
-	bool 	closed[2];
+	bool 	closed_quotes[2];
 
 	i = 0;
-	closed[0] = true;
-	closed[1] = true;
+	closed_quotes[0] = true;
+	closed_quotes[1] = true;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '"' && closed[1] != false)
-			closed[0] = switch_bool(closed[0]);
-		else if (str[i] == '\'' && closed[0] != false)
-			closed[1] = switch_bool(closed[1]);
-		if ((str[i] == '$' && closed[1] != false) 
+		if (str[i] == '"' && closed_quotes[1] != false)
+			closed_quotes[0] = switch_bool(closed_quotes[0]);
+		else if (str[i] == '\'' && closed_quotes[0] != false)
+			closed_quotes[1] = switch_bool(closed_quotes[1]);
+		if ((str[i] == '$' && closed_quotes[1] != false) 
 			&& (str[i + 1] != ' ' && str[i + 1] != '$')) 
 		{
-			str = __handle_expand(g, str, &str[i + 1]);
+			str = __handle_expand(d, str, &str[i + 1]);
 			if (str == NULL)
 				return (NULL);
 		}

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:27:20 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/19 19:04:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:22:21 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define CREATE_TAB 1
 # define ADD 2
 # define ADD_TAB 3
-# define ADD 1
 # define REMOVE -1
 # define CLEAN_ALL -2
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/17 17:13:06 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 15:44:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ int	create_env_list(t_env_lst **env, char **envp)
 	{
 		var = env_new_var(envp[i]);
 		if (var == NULL)
-		{
-			lstclear_env(env);
-			return (FAILURE);
-		}
+			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 		if (last == NULL)
 			*env = var;
 		else
@@ -85,12 +82,12 @@ static void	__update_shlvl(t_env_lst *env)
 			var_value += 1;
 			new_value = ft_itoa(var_value);
 			if (new_value == NULL)
-				(err_msg("malloc", ERR_MALLOC, 0), free(new_value));
+				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 			(void)yama(ADD, new_value, 0);
 			free(head->content);
 			head->content = ft_strjoin("SHLVL=", new_value);
 			if (head->content == NULL)
-				(free(head->content), free(new_value));
+				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 			(void)yama(ADD, head->content, 0);
 			free(new_value);
 		}
@@ -98,14 +95,14 @@ static void	__update_shlvl(t_env_lst *env)
 	}
 }
 
-void	create_env(t_global *g, char **envp)
+void	create_env(t_data *d, char **envp)
 {
 	size_t	envp_size;
 
 	envp_size = get_env_size(envp);
-	if (create_env_list(&g->env, envp) == FAILURE)
+	if (create_env_list(&d->env, envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
-	__update_shlvl(g->env);
-	if (create_exp_env_list(&g->exp_env, envp, envp_size, 0) == FAILURE)
+	__update_shlvl(d->env);
+	if (create_exp_env_list(&d->exp_env, envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
 }

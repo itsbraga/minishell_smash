@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_global.c                                      :+:      :+:    :+:   */
+/*   init_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:37:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/19 15:35:27 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:54:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,32 @@ static char	*__generate_prompt(void)
 	free(rb_username);
 	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" RESET "\002 $> ");
 	free(part1);
-	(void)yama(ADD, prompt, 0); // verifier si on laisse yama le free ou bien free_global
+	(void)yama(ADD, prompt, 0); // verifier si on laisse yama le free ou bien free_data
 	return (prompt);
 }
 
-void    init_global(t_global *g)
+// singleton version
+t_data	*get_data_instance(void)
 {
-	g->prompt = __generate_prompt();
-	if (g->prompt == NULL)
-		clean_exit_shell(g, FAILURE);
-	g->main = NULL;
-	g->token = NULL;
-	g->e_info = NULL;
-	g->env = NULL;
-	g->exp_env = NULL;
-	g->last_exit_status = 0;
+	static t_data	*instance = NULL;
+
+	if (instance == NULL)
+	{
+		instance = (t_data *)malloc(sizeof(t_data));
+		if (instance == NULL)
+		{
+			err_msg("malloc", ERR_MALLOC, 0);
+			clean_exit_shell(FAILURE);
+		}
+		instance->prompt = __generate_prompt();
+		if (instance->prompt == NULL)
+			clean_exit_shell(FAILURE);
+		instance->main = NULL;
+		instance->token = NULL;
+		instance->exec = NULL;
+		instance->env = NULL;
+		instance->exp_env = NULL;
+		instance->last_exit_status = 0;
+	}
+	return (instance);
 }

@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   my_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:38:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/06 01:47:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 15:16:51 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	my_unset(t_global *g, char **args)
+int	my_unset(t_data *d, char **args)
 {
 	int		i;
 
 	i = 0;
 	while (args[i] != NULL)
 	{
-		del_env_var(&g->env, args[i]);
-		del_env_var(&g->exp_env, args[i]);
+		del_env_var(&d->env, args[i]);
+		del_env_var(&d->exp_env, args[i]);
 		i++;
 	}
-	g->last_exit_status = 0;
+	d->last_exit_status = 0;
 	return (SUCCESS);
 }

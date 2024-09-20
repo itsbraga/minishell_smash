@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/09 21:01:22 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 15:16:35 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static long long	__ft_atol(char *arg)
 	return ((res * sign) % 256);
 }
 
-static int	__set_exit_status(t_global *g, char **args)
+static int	__set_exit_status(t_data *d, char **args)
 {
 	long long	exit_status;
 
 	exit_status = 0;
 	if (args == NULL || args[1] == NULL)
-		exit_status = g->last_exit_status;
+		exit_status = d->last_exit_status;
 	else if (args[1] != NULL)
 	{
 		if (ft_strisnumeric(args[1]) == 0 && args[2] != NULL)
@@ -58,13 +58,13 @@ static int	__set_exit_status(t_global *g, char **args)
 	return (exit_status);
 }
 
-void	my_exit(t_global *g, char **args)
+void	my_exit(t_data *d, char **args)
 {
 	int	exit_status;
 	
 	exit_status = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
-	exit_status = __set_exit_status(g, args);
+	exit_status = __set_exit_status(d, args);
 	if (exit_status != 1)
-		clean_exit_shell(g, exit_status);
+		clean_exit_shell(exit_status);
 }

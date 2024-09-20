@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 17:45:27 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:37:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define ERR_PREFIX (BOLD RED "minishell: " RESET)
 # define ERR_NEAR_PIPE "syntax error near unexpected token `|'"
 # define ERR_MALLOC "cannot allocate memory"
+# define ERR_QUOTES "failed to handle quotes"
 
 /******************************************************************************\
  * CUSTOM

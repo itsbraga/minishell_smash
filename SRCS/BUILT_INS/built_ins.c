@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/15 23:39:13 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 17:35:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_built_in(char *cmd)
 {
-	size_t		i;
+	int			i;
 	const char	*built_in[] =
 	{
 		"pwd",
@@ -34,22 +34,22 @@ bool	is_built_in(char *cmd)
 	return (false);
 }
 
-void	exec_built_in(char **cmd, t_global *g)
+void	exec_built_in(char **cmd, t_data *d)
 {
 	if (ft_strcmp(cmd[0], "pwd") == 0)
 		my_pwd();
 	else if (ft_strcmp(cmd[0], "cd") == 0)
-		my_cd(g);
+		my_cd(d);
 	else if (ft_strcmp(cmd[0], "env") == 0)
 	{
 		if (cmd[1] != NULL)
 			return (err_msg(cmd[1], "No such file or directory", 1));
-		my_env(g->env);
+		my_env(d->env);
 	}
 	else if (ft_strcmp(cmd[0], "exit") == 0)
-		my_exit(g, cmd);
+		my_exit(d, cmd);
 	else if (ft_strcmp(cmd[0], "unset") == 0)
-		my_unset(g, cmd + 1);
+		my_unset(d, cmd + 1);
 	else if (ft_strcmp(cmd[0], "clear") == 0)
 		printf("\033[H\033[J");
 }

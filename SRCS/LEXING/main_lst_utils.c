@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_lst_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/17 17:16:06 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 17:44:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	main_lst_add_back(t_main_lst **main, t_main_lst *new_node)
 
 size_t	get_main_lst_size(t_main_lst **main)
 {
-	size_t	size;
-	t_main_lst *node;
+	size_t		size;
+	t_main_lst	*node;
 
 	size = 0;
 	node = *main;

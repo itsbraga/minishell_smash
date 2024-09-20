@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/19 19:01:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:29:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,6 @@ static void	*__add(t_gc_lst **yama, void *ptr, bool is_tab)
 	return (ptr);
 }
 
-static void	__free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free(tab);
-	tab = NULL;
-}
-
 static int	__clean_all(t_gc_lst **yama)
 {
 	t_gc_lst *tmp;
@@ -64,7 +49,7 @@ static int	__clean_all(t_gc_lst **yama)
 		tmp = (*yama)->next;
 		(*yama)->next = NULL;
 		if ((*yama)->is_tab == true)
-			__free_tab((char **)(*yama)->ptr);
+			free_tab((char **)(*yama)->ptr);
 		else
 		{
 			free((*yama)->ptr);

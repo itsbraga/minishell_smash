@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/18 15:51:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:44:24 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ static int	__quote_parser_main_lst(t_token_parser *p)
 
 static char	**__split_quoted_tokens(t_main_lst *main, t_token_parser *p)
 {
-	size_t	nb_tokens;
+	int	nb_tokens;
 
 	ft_bzero(p, sizeof(p));
 	p->main = main;
 	nb_tokens = __count_tokens(p->main, p);
 	p->seg_elems = yama(CREATE, NULL, (sizeof(char *) * (nb_tokens + 1)));
 	if (p->seg_elems == NULL)
-		return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 	while (p->main != NULL)
 	{
 		while (p->main->content[p->i] != '\0')

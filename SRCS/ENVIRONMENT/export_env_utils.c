@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:38:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	__cmp_to_equal(const char *s1, const char *s2)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s1[i] == s2[i] && s1[i] && s2[i] && s1[i] != '=' && s2[i] != '=')
@@ -40,7 +40,7 @@ t_env_lst	*copy_toppest(char **envp)
 
 	i = 0;
 	tmp_top = NULL;
-	while (envp[i])
+	while (envp[i] != NULL)
 	{
 		if (tmp_top == NULL)
 			tmp_top = envp[0];
@@ -64,7 +64,7 @@ t_env_lst	*ascii_sort(char **envp, char *last_added)
 
 	i = 0;
 	tmp = NULL;
-	while (envp[i])
+	while (envp[i] != NULL)
 	{
 		if (__cmp_to_equal(last_added, envp[i]) < 0)
 		{

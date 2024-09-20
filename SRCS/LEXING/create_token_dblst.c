@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/19 19:32:56 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:12:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	create_token_dblst(t_main_lst *main, t_exec_lst *exec)
 			new_token = token_dblst_new_node(*seg_elems, -1);
 			printf("new_tok: %s\n", new_token->content);
 			if (new_token == NULL)
-				return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
+				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 			(void)yama(ADD, new_token, 0);
 			token_dblst_add_back(&main->tokens, new_token);
 			seg_elems++;

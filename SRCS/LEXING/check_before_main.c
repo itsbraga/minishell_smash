@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_before_main.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/17 17:03:02 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 15:39:39 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	__quote_parser(t_parser *p)
 	}
 	tmp = ft_strldup(p->user_input + p->start, p->i - p->start);
 	if (tmp == NULL)
-		return (FAILURE);
+		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 	(void)yama(ADD, tmp, 0);
 	p->segment[p->seg_count] = tmp;
 	p->seg_count++;
@@ -49,19 +49,6 @@ static int	__quote_parser(t_parser *p)
 		p->i++;
 	return (SUCCESS);
 }
-
-// static int	__pipe_check(t_parser *p)
-// {
-// 	if (p->user_input[p->i] == '|')
-// 	{
-// 		p->i++;
-// 		while (ft_isspace(p->user_input[p->i]) == 1)
-// 			p->i++;
-// 		if (p->user_input[p->i] == '\0')
-// 			return (FAILURE);
-// 	}
-// 	return (SUCCESS);
-// }
 
 char	**split_user_input(char *input)
 {
@@ -79,17 +66,19 @@ char	**split_user_input(char *input)
 	{
 		p.segment = yama(CREATE, NULL, (sizeof(char *) * (len_input + 1)));
 		if (p.segment == NULL)
-			return (err_msg("malloc", ERR_MALLOC, 0), NULL);
+			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 		while (p.user_input[p.i] != '\0')
 		{
 			if (__quote_parser(&p) == FAILURE)
-				return (NULL);
+				return (err_msg("malloc", ERR_QUOTES, 0), NULL);
 		}
 		p.segment[p.seg_count] = NULL;
 	}
 	else
 	{
 		p.segment = ft_split(input, '|');
+		if (p.segment == NULL)
+			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 		(void)yama(ADD, p.segment, 0);
 	}
 	return (p.segment);

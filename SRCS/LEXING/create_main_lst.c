@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/17 17:23:48 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 17:43:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	__del_unwanted_whitespaces(t_main_lst *main)
 		}
 		trimmed_token = ft_strtrim(head->content, " ");
 		if (trimmed_token == NULL)
-			return (err_msg(NULL, "cannot trim token", 0), FAILURE);
+			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 		free(head->content);
 		head->content = trimmed_token;
 		head = head->next;
@@ -38,13 +38,13 @@ static int	__del_unwanted_whitespaces(t_main_lst *main)
 	return (SUCCESS);
 }
 
-int	create_main_lst(t_global *g, char *input)
+int	create_main_lst(t_data *d, char *input)
 {
 	t_main_lst	*new_node;
 	char		**segments;
-	size_t      i;
+	int			i;
 
-	lstclear_main(&g->main);
+	lstclear_main(&d->main);
 	segments = split_user_input(input);
 	if (segments == NULL)
 		return (FAILURE);
@@ -54,14 +54,14 @@ int	create_main_lst(t_global *g, char *input)
 	{
 		new_node = main_lst_new_node(segments[i]);
 		if (new_node == NULL)
-			return (free_tab(segments), err_msg("malloc", ERR_MALLOC, 0), 1);
+			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 		(void)yama(ADD, new_node, 0);
-		main_lst_add_back(&g->main, new_node);
+		main_lst_add_back(&d->main, new_node);
 		i++;
-		g->info.cmd_count = i;
-		g->info.pipe_count = g->info.cmd_count - 1;
+		d->e_info.cmd_count = i;
+		d->e_info.pipe_count = d->e_info.cmd_count - 1;
 	}
 	free_tab(segments);
-	__del_unwanted_whitespaces(g->main);
+	__del_unwanted_whitespaces(d->main);
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_dblst_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/17 17:16:54 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 15:41:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ t_token_dblst	*token_dblst_new_node(char *content, t_token_type type)
 	if (new_node == NULL)
 	{
 		err_msg("malloc", ERR_MALLOC, 0);
-		return (NULL);
+		clean_exit_shell(FAILURE);
 	}
     new_node->type = type;
 	new_node->content = ft_strdup(content);
     if (new_node->content == NULL)
-    {
-        free(new_node);
+	{
 		err_msg("malloc", ERR_MALLOC, 0);
-        return (NULL);
-    }
+		clean_exit_shell(FAILURE);
+	}
 	(void)yama(ADD, new_node->content, 0);
 	new_node->prev = NULL;
 	new_node->next = NULL;

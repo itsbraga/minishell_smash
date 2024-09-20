@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/19 19:27:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:34:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ typedef enum 	e_token_type
 
 typedef struct s_parser
 {
-	char		*user_input;
-	size_t		i;
-	size_t		start;
-	size_t		seg_count;
-	char		**segment;
-	bool		closed_quotes[2];
+	char	*user_input;
+	int		i;
+	int		start;
+	int		seg_count;
+	char	**segment;
+	bool	closed_quotes[2];
 }				t_parser;
 
 typedef struct s_token_dblst
@@ -48,9 +48,9 @@ typedef struct s_token_dblst
 typedef struct s_token_parser
 {
 	struct s_main_lst	*main;
-	size_t				i;
-	size_t				start;
-	size_t				token_count;
+	int					i;
+	int					start;
+	int					token_count;
 	char				**seg_elems;
 	bool				closed_quotes[2];
 }				t_token_parser;
@@ -64,20 +64,20 @@ typedef struct s_main_lst
 
 typedef struct s_exec_lst
 {
-	size_t		heredoc_nb;
-	char		**limiter;
-	bool		redir_in;
-	char		*infile;
-	size_t		redir_out;
-	char		*outfile;
-	bool		absolute_path;
-	char		**cmd;
+	int		heredoc_nb;
+	char	**limiter;
+	bool	redir_in;
+	char	*infile;
+	int		redir_out;
+	char	*outfile;
+	bool	absolute_path;
+	char	**cmd;
 }				t_exec_lst;
 
 typedef struct s_exec_info
 {
-	size_t	cmd_count;
-	size_t	pipe_count;
+	int		cmd_count;
+	int		pipe_count;
 }				t_exec_info;
 
 typedef struct s_env_lst
@@ -86,17 +86,16 @@ typedef struct s_env_lst
 	struct s_env_lst	*next;
 }				t_env_lst;
 
-typedef struct s_global
+typedef struct s_data
 {
 	char			*prompt;
 	t_main_lst		*main;
 	t_token_dblst	*token;
 	t_exec_info		e_info;
+	t_exec_lst		*exec;
 	t_env_lst		*env;
 	t_env_lst		*exp_env;
 	int				last_exit_status;
-}				t_global;
-
-	// t_exec_lst		*exec;
+}				t_data;
 
 #endif

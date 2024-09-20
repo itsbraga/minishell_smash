@@ -46,7 +46,7 @@ EXPAND_DIR		=	EXPAND/
 EXPAND_F		=	expand.c expand_utils.c
 
 INIT_DIR		=	INIT/
-INIT_F			=	init_global.c
+INIT_F			=	init_data.c
 
 LEXING_DIR		=	LEXING/
 LEXING_F		=	main_lst_utils.c check_before_main.c create_main_lst.c \

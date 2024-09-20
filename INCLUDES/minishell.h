@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/19 19:31:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:30:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ extern int	g_sig_code;
  * INIT
 \******************************************************************************/
 
-// init_global.c
-void		init_global(t_global *global);
+// init_data.c
+// void			init_data(t_data *global);
+t_data		*get_data_instance(void);
 
 /******************************************************************************\
  * LEXING
@@ -80,7 +81,7 @@ t_main_lst		*main_lst_new_node(char *content);
 char			**split_user_input(char *input);
 
 // create_main_lst.c
-int				create_main_lst(t_global *g, char *user_input);
+int				create_main_lst(t_data *d, char *user_input);
 int 			del_unwanted_char(t_main_lst *main);
 
 /******************************************************************************\
@@ -118,7 +119,7 @@ void		del_env_var(t_env_lst **env, char *var_to_rm);
 int			create_exp_env_list(t_env_lst **exp_env, char **envp,
 size_t envp_size, size_t idx_exp_env);
 int			create_env_list(t_env_lst **env, char **envp);
-void		create_env(t_global *g, char **envp);
+void		create_env(t_data *d, char **envp);
 
 /******************************************************************************\
  * EXPAND
@@ -130,23 +131,23 @@ char		*take_var(char *str, char *var);
 char 		*search_var(char *to_find, t_env_lst *env);
 
 // expand.c
-char		*expand(t_global *g, char *str);
+char		*expand(t_data *d, char *str);
 
 /******************************************************************************\
  * BUILT-INS
 \******************************************************************************/
 
 // my_unset.c
-int			my_unset(t_global *g, char **args);
+int			my_unset(t_data *d, char **args);
 
 // my_exit.c
-void		my_exit(t_global *g, char **args);
+void		my_exit(t_data *d, char **args);
 
 // my_cd_utils.c
 void		change_paths(t_env_lst *env, t_env_lst *exp_env);
 
 // my_cd.c
-int			my_cd(t_global *g);
+int			my_cd(t_data *d);
 
 // my_pwd.c
 int			my_pwd(void);
@@ -155,27 +156,27 @@ int			my_pwd(void);
 int			my_env(t_env_lst *env);
 
 // built_ins.c
-void		exec_built_in(char **built_in, t_global *g);
+void		exec_built_in(char **built_in, t_data *d);
 
 /******************************************************************************\
  * TOOLS
 \******************************************************************************/
 
-// clean_exit_shell.c
-void		clean_exit_shell(t_global *g, int err_status);
+// error.c
+void		err_msg(char *detail, char *reason, int quotes);
+int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
 
 // garbage_collector_utils.c && garbage_collector.c ---> garbage_collector.h
 
 // cleanup.c
 void		free_tab(char **tab);
-void		lstclear_tokens(t_token_dblst **t);
 void		lstclear_main(t_main_lst **main);
+void		lstclear_tokens(t_token_dblst **t);
 void 		lstclear_env(t_env_lst **env);
-void		free_global(t_global *g, bool clear_history);
+void		free_data(t_data *d, bool clear_history);
 
-// error.c
-void		err_msg(char *detail, char *reason, int quotes);
-int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
+// clean_exit_shell.c
+void		clean_exit_shell(int err_status);
 
 /******************************************************************************\
  * EXTRAS

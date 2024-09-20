@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   features.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/17 16:59:37 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 17:47:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	rainbow_txt(const char *str)
 {
 	const char	*colors[7] = {RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, PINK};
-	size_t		nb_colors;
+	int			nb_colors;
 	size_t		i;
 	size_t		len;
 
@@ -33,7 +33,7 @@ void	rainbow_txt(const char *str)
 void	rainbow_txt_nonl(const char *str)
 {
 	const char	*colors[7] = {RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, PINK};
-	size_t		nb_colors;
+	int			nb_colors;
 	size_t		i;
 	size_t		len;
 
@@ -52,7 +52,7 @@ char	*rainbow_prompt(const char *str)
 {
 	const char	*colors[7] = {RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, PINK};
 	char		*colored_str;
-	size_t		i;
+	int			i;
 	size_t		len;
 
 	len = ft_strlen(str) * (10 + 4) + ft_strlen(RESET) + 5;

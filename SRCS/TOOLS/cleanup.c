@@ -6,26 +6,41 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/19 18:52:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:30:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lstclear_env(t_env_lst **env)
+void	free_tab(char **tab)
 {
-	t_env_lst *tmp;
+	int	i;
 
-	if (env == NULL || (*env) == NULL)
-		return ;
-	while ((*env) != NULL)
+	i = 0;
+	while (tab[i] != NULL)
 	{
-		tmp = (*env)->next;
-		(*env)->next = NULL;
-		free((*env)->content);
-		(*env)->content = NULL;
-		free(*env);
-		(*env) = tmp;
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}
+
+void	lstclear_main(t_main_lst **main)
+{
+	t_main_lst	*tmp;
+	
+	if (main == NULL || (*main) == NULL)
+		return ;
+	while ((*main) != NULL)
+	{
+		tmp = (*main)->next;
+		(*main)->next = NULL;
+		free((*main)->content); 
+		(*main)->next = NULL;
+		free(*main);
+		(*main) = tmp;
 	}
 }
 
@@ -46,37 +61,41 @@ void	lstclear_tokens(t_token_dblst **t)
 	}
 }
 
-void	lstclear_main(t_main_lst **main)
+void	lstclear_env(t_env_lst **env)
 {
-	t_main_lst	*tmp;
-	
-	if (main == NULL || (*main) == NULL)
+	t_env_lst *tmp;
+
+	if (env == NULL || (*env) == NULL)
 		return ;
-	while ((*main) != NULL)
+	while ((*env) != NULL)
 	{
-		tmp = (*main)->next;
-		(*main)->next = NULL;
-		free((*main)->content); 
-		(*main)->next = NULL;
-		free(*main);
-		(*main) = tmp;
+		tmp = (*env)->next;
+		(*env)->next = NULL;
+		free((*env)->content);
+		(*env)->content = NULL;
+		free(*env);
+		(*env) = tmp;
 	}
 }
 
-void	free_global(t_global *g, bool clear_history)
+void	free_data(t_data *d, bool clear_history)
 {
-	if (g != NULL && g->prompt != NULL)
-		free(g->prompt);
-	if (g != NULL && g->main != NULL)
-		lstclear_main(&g->main);
-	if (g != NULL && g->token != NULL)
-		lstclear_tokens(&g->token);
-	if (clear_history == true)
+	if (d != NULL)
 	{
-		if (g != NULL && g->env != NULL)
-			lstclear_env(&g->env);
-		if (g != NULL && g->exp_env != NULL)
-			lstclear_env(&g->exp_env);
-		rl_clear_history();
+		if (d->prompt != NULL)
+			free(d->prompt);
+		if (d->main != NULL)
+			lstclear_main(&d->main);
+		if (d->token != NULL)
+			lstclear_tokens(&d->token);
+		if (clear_history == true)
+		{
+			if (d->env != NULL)
+				lstclear_env(&d->env);
+			if (d->exp_env != NULL)
+				lstclear_env(&d->exp_env);
+			rl_clear_history();
+		}
+		free(d);
 	}
 }
