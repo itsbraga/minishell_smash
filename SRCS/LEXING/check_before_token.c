@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/20 17:24:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 20:04:51 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,34 @@ static void	__quote_parser_main_lst(t_token_parser *p)
     p->closed_quotes[0] = true;
     p->closed_quotes[1] = true;
 	p->i = 0;
-    p->start = p->i;
-	printf("main->content: *%s*\n", p->main->content);
+	p->start = p->i;
+	printf("main->content: |%s|\n", p->main->content);
     while (p->main->content[p->i] != '\0')
 	{
 		if (p->main->content[p->i] == '\'')
 			p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
 		else if (p->main->content[p->i] == '"')
 			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
-		if (p->main->content[p->i] == ' ' && p->closed_quotes[0] == true && p->closed_quotes[1] == true)
+		if (p->main->content[p->i] == ' ' && p->closed_quotes[0] == true
+			&& p->closed_quotes[1] == true)
 		{
-			tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
-			if (tmp == NULL)
-				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
-			(void)yama(ADD, tmp, 0);
-			p->seg_elems[p->token_count++] = tmp;
-			p->start = p->i + 1;
+			if (p->i > p->start) // Assure qu'on ne capture pas plusieurs espaces
+			{
+				tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
+				if (tmp == NULL)
+					(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+				(void)yama(ADD, tmp, 0);
+				p->seg_elems[p->token_count++] = tmp;
+			}
+			// Ignorer les espaces pour la prochaine capture
+			while (ft_isspace(p->main->content[p->i]) == 1)
+				p->i++;
+			p->start = p->i; // Redéfinir le début pour le prochain token
 		}
-		p->i++;
+		else
+			p->i++;
 	}
+	// Ajouter le dernier token s'il reste des caractères à traiter
 	if (p->i > p->start)
 	{
 		tmp = ft_strldup(p->main->content + p->start, p->i - p->start);
@@ -46,8 +55,6 @@ static void	__quote_parser_main_lst(t_token_parser *p)
 		(void)yama(ADD, tmp, 0);
 		p->seg_elems[p->token_count++] = tmp;
 	}
-	// if (p->main->content[p->i] == ' ')
-	// 	p->i++;
 }
 
 static char	**__split_quoted_tokens(t_main_lst *main, t_token_parser *p)
@@ -57,13 +64,8 @@ static char	**__split_quoted_tokens(t_main_lst *main, t_token_parser *p)
 	p->seg_elems = yama(CREATE_TAB, NULL, (sizeof(char *) * (ft_strlen(main->content) + 1)));
 	if (p->seg_elems == NULL)
 		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
-	while (p->main != NULL)
-	{
-		while (p->main->content[p->i] != '\0')
-			__quote_parser_main_lst(p);
-		p->main = p->main->next;
-		p->i = 0;
-	}
+	while (p->main->content[p->i] != '\0')
+		__quote_parser_main_lst(p);
 	p->seg_elems[p->token_count] = NULL;
 	return (p->seg_elems);
 }

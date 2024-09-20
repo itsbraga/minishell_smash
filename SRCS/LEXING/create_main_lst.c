@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/20 17:43:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:35:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ static int	__del_unwanted_whitespaces(t_main_lst *main)
 	len = ft_strlen(head->content) - 1;
 	while (head != NULL)
 	{
-		if (((head->content[0] == '"') && (head->content[len] == '"'))
-			|| ((head->content[1] == '\'') && (head->content[len] == '\'')))
-		{
-			head = head->next;
-			continue ;
-		}
 		trimmed_token = ft_strtrim(head->content, " ");
 		if (trimmed_token == NULL)
 			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
@@ -61,7 +55,7 @@ int	create_main_lst(t_data *d, char *input)
 		d->e_info.cmd_count = i;
 		d->e_info.pipe_count = d->e_info.cmd_count - 1;
 	}
-	free_tab(segments);
+	(void)yama(REMOVE, segments, 0);
 	__del_unwanted_whitespaces(d->main);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 15:30:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:49:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ int	main(int argc, char **argv, char **envp)
 		exit(FAILURE);
 	}
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
-	// init_data(&d);
 	create_env(d, envp);
-	ft_bzero(d->main, sizeof(d->main));
 	minishell(d);
 	return (SUCCESS);
 }

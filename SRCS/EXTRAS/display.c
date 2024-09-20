@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/17 18:36:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 18:29:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void    display_export_env(t_env_lst *exp_env)
 	tmp = exp_env;
 	while (tmp != NULL)
 	{
-		ft_putstr_fd(tmp->content, STDOUT_FILENO);
-		ft_putendl_fd("", STDOUT_FILENO);
+		ft_printf(STDOUT_FILENO, "%s\n", tmp->content);
 		tmp = tmp->next;
 	}
 }
@@ -32,9 +31,8 @@ void    display_main_lst(t_main_lst *main)
 	tmp = main;
 	while (tmp != NULL)
 	{
-		ft_putstr_fd(BOLD PURPLE "T_MAIN_LST:\t" RESET, STDOUT_FILENO);
-		ft_putstr_fd(tmp->content, STDOUT_FILENO);
-		ft_putendl_fd("", STDOUT_FILENO);
+		ft_printf(STDOUT_FILENO, "%s\t ", BOLD PURPLE "T_MAIN_LST:" RESET);
+		ft_printf(STDOUT_FILENO, "|%s|\n", tmp->content);
 		tmp = tmp->next;
 	}
 }

@@ -6,15 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/20 17:46:33 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:31:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// 
 // Ne gere pas le cas ou le prev de la COMMAND est un INFILE: erreur
-//
 static t_token_type	__classify(char *token, char *prev)
 {
 	if (ft_strcmp(token, "<") == 0)
@@ -55,12 +53,12 @@ void	lst_tokenization(t_token_dblst *t, t_exec_lst *exec)
 				exec->heredoc_nb++;
 				printf("heredoc count: %d\n", exec->heredoc_nb);
 			}
-			printf("type:\t %d\n", head->type);
+			printf("type:\t\t %d\n", head->type);
 		}
 		else
 		{
 			head->type = __classify(head->content, NULL);
-			printf("type:\t %d\n", head->type);
+			printf("type:\t\t %d\n", head->type);
 		}
 		head = head->next;
 	}
