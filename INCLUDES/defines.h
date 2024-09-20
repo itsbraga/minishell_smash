@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/20 15:37:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:12:17 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define ERR_NEAR_PIPE "syntax error near unexpected token `|'"
 # define ERR_MALLOC "cannot allocate memory"
 # define ERR_QUOTES "failed to handle quotes"
+# define ERR_BAD_FILE "No such file or directory"
+# define CMD_NOT_FOUND "command not found"
 
 /******************************************************************************\
  * CUSTOM
