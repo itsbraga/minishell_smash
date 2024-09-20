@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/17 17:25:37 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/20 19:40:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	err_msg(char *detail, char *reason, int quotes)
 	else
 		msg = __append_strs(__append_strs(NULL, ERR_PREFIX), reason);
 	ft_putendl_fd(msg, STDERR_FILENO);
-	free(msg);
+	yama(REMOVE, msg, 0);
 }
 
 int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_status)
@@ -74,6 +74,6 @@ int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_status)
 	}
 	msg = __append_strs(msg, reason);
 	ft_putendl_fd(msg, STDERR_FILENO);
-	free(msg);
+	yama(REMOVE, msg, 0);
 	return (err_status);
 }
