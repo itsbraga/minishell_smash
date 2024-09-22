@@ -6,26 +6,66 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 19:14:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/22 21:22:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../INCLUDES/mini_exec.h"
+#include "minishell.h"
 
-void	pathfinder(t_exec_lst *node, t_exec_info *e_info, char **env)
+int	redirection_in(t_redir_lst *r)
 {
-	if (node->red_in != NULL)
-		redirection_in();
-	else if (e_info->executed_cmd != 0)
+	int	infile_fd;
+
+	infile_fd = 0;
+	infile_fd = open(r->infile, O_RDONLY);
+	if (infile_fd == -1)
 	{
-		dup2(e_info->old_read_fd, STDIN_FILENO);
-		close(e_info->old_read_fd);
+		err_msg(r->infile, ERR_BAD_FILE, 0);
+		return (FAILURE);
 	}
-	if (node->red_out != NULL)
-		redirection_out();
-	else if (e_info->executed_cmd != (e_info->cmd_count) - 1)
-		dup2(e_info->fd[1], STDOUT_FILENO);
-	close(e_info->fd[0]);
-	close(e_info->fd[1]);
-	go_exec(node, env);
+	dup2(infile_fd, STDIN_FILENO);
+	close(infile_fd);
+	return (SUCCESS);
+}
+
+int	redirection_out(t_redir_lst *r)
+{
+	int	outfile_fd;
+	int flags;
+
+	outfile_fd = 0;
+	flags = O_WRONLY | O_CREAT | O_TRUNC;
+	if (r->type == REDIR_OUT_APPEND)
+		flags = O_WRONLY | O_CREAT | O_APPEND;
+	outfile_fd = open(r->outfile, flags, 0755);
+	if (outfile_fd == -1)
+	{
+		err_msg(r->outfile, strerror(errno), 0);
+		return (FAILURE);
+	}
+	dup2(outfile_fd, STDOUT_FILENO);
+	close(outfile_fd);
+	return (SUCCESS);
+}
+
+void	pathfinder(t_exec_lst *node, t_redir_lst *r, t_exec_info *e_info, char **env)
+{
+	int 			error;
+	t_token_type	lastest_red_in;
+
+	error = 0;
+	if (node->heredoc_nb > 0)
+		fill_all_heredoc();
+	while (r != NULL)
+	{
+		if (r->type == REDIR_IN || r->type == HERE_DOC)
+			lastest_red_in = r->type;
+		if (r->type == REDIR_IN)
+			error = redirection_in(r);
+		else if (r->type == REDIR_OUT_TRUNC || r->type == REDIR_OUT_APPEND)
+			error = redirection_out(r);
+		r = r->next;
+	}
+	if (lastest_red_in == HERE_DOC)
+		
 }
