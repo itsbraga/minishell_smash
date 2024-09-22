@@ -6,11 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/22 20:09:36 by annabrag         ###   ########.fr       */
-=======
-/*   Updated: 2024/09/22 15:25:29 by pmateo           ###   ########.fr       */
->>>>>>> 8a385790abebcafcd19de286eca1e3a3e05e2047
+/*   Updated: 2024/09/22 22:12:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +16,6 @@
 typedef enum 	e_token_type
 {
 	COMMAND = 0,
-<<<<<<< HEAD
 	ARGUMENT,				// 1
 	REDIR_IN,				// 2
 	INFILE,					// 3
@@ -30,17 +25,6 @@ typedef enum 	e_token_type
 	REDIR_OUT_APPEND,		// 7
 	OUTFILE,				// 8
 	WORD					// 9
-=======
-	ARGUMENT,	// 1
-	REDIR_IN,	// 2
-	INFILE,		// 3
-	HERE_DOC,	// 4
-	LIMITER,	// 5
-	REDIR_OUT_TRUNC,		// 6
-	REDIR_OUT_APPEND,		// 7
-	OUTFILE,	// 8
-	WORD		// 9
->>>>>>> 8a385790abebcafcd19de286eca1e3a3e05e2047
 }			 	t_token_type;
 
 typedef struct s_parser
