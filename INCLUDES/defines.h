@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/20 19:12:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/22 15:00:46 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define ERR_MALLOC "cannot allocate memory"
 # define ERR_QUOTES "failed to handle quotes"
 # define ERR_BAD_FILE "No such file or directory"
-# define CMD_NOT_FOUND "command not found"
+# define ERR_CMD "command not found"
 
 /******************************************************************************\
  * CUSTOM

@@ -6,13 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/20 18:35:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:28:14 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	__del_unwanted_whitespaces(t_main_lst *main)
+static void	__del_unwanted_whitespaces(t_main_lst *main)
 {
 	t_main_lst  *head;
 	char        *trimmed_token;
@@ -25,11 +25,11 @@ static int	__del_unwanted_whitespaces(t_main_lst *main)
 		trimmed_token = ft_strtrim(head->content, " ");
 		if (trimmed_token == NULL)
 			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+		(void)yama(ADD, trimmed_token, 0);
 		free(head->content);
 		head->content = trimmed_token;
 		head = head->next;
 	}
-	return (SUCCESS);
 }
 
 int	create_main_lst(t_data *d, char *input)

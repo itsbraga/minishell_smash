@@ -84,6 +84,8 @@ OBJS_F			=	$(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_F))
 
 DEPS_F			=	$(patsubst %.c,$(OBJS_DIR)%.d,$(SRCS_F))
 
+TOTAL_F			:=	$(words $(SRCS_F))
+
 #******************************************************************************#
 #	RULES
 #******************************************************************************#
@@ -100,8 +102,8 @@ $(LIBFT):
 		@make -sC $(LIBFT_PATH) $(MAKEFLAGS)
 
 $(NAME): $(OBJS_F) $(LIBFT)
-			@printf "$(RESET)$(BOLD)\n\n\t\t ⸜(｡˃ ᵕ ˂ )⸝♡\n\n"
-			@printf "=================$(shell bash rainbow.sh " MINISHELL ")"
+#			@printf "$(RESET)$(BOLD)\n\n\t\t ⸜(｡˃ ᵕ ˂ )⸝♡\n\n"
+			@printf "\n\n=================$(shell bash rainbow.sh " MINISHELL ")"
 			@printf "$(BOLD)=================\n\n"
 			@printf "$(BLINK)$(PINK)\t\t   READY!$(RESET)\n\n"
 			@printf "$(BOLD)=============================================\n\n$(RESET)"
