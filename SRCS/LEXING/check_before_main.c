@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/20 15:39:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:42:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	__quote_parser(t_parser *p)
 	while (p->user_input[p->i] != '\0' && (p->user_input[p->i] != '|'
 			|| p->closed_quotes[0] == false || p->closed_quotes[1] == false))
 	{
-		if (p->user_input[p->i] == '\'')
+		if (p->user_input[p->i] == '\'' && p->closed_quotes[0] == true)
 			p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
-		else if (p->user_input[p->i] == '"')
+		else if (p->user_input[p->i] == '"' && p->closed_quotes[0] == true)
 			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
 		p->i++;
 	}
