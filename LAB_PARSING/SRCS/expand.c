@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/08 21:34:06 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/23 16:37:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,13 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 	return (free(start_str), new_str);
 }
 
-static char	*__handle_expand(t_global *g, char *str, char *var)
+static char	*__handle_expand(char *str, char *var, char **envp)
 {
 	char	*to_find;
 	char	*var_value;
 
-	if (*var == '?')
-		expand_to_last_exit_code();
 	to_find = take_var(str, var);
-	var_value = search_var(to_find, g->env);
+	var_value = search_var(to_find, envp);
 	if (var_value == NULL)
 		str = __del_var(str, var, ft_strlen(to_find));
 	else

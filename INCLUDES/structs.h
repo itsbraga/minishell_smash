@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/22 22:12:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:07:09 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_exec_lst
 	t_redir_lst			*r;
 	int					heredoc_nb;
 	bool				absolute_path;
+	char				*bin_path;
 	char				**cmd;
 	struct s_exec_lst	*next;
 }				t_exec_lst;

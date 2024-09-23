@@ -16,8 +16,8 @@ int	main(int argc, char **argv, char **envp)
 	char **cmd;
 	char *bin_path;
 
-	cmd[0] = "cat";
-	cmd[1] = "";
+	cmd[0] = "Makefile";
+	// cmd[1] = "";
 	// cmd[2] = "-l";
 	bin_path = "/usr/bin/cat";
 	if (execve(bin_path, cmd, envp) == -1)

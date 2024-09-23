@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/22 21:22:26 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:51:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	redirection_in(t_redir_lst *r)
 	infile_fd = open(r->infile, O_RDONLY);
 	if (infile_fd == -1)
 	{
-		err_msg(r->infile, ERR_BAD_FILE, 0);
+		err_msg(r->infile, strerror(errno), 0);
 		return (FAILURE);
 	}
 	dup2(infile_fd, STDIN_FILENO);
@@ -50,12 +50,13 @@ int	redirection_out(t_redir_lst *r)
 
 void	pathfinder(t_exec_lst *node, t_redir_lst *r, t_exec_info *e_info, char **env)
 {
-	int 			error;
 	t_token_type	lastest_red_in;
+	int				last_heredoc_fd;
+	int 			error;
 
 	error = 0;
 	if (node->heredoc_nb > 0)
-		fill_all_heredoc();
+		last_heredoc_fd = fill_all_heredoc();
 	while (r != NULL)
 	{
 		if (r->type == REDIR_IN || r->type == HERE_DOC)
@@ -67,5 +68,9 @@ void	pathfinder(t_exec_lst *node, t_redir_lst *r, t_exec_info *e_info, char **en
 		r = r->next;
 	}
 	if (lastest_red_in == HERE_DOC)
-		
+	{
+		dup2(last_heredoc_fd, STDIN_FILENO);
+		close(last_heredoc_fd);
+	}
+	go_exec(node, env);
 }
