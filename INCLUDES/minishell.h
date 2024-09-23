@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/22 22:12:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:33:33 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void		exec_built_in(char **built_in, t_data *d);
 // error.c
 void		err_msg(char *detail, char *reason, int quotes);
 int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);
+int			err_msg_cmd2(char *cmd, char *reason, int err_status);
 
 // garbage_collector_utils.c && garbage_collector.c ---> garbage_collector.h
 

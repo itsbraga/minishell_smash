@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/20 19:40:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/23 19:31:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,19 @@ int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_status)
 			msg = __append_strs(msg, "'");
 		msg = __append_strs(msg, ": ");
 	}
+	msg = __append_strs(msg, reason);
+	ft_putendl_fd(msg, STDERR_FILENO);
+	yama(REMOVE, msg, 0);
+	return (err_status);
+}
+
+int	err_msg_cmd2(char *cmd, char *reason, int err_status)
+{
+	char	*msg;
+
+	msg = NULL;
+	if (cmd != NULL)
+		msg = __append_strs(cmd, ": ");
 	msg = __append_strs(msg, reason);
 	ft_putendl_fd(msg, STDERR_FILENO);
 	yama(REMOVE, msg, 0);

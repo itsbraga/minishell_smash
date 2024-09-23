@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 17:41:53 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:40:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,11 @@ char	*expand(t_data *d, char *str)
 	closed_quotes[1] = true;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '"' && closed_quotes[1] != false)
-			closed_quotes[0] = switch_bool(closed_quotes[0]);
-		else if (str[i] == '\'' && closed_quotes[0] != false)
+		if (str[i] == '\'' && closed_quotes[0] == true)
 			closed_quotes[1] = switch_bool(closed_quotes[1]);
-		if ((str[i] == '$' && closed_quotes[1] != false) 
+		else if (str[i] == '"' && closed_quotes[0] == true)
+			closed_quotes[0] = switch_bool(closed_quotes[0]);
+		if ((str[i] == '$' && closed_quotes[0] == true) 
 			&& (str[i + 1] != ' ' && str[i + 1] != '$')) 
 		{
 			str = __handle_expand(d, str, &str[i + 1]);

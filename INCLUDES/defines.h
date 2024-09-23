@@ -6,11 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/22 15:00:46 by annabrag         ###   ########.fr       */
-=======
-/*   Updated: 2024/09/22 14:51:40 by pmateo           ###   ########.fr       */
->>>>>>> 8a385790abebcafcd19de286eca1e3a3e05e2047
+/*   Updated: 2024/09/23 19:21:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +36,7 @@
  * ERROR
 \******************************************************************************/
 
-# define ERR_PREFIX (BOLD RED "minishell: " RESET)
+# define ERR_PREFIX (BOLD RED "smash: " RESET)
 # define ERR_NEAR_PIPE "syntax error near unexpected token `|'"
 # define ERR_MALLOC "cannot allocate memory"
 # define ERR_QUOTES "failed to handle quotes"
