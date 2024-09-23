@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/22 15:28:14 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:05:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static void	__del_unwanted_whitespaces(t_main_lst *main)
 {
 	t_main_lst  *head;
 	char        *trimmed_token;
-	size_t		len;
 
 	head = main;
-	len = ft_strlen(head->content) - 1;
 	while (head != NULL)
 	{
 		trimmed_token = ft_strtrim(head->content, " ");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/23 19:33:33 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:20:07 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_data		*get_data_instance(void);
  * LEXING
 \******************************************************************************/
 
-// token_utils.c
+// token_dblst_utils.c
 void			del_current_token(t_token_dblst **t, t_token_dblst *to_delete);
 size_t			get_token_dblst_size(t_token_dblst **t);
 void			token_dblst_add_back(t_token_dblst **t,
@@ -61,7 +61,7 @@ t_token_dblst *new_node);
 t_token_dblst	*token_dblst_new_node(char *content, t_token_type type);
 
 // check_main_lst.c
-char			**split_main_content(t_main_lst *main);
+char			**get_quoted_seg_elems(t_main_lst *main, t_token_parser *p);
 
 // identify_token.c
 void			lst_tokenization(t_token_dblst *t, t_exec_lst *exec);
@@ -69,7 +69,9 @@ void			lst_tokenization(t_token_dblst *t, t_exec_lst *exec);
 // create_token_lst.c
 int				create_token_dblst(t_main_lst *main, t_exec_lst *exec);
 
-/******************************************************************************/
+/******************************************************************************\
+ * PARSING
+\******************************************************************************/
 
 // main_lst_utils.c
 size_t			get_main_lst_size(t_main_lst **main);
@@ -82,10 +84,6 @@ char			**split_user_input(char *input);
 // create_main_lst.c
 int				create_main_lst(t_data *d, char *user_input);
 int 			del_unwanted_char(t_main_lst *main);
-
-/******************************************************************************\
- * PARSING
-\******************************************************************************/
 
 // del_quotes.c
 char		*del_empty_quotes(char *str, int quote_idx);

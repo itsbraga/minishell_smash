@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/23 19:07:09 by pmateo           ###   ########.fr       */
-=======
-/*   Updated: 2024/09/23 19:53:47 by annabrag         ###   ########.fr       */
->>>>>>> 4c8887fdce5bea9cfc9be1eee496847660a43309
+/*   Updated: 2024/09/24 01:08:25 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +53,8 @@ typedef struct s_token_parser
 	int					token_count;
 	char				**seg_elems;
 	bool				closed_quotes[2];
+	bool				is_closed;
+    bool				was_closed;
 }				t_token_parser;
 
 typedef struct s_main_lst

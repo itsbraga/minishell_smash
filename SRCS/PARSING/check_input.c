@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_before_main.c                                :+:      :+:    :+:   */
+/*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/23 18:42:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:20:31 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	__quote_parser(t_parser *p)
 			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
 		p->i++;
 	}
-	tmp = ft_strldup(p->user_input + p->start, p->i - p->start);
+	tmp = ft_strldup(p->user_input + p->start, (p->i - p->start));
 	if (tmp == NULL)
 		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 	(void)yama(ADD, tmp, 0);
