@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/24 20:42:40 by art3mis          ###   ########.fr       */
+/*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
+/*   Updated: 2024/09/24 22:07:21 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define ERR_QUOTES "failed to handle quotes"
 # define ERR_BAD_FILE "No such file or directory"
 # define ERR_CMD "command not found"
+# define ERR_NO_ENV "$PATH doesn't exist, please specify absolute path"
+# define ERR_BAD_PERM "Permission denied"
 
 /******************************************************************************\
  * CUSTOM

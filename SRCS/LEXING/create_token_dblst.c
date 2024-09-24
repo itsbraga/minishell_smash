@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 21:44:01 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/24 22:22:55 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	create_token_dblst(t_main_lst *main)
 {
 	t_token_dblst	*new_token;
 	char			**seg_elems;
-	t_redir_lst		*redirs;
+	t_redir_lst		*redir;
 
-	redirs = NULL;
+	redir = NULL;
 	while (main != NULL)
 	{
 		main->tokens = NULL;
@@ -36,7 +36,7 @@ int	create_token_dblst(t_main_lst *main)
 			seg_elems++;
 		}
 		lst_tokenization(main->tokens);
-		fill_redir_lst(main->tokens, &redirs);
+		fill_redir_lst(main->tokens, &redir);
 		main = main->next;
 	}
 	return (SUCCESS);

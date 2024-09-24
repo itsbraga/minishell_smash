@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/23 15:44:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/24 22:04:52 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	fill_all_heredoc(t_redir_lst *r)
 			yama(REMOVE, tmp, 0);
 			lastest_read_fd = open_heredoc(node->limiter);
 		}
-		node == node->next;
+		node = node->next;
 	}
 	return (lastest_read_fd);
 }
