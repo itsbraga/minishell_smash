@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 01:08:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/24 16:53:09 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_redir_lst
 
 typedef struct s_exec_lst
 {
-	t_redir_lst			*r;
+	t_redir_lst			*redir;
 	int					heredoc_nb;
 	bool				absolute_path;
 	char				*bin_path;

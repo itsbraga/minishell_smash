@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/23 15:42:22 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:43:44 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_sig_code;
 
-int	minishell(t_data *d)
+static int	__minishell(t_data *d)
 {
 	char	*user_input;
 
@@ -27,7 +27,7 @@ int	minishell(t_data *d)
 			if (create_main_lst(d, user_input) == FAILURE)
 				return (FAILURE);
 			display_main_lst(d->main);
-			if (create_token_dblst(d->main, d->exec) == FAILURE)
+			if (create_token_dblst(d->main) == FAILURE)
 				return (FAILURE);
 			free(user_input);
 		}
@@ -48,6 +48,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
 	create_env(d, envp);
-	minishell(d);
+	__minishell(d);
 	return (SUCCESS);
 }

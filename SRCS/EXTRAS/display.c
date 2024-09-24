@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/20 18:29:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:16:09 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,23 @@ void    display_main_lst(t_main_lst *main)
 	tmp = main;
 	while (tmp != NULL)
 	{
-		ft_printf(STDOUT_FILENO, "%s\t ", BOLD PURPLE "T_MAIN_LST:" RESET);
-		ft_printf(STDOUT_FILENO, "|%s|\n", tmp->content);
+		ft_printf(STDOUT_FILENO, "%s", BOLD PURPLE "t_main_lst:\t [" R);
+		ft_printf(STDOUT_FILENO, "%s" BOLD PURPLE "]\n" R, tmp->content);
+		tmp = tmp->next;
+	}
+}
+
+void    display_token_dblst(t_token_dblst *token)
+{
+	t_token_dblst	*tmp;
+
+	tmp = token;
+	while (tmp != NULL)
+	{
+		ft_printf(STDOUT_FILENO, "%s", BOLD BLUE "t_token_dblst:\t [" R);
+		ft_printf(STDOUT_FILENO, "%s" BOLD BLUE "]\n" R, tmp->content);
+		ft_printf(STDOUT_FILENO, "%s", YELLOW "token_type:\t ");
+		ft_printf(STDOUT_FILENO, "%d\n" R, tmp->type);
 		tmp = tmp->next;
 	}
 }

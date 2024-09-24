@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/23 23:05:35 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:24:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	create_main_lst(t_data *d, char *input)
 	char		**segments;
 	int			i;
 
+	if (unclosed_quotes(input) == true)
+		return (err_msg(NULL, YELLOW "WARNING: unclosed quotes" R, 0), FAILURE);
 	lstclear_main(&d->main);
 	segments = split_user_input(input);
 	if (segments == NULL)
@@ -53,7 +55,6 @@ int	create_main_lst(t_data *d, char *input)
 		d->e_info.cmd_count = i;
 		d->e_info.pipe_count = d->e_info.cmd_count - 1;
 	}
-	(void)yama(REMOVE, segments, 0);
-	__del_unwanted_whitespaces(d->main);
+	((void)yama(REMOVE, segments, 0), __del_unwanted_whitespaces(d->main));
 	return (SUCCESS);
 }

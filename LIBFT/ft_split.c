@@ -14,15 +14,17 @@
 
 static void	freeall(char **tab)
 {
-	char	**tmp;
+	int	i;
 
-	tmp = tab;
-	while (*tmp)
+	i = 0;
+	while (tab[i] != NULL)
 	{
-		free(*tmp);
-		tmp++;
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
 	}
 	free(tab);
+	tab = NULL;
 }
 
 static int	count_substr(char const *s, char c)

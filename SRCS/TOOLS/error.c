@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/23 19:31:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:29:37 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	err_msg(char *detail, char *reason, int quotes)
 		if (quotes == 1)
 		{
 			msg = __append_strs(__append_strs(NULL, ERR_PREFIX), "‘");
-			msg = __append_strs(msg, detail);
-			msg = __append_strs(msg, "’");
+			msg = __append_strs(__append_strs(msg, detail), "’");
 		}
 		else
 			msg = __append_strs(__append_strs(NULL, ERR_PREFIX), detail);

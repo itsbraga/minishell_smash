@@ -6,82 +6,38 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:54:57 by u4s2e0r           #+#    #+#             */
-/*   Updated: 2024/09/09 20:32:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:32:41 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "INCLUDES/libft.h"
 
-// size_t	ft_strlen(const char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i] != '\0')
-// 		i++;
-// 	return (i);
-// }
-
-// unsigned int	ft_strlcpy(char *dest, const char *src, unsigned int size)
-// {
-// 	unsigned int	i;
-
-// 	i = 0;
-// 	if (size == 0)
-// 		return (ft_strlen(src));
-// 	while (src[i] != '\0' && i < size - 1)
-// 	{
-// 		dest[i] = src[i];
-// 		i++;
-// 	}
-// 	dest[i] = '\0';
-// 	return (ft_strlen(src));
-// }
-
-// char	*ft_substr(const char *src, unsigned int start, size_t len)
-// {
-// 	char	*str;
-// 	size_t	strlen;
-
-// 	if (!src)
-// 		return (NULL);
-// 	if (start > ft_strlen(src))
-// 	{
-// 		str = malloc(sizeof(char));
-// 		if (!str)
-// 			return (NULL);
-// 		str[0] = '\0';
-// 		return (str);
-// 	}
-// 	else
-// 	{
-// 		strlen = len;
-// 		if (ft_strlen(src + start) < len)
-// 			strlen = ft_strlen(src + start);
-// 		str = malloc((strlen + 1) * sizeof(char));
-// 		if (!str)
-// 			return (NULL);
-// 		ft_strlcpy(str, src + start, strlen + 1);
-// 		return (str);
-// 	}
-// }
-
 char	*ft_substr(const char *src, unsigned int start, size_t len)
 {
-	char	*sub;
+	char	*str;
+	size_t	strlen;
 
 	if (!src)
 		return (NULL);
-	if ((size_t)start > ft_strlen(src))
-		start = ft_strlen(src);
-	if (len > (ft_strlen(src) - start))
-		len = ft_strlen(src) - start;
-	sub = (char *)malloc(sizeof(char) * (len + 1));
-	if (!sub)
-		return (NULL);
-	ft_memcpy(sub, src + start, len);
-	sub[len] = 0;
-	return (sub);
+	if (start > ft_strlen(src))
+	{
+		str = malloc(sizeof(char));
+		if (!str)
+			return (NULL);
+		str[0] = '\0';
+		return (str);
+	}
+	else
+	{
+		strlen = len;
+		if (ft_strlen(src + start) < len)
+			strlen = ft_strlen(src + start);
+		str = malloc((strlen + 1) * sizeof(char));
+		if (!str)
+			return (NULL);
+		ft_strlcpy(str, src + start, strlen + 1);
+		return (str);
+	}
 }
 
 // int	main(void)

@@ -6,13 +6,13 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 01:20:31 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/24 16:49:03 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	__first_check(t_parser *p)
+static int	__front_check(t_parser *p)
 {
 	while (ft_isspace(p->user_input[p->i]) == 1)
 		p->i++;
@@ -21,21 +21,33 @@ static int	__first_check(t_parser *p)
 	return (SUCCESS);
 }
 
-static int	__quote_parser(t_parser *p)
+static void	__pipe_check(t_parser *p)
+{
+	if (p->user_input[p->i] == '|')
+	{
+		p->i++;
+		while (p->user_input[p->i] != '\0' && ft_isspace(p->user_input[p->i]) == 1)
+			p->i++;
+		if (p->user_input[p->i] == '|' || p->user_input[p->i] == '\0')
+			(err_msg(NULL, ERR_NEAR_PIPE, 0), exit(FAILURE));
+	}
+}
+
+static void	__quote_parser(t_parser *p)
 {
 	char    *tmp;
 
-	if (__first_check(p) == FAILURE)
-		return (FAILURE);
+	if (__front_check(p) == FAILURE)
+		exit(FAILURE);
 	p->closed_quotes[0] = true;
 	p->closed_quotes[1] = true;
 	p->start = p->i;
 	while (p->user_input[p->i] != '\0' && (p->user_input[p->i] != '|'
 			|| p->closed_quotes[0] == false || p->closed_quotes[1] == false))
 	{
-		if (p->user_input[p->i] == '\'' && p->closed_quotes[0] == true)
+		if (p->user_input[p->i] == '\'')
 			p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
-		else if (p->user_input[p->i] == '"' && p->closed_quotes[0] == true)
+		else if (p->user_input[p->i] == '"')
 			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
 		p->i++;
 	}
@@ -45,33 +57,27 @@ static int	__quote_parser(t_parser *p)
 	(void)yama(ADD, tmp, 0);
 	p->segment[p->seg_count] = tmp;
 	p->seg_count++;
-	if (p->user_input[p->i] == '|')
-		p->i++;
-	return (SUCCESS);
+	if (p->closed_quotes[0] == true && p->closed_quotes[1] == true)
+		__pipe_check(p);
 }
 
 char	**split_user_input(char *input)
 {
 	t_parser	p;
-	size_t		len_input;
-
-	if (unclosed_quotes(input) == true)
-		return (err_msg(NULL, "unclosed quotes, please try again", 0), NULL);
+	size_t		input_len;
+	
 	ft_bzero(&p, sizeof(p));
 	p.user_input = input;
-	len_input = ft_strlen(p.user_input);
 	if (p.user_input == NULL || p.user_input[0] == '\0')
 		return (NULL);
+	input_len = ft_strlen(p.user_input);
 	if (ft_strchr(input, '\'') != NULL || ft_strchr(input, '"') != NULL)
 	{
-		p.segment = yama(CREATE, NULL, (sizeof(char *) * (len_input + 1)));
+		p.segment = yama(CREATE, NULL, (sizeof(char *) * (input_len + 1)));
 		if (p.segment == NULL)
 			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 		while (p.user_input[p.i] != '\0')
-		{
-			if (__quote_parser(&p) == FAILURE)
-				return (err_msg("malloc", ERR_QUOTES, 0), NULL);
-		}
+			__quote_parser(&p);
 		p.segment[p.seg_count] = NULL;
 	}
 	else

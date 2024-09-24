@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:29:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/06/26 16:41:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/24 20:38:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COLORS_H
 
 # define RESET			"\e[0m"
+# define R  			"\e[0m"
 
 # define BOLD			"\e[1m"
 # define DIM			"\e[2m"
@@ -28,7 +29,7 @@
 # define ORANGE			"\e[38;5;208m"
 # define BLUE			"\e[34m"
 # define PURPLE			"\e[35m"
-# define PINK			"\033[38;2;255;182;193m"
+# define PINK			"\e[38;2;255;182;193m"
 # define CYAN			"\e[36m"
 # define WHITE			"\e[37m"
 

@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 01:22:08 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:10:49 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	__get_closed_quotes(t_token_parser *p)
 		p->is_closed = false;
 }
 
-static void __parse_quoted_segment(t_token_parser *p)
+static void __parse_segment(t_token_parser *p)
 {
 	__init(p);
 	while (p->main->content[p->i] != '\0')
@@ -86,16 +86,21 @@ static void __parse_quoted_segment(t_token_parser *p)
 	}
 }
 
-char	**get_quoted_seg_elems(t_main_lst *main, t_token_parser *p)
+char	**get_all_seg_elems(t_main_lst *main)
 {
-	ft_bzero(p, sizeof(p));
-	p->main = main;
-	p->seg_elems = yama(CREATE_TAB, NULL,
-	(sizeof(char *) * (ft_strlen(main->content) + 1)));
-	if (p->seg_elems == NULL)
+	t_token_parser	p;
+	size_t			seg_len;
+	
+	ft_bzero(&p, sizeof(p));
+	p.main = main;
+	if (p.main == NULL || p.main->content == NULL)
+		return (NULL);
+	seg_len = ft_strlen(main->content);
+	p.seg_elems = yama(CREATE_TAB, NULL, (sizeof(char *) * (seg_len + 1)));
+	if (p.seg_elems == NULL)
 		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
-	while (p->main->content[p->i] != '\0')
-		__parse_quoted_segment(p);
-	p->seg_elems[p->token_count] = NULL;
-	return (p->seg_elems);
+	while (p.main->content[p.i] != '\0')
+		__parse_segment(&p);
+	p.seg_elems[p.token_count] = NULL;
+	return (p.seg_elems);
 }

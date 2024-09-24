@@ -49,16 +49,19 @@ INIT_DIR		=	INIT/
 INIT_F			=	init_data.c
 
 LEXING_DIR		=	LEXING/
-LEXING_F		=	check_main_lst.c token_dblst_utils.c identify_token.c \
-					create_token_dblst.c
+LEXING_F		=	check_main_lst.c identify_token.c create_token_dblst.c \
+					fill_redir_lst.c
 
 PARSING_DIR		=	PARSING/
 PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c check_input.c \
-					main_lst_utils.c create_main_lst.c create_exec_lst.c
+					create_main_lst.c create_exec_lst.c
 
 TOOLS_DIR		=	TOOLS/
 TOOLS_F			=	error.c cleanup.c clean_exit_shell.c garbage_collector.c \
 					garbage_collector_utils.c
+
+LISTS_U_DIR		=	TOOLS/LISTS_UTILS/
+LISTS_U_F		=	main_lst.c token_dblst.c redir_lst.c
 
 EXTRAS_DIR		=	EXTRAS/
 EXTRAS_F		=	display.c features.c
@@ -75,6 +78,7 @@ SRCS_F			=	$(addprefix $(ENV_DIR), $(ENV_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
+					$(addprefix $(LISTS_U_DIR), $(LISTS_U_F)) \
 					$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					main.c
 
