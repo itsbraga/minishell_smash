@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 17:29:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:35:49 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static int	__clean_all(t_gc_lst **yama)
 		{
 			free((*yama)->ptr);
 			(*yama)->ptr = NULL;
-			free((*yama));
 		}
+		free((*yama));
 		(*yama) = tmp;
 	}
 	return (SUCCESS);

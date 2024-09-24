@@ -6,30 +6,13 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/22 16:28:02 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/24 19:03:36 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	redirection_in(t_exec_lst *node)
-{
-	int	infile_fd;
-
-	infile_fd = 0;
-	if (node->here_doc != NULL)
-		handle_heredoc(node->limiter);
-	else
-	{
-		infile_fd = open(node->infile, O_RDONLY);
-		if (infile_fd == -1)
-		{
-			ft_printf(2, "No such file or directory");
-		}
-	}
-}
-
-void	redirection_out(t_exec_lst *node)
+void	parent()
 {
 	
 }

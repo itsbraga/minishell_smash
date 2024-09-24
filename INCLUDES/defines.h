@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:49:02 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/23 19:21:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:48:03 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define ERR_QUOTES "failed to handle quotes"
 # define ERR_BAD_FILE "No such file or directory"
 # define ERR_CMD "command not found"
+# define ERR_NO_ENV "$PATH doesn't exist, please specify absolute path"
+# define ERR_BAD_PERM "Permission denied"
 
 /******************************************************************************\
  * CUSTOM
