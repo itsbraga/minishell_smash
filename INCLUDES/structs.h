@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 16:53:09 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/25 17:03:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 typedef enum 	e_token_type
 {
 	COMMAND = 0,
-	ARGUMENT,				// 1
+	WORD,					// 1
 	REDIR_IN,				// 2
 	INFILE,					// 3
 	HERE_DOC,				// 4
 	LIMITER,				// 5
 	REDIR_OUT_TRUNC,		// 6
 	REDIR_OUT_APPEND,		// 7
-	OUTFILE,				// 8
-	WORD					// 9
+	OUTFILE					// 8
 }			 	t_token_type;
 
 typedef struct s_parser

@@ -16,8 +16,8 @@ int	main(int argc, char **argv, char **envp)
 	char *cmd[2];
 	char *bin_path;
 
-	cmd[0] = "ct";
-	cmd[1] = NULL;
+	cmd[0] = "ls";
+	cmd[1] = "";
 	// cmd[2] = "-l";
 	bin_path = "/usr/bin/ct";
 	// if (execve(bin_path, cmd, envp) == -1)

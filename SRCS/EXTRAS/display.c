@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 16:16:09 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/25 14:19:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,32 @@ void    display_export_env(t_env_lst *exp_env)
 	}
 }
 
+// void    display_main_lst(t_main_lst *main)
+// {
+// 	t_main_lst    *tmp;
+
+// 	tmp = main;
+// 	while (tmp != NULL)
+// 	{
+// 		ft_printf(STDOUT_FILENO, "%s", BOLD PURPLE "t_main_lst:\t [" R);
+// 		ft_printf(STDOUT_FILENO, "%s" BOLD PURPLE "]\n" R, tmp->content);
+// 		tmp = tmp->next;
+// 	}
+// }
+
 void    display_main_lst(t_main_lst *main)
 {
 	t_main_lst    *tmp;
 
 	tmp = main;
+	ft_printf(STDOUT_FILENO, "%s\n", BOLD "-------------------------------------------------" R);
 	while (tmp != NULL)
 	{
 		ft_printf(STDOUT_FILENO, "%s", BOLD PURPLE "t_main_lst:\t [" R);
 		ft_printf(STDOUT_FILENO, "%s" BOLD PURPLE "]\n" R, tmp->content);
 		tmp = tmp->next;
 	}
+	ft_printf(STDOUT_FILENO, "%s\n", BOLD "-------------------------------------------------" R);
 }
 
 void    display_token_dblst(t_token_dblst *token)

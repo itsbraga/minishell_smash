@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token_dblst.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 22:22:55 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/25 17:01:35 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	create_token_dblst(t_main_lst *main)
 		while (*seg_elems != NULL)
 		{
 			new_token = token_dblst_new_node(*seg_elems, -1);
-			printf(BLUE "new_token:\t [" R "%s" BLUE "]\n" R, new_token->content);
+			printf(BOLD BLUE "new_token:\t [" R "%s" BOLD BLUE "]\n" R, new_token->content);
 			if (new_token == NULL)
 				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 			(void)yama(ADD, new_token, 0);
