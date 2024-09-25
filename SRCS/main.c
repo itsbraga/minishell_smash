@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/25 14:42:27 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:36:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int	__minishell(t_data *d)
 			display_main_lst(d->main);
 			if (create_token_dblst(d->main) == FAILURE)
 				return (FAILURE);
+			free(user_input);
 		}
-		free(user_input);
 	}
 	return (SUCCESS);
 }

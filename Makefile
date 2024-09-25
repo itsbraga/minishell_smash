@@ -57,7 +57,7 @@ PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c check_input.c \
 					create_main_lst.c create_exec_lst.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	error.c cleanup.c clean_exit_shell.c garbage_collector.c \
+TOOLS_F			=	error.c lstclear.c cleanup.c garbage_collector.c \
 					garbage_collector_utils.c
 
 LISTS_U_DIR		=	TOOLS/LISTS_UTILS/

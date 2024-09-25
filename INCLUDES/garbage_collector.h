@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:27:20 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 17:22:21 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:44:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_gc_lst
  * FUNCTIONS
 \******************************************************************************/
 
+void		free_tab(char **tab);
 int			remove_gc_node(t_gc_lst**yama, void *ptr);
 void		add_gc_node(t_gc_lst **yama, t_gc_lst *node);
 t_gc_lst	*last_gc_lst_node(t_gc_lst *yama);

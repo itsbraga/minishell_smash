@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/19 19:31:51 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/25 19:47:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/mini_exec.h"
 
-void	lstclear_tokens(t_exec_lst **t)
+void	lstclear_token(t_exec_lst **t)
 {
 	t_exec_lst	*tmp;
 	
@@ -182,7 +182,7 @@ int	main(int argc, char **argv, char **envp)
 		e_info.pipe_count = e_info.cmd_count - 1;
 		printf("|\n|\n|\n------------------------------\n");
 		while_cmd(&e_lst, &e_info, &env);
-		lstclear_tokens(&e_lst);
+		lstclear_token(&e_lst);
 		if (input != NULL)
 			free(input);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/24 22:15:37 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/25 19:57:00 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,16 +157,16 @@ int				err_msg_cmd(char *cmd, char *detail, char *reason,
 int err_status);
 int				err_msg_cmd2(char *cmd, char *reason, int err_status);
 
-// garbage_collector_utils.c && garbage_collector.c ---> garbage_collector.h
+// garbage*.c ---> garbage_collector.h
+
+// lstclear.c
+void			lstclear_main(t_main_lst **main);
+void			lstclear_token(t_token_dblst **t);
+void			lstclear_redir(t_redir_lst **r);
+void 			lstclear_env(t_env_lst **env);
 
 // cleanup.c
-void			free_tab(char **tab);
-void			lstclear_main(t_main_lst **main);
-void			lstclear_tokens(t_token_dblst **t);
-void 			lstclear_env(t_env_lst **env);
 void			free_data(t_data *d, bool clear_history);
-
-// clean_exit_shell.c
 void			clean_exit_shell(int err_status);
 
 /******************************************************************************\
@@ -197,7 +197,8 @@ t_redir_lst 	*redir_lst_new_node(t_token_type type);
 // display.c
 void			display_export_env(t_env_lst *exp_env);
 void			display_main_lst(t_main_lst *main);
-void			display_token_dblst(t_token_dblst *token);
+void			display_token_dblst(t_token_dblst *t);
+void    		display_redir_lst(t_redir_lst *r);
 
 // features.c
 void			rainbow_txt(const char *str);

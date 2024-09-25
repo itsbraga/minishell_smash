@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_main_lst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 15:10:49 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/25 21:42:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,11 @@ static void	__take_seg_elem(t_token_parser *p)
 	tmp = NULL;
 	if (p->i > p->start)
 	{
-		if (p->main->content[p->i] == '\'' || p->main->content[p->i] == '"')
-		{
-			tmp = ft_strldup(p->main->content + p->start, (p->i - p->start) + 1);
-			if (tmp == NULL)
-				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
-			(void)yama(ADD, tmp, 0);
-			p->seg_elems[p->token_count++] = tmp;
-		}
-		else
-		{
-			tmp = ft_strldup(p->main->content + p->start, (p->i - p->start));
-			if (tmp == NULL)
-				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
-			(void)yama(ADD, tmp, 0);
-			p->seg_elems[p->token_count++] = tmp;
-		}
+		tmp = ft_strldup(p->main->content + p->start, (p->i - p->start));
+		if (tmp == NULL)
+			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+		(void)yama(ADD, tmp, 0);
+		p->seg_elems[p->token_count++] = tmp;
 	}
 }
 
@@ -44,7 +33,6 @@ static void	__init(t_token_parser *p)
 	p->closed_quotes[1] = true;
 	p->i = 0;
 	p->start = p->i;
-	p->was_closed = true;
 }
 
 static void	__get_closed_quotes(t_token_parser *p)
@@ -53,10 +41,15 @@ static void	__get_closed_quotes(t_token_parser *p)
 		p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
 	else if (p->main->content[p->i] == '"')
 		p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
-	if (p->closed_quotes[0] == true && p->closed_quotes[1] == true)
-		p->is_closed = true;
-	else
-		p->is_closed = false;
+}
+
+bool	is_redir(t_token_parser *p)
+{
+	if (p->main->content[p->i] == REDIR_IN || p->main->content[p->i] == HERE_DOC
+		|| p->main->content[p->i] == REDIR_OUT_TRUNC
+		|| p->main->content[p->i] == REDIR_OUT_APPEND)
+		return (true);
+	return (false);
 }
 
 static void __parse_segment(t_token_parser *p)
@@ -65,22 +58,15 @@ static void __parse_segment(t_token_parser *p)
 	while (p->main->content[p->i] != '\0')
 	{
 		__get_closed_quotes(p);
-		if (p->is_closed == true && p->was_closed == false)
-		{
-			__take_seg_elem(p);
-			p->i++;
-			p->start = p->i;
-		}
-		else if (p->is_closed == true && p->main->content[p->i] == ' ')
-		{
-			__take_seg_elem(p);
-			while (p->main->content[p->i] == ' ')
-				p->i++;
-			p->start = p->i;
-		}
-		else
-			p->i++;
-		p->was_closed = p->is_closed; // permet de garder une trace de l'etat precedent des guillemets
+		if (p->main->content[p->i] == ' ' && p->closed_quotes[0] == true && p->closed_quotes[1] == true)
+        {
+            __take_seg_elem(p);
+            while (ft_isspace(p->main->content[p->i]) == 1)
+                p->i++;
+            p->start = p->i; // Redéfinir le début pour le prochain token
+        }
+        else
+            p->i++;
 		if (p->main->content[p->i] == '\0' && (p->i > p->start))
 			__take_seg_elem(p);
 	}

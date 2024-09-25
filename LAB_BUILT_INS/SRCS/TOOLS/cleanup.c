@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:47:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	lstclear_env(t_env_lst **env)
     }
 }
 
-void	lstclear_tokens(t_token **t)
+void	lstclear_token(t_token **t)
 {
 	t_token	*tmp;
 	
@@ -66,7 +66,7 @@ void    free_global(t_global *g, bool clear_history)
 		if (g->input != NULL)
 			free(g->input);
 		if (g->token != NULL)
-			lstclear_tokens(&g->token);
+			lstclear_token(&g->token);
 		if (clear_history == true)
 		{
 			if (g->env != NULL)

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/11 18:53:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:47:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ size_t idx_exp_env);
 t_token		*new_node(char *content);
 t_token		*last_node(t_token *t);
 void		add_back(t_token **t, t_token *new_node);
-void		lstclear_tokens(t_token **t);
+void		lstclear_token(t_token **t);
 void		display_tokens(t_token *t);
 
 void		exec_built_in(char **built_in, t_global *g);

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/25 17:04:29 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:36:19 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	lst_tokenization(t_token_dblst *t)
 	t_token_dblst	*head;
 	t_exec_lst		exec;
 
-	ft_bzero(&exec, sizeof(exec));
 	head = t;
+	ft_bzero(&exec, sizeof(exec));
 	while (head != NULL)
 	{
 		if (head->prev != NULL)
