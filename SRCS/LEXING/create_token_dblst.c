@@ -3,41 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   create_token_dblst.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/25 20:01:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 01:42:22 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	create_token_dblst(t_main_lst *main)
+static char	**__get_all_seg_elems(t_main_lst *main)
+{
+	t_token_parser	p;
+	size_t			seg_len;
+	
+	ft_bzero(&p, sizeof(p));
+	p.main = main;
+	if (p.main == NULL || p.main->content == NULL)
+		return (NULL);
+	seg_len = ft_strlen(main->content);
+	p.seg_elems = yama(CREATE_TAB, NULL, (sizeof(char *) * (seg_len + 1)));
+	if (p.seg_elems == NULL)
+		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+	while (p.main->content[p.i] != '\0')
+		parse_segment(&p);
+	p.seg_elems[p.token_count] = NULL;
+	return (p.seg_elems);
+}
+
+int	create_token_dblst(t_data *d)
 {
 	t_token_dblst	*new_token;
 	char			**seg_elems;
-	t_redir_lst		*redir;
 
-	redir = NULL;
-	while (main != NULL)
+	while (d->main != NULL)
 	{
-		main->tokens = NULL;
-		seg_elems = get_all_seg_elems(main);
+		// d->main->token = NULL;
+		seg_elems = __get_all_seg_elems(d->main);
 		if (seg_elems == NULL)
 			return (err_msg("malloc", ERR_MALLOC, 0), FAILURE);
 		while (*seg_elems != NULL)
 		{
-			new_token = token_dblst_new_node(*seg_elems, -1);
-			printf(BOLD BLUE "new_token:\t [" R "%s" BOLD BLUE "]\n" R, new_token->content);
+			new_token = token_dblst_new_node(*seg_elems, UNKNOWN);
 			if (new_token == NULL)
 				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 			(void)yama(ADD, new_token, 0);
-			token_dblst_add_back(&main->tokens, new_token);
+			token_dblst_add_back(&(d->token), new_token);
 			seg_elems++;
 		}
-		lst_tokenization(main->tokens);
-		fill_redir_lst(main->tokens, &redir);
-		main = main->next;
+		lst_tokenization(d->token);
+		display_token_dblst(d->token);
+		create_redir_lst(&(d->exec->redir), d->token);
+		d->main = d->main->next;
 	}
 	return (SUCCESS);
 }

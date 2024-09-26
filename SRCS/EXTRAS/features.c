@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   features.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/20 17:47:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/26 23:38:06 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	rainbow_txt(const char *str)
 		printf("%s%c", colors[i % nb_colors], str[i]);
 		i++;
 	}
-	printf("%s\n", RESET);
+	printf("%s\n", R);
 }
 
 void	rainbow_txt_nonl(const char *str)
@@ -45,7 +45,7 @@ void	rainbow_txt_nonl(const char *str)
 		printf("%s%c", colors[i % nb_colors], str[i]);
 		i++;
 	}
-	printf(RESET);
+	printf(R);
 }
 
 char	*rainbow_prompt(const char *str)
@@ -55,7 +55,7 @@ char	*rainbow_prompt(const char *str)
 	int			i;
 	size_t		len;
 
-	len = ft_strlen(str) * (10 + 4) + ft_strlen(RESET) + 5;
+	len = ft_strlen(str) * (10 + 4) + ft_strlen(R) + 5;
 	colored_str = yama(CREATE, NULL, len);
 	if (colored_str == NULL)
 		return (NULL);
@@ -69,6 +69,6 @@ char	*rainbow_prompt(const char *str)
 		ft_strcat(colored_str, (char[]){str[i], '\0'});
 		i++;
 	}
-	ft_strcat(colored_str, "\001" RESET "\002");
+	ft_strcat(colored_str, "\001" R "\002");
 	return (colored_str);
 }

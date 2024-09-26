@@ -10,6 +10,7 @@
         "ft_printf.h": "c",
         "get_next_line_bonus.h": "c",
         "structs.h": "c",
-        "numbers": "c"
+        "numbers": "c",
+        "minishell.h": "c"
     }
 }

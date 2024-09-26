@@ -25,6 +25,7 @@ static char	*__generate_prompt(void)
 {
 	char	*username;
 	char	*rb_username;
+	char	*header;
 	char	*part1;
 	char	*prompt;
 	
@@ -32,11 +33,13 @@ static char	*__generate_prompt(void)
 	if (username == NULL)
 		username = "unknown";
 	rb_username = rainbow_prompt(username);
-	part1 = ft_strjoin("\001" BOLD "\002" "[", rb_username);
+	header = ft_strjoin("\001" BOLD PROMPT_BAR "\002", "\001" BOLD "[" "\002");
+	part1 = ft_strjoin(header, rb_username);
+	free(header);
 	free(rb_username);
-	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" RESET "\002 $> ");
+	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" R "\002 $> ");
 	free(part1);
-	(void)yama(ADD, prompt, 0); // verifier si on laisse yama le free ou bien free_data
+	(void)yama(ADD, prompt, 0);
 	return (prompt);
 }
 

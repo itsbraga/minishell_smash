@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstclear.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/25 20:03:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 01:44:39 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,35 @@ void	lstclear_redir(t_redir_lst **r)
 		(*r)->outfile = NULL;
 		free(*r);
 		(*r) = tmp;
+	}
+}
+
+void	lstclear_exec(t_exec_lst **e)
+{
+	t_exec_lst	*tmp;
+	int			i;
+	
+	if (e == NULL || (*e) == NULL)
+		return ;
+	while ((*e) != NULL)
+	{
+		tmp = (*e)->next;
+		(*e)->next = NULL;
+		// if ((*e)->redir != NULL)
+		// 	lstclear_redir(&(*e)->redir);
+		free((*e)->bin_path);
+		(*e)->bin_path = NULL;
+        if ((*e)->cmd != NULL)
+        {
+            i = 0;
+            while ((*e)->cmd[i] != NULL)
+                free((*e)->cmd[i++]);
+                i++;
+            free((*e)->cmd);
+            (*e)->cmd = NULL;
+        }
+		free(*e);
+		(*e) = tmp;
 	}
 }
 

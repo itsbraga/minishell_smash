@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:06:09 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/24 21:20:57 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 01:49:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_redir_lst *redir_lst_new_node(t_token_type type)
 	if (new_node == NULL)
 	{
 		err_msg("malloc", ERR_MALLOC, 0);
-		return (NULL);
+		clean_exit_shell(FAILURE);
 	}
 	new_node->type = type;
     new_node->limiter = NULL;
@@ -43,6 +43,8 @@ void	redir_lst_add_back(t_redir_lst **r, t_redir_lst *new_node)
 {
 	t_redir_lst	*tmp;
 
+	if (r == NULL)
+		return ;
 	if ((*r) == NULL)
 		*r = new_node;
 	else
@@ -65,4 +67,9 @@ size_t	get_redir_lst_size(t_redir_lst **r)
 		node = node->next;
 	}
 	return (size);
+}
+
+bool	is_redir(char *str)
+{
+	return (*str == '<' || *str == '>');
 }

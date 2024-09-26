@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/25 20:36:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 00:36:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static int	__minishell(t_data *d)
 			if (create_main_lst(d, user_input) == FAILURE)
 				return (FAILURE);
 			display_main_lst(d->main);
-			if (create_token_dblst(d->main) == FAILURE)
+			if (create_token_dblst(d->main, d->exec) == FAILURE)
 				return (FAILURE);
-			free(user_input);
 		}
+		free(user_input);
 	}
 	return (SUCCESS);
 }
@@ -43,13 +43,12 @@ int	main(int argc, char **argv, char **envp)
 	d = get_data_instance();
 	if (argc != 1)
 	{
-		ft_printf(STDOUT_FILENO, BOLD YELLOW "No arguments allowed\n" RESET);
+		ft_printf(STDOUT_FILENO, BOLD YELLOW "No arguments allowed\n" R);
 		clean_exit_shell(FAILURE);
 	}
-	printf("\n%s", BOLD WELCOME_BANNER RESET);
+	printf("\n%s", BOLD WELCOME_BANNER R);
 	create_env(d, envp);
 	__minishell(d);
-	// printf("%s\n", BOLD BLUE BYE_MSG RESET);
 	// clean_exit_shell(SUCCESS);
 	return (SUCCESS);
 }

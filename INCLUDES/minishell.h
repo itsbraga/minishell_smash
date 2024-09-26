@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/25 19:57:00 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 01:50:12 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,24 @@ t_data			*get_data_instance(void);
  * LEXING
 \******************************************************************************/
 
-// fill_redir_lst.c
-void			fill_redir_lst(t_token_dblst *t, t_redir_lst **r_head);
+// create_redir_lst.c
+void			create_redir_lst(t_redir_lst **r_head, t_token_dblst *t);
 
 // check_main_lst.c
-char			**get_all_seg_elems(t_main_lst *main);
+void			parse_segment(t_token_parser *p);
 
 // identify_token.c
 void			lst_tokenization(t_token_dblst *t);
 
 // create_token_lst.c
-int				create_token_dblst(t_main_lst *main);
+int				create_token_dblst(t_data *d);
 
 /******************************************************************************\
  * PARSING
 \******************************************************************************/
 
 // check_input.c
-char			**split_user_input(char *input);
+void			parse_input(t_parser *p);
 
 // create_main_lst.c
 int				create_main_lst(t_data *d, char *user_input);
@@ -155,7 +155,6 @@ void			exec_built_in(char **built_in, t_data *d);
 void			err_msg(char *detail, char *reason, int quotes);
 int				err_msg_cmd(char *cmd, char *detail, char *reason,
 int err_status);
-int				err_msg_cmd2(char *cmd, char *reason, int err_status);
 
 // garbage*.c ---> garbage_collector.h
 
@@ -163,6 +162,7 @@ int				err_msg_cmd2(char *cmd, char *reason, int err_status);
 void			lstclear_main(t_main_lst **main);
 void			lstclear_token(t_token_dblst **t);
 void			lstclear_redir(t_redir_lst **r);
+void			lstclear_exec(t_exec_lst **e);
 void 			lstclear_env(t_env_lst **env);
 
 // cleanup.c
@@ -186,9 +186,15 @@ t_token_dblst *new_node);
 t_token_dblst	*token_dblst_new_node(char *content, t_token_type type);
 
 // redir_lst.c
+bool			is_redir(char *str);
 size_t			get_redir_lst_size(t_redir_lst **r);
 void			redir_lst_add_back(t_redir_lst **r, t_redir_lst *new_node);
 t_redir_lst 	*redir_lst_new_node(t_token_type type);
+
+// exec_lst.c
+size_t			get_exec_lst_size(t_exec_lst **e);
+void			exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node);
+t_exec_lst 		*exec_lst_new_node(t_token_dblst *t);
 
 /******************************************************************************\
  * EXTRAS

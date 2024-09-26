@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/25 17:03:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 01:46:50 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 typedef enum 	e_token_type
 {
-	COMMAND = 0,
+	UNKNOWN = -1,
+	COMMAND,				// 0
 	WORD,					// 1
 	REDIR_IN,				// 2
 	INFILE,					// 3
@@ -38,6 +39,7 @@ typedef struct s_parser
 
 typedef struct s_token_dblst
 {
+	t_exec_lst				*exec;
 	t_token_type			type;
 	char					*content;
 	struct s_token_dblst	*prev;
@@ -58,7 +60,7 @@ typedef struct s_token_parser
 
 typedef struct s_main_lst
 {
-	t_token_dblst		*tokens;
+	// t_token_dblst		*token;
 	char				*content;
 	struct s_main_lst	*next;
 }				t_main_lst;
@@ -103,7 +105,7 @@ typedef struct s_data
 	char			*prompt;
 	t_main_lst		*main;
 	t_token_dblst	*token;
-	t_exec_info		e_info;
+	t_exec_info		info;
 	t_exec_lst		*exec;
 	t_env_lst		*env;
 	t_env_lst		*exp_env;

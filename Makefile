@@ -50,7 +50,7 @@ INIT_F			=	init_data.c
 
 LEXING_DIR		=	LEXING/
 LEXING_F		=	check_main_lst.c identify_token.c create_token_dblst.c \
-					fill_redir_lst.c
+					create_redir_lst.c
 
 PARSING_DIR		=	PARSING/
 PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c check_input.c \
@@ -61,7 +61,7 @@ TOOLS_F			=	error.c lstclear.c cleanup.c garbage_collector.c \
 					garbage_collector_utils.c
 
 LISTS_U_DIR		=	TOOLS/LISTS_UTILS/
-LISTS_U_F		=	main_lst.c token_dblst.c redir_lst.c
+LISTS_U_F		=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
 
 EXTRAS_DIR		=	EXTRAS/
 EXTRAS_F		=	display.c features.c

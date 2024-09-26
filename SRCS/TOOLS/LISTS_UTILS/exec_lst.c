@@ -1,68 +1,67 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_lst.c                                         :+:      :+:    :+:   */
+/*   exec_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/27 00:18:00 by art3mis          ###   ########.fr       */
+/*   Created: 2024/09/27 01:00:46 by art3mis           #+#    #+#             */
+/*   Updated: 2024/09/27 01:50:01 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_main_lst	*main_lst_new_node(char *content)
+t_exec_lst *exec_lst_new_node(t_token_dblst *t)
 {
-	t_main_lst	*new_node;
+	t_exec_lst	*new_node;
 	
-	new_node = yama(CREATE, NULL, sizeof(t_main_lst));
+	new_node = yama(CREATE, NULL, sizeof(t_exec_lst));
 	if (new_node == NULL)
 	{
 		err_msg("malloc", ERR_MALLOC, 0);
 		clean_exit_shell(FAILURE);
 	}
-	new_node->content = ft_strdup(content);
-	if (new_node->content == NULL)
-	{
-		free(new_node);
-		err_msg("malloc", ERR_MALLOC, 0);
-		clean_exit_shell(FAILURE);
-	}
-	(void)yama(ADD, new_node->content, 0);
+	new_node->redir = NULL;
+	new_node->heredoc_nb = t->exec->heredoc_nb;
+	new_node->absolute_path = false;
+	new_node->bin_path = NULL;
+	new_node->cmd = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
 
-static t_main_lst	*__main_lst_last_node(t_main_lst *main)
+static t_exec_lst	*__exec_lst_last_node(t_exec_lst *e)
 {
-	if (main == NULL)
+	if (e == NULL)
 		return (NULL);
-	while (main->next != NULL)
-		main = main->next;
-	return (main);
+	while (e->next != NULL)
+		e = e->next;
+	return (e);
 }
 
-void	main_lst_add_back(t_main_lst **main, t_main_lst *new_node)
+void	exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node)
 {
-	t_main_lst	*tmp;
+	t_exec_lst	*tmp;
 
-	if ((*main) == NULL)
-		*main = new_node;
+	if (e == NULL)
+		return ;
+	if ((*e) == NULL)
+		*e = new_node;
 	else
 	{
-		tmp = __main_lst_last_node(*main);
+		tmp = __exec_lst_last_node(*e);
 		tmp->next = new_node;
 	}
 }
 
-size_t	get_main_lst_size(t_main_lst **main)
+size_t	get_exec_lst_size(t_exec_lst **e)
 {
 	size_t		size;
-	t_main_lst	*node;
+	t_exec_lst	*node;
 
 	size = 0;
-	node = *main;
+	node = *e;
 	while (node != NULL)
 	{
 		size++;
