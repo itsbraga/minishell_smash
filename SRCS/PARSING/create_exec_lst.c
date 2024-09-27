@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 02:44:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/28 00:58:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,67 @@
 // 	return (cleaned);
 // }
 
-static void	__secure_malloc(t_exec_lst *new_task)
+// manque absolute_path + bin_path
+
+static int	__cmd_token_count(t_token_dblst *t)
 {
-	if (new_task == NULL)
+	int	count;
+
+	count = 0;
+	while (t != NULL)
 	{
-		err_msg("malloc", ERR_MALLOC, 0);
-		clean_exit_shell(FAILURE);
+		printf("Token type: %d, content: %s\n", t->type, t->content);
+		if (t->type == COMMAND || t->type == WORD)
+			count++;
+		t = t->next;
 	}
+	return (count);
 }
 
-// // manque absolute_path + bin_path
 int	create_exec_lst(t_data *d)
 {
 	t_exec_lst	*new_task;
 	int			i;
 	// char		*cleaned_token;
 
-	if (d->main == NULL || d->main->content == NULL)
+	if (d->token == NULL || d->token->content == NULL)
 		return (FAILURE);
-	while (d->main != NULL)
+	while (d->token != NULL)
 	{
-		i = 0;
 		if (d->token->type == COMMAND)
 		{
-			new_task = exec_lst_new_node(d);
-			__secure_malloc(new_task);
-			new_task->cmd[0] = d->token->content;
+			i = 0;
+			new_task = exec_lst_new_node();
+			printf(RED "new_task: %p\n" R, new_task);
+			secure_malloc(new_task);
+			// new_task->cmd = yama(CREATE_TAB, NULL, (sizeof(char *) * (__cmd_token_count(d->token) + 1)));
+			new_task->cmd = malloc(sizeof(char *) * (__cmd_token_count(d->token) + 1));
+			secure_malloc(new_task->cmd);
+			printf(RED "i: %d, token content: %s\n" R, i, d->token->content);
+			new_task->cmd[i] = ft_strdup(d->token->content);
+			printf(BP "node_cmd[0]:\t [" R "%s" BP "]\n" R, new_task->cmd[0]);
+			i++;
+			// (void)yama(ADD, new_task->cmd[i], 0);
 		}
-		if (d->token->type == WORD)
+		else if (d->token->type == WORD)
 		{
-			new_task = exec_lst_new_node(d);
-			__secure_malloc(new_task);
-			new_task->cmd[i] = d->token->content;
+			i = 0;
+			new_task->cmd[i] = ft_strdup(d->token->content);
+			printf(BP "node_cmd[i]:\t [" R "%s" BP "]\n" R, new_task->cmd[i]);
+			i++;
+			// (void)yama(ADD, new_task->cmd[i], 0);
 		}
-		exec_lst_add_back(&(d->exec), new_task);
-		i++;
-		d->main = d->main->next;
+		else if (d->token->type == HERE_DOC)
+		{
+			new_task->heredoc_nb++;
+			printf(ITAL "\nheredoc_nb: %d\n\n" R, new_task->heredoc_nb);		
+		}
+		d->token = d->token->next;
+		if (d->token == NULL)
+		{
+			new_task->cmd[i] = NULL;
+			exec_lst_add_back(&(d->exec), new_task);
+		}
 	}
 	return (SUCCESS);
 }

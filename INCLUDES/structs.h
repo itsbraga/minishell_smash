@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 02:26:26 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:16:27 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct s_token_parser
 
 typedef struct s_main_lst
 {
-	// t_token_dblst		*token;
 	char				*content;
 	struct s_main_lst	*next;
 }				t_main_lst;

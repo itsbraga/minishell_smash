@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/26 23:38:06 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 23:00:40 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ char	*rainbow_prompt(const char *str)
 
 	len = ft_strlen(str) * (10 + 4) + ft_strlen(R) + 5;
 	colored_str = yama(CREATE, NULL, len);
-	if (colored_str == NULL)
-		return (NULL);
+	secure_malloc(colored_str);
 	colored_str[0] = '\0';
 	i = 0;
 	while (str[i] != '\0')

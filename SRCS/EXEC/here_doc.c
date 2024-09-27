@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/24 22:04:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:55:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		open_heredoc(char *limiter)
 	if (pipe(fd) == -1)
 	{
 		err_msg(NULL, strerror(errno), 0);
-		clean_exit_shell(1);
+		clean_exit_shell(FAILURE);
 	}
 	while (1)
 	{
@@ -44,11 +44,11 @@ int		open_heredoc(char *limiter)
 int	fill_all_heredoc(t_redir_lst *r)
 {
 	t_redir_lst *node;
-	int			lastest_read_fd;
+	int			latest_read_fd;
 	char		*tmp;
 
 	node = r;
-	lastest_read_fd = 0;
+	latest_read_fd = 0;
 	tmp = NULL;
 	while (node != NULL)
 	{
@@ -57,9 +57,9 @@ int	fill_all_heredoc(t_redir_lst *r)
 			tmp = node->limiter;
 			node->limiter = ft_strjoin(node->limiter, "\n");
 			yama(REMOVE, tmp, 0);
-			lastest_read_fd = open_heredoc(node->limiter);
+			latest_read_fd = open_heredoc(node->limiter);
 		}
 		node = node->next;
 	}
-	return (lastest_read_fd);
+	return (latest_read_fd);
 }

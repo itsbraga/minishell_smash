@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/24 19:03:36 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/27 22:56:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	while_cmd(t_exec_lst **e_lst, t_exec_info *e_info, t_env_lst **env)
 		if (e_info->child_pid == -1)
 			clean_exit();
 		if (!e_info->child_pid)
-			pathfinder(node, node->r, e_info, envtab);
+			pathfinder(node, node->redir, e_info, envtab);
 		else
 			parent();
 		node = node->next;

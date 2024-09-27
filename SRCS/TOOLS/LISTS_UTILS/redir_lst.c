@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:06:09 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 01:49:26 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:44:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ t_redir_lst *redir_lst_new_node(t_token_type type)
 	t_redir_lst	*new_node;
 	
 	new_node = yama(CREATE, NULL, sizeof(t_redir_lst));
-	if (new_node == NULL)
-	{
-		err_msg("malloc", ERR_MALLOC, 0);
-		clean_exit_shell(FAILURE);
-	}
+	secure_malloc(new_node);
 	new_node->type = type;
     new_node->limiter = NULL;
     new_node->infile = NULL;

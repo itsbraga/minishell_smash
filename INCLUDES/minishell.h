@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/27 02:35:13 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:38:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ t_data			*data_struct(void);
  * LEXING
 \******************************************************************************/
 
-// create_redir_lst.c
-int				create_redir_lst(t_redir_lst **r_head, t_token_dblst *t);
-
 // check_main_lst.c
 void			parse_segment(t_token_parser *p);
 
@@ -90,6 +87,9 @@ int 			del_unwanted_char(t_main_lst *main);
 // del_quotes.c
 char			*del_empty_quotes(char *str, int quote_idx);
 char			*del_quote_pair(char *str, int first, int second);
+
+// create_redir_lst.c
+int				create_redir_lst(t_data *d);
 
 // create_exec_lst.c
 int				create_exec_lst(t_data *d);
@@ -161,6 +161,9 @@ int err_status);
 
 // garbage*.c ---> garbage_collector.h
 
+// secure_malloc.c
+void    		secure_malloc(void *to_secure);
+
 // lstclear.c
 void			lstclear_main(t_main_lst **main);
 void			lstclear_token(t_token_dblst **t);
@@ -197,7 +200,7 @@ t_redir_lst 	*redir_lst_new_node(t_token_type type);
 // exec_lst.c
 size_t			get_exec_lst_size(t_exec_lst **e);
 void			exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node);
-t_exec_lst 		*exec_lst_new_node(t_data *d);
+t_exec_lst 		*exec_lst_new_node(void);
 
 /******************************************************************************\
  * EXTRAS

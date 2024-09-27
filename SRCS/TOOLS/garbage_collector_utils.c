@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/25 19:44:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:49:01 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	*new_gc_node(void *ptr, bool is_tab)
 	t_gc_lst	*node;
 
 	node = malloc(sizeof(t_gc_lst));
+	// secure_malloc(node);
 	if (node == NULL)
 		return (NULL);
 	node->ptr = ptr;

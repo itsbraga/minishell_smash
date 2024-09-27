@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/24 22:05:07 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:53:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec(char *path_bin, char **cmd_and_args, char **env)
 	{
 		free(path_bin);
 		path_bin = NULL;
-		return ; //à changer
+		return ; // à changer
 	}
 }
 
@@ -32,16 +32,16 @@ int	check_bin_path(t_exec_lst *node, bool absolute_path)
 			err_msg_cmd2(node->cmd[0], ERR_CMD, 127);
 		free(node->bin_path);
 		node->bin_path = NULL;
-		return (1);
+		return (FAILURE);
 	}
 	else if (access(node->bin_path, X_OK) == -1)
 	{
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
 		free(node->bin_path);
 		node->bin_path = NULL;
-		return (1);
+		return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 static int	handle_bin_path(t_exec_lst *node, char **env)
@@ -74,6 +74,6 @@ void	go_exec(t_exec_lst *node, char **env)
 	if (handle_bin_path(node, env) == 0)
 		exec(node->bin_path, node->cmd, env);
 	else
-		return;
+		return ;
 }
 // gerer le cas des redirections seules (aucune commande)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/25 14:04:46 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:56:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	redirection_out(t_redir_lst *r)
 
 void	pathfinder(t_exec_lst *node, t_redir_lst *r, t_exec_info *e_info, char **env)
 {
-	t_token_type	lastest_red_in;
+	t_token_type	latest_red_in;
 	int				last_heredoc_fd;
 	int 			error;
 
@@ -60,14 +60,14 @@ void	pathfinder(t_exec_lst *node, t_redir_lst *r, t_exec_info *e_info, char **en
 	while (r != NULL)
 	{
 		if (r->type == REDIR_IN || r->type == HERE_DOC)
-			lastest_red_in = r->type;
+			latest_red_in = r->type;
 		if (r->type == REDIR_IN)
 			error = redirection_in(r);
 		else if (r->type == REDIR_OUT_TRUNC || r->type == REDIR_OUT_APPEND)
 			error = redirection_out(r);
 		r = r->next;
 	}
-	if (lastest_red_in == HERE_DOC)
+	if (latest_red_in == HERE_DOC)
 	{
 		dup2(last_heredoc_fd, STDIN_FILENO);
 		close(last_heredoc_fd);

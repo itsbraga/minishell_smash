@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/24 22:04:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:50:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ int	check_bin_path(t_exec_lst *node, bool absolute_path)
 			err_msg_cmd2(node->cmd[0], ERR_CMD, 127);
 		free(node->bin_path);
 		node->bin_path = NULL;
-		return (1);
+		return (FAILURE);
 	}
 	else if (access(node->bin_path, X_OK) == -1)
 	{
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
 		free(node->bin_path);
 		node->bin_path = NULL;
-		return (1);
+		return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 char	*search_path(char **tab_path, char **env)
@@ -41,7 +41,7 @@ char	*search_path(char **tab_path, char **env)
 
 	all_path = NULL;
 	i = 0;
-	while (env[i])
+	while (env[i] != NULL)
 	{
 		if (ft_strncmp(env[i], "PATH", 4) != 0)
 			i++;
@@ -51,13 +51,13 @@ char	*search_path(char **tab_path, char **env)
 			break;
 		}
 	}
-	if (all_path)
+	if (all_path != NULL)
 	{
 		tab_path = yama(ADD_TAB, ft_split(all_path, ':'), 0);
 		if (tab_path == NULL)
 		{
 			perror("malloc");
-			clean_exit_shell(1);
+			clean_exit_shell(FAILURE);
 		}
 	}
 	return (tab_path);

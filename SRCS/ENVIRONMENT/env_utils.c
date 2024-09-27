@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 15:45:24 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:58:25 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,9 @@ t_env_lst	*env_new_var(char *content)
 	t_env_lst	*new_var;
 
 	new_var = yama(CREATE, NULL, sizeof(t_env_lst));
-	if (new_var == NULL)
-	{
-		err_msg("malloc", ERR_MALLOC, 0);
-		clean_exit_shell(FAILURE);
-	}
+	secure_malloc(new_var);
 	new_var->content = ft_strdup(content);
-	if (new_var->content == NULL)
-	{
-		err_msg("malloc", ERR_MALLOC, 0);
-		clean_exit_shell(FAILURE);
-	}
+	secure_malloc(new_var->content);
 	(void)yama(ADD, new_var->content, 0);
 	new_var->next = NULL;
 	return (new_var);

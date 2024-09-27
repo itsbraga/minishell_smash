@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 00:09:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:40:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static void	__take_seg_elem(t_token_parser *p)
 	if (p->i > p->start)
 	{
 		tmp = ft_strldup(p->main->content + p->start, (p->i - p->start));
-		if (tmp == NULL)
-			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+		secure_malloc(tmp);
 		(void)yama(ADD, tmp, 0);
 		p->seg_elems[p->token_count] = tmp;
 		p->token_count++;

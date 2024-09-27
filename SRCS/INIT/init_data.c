@@ -34,12 +34,14 @@ static char	*__generate_prompt(void)
 		username = "unknown";
 	rb_username = rainbow_prompt(username);
 	header = ft_strjoin("\001" BOLD PROMPT_BAR "\002", "\001" BOLD "[" "\002");
+	secure_malloc(header);
 	part1 = ft_strjoin(header, rb_username);
-	free(header);
-	free(rb_username);
+	secure_malloc(part1);
+	(free(header), free(rb_username));
 	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" R "\002 $> ");
-	free(part1);
+	secure_malloc(prompt);
 	(void)yama(ADD, prompt, 0);
+	free(part1);
 	return (prompt);
 }
 
@@ -50,12 +52,8 @@ t_data	*data_struct(void)
 
 	if (instance == NULL)
 	{
-		instance = (t_data *)malloc(sizeof(t_data));
-		if (instance == NULL)
-		{
-			err_msg("malloc", ERR_MALLOC, 0);
-			clean_exit_shell(FAILURE);
-		}
+		instance = yama(CREATE, NULL, sizeof(t_data));
+		secure_malloc(instance);
 		instance->prompt = __generate_prompt();
 		if (instance->prompt == NULL)
 			clean_exit_shell(FAILURE);

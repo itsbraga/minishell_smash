@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 15:44:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:57:54 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int	create_env_list(t_env_lst **env, char **envp)
 	while (envp[i] != NULL)
 	{
 		var = env_new_var(envp[i]);
-		if (var == NULL)
-			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+		secure_malloc(var);
 		if (last == NULL)
 			*env = var;
 		else
@@ -81,13 +80,11 @@ static void	__update_shlvl(t_env_lst *env)
 			var_value = ft_atoi(head->content + 6, 0);
 			var_value += 1;
 			new_value = ft_itoa(var_value);
-			if (new_value == NULL)
-				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+			secure_malloc(new_value);
 			(void)yama(ADD, new_value, 0);
 			free(head->content);
 			head->content = ft_strjoin("SHLVL=", new_value);
-			if (head->content == NULL)
-				(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+			secure_malloc(head->content);
 			(void)yama(ADD, head->content, 0);
 			free(new_value);
 		}

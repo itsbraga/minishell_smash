@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 00:42:19 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:40:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	parse_input(t_parser *p)
 		p->i++;
 	}
 	tmp = ft_strldup(p->user_input + p->start, (p->i - p->start));
-	if (tmp == NULL)
-		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+	secure_malloc(tmp);
 	(void)yama(ADD, tmp, 0);
 	p->segment[p->seg_count] = tmp;
 	p->seg_count++;

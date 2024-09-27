@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/23 18:40:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 23:00:03 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static char	*__clean_translated_variable(char *str, char *var)
 	int		i;
 	
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 2)));
-	if (new_str == NULL)
-		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+	secure_malloc(new_str);
 	i = 0;
 	while (str != (var - 1))
 		new_str[i++] = *str++;
@@ -41,8 +40,7 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 
 	end_var = var + var_size;
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - var_size)));
-	if (new_str == NULL)
-		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+	secure_malloc(new_str);
 	ft_strlcpy(new_str, str, (var - str));
 	ft_strcpy(new_str + ((var - 1) - str), end_var);
 	free(str);
@@ -65,8 +63,7 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 			|| var[len_var] == '_')
 		len_var++;
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) + (vv_size - len_var))));
-	if (new_str == NULL)
-		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+	secure_malloc(new_str);
 	i = 0;
 	while (str != (var - 1))
 		new_str[i++] = *str++;
@@ -90,8 +87,7 @@ static char	*__handle_expand(t_data *d, char *str, char *var)
 	if (*var == '?')
 	{
 		var_value = ft_itoa(d->last_exit_status);
-		if (var_value == NULL)
-			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+		secure_malloc(var_value);
 		(void)yama(ADD, var_value, 0);
 		str = __add_var_value(str, var, var_value, ft_strlen(var_value));
 	}

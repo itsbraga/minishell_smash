@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/27 00:18:00 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 22:44:25 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ t_main_lst	*main_lst_new_node(char *content)
 	t_main_lst	*new_node;
 	
 	new_node = yama(CREATE, NULL, sizeof(t_main_lst));
-	if (new_node == NULL)
-	{
-		err_msg("malloc", ERR_MALLOC, 0);
-		clean_exit_shell(FAILURE);
-	}
+	secure_malloc(new_node);
 	new_node->content = ft_strdup(content);
 	if (new_node->content == NULL)
 	{

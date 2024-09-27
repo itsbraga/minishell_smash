@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 03:03:06 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/28 00:32:12 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,38 @@ static t_token_type	__classify(char *token, char *prev)
 void	lst_tokenization(t_token_dblst *t)
 {
 	t_token_dblst	*head;
-	t_exec_lst		exec;
+	// t_exec_lst		exec;
 
 	head = t;
-	ft_bzero(&exec, sizeof(exec));
-	// data_struct()->exec = NULL;
+	// ft_bzero(&exec, sizeof(exec));
 	while (head != NULL)
 	{
 		if (head->prev != NULL)
 			head->type = __classify(head->content, head->prev->content);
 		else
 			head->type = __classify(head->content, NULL);
-		if (head->type == HERE_DOC)
-		{
-			exec.heredoc_nb++;
-			// data_struct()->exec->heredoc_nb = exec.heredoc_nb;
-		}
+		// if (head->type == HERE_DOC)
+		// 	exec.heredoc_nb++;
 		head = head->next;
 	}
-	printf(ITAL "\nHERE_DOC count: %d\n\n" R, exec.heredoc_nb);
-	// printf(ITAL "\n2--- HERE_DOC count: %d\n\n" R, data_struct()->exec->heredoc_nb);
+	// printf(ITAL "\nHERE_DOC count: %d\n\n" R, exec.heredoc_nb);
 }
+
+// void	lst_tokenization(t_token_dblst *t)
+// {
+// 	t_token_dblst	*head;
+
+// 	head = t;
+// 	data_struct()->exec = NULL;
+// 	while (head != NULL)
+// 	{
+// 		if (head->prev != NULL)
+// 			head->type = __classify(head->content, head->prev->content);
+// 		else
+// 			head->type = __classify(head->content, NULL);
+// 		if (head->type == HERE_DOC)
+// 			data_struct()->exec->heredoc_nb++;
+// 		head = head->next;
+// 	}
+// 	printf(ITAL "\nHERE_DOC count: %d\n\n" R, data_struct()->exec->heredoc_nb);
+// }

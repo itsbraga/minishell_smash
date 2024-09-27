@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 15:43:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:59:11 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ static char	*__take_var_value(char *str)
 	while (str[i] != '=')
 		i++;
 	value = ft_strdup((str + i + 1));
-	if (value == NULL)
-		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+	secure_malloc(value);
 	(void)yama(ADD, value, 0);
 	return (value);
 }
@@ -55,8 +54,7 @@ char	*take_var(char *str, char *var)
 			|| str[j] == '_'))
 		j++;
 	to_find = ft_strldup(&str[i], (j - i));
-	if (to_find == NULL)
-		(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+	secure_malloc(to_find);
 	(void)yama(ADD, to_find, 0);
 	return (to_find);
 }
@@ -71,8 +69,7 @@ char 	*search_var(char *to_find, t_env_lst *env)
 	while (node != NULL)
 	{
 		to_cmp = ft_strldup(node->content, len_to_equal(node->content));
-		if (to_cmp == NULL)
-			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
+		secure_malloc(to_cmp);
 		(void)yama(ADD, to_cmp, 0);
 		if (ft_strcmp(to_find, to_cmp) == 0)
 		{
