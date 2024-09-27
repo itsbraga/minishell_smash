@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/23 18:40:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:42:41 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static char	*__handle_expand(t_data *d, char *str, char *var)
 }
 
 //EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
-char	*expand(t_data *d, char *str)
+char	*expand(t_data *d, char *str, bool in_heredoc)
 {
 	int		i;
 	bool 	closed_quotes[2];
@@ -137,6 +137,7 @@ char	*expand(t_data *d, char *str)
 		}
 		i++;
 	}
-	str = empty_quotes(str);
+	if (in_heredoc == false)
+		str = empty_quotes(str);
 	return (str);
 }

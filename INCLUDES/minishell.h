@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/27 02:35:13 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 21:42:27 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ bool			unclosed_quotes_return(bool closed[]);
 // handle_quotes.c
 bool			unclosed_quotes(char *str);
 char			*empty_quotes(char *str);
+char			*other_quotes(char *str);
 char			*handle_quotes_modif(char *user_input);
 
 // check_input.c
@@ -123,7 +124,7 @@ char			*take_var(char *str, char *var);
 char 			*search_var(char *to_find, t_env_lst *env);
 
 // expand.c
-char			*expand(t_data *d, char *str);
+char			*expand(t_data *d, char *str, bool in_heredoc);
 
 /******************************************************************************\
  * BUILT-INS

@@ -6,39 +6,55 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/24 19:03:36 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/09/27 22:07:59 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parent()
+void	wait_child(t_exec_info *info)
+{
+	int	status;
+
+	while (info->cmd_count)
+	{
+		if (waitpid(-1, &status, 0) == -1)
+		{
+			err_msg("waitpid", strerror(errno), 0);
+			clean_exit_shell(FAILURE);
+		}
+		info->cmd_count--;
+	}
+}
+
+void	parent(t_exec_info *info)
 {
 	
 }
 
-void	while_cmd(t_exec_lst **e_lst, t_exec_info *e_info, t_env_lst **env)
+void	while_cmd(t_data *d, t_exec_lst **e_lst)
 {
 	t_exec_lst *node;
 	char **envtab;
 
 	node = *e_lst;
-	envtab = recreate_env_tab(env);
-	while (e_info->executed_cmd != e_info->cmd_count && node != NULL)
+	envtab = recreate_env_tab(d->env);
+	while (d->info.executed_cmd != d->info.cmd_count && node != NULL)
 	{
-		if (e_info->pipe_count)
-			if (pipe(e_info->fd) == -1)
+		if (d->info.pipe_count)
+			if (pipe(d->info.fd) == -1)
 				clean_exit();
-		e_info->child_pid = fork();
-		if (e_info->child_pid == -1)
+		d->info.child_pid = fork();
+		if (d->info.child_pid == -1)
 			clean_exit();
-		if (!e_info->child_pid)
-			pathfinder(node, node->r, e_info, envtab);
+		if (!d->info.child_pid)
+			pathfinder(d, node, envtab);
 		else
 			parent();
 		node = node->next;
-		e_info->executed_cmd++;
-	}	
+		d->info.executed_cmd++;
+	}
+	wait_child(&d->info);
 }
 
 //NOTES :

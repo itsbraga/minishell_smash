@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/06 17:17:49 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:07:13 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	unclosed_quotes(char *str)
 	return (unclosed_quotes_return(closed));
 }
 
-char	*__other_quotes(char *str)
+char	*other_quotes(char *str)
 {
 	int		i;
 	int 	closing_quote;
