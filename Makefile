@@ -49,7 +49,7 @@ INIT_DIR		=	INIT/
 INIT_F			=	init_data.c
 
 LEXING_DIR		=	LEXING/
-LEXING_F		=	check_main_lst.c identify_token.c create_token_dblst.c \
+LEXING_F		=	check_main_lst.c tokenization.c create_token_dblst.c \
 					create_redir_lst.c
 
 PARSING_DIR		=	PARSING/

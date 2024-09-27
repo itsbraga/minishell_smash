@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 01:07:05 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 02:24:21 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_token_dblst	*token_dblst_new_node(char *content, t_token_type type)
 		err_msg("malloc", ERR_MALLOC, 0);
 		clean_exit_shell(FAILURE);
 	}
-	new_node->exec = NULL;
     new_node->type = type;
 	new_node->content = ft_strdup(content);
     if (new_node->content == NULL)

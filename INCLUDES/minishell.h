@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/27 01:50:12 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 02:35:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,37 @@ extern int		g_sig_code;
 \******************************************************************************/
 
 // init_data.c
-t_data			*get_data_instance(void);
+t_data			*data_struct(void);
 
 /******************************************************************************\
  * LEXING
 \******************************************************************************/
 
 // create_redir_lst.c
-void			create_redir_lst(t_redir_lst **r_head, t_token_dblst *t);
+int				create_redir_lst(t_redir_lst **r_head, t_token_dblst *t);
 
 // check_main_lst.c
 void			parse_segment(t_token_parser *p);
 
-// identify_token.c
-void			lst_tokenization(t_token_dblst *t);
-
 // create_token_lst.c
 int				create_token_dblst(t_data *d);
+
+// tokenization.c
+void			lst_tokenization(t_token_dblst *t);
 
 /******************************************************************************\
  * PARSING
 \******************************************************************************/
+
+// quotes_utils.c
+bool			switch_bool(bool closed);
+int				find_closing_quote(char *str, char quote);
+bool			unclosed_quotes_return(bool closed[]);
+
+// handle_quotes.c
+bool			unclosed_quotes(char *str);
+char			*empty_quotes(char *str);
+char			*handle_quotes_modif(char *user_input);
 
 // check_input.c
 void			parse_input(t_parser *p);
@@ -81,15 +91,8 @@ int 			del_unwanted_char(t_main_lst *main);
 char			*del_empty_quotes(char *str, int quote_idx);
 char			*del_quote_pair(char *str, int first, int second);
 
-// quotes_utils.c
-bool			switch_bool(bool closed);
-int				find_closing_quote(char *str, char quote);
-bool			unclosed_quotes_return(bool closed[]);
-
-// handle_quotes.c
-bool			unclosed_quotes(char *str);
-char			*empty_quotes(char *str);
-char			*handle_quotes_modif(char *user_input);
+// create_exec_lst.c
+int				create_exec_lst(t_data *d);
 
 /******************************************************************************\
  * ENVIRONMENT
@@ -194,7 +197,7 @@ t_redir_lst 	*redir_lst_new_node(t_token_type type);
 // exec_lst.c
 size_t			get_exec_lst_size(t_exec_lst **e);
 void			exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node);
-t_exec_lst 		*exec_lst_new_node(t_token_dblst *t);
+t_exec_lst 		*exec_lst_new_node(t_data *d);
 
 /******************************************************************************\
  * EXTRAS

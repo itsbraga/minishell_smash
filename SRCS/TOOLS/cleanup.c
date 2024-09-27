@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/27 01:44:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 02:35:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	clean_exit_shell(int err_status)
 {
 	t_data	*d;
 
-	d = get_data_instance();
+	d = data_struct();
 	if (d != NULL)
 		__free_data(d, true);
 	yama(CLEAN_ALL, NULL, 0);

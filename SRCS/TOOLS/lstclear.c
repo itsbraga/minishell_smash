@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/27 01:44:39 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 01:56:34 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	lstclear_exec(t_exec_lst **e)
             i = 0;
             while ((*e)->cmd[i] != NULL)
                 free((*e)->cmd[i++]);
-                i++;
             free((*e)->cmd);
             (*e)->cmd = NULL;
         }

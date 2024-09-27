@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/27 00:02:48 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 02:53:01 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	create_main_lst(t_data *d, char *input)
 
 	if (unclosed_quotes(input) == true)
 		return (err_msg(NULL, YELLOW "WARNING: unclosed quotes" R, 0), FAILURE);
-	lstclear_main(&d->main);
+	lstclear_main(&(d->main));
 	segments = __get_all_segments(input);
 	if (segments == NULL)
 		return (FAILURE);
@@ -69,7 +69,7 @@ int	create_main_lst(t_data *d, char *input)
 		if (new_node == NULL)
 			(err_msg("malloc", ERR_MALLOC, 0), clean_exit_shell(FAILURE));
 		(void)yama(ADD, new_node, 0);
-		main_lst_add_back(&d->main, new_node);
+		main_lst_add_back(&(d->main), new_node);
 		i++;
 		d->info.cmd_count = i;
 		d->info.pipe_count = d->info.cmd_count - 1;

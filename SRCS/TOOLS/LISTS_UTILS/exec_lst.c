@@ -6,13 +6,13 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 01:00:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 01:50:01 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 02:28:43 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_exec_lst *exec_lst_new_node(t_token_dblst *t)
+t_exec_lst *exec_lst_new_node(t_data *d)
 {
 	t_exec_lst	*new_node;
 	
@@ -23,7 +23,7 @@ t_exec_lst *exec_lst_new_node(t_token_dblst *t)
 		clean_exit_shell(FAILURE);
 	}
 	new_node->redir = NULL;
-	new_node->heredoc_nb = t->exec->heredoc_nb;
+	new_node->heredoc_nb = d->exec->heredoc_nb;
 	new_node->absolute_path = false;
 	new_node->bin_path = NULL;
 	new_node->cmd = NULL;

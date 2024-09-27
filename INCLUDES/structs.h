@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 01:46:50 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/27 02:26:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_parser
 
 typedef struct s_token_dblst
 {
-	t_exec_lst				*exec;
 	t_token_type			type;
 	char					*content;
 	struct s_token_dblst	*prev;

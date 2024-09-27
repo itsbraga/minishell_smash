@@ -44,7 +44,7 @@ static char	*__generate_prompt(void)
 }
 
 // singleton version
-t_data	*get_data_instance(void)
+t_data	*data_struct(void)
 {
 	static t_data	*instance = NULL;
 
