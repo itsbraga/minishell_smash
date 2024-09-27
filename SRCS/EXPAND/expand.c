@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
 /*   Updated: 2024/09/27 23:00:03 by art3mis          ###   ########.fr       */
+=======
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
+/*   Updated: 2024/09/27 21:42:41 by pmateo           ###   ########.fr       */
+>>>>>>> 7c3138179f7d0ce2a54ce4dc803fd1e4914fd9e7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +117,7 @@ static char	*__handle_expand(t_data *d, char *str, char *var)
 }
 
 //EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
-char	*expand(t_data *d, char *str)
+char	*expand(t_data *d, char *str, bool in_heredoc)
 {
 	int		i;
 	bool 	closed_quotes[2];
@@ -133,6 +140,7 @@ char	*expand(t_data *d, char *str)
 		}
 		i++;
 	}
-	str = empty_quotes(str);
+	if (in_heredoc == false)
+		str = empty_quotes(str);
 	return (str);
 }
