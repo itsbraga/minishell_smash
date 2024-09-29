@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/28 00:35:46 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/09/29 20:54:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	create_token_dblst(t_data *d)
 			i++;
 		}
 		lst_tokenization(d->token);
+		display_token_dblst(d->token);
 		if (create_exec_lst(d) == FAILURE)
 			return (err_msg(NULL, "could not create exec_lst", 0), FAILURE);
-		display_token_dblst(d->token);
 		d->main = d->main->next;
 	}
 	return (SUCCESS);
