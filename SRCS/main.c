@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/28 00:28:41 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/02 19:13:11 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ static int	__minishell(t_data *d)
 			display_main_lst(d->main);
 			if (create_token_dblst(d) == FAILURE)
 				return (FAILURE);
-			// if (create_exec_lst(d) == FAILURE)
-			// 	return (err_msg(NULL, "could not create exec_lst", 0), FAILURE);
-			// if (create_redir_lst(d) == FAILURE)
-			// 	return (err_msg(NULL, "could not create redir_lst", 0), FAILURE);
 		}
 		free(user_input);
 	}

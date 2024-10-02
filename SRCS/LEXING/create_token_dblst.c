@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/29 20:54:24 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/02 22:32:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int	create_token_dblst(t_data *d)
 			return (err_msg(NULL, "could not create exec_lst", 0), FAILURE);
 		d->main = d->main->next;
 	}
+	// lstclear_exec(&(d->exec));
 	return (SUCCESS);
 }

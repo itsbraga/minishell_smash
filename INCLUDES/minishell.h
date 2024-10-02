@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/28 01:02:07 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/02 21:49:12 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,13 @@ t_data			*data_struct(void);
  * LEXING
 \******************************************************************************/
 
-// check_main_lst.c
+// check_input.c
+void			parse_input(t_parser *p);
+
+// create_main_lst.c
+int				create_main_lst(t_data *d, char *user_input);
+
+// check_main.c
 void			parse_segment(t_token_parser *p);
 
 // create_token_lst.c
@@ -72,23 +78,17 @@ void			lst_tokenization(t_token_dblst *t);
 bool			switch_bool(bool closed);
 int				find_closing_quote(char *str, char quote);
 bool			unclosed_quotes_return(bool closed[]);
+char			*del_empty_quotes(char *str, int quote_idx);
+char			*del_quote_pair(char *str, int first, int second);
 
 // handle_quotes.c
 bool			unclosed_quotes(char *str);
 char			*empty_quotes(char *str);
 char			*other_quotes(char *str);
-char			*handle_quotes_modif(char *user_input);
 
-// check_input.c
-void			parse_input(t_parser *p);
-
-// create_main_lst.c
-int				create_main_lst(t_data *d, char *user_input);
-int 			del_unwanted_char(t_main_lst *main);
-
-// del_quotes.c
-char			*del_empty_quotes(char *str, int quote_idx);
-char			*del_quote_pair(char *str, int first, int second);
+// check_tokens.c
+char			*token_cleanup(char *content);
+int				cmd_token_count(t_token_dblst *t);
 
 // create_redir_lst.c
 int				create_redir_lst(t_data *d);
@@ -174,19 +174,18 @@ void			lstclear_exec(t_exec_lst **e);
 void 			lstclear_env(t_env_lst **env);
 
 // cleanup.c
-void			free_data(t_data *d, bool clear_history);
 void			clean_exit_shell(int err_status);
 
 /******************************************************************************\
  * LISTS UTILS
 \******************************************************************************/
 
-// main_lst_utils.c
+// main_lst.c
 size_t			get_main_lst_size(t_main_lst **main);
 void			main_lst_add_back(t_main_lst **main, t_main_lst *new_node);
 t_main_lst		*main_lst_new_node(char *content);
 
-// token_dblst_utils.c
+// token_dblst.c
 void			del_current_token(t_token_dblst **t, t_token_dblst *to_delete);
 size_t			get_token_dblst_size(t_token_dblst **t);
 void			token_dblst_add_back(t_token_dblst **t,

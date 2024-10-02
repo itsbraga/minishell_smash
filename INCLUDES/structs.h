@@ -6,10 +6,9 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/28 01:02:41 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/02 21:39:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -72,6 +71,12 @@ typedef struct s_redir_lst
 	char				*outfile;
 	struct s_redir_lst	*next;
 }				t_redir_lst;
+
+typedef struct s_ptrs
+{
+	struct s_exec_lst	*new_task;
+	int					i;
+}				t_ptrs;
 
 typedef struct s_exec_lst
 {

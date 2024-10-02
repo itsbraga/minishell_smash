@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/27 21:07:13 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/02 21:18:32 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,6 @@ bool	unclosed_quotes(char *str)
 		i++;
 	}
 	return (unclosed_quotes_return(closed));
-}
-
-char	*other_quotes(char *str)
-{
-	int		i;
-	int 	closing_quote;
-
-	i = 0;
-	closing_quote = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '"')
-		{
-			closing_quote = find_closing_quote(&str[i], '"');
-			str = del_quote_pair(str, i, i + closing_quote);
-			i = i + (closing_quote - 1);
-		}
-		else if (str[i] == '\'')
-		{
-			closing_quote = find_closing_quote(&str[i], '\'');
-			str = del_quote_pair(str, i, (i + closing_quote));
-			i  = i + (closing_quote - 1);
-		}
-		i++;
-	}
-	return (str);
 }
 
 static bool	__handle_empty_quotes(char *str, int i, bool *closed)
@@ -104,12 +78,28 @@ char	*empty_quotes(char *str)
 	return (str);
 }
 
-char	*handle_quotes_modif(char *user_input)
+char	*other_quotes(char *str)
 {
-	if (unclosed_quotes(user_input) == true)
-		return (NULL);
-	user_input = empty_quotes(user_input);
-	// user_input = expand(user_input, envp);
-	// user_input = __other_quotes(user_input);
-	return (user_input);
+	int		i;
+	int 	closing_quote;
+
+	i = 0;
+	closing_quote = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '"')
+		{
+			closing_quote = find_closing_quote(&str[i], '"');
+			str = del_quote_pair(str, i, i + closing_quote);
+			i = i + (closing_quote - 1);
+		}
+		else if (str[i] == '\'')
+		{
+			closing_quote = find_closing_quote(&str[i], '\'');
+			str = del_quote_pair(str, i, (i + closing_quote));
+			i  = i + (closing_quote - 1);
+		}
+		i++;
+	}
+	return (str);
 }

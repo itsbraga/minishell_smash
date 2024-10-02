@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/26 23:41:06 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/02 21:50:29 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    display_token_dblst(t_token_dblst *t)
 	}
 }
 
-void	display_redir_node(t_redir_lst *node)
+static void	__display_redir_node(t_redir_lst *node)
 {
 	ft_printf(2, BP "redir:\t\t [" R "%d" BP "]\n" R, node->type);
 	if (node->type == REDIR_IN)
@@ -87,7 +87,7 @@ void	display_redir_lst(t_redir_lst *r)
 	head = r;
 	while (head != NULL)
 	{
-		display_redir_node(head);
+		__display_redir_node(head);
 		head = head->next;
 	}
 }

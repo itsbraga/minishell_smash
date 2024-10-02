@@ -35,52 +35,56 @@ DEBUG		=	-g -g3
 #	SOURCES
 #******************************************************************************#
 
-BUILT_INS_DIR	=	BUILT_INS/
-BUILT_INS_F		=	built_ins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c \
-					my_exit.c my_unset.c
-
-ENV_DIR			=	ENVIRONMENT/
-ENV_F			=	create_env.c env_utils.c export_env_utils.c
-
-EXPAND_DIR		=	EXPAND/
-EXPAND_F		=	expand.c expand_utils.c
-
-INIT_DIR		=	INIT/
-INIT_F			=	init_data.c
-
-LEXING_DIR		=	LEXING/
-LEXING_F		=	check_main_lst.c tokenization.c create_token_dblst.c \
-					create_redir_lst.c
-
-PARSING_DIR		=	PARSING/
-PARSING_F		=	handle_quotes.c quotes_utils.c del_quotes.c check_input.c \
-					create_main_lst.c create_exec_lst.c
+EXTRAS_DIR		=	EXTRAS/
+EXTRAS_F		=	display.c features.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	error.c lstclear.c cleanup.c secure_malloc.c \
+TOOLS_F			=	error.c secure_malloc.c lstclear.c cleanup.c  \
 					garbage_collector_utils.c garbage_collector.c
 
 LISTS_U_DIR		=	TOOLS/LISTS_UTILS/
 LISTS_U_F		=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
 
-EXTRAS_DIR		=	EXTRAS/
-EXTRAS_F		=	display.c features.c
+INIT_DIR		=	INIT/
+INIT_F			=	init_data.c
+
+ENV_DIR			=	ENVIRONMENT/
+ENV_F			=	create_env.c env_utils.c export_env_utils.c
+
+LEXING_DIR		=	LEXING/
+LEXING_F		=	check_input.c create_main_lst.c check_main.c \
+					tokenization.c create_token_dblst.c 
+
+PARSING_DIR		=	PARSING/
+PARSING_F		=	handle_quotes.c quotes_utils.c check_tokens.c \
+					create_exec_lst.c create_redir_lst.c
+
+EXPAND_DIR		=	EXPAND/
+EXPAND_F		=	expand.c expand_utils.c
+
+BUILT_INS_DIR	=	BUILT_INS/
+BUILT_INS_F		=	built_ins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c \
+					my_exit.c my_unset.c
+
+EXEC_DIR		=	EXEC/
+EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
 
 #******************************************************************************#
 #	COMBINE FILES AND DIRECTORIES
 #******************************************************************************#
 
 SRCS_DIR		=	SRCS/
-SRCS_F			=	$(addprefix $(ENV_DIR), $(ENV_F)) \
-					$(addprefix $(LEXING_DIR), $(LEXING_F)) \
-					$(addprefix $(PARSING_DIR), $(PARSING_F)) \
-					$(addprefix $(BUILT_INS_DIR), $(BUILT_INS_F)) \
-					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
-					$(addprefix $(INIT_DIR), $(INIT_F)) \
+SRCS_F			=	$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(LISTS_U_DIR), $(LISTS_U_F)) \
-					$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
+					$(addprefix $(INIT_DIR), $(INIT_F)) \
+					$(addprefix $(ENV_DIR), $(ENV_F)) \
+					$(addprefix $(LEXING_DIR), $(LEXING_F)) \
+					$(addprefix $(PARSING_DIR), $(PARSING_F)) \
+					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
+					$(addprefix $(BUILT_INS_DIR), $(BUILT_INS_F)) \
 					main.c
+#					$(addprefix $(EXEC_DIR), $(EXEC_F)) \#
 
 OBJS_DIR		=	OBJS/
 OBJS_F			=	$(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_F))
@@ -105,7 +109,6 @@ $(LIBFT):
 		@make -sC $(LIBFT_PATH) $(MAKEFLAGS)
 
 $(NAME): $(OBJS_F) $(LIBFT)
-#			@printf "$(RESET)$(BOLD)\n\n\t\t ⸜(｡˃ ᵕ ˂ )⸝♡\n\n"
 			@printf "\n\n=================$(shell bash rainbow.sh " MINISHELL ")"
 			@printf "$(BOLD)=================\n\n"
 			@printf "$(BLINK)$(PINK)\t\t   READY!$(RESET)\n\n"

@@ -6,78 +6,81 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/29 21:03:47 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/02 22:38:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// appeler other_quotes (+ empty_quotes?)
-// static char	*__quote_cleanup(t_token_dblst *t)
-// {
-// 	t_token_dblst	*head;
-// 	char			*cleaned;
-
-// 	head = t;
-// 	while (head != NULL)
-// 	{
-		
-// 	}
-// 	return (cleaned);
-// }
-
-// manque absolute_path + bin_path
-
-static int	__cmd_token_count(t_token_dblst *t)
+static void	__init_exec(t_exec_lst *e)
 {
-	int	count;
-
-	count = 0;
-	while (t != NULL)
-	{
-		if (t->type == COMMAND || t->type == WORD)
-			count++;
-		t = t->next;
-	}
-	return (count);
+	e = yama(CREATE, NULL, sizeof(t_exec_lst));
+	secure_malloc(e);
+	ft_bzero(e, sizeof(t_exec_lst));
+	e->redir = yama(CREATE, NULL, sizeof(t_redir_lst));
+	secure_malloc(e->redir);
+	ft_bzero(e->redir, sizeof(t_redir_lst));
 }
 
+static void	__command_case(t_data *d, t_ptrs *p)
+{
+	int		size;
+	char	*cleaned_token;
+	
+	size = (sizeof(char *) * cmd_token_count(d->token));
+	p->new_task = exec_lst_new_node();
+	secure_malloc(p->new_task);
+	p->new_task->cmd = yama(CREATE_TAB, NULL, (size + 1));
+	secure_malloc(p->new_task->cmd);
+	cleaned_token = token_cleanup(d->token->content);
+	p->new_task->cmd[p->i] = cleaned_token;
+	printf(RED "node_cmd[0]:\t [" R "%s" RED "]\n" R, p->new_task->cmd[p->i]);
+	p->i++;
+}
+
+static void	__word_case(t_data *d, t_ptrs *p)
+{
+	int		size;
+	char	*cleaned_token;
+
+	if (p->new_task != NULL)
+	{
+		p->new_task->cmd[p->i] = d->token->content;
+		printf(RED "node_cmd[i]:\t [" R "%s" RED "]\n" R, p->new_task->cmd[p->i]);
+	}
+	else
+	{
+		d->token->type = COMMAND; // redefini le WORD en COMMAND
+		size = (sizeof(char *) * cmd_token_count(d->token));
+		p->new_task = exec_lst_new_node();
+		secure_malloc(p->new_task);
+		p->new_task->cmd = yama(CREATE_TAB, NULL, (size + 1));
+		secure_malloc(p->new_task->cmd);
+		cleaned_token = token_cleanup(d->token->content);
+		p->new_task->cmd[p->i] = cleaned_token;
+		printf(RED "node_cmd[x]:\t [" R "%s" RED "]\n" R, p->new_task->cmd[p->i]);	
+	}
+	p->i++;
+}
+
+// manque absolute_path + bin_path
 int	create_exec_lst(t_data *d)
 {
-	t_exec_lst	*new_task;
-	int			i;
-	// char		*cleaned_token;
-
+	t_token_dblst	*head;
+	t_ptrs			p;
+	
 	if (d->token == NULL || d->token->content == NULL)
 		return (FAILURE);
-	if (d->exec == NULL)
-	{
-		d->exec = malloc(sizeof(t_exec_lst));
-		secure_malloc(d->exec);
-	}
-	ft_bzero(d->exec, sizeof(t_exec_lst));
+	head = d->token;
+	__init_exec(d->exec);
+	p.new_task = NULL;
+	p.i = 0;
 	while (d->token != NULL)
 	{
 		if (d->token->type == COMMAND)
-		{
-			i = 0;
-			new_task = exec_lst_new_node();
-			secure_malloc(new_task);
-			new_task->cmd = yama(CREATE_TAB, NULL, (sizeof(char *) * (__cmd_token_count(d->token) + 1)));
-			secure_malloc(new_task->cmd);
-			new_task->cmd[i] = ft_strdup(d->token->content);
-			printf(BP "node_cmd[0]:\t [" R "%s" BP "]\n" R, new_task->cmd[i]);
-			i++;
-			// (void)yama(ADD, new_task->cmd[i], 0);
-		}
+			__command_case(d, &p);
 		else if (d->token->type == WORD)
-		{
-			i = 0;
-			new_task->cmd[i] = ft_strdup(d->token->content);
-			printf(BP "node_cmd[i]:\t [" R "%s" BP "]\n" R, new_task->cmd[i]);
-			i++;
-			// (void)yama(ADD, new_task->cmd[i], 0);
-		}
+			__word_case(d, &p);
 		else if (d->token->type == HERE_DOC)
 		{
 			d->exec->heredoc_nb++;
@@ -85,10 +88,10 @@ int	create_exec_lst(t_data *d)
 		}
 		d->token = d->token->next;
 		if (d->token == NULL)
-		// {
-		// 	new_task->cmd[i] = NULL;
-			exec_lst_add_back(&(d->exec), new_task);
-		// }
+			exec_lst_add_back(&(d->exec), p.new_task);
 	}
+	d->token = head;
+	if (create_redir_lst(d) == FAILURE)
+		return (err_msg(NULL, "could not create redir_lst", 0), FAILURE);
 	return (SUCCESS);
 }
