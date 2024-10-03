@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/02 22:34:47 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:27:17 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,18 @@ void	lstclear_exec(t_exec_lst **e)
 		tmp = (*e)->next;
 		(*e)->next = NULL;
 		if ((*e)->redir != NULL)
-			lstclear_redir(&(*e)->redir);
+			lstclear_redir(&((*e)->redir));
 		free((*e)->bin_path);
 		(*e)->bin_path = NULL;
-        if ((*e)->cmd != NULL)
-        {
-            i = 0;
-            while ((*e)->cmd[i] != NULL)
-			{
-                free((*e)->cmd[i]);
-				(*e)->cmd[i] = NULL;
-				i++;
-			}
-            free((*e)->cmd);
-            (*e)->cmd = NULL;
-        }
+		if ((*e)->cmd != NULL)
+		{
+			i = 0;
+			free((*e)->cmd[i]);
+			(*e)->cmd[i] = NULL;
+			i++;
+		}
+		free((*e)->cmd);
+		(*e)->cmd = NULL;
 		free(*e);
 		(*e) = tmp;
 	}

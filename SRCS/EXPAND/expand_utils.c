@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/27 22:59:11 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:25:20 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*take_var(char *str, char *var)
 			|| (str[j] >= '0' && str[j] <= '9')
 			|| str[j] == '_'))
 		j++;
-	to_find = ft_strldup(&str[i], (j - i));
+	to_find = ft_strldup(&(str[i]), (j - i));
 	secure_malloc(to_find);
 	(void)yama(ADD, to_find, 0);
 	return (to_find);

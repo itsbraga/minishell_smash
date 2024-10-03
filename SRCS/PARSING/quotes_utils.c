@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del_quotes.c                                       :+:      :+:    :+:   */
+/*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/02 12:36:02 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 22:30:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,18 @@ char	*del_quote_pair(char *str, int first, int second)
 	}
 	j = i + 1;
 	while (j != second)
-		new_str[i++] = str[j++];
-	j += 1;
+	{
+		new_str[i] = str[j];
+		i++;
+		j++;
+	}
+	j += 2; // modifie par Ana
 	while (str[j] != '\0')
-		new_str[i++] = str[j++];
+	{
+		new_str[i] = str[j];
+		i++;
+		j++;
+	}
 	new_str[i] = '\0';
 	free(str);
 	return (new_str);

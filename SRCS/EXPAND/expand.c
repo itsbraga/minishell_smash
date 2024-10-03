@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/28 01:09:12 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:25:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ char	*expand(t_data *d, char *str, bool in_heredoc)
 		if ((str[i] == '$' && closed_quotes[0] == true) 
 			&& (str[i + 1] != ' ' && str[i + 1] != '$')) 
 		{
-			str = __handle_expand(d, str, &str[i + 1]);
+			str = __handle_expand(d, str, &(str[i + 1]));
 			if (str == NULL)
 				return (NULL);
 		}

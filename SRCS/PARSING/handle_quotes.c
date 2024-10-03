@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/02 21:18:32 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:26:55 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ char	*other_quotes(char *str)
 	{
 		if (str[i] == '"')
 		{
-			closing_quote = find_closing_quote(&str[i], '"');
-			str = del_quote_pair(str, i, i + closing_quote);
-			i = i + (closing_quote - 1);
+			closing_quote = find_closing_quote(&(str[i]), '"');
+			str = del_quote_pair(str, i, (i + closing_quote));
+			i += (closing_quote - 1);
 		}
 		else if (str[i] == '\'')
 		{
-			closing_quote = find_closing_quote(&str[i], '\'');
+			closing_quote = find_closing_quote(&(str[i]), '\'');
 			str = del_quote_pair(str, i, (i + closing_quote));
-			i  = i + (closing_quote - 1);
+			i += (closing_quote - 1);
 		}
 		i++;
 	}

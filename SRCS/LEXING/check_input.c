@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 22:40:47 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 22:48:20 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ static int	__front_check(t_parser *p)
 	return (SUCCESS);
 }
 
+static void	__init_parser(t_parser *p)
+{
+	p->closed_quotes[0] = true;
+	p->closed_quotes[1] = true;
+	p->start = p->i;
+}
+
 static void	__pipe_check(t_parser *p)
 {
 	if (p->user_input[p->i] == '|')
@@ -30,15 +37,8 @@ static void	__pipe_check(t_parser *p)
 				&& ft_isspace(p->user_input[p->i]) == 1)
 			p->i++;
 		if (p->user_input[p->i] == '|' || p->user_input[p->i] == '\0')
-			(err_msg(NULL, ERR_NEAR_PIPE, 0), exit(FAILURE));
+			(err_msg(NULL, "|", 2), exit(FAILURE));
 	}
-}
-
-static void	__init(t_parser *p)
-{
-	p->closed_quotes[0] = true;
-	p->closed_quotes[1] = true;
-	p->start = p->i;
 }
 
 void	parse_input(t_parser *p)
@@ -47,7 +47,7 @@ void	parse_input(t_parser *p)
 
 	if (__front_check(p) == FAILURE)
 		exit(FAILURE);
-	__init(p);
+	__init_parser(p);
 	while (p->user_input[p->i] != '\0')
 	{
 		if (p->user_input[p->i] == '\'')

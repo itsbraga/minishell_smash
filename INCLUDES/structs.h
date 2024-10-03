@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/02 21:39:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 22:12:23 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_ptrs
 {
 	struct s_exec_lst	*new_task;
 	int					i;
+	char				*cleaned_token;
 }				t_ptrs;
 
 typedef struct s_exec_lst

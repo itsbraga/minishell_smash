@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/02 21:49:12 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:20:28 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ bool			unclosed_quotes(char *str);
 char			*empty_quotes(char *str);
 char			*other_quotes(char *str);
 
-// check_tokens.c
+// check_sequence.c
+// int				check_redir_sequence(t_token_dblst *t);
+int				check_redir_sequence(char *content);
+
+// exec_lst_utils.c
 char			*token_cleanup(char *content);
 int				cmd_token_count(t_token_dblst *t);
 
@@ -131,23 +135,23 @@ char			*expand(t_data *d, char *str, bool in_heredoc);
  * BUILT-INS
 \******************************************************************************/
 
-// my_unset.c
-int				my_unset(t_data *d, char **args);
+// our_unset.c
+int				our_unset(t_data *d, char **args);
 
-// my_exit.c
-void			my_exit(t_data *d, char **args);
+// our_exit.c
+void			our_exit(t_data *d, char **args);
 
-// my_cd_utils.c
+// our_cd_utils.c
 void			change_paths(t_env_lst *env, t_env_lst *exp_env);
 
-// my_cd.c
-int				my_cd(t_data *d);
+// our_cd.c
+int				our_cd(t_data *d);
 
-// my_pwd.c
-int				my_pwd(void);
+// our_pwd.c
+int				our_pwd(void);
 
-// my_env.c
-int				my_env(t_env_lst *env);
+// our_env.c
+int				our_env(t_env_lst *env);
 
 // built_ins.c
 void			exec_built_in(char **built_in, t_data *d);
@@ -165,6 +169,7 @@ int err_status);
 
 // secure_malloc.c
 void    		secure_malloc(void *to_secure);
+void			secure_malloc2(void *to_secure, bool full_clean);
 
 // lstclear.c
 void			lstclear_main(t_main_lst **main);
@@ -174,10 +179,11 @@ void			lstclear_exec(t_exec_lst **e);
 void 			lstclear_env(t_env_lst **env);
 
 // cleanup.c
+void			free_data(t_data *d, bool clear_history);
 void			clean_exit_shell(int err_status);
 
 /******************************************************************************\
- * LISTS UTILS
+ * TOOLS/LISTS
 \******************************************************************************/
 
 // main_lst.c

@@ -11,6 +11,7 @@
         "get_next_line_bonus.h": "c",
         "structs.h": "c",
         "numbers": "c",
-        "minishell.h": "c"
+        "minishell.h": "c",
+        "random": "c"
     }
 }

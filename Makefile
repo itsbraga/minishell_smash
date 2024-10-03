@@ -42,8 +42,8 @@ TOOLS_DIR		=	TOOLS/
 TOOLS_F			=	error.c secure_malloc.c lstclear.c cleanup.c  \
 					garbage_collector_utils.c garbage_collector.c
 
-LISTS_U_DIR		=	TOOLS/LISTS_UTILS/
-LISTS_U_F		=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
+LISTS_DIR		=	TOOLS/LISTS/
+LISTS_F			=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
 
 INIT_DIR		=	INIT/
 INIT_F			=	init_data.c
@@ -56,15 +56,15 @@ LEXING_F		=	check_input.c create_main_lst.c check_main.c \
 					tokenization.c create_token_dblst.c 
 
 PARSING_DIR		=	PARSING/
-PARSING_F		=	handle_quotes.c quotes_utils.c check_tokens.c \
-					create_exec_lst.c create_redir_lst.c
+PARSING_F		=	handle_quotes.c quotes_utils.c exec_lst_utils.c \
+					check_sequence.c create_exec_lst.c create_redir_lst.c
 
 EXPAND_DIR		=	EXPAND/
 EXPAND_F		=	expand.c expand_utils.c
 
 BUILT_INS_DIR	=	BUILT_INS/
-BUILT_INS_F		=	built_ins.c my_env.c my_pwd.c my_cd_utils.c my_cd.c \
-					my_exit.c my_unset.c
+BUILT_INS_F		=	built_ins.c our_env.c our_pwd.c cd_utils.c our_cd.c \
+					our_exit.c our_unset.c
 
 EXEC_DIR		=	EXEC/
 EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
@@ -76,7 +76,7 @@ EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
 SRCS_DIR		=	SRCS/
 SRCS_F			=	$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
-					$(addprefix $(LISTS_U_DIR), $(LISTS_U_F)) \
+					$(addprefix $(LISTS_DIR), $(LISTS_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(ENV_DIR), $(ENV_F)) \
 					$(addprefix $(LEXING_DIR), $(LEXING_F)) \

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_cd.c                                            :+:      :+:    :+:   */
+/*   our_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/20 15:16:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/03 23:20:39 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 	
 	>> bonus wildcards
 */
-int	my_cd(t_data *d)
+int	our_cd(t_data *d)
 {
 	int		ret;
 	char	*current;

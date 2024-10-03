@@ -6,11 +6,27 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/02 21:38:57 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:25:49 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	__init_token_parser(t_token_parser *p)
+{
+	p->closed_quotes[0] = true;
+	p->closed_quotes[1] = true;
+	p->i = 0;
+	p->start = p->i;
+}
+
+static void	__get_closed_quotes(t_token_parser *p)
+{
+	if (p->main->content[p->i] == '\'')
+		p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
+	else if (p->main->content[p->i] == '"')
+		p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
+}
 
 static void	__take_seg_elem(t_token_parser *p)
 {
@@ -28,22 +44,6 @@ static void	__take_seg_elem(t_token_parser *p)
 	p->start = p->i; // Redéfinir le début pour le prochain token
 }
 
-static void	__init(t_token_parser *p)
-{
-	p->closed_quotes[0] = true;
-	p->closed_quotes[1] = true;
-	p->i = 0;
-	p->start = p->i;
-}
-
-static void	__get_closed_quotes(t_token_parser *p)
-{
-	if (p->main->content[p->i] == '\'')
-		p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
-	else if (p->main->content[p->i] == '"')
-		p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
-}
-
 static void	__redir_case(t_token_parser *p)
 {
 	__take_seg_elem(p);
@@ -56,11 +56,11 @@ static void	__redir_case(t_token_parser *p)
 
 void	parse_segment(t_token_parser *p)
 {
-	__init(p);
+	__init_token_parser(p);
 	while (p->main->content[p->i] != '\0')
 	{
 		__get_closed_quotes(p);
-		if (is_redir(&p->main->content[p->i]) == true
+		if (is_redir(&(p->main->content[p->i])) == true
 			&& p->closed_quotes[0] == true && p->closed_quotes[1] == true)
 			__redir_case(p);
 		else if (p->main->content[p->i] == ' '

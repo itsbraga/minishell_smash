@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/28 01:06:05 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:25:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 		node = node->next;
 		d->info.executed_cmd++;
 	}
-	wait_child(&d->info);
+	wait_child(&(d->info));
 }
 
 //NOTES :

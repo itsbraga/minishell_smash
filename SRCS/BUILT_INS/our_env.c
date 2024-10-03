@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_export.c                                        :+:      :+:    :+:   */
+/*   our_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
+/*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
+/*   Updated: 2024/10/03 23:20:46 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// ONLY TO DISPLAY --> BUILT-IN EXPORT STILL TO DO
-void    my_export(t_env_lst *exp_env)
+int	our_env(t_env_lst *env)
 {
-    t_env_lst    *tmp;
+	t_env_lst	*tmp;
 
-    tmp = exp_env;
-    while (tmp != NULL)
-    {
-        ft_putstr_fd(tmp->content, 1);
-        ft_putendl_fd("", 1);
-        tmp = tmp->next;
-    }
+	tmp = env;
+	while (tmp != NULL)
+	{
+		printf("%s\n", tmp->content);
+		tmp = tmp->next;
+	}
+	// g->last_exit_status = 0;
+	return (SUCCESS);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_pwd.c                                           :+:      :+:    :+:   */
+/*   our_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 21:51:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/03 23:20:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	The $PWD environment variable is a dynamic variable
 	that stores the path to the current working directory.
 */
-int	my_pwd(void)
+int	our_pwd(void)
 {
 	char	cwd[PATH_MAX];
 

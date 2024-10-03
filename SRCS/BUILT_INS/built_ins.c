@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/20 17:35:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/03 23:21:09 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ bool	is_built_in(char *cmd)
 void	exec_built_in(char **cmd, t_data *d)
 {
 	if (ft_strcmp(cmd[0], "pwd") == 0)
-		my_pwd();
+		our_pwd();
 	else if (ft_strcmp(cmd[0], "cd") == 0)
-		my_cd(d);
+		our_cd(d);
 	else if (ft_strcmp(cmd[0], "env") == 0)
 	{
 		if (cmd[1] != NULL)
 			return (err_msg(cmd[1], "No such file or directory", 1));
-		my_env(d->env);
+		our_env(d->env);
 	}
 	else if (ft_strcmp(cmd[0], "exit") == 0)
-		my_exit(d, cmd);
+		our_exit(d, cmd);
 	else if (ft_strcmp(cmd[0], "unset") == 0)
-		my_unset(d, cmd + 1);
+		our_unset(d, cmd + 1);
 	else if (ft_strcmp(cmd[0], "clear") == 0)
 		printf("\033[H\033[J");
 }

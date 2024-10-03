@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_exit.c                                          :+:      :+:    :+:   */
+/*   our_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/20 15:16:35 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/03 23:20:50 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	__set_exit_status(t_data *d, char **args)
 	return (exit_status);
 }
 
-void	my_exit(t_data *d, char **args)
+void	our_exit(t_data *d, char **args)
 {
 	int	exit_status;
 	

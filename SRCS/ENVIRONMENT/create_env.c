@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/27 22:57:54 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:24:39 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void	create_env(t_data *d, char **envp)
 	size_t	envp_size;
 
 	envp_size = get_env_size(envp);
-	if (create_env_list(&d->env, envp) == FAILURE)
+	if (create_env_list(&(d->env), envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
 	__update_shlvl(d->env);
-	if (create_exp_env_list(&d->exp_env, envp, envp_size, 0) == FAILURE)
+	if (create_exp_env_list(&(d->exp_env), envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
 }

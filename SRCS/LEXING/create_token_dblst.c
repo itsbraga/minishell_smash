@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/02 22:32:33 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:23:03 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static char	**__get_all_seg_elems(t_main_lst *main)
 	p.seg_elems = yama(CREATE_TAB, NULL, (sizeof(char *) * (seg_len + 1)));
 	secure_malloc(p.seg_elems);
 	while (p.main->content[p.i] != '\0')
+	{
+		if (check_redir_sequence(p.main->content) == FAILURE)
+			return (NULL);
 		parse_segment(&p);
+	}
 	p.seg_elems[p.token_count] = NULL;
 	return (p.seg_elems);
 }
@@ -36,12 +40,12 @@ int	create_token_dblst(t_data *d)
 	char			**seg_elems;
 	int				i;
 
+	i = 0;
 	while (d->main != NULL)
 	{
 		lstclear_token(&(d->token));
 		seg_elems = __get_all_seg_elems(d->main);
-		secure_malloc(seg_elems);
-		i = 0;
+		secure_malloc2(seg_elems, false);
 		while (seg_elems[i] != NULL)
 		{
 			new_token = token_dblst_new_node(seg_elems[i], UNKNOWN);
@@ -54,8 +58,10 @@ int	create_token_dblst(t_data *d)
 		display_token_dblst(d->token);
 		if (create_exec_lst(d) == FAILURE)
 			return (err_msg(NULL, "could not create exec_lst", 0), FAILURE);
+		printf("heredoc count: %d\n", d->exec->heredoc_nb);
+		d->exec->heredoc_nb = 0;
 		d->main = d->main->next;
 	}
-	// lstclear_exec(&(d->exec));
+	lstclear_exec(&(d->exec));
 	return (SUCCESS);
 }
