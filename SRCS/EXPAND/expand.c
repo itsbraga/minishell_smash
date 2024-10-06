@@ -12,27 +12,6 @@
 
 #include "minishell.h"
 
-static char	*__clean_translated_variable(char *str, char *var)
-{
-	char	*new_str;
-	int		i;
-	
-	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 2)));
-	secure_malloc(new_str);
-	i = 0;
-	while (str != (var - 1))
-		new_str[i++] = *str++;
-	str += 2;
-	while (*str != *var)
-		new_str[i++] = *str++;
-	str += 1;
-	while (*str)
-		new_str[i++] = *str++;
-	new_str[i] = '\0';
-	free(str);
-	return (new_str);
-}
-
 static char	*__del_var(char *str, char *var, size_t var_size)
 {
 	char	*new_str;
@@ -47,7 +26,6 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 	return (new_str);
 }
 
-// EXEMPLE : gg"$USER"wp = gg"pmateo"wp 
 static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_size)
 {
 	char	*new_str;
@@ -77,7 +55,19 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 	return (new_str);
 }
 
-static char	*__handle_expand(t_data *d, char *str, char *var)
+static	char	*handle_last_exit_code (t_data *d, char *str, char *var)
+{
+	char	*var_value;
+
+	var_value = NULL;
+	var_value = ft_itoa(d->last_exit_status);
+	secure_malloc(var_value);
+	(void)yama(ADD, var_value, 0);
+	str = __add_var_value(str, var, var_value, ft_strlen(var_value));
+	return (str);
+}
+
+static	char	*__handle_expand(t_data *d, char *str, char *var)
 {
 	char	*to_find;
 	char	*var_value;
@@ -85,12 +75,7 @@ static char	*__handle_expand(t_data *d, char *str, char *var)
 	to_find = NULL;
 	var_value = NULL;
 	if (*var == '?')
-	{
-		var_value = ft_itoa(d->last_exit_status);
-		secure_malloc(var_value);
-		(void)yama(ADD, var_value, 0);
-		str = __add_var_value(str, var, var_value, ft_strlen(var_value));
-	}
+		handle_last_exit_code(d, str, var);
 	else if (*var == '"' || *var == '\'')
 		str = __clean_translated_variable(str, var);
 	else
@@ -109,7 +94,6 @@ static char	*__handle_expand(t_data *d, char *str, char *var)
 	return (str);
 }
 
-//EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
 char	*expand(t_data *d, char *str, bool in_heredoc)
 {
 	int		i;
