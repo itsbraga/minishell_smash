@@ -45,6 +45,30 @@ static char	*__generate_prompt(void)
 	return (prompt);
 }
 
+// static char	*__generate_prompt(void)
+// {
+// 	char	*username;
+// 	char	*rb_bar;
+// 	char	*header;
+// 	char	*part1;
+// 	char	*prompt;
+	
+// 	username = getenv("USER");
+// 	if (username == NULL)
+// 		username = "unknown";
+// 	rb_bar = rainbow_prompt("\001" BOLD PROMPT_BAR "\002");
+// 	header = ft_strjoin(rb_bar, "\001" BOLD "[" "\002");
+// 	secure_malloc(header);
+// 	part1 = ft_strjoin(header, username);
+// 	secure_malloc(part1);
+// 	(free(header), free(username));
+// 	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" R "\002 $> ");
+// 	secure_malloc(prompt);
+// 	(void)yama(ADD, prompt, 0);
+// 	free(part1);
+// 	return (prompt);
+// }
+
 // singleton version
 t_data	*data_struct(void)
 {

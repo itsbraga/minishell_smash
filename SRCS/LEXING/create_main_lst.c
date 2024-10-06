@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/03 22:51:12 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:51:07 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ static char	**__get_all_segments(char *input)
 
 static void	__del_unwanted_whitespaces(t_main_lst *main)
 {
-	t_main_lst  *head;
+	t_main_lst  *current;
 	char        *trimmed_token;
 
-	head = main;
-	while (head != NULL)
+	current = main;
+	while (current != NULL)
 	{
-		trimmed_token = ft_strtrim(head->content, " ");
+		trimmed_token = ft_strtrim(current->content, " ");
 		secure_malloc(trimmed_token);
 		(void)yama(ADD, trimmed_token, 0);
-		free(head->content);
-		head->content = trimmed_token;
-		head = head->next;
+		free(current->content);
+		current->content = trimmed_token;
+		current = current->next;
 	}
 }
 
@@ -55,6 +55,7 @@ int	create_main_lst(t_data *d, char *input)
 
 	if (unclosed_quotes(input) == true)
 		return (err_msg(NULL, YELLOW "WARNING: unclosed quotes" R, 0), FAILURE);
+	ft_bzero(&(d->info), sizeof(t_exec_info));
 	lstclear_main(&(d->main));
 	segments = __get_all_segments(input);
 	if (segments == NULL)

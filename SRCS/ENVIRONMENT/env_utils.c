@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/27 22:58:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 22:05:12 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,21 @@ void	del_env_var(t_env_lst **env, char *var_to_rm)
         current = current->next;
     }
 }
+
+// char	**recreate_env_tab(t_env_lst **env)
+// {
+// 	char		**tab;
+// 	t_env_lst 	*node;
+// 	int			i;
+
+// 	tab = malloc(get_env_size(env) * sizeof(char *));
+// 	node = *env;
+// 	i = 0;
+// 	while (node != NULL)
+// 	{
+// 		tab[i] = ft_strdup(node->content);
+// 		i++;
+// 		node = node->next;
+// 	}
+// 	return (tab);
+// }

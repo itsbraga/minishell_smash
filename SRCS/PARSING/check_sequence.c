@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_sequence.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/03 23:05:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:51:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 // int	check_redir_sequence(t_token_dblst *t)
 // {
-// 	t_token_dblst   *head;
+// 	t_token_dblst   *current;
 
-// 	head = t;
-// 	while (head != NULL)
+// 	current = t;
+// 	while (current != NULL)
 // 	{
-// 		if (IS_REDIR(head->type) == true)
+// 		if (IS_REDIR(current->type) == true)
 // 		{
-// 			if (head->next == NULL)
+// 			if (current->next == NULL)
 // 			{
 // 				err_msg(NULL, "newline", 2);
 // 				return (FAILURE);
 // 			}
 // 		}
-// 		head = head->next;
+// 		current = current->next;
 // 	}
 // 	return (SUCCESS);
 // }

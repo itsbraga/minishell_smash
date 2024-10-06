@@ -83,8 +83,8 @@ SRCS_F			=	$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					$(addprefix $(PARSING_DIR), $(PARSING_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(BUILT_INS_DIR), $(BUILT_INS_F)) \
+					$(addprefix $(EXEC_DIR), $(EXEC_F)) \
 					main.c
-#					$(addprefix $(EXEC_DIR), $(EXEC_F)) \#
 
 OBJS_DIR		=	OBJS/
 OBJS_F			=	$(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_F))

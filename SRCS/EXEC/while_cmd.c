@@ -3,59 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/03 23:25:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 22:05:21 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	wait_child(t_exec_info *info)
-{
-	int	status;
+// static void	__wait_child(t_exec_info *info)
+// {
+// 	int	status;
 
-	while (info->cmd_count)
-	{
-		if (waitpid(-1, &status, 0) == -1)
-		{
-			err_msg("waitpid", strerror(errno), 0);
-			clean_exit_shell(FAILURE);
-		}
-		info->cmd_count--;
-	}
-}
+// 	while (info->cmd_count != 0)
+// 	{
+// 		if (waitpid(-1, &status, 0) == -1)
+// 		{
+// 			err_msg("waitpid", strerror(errno), 0);
+// 			clean_exit_shell(FAILURE);
+// 		}
+// 		info->cmd_count--;
+// 	}
+// }
 
-void	parent(t_exec_info *info)
-{
-	
-}
+// static void	__parent(t_exec_info *info)
+// {
+// 	close(info->fd[1]);
+// 	if (info->executed_cmd != 0)
+// 		close(info->old_read_fd);
+// 	info->old_read_fd = info->fd[0];
+// 	if (info->cmd_count - 1)
+// }
 
-void	while_cmd(t_data *d, t_exec_lst **e_lst)
-{
-	t_exec_lst	*node;
-	char		**envtab;
+// void	while_cmd(t_data *d, t_exec_lst **e_lst)
+// {
+// 	t_exec_lst	*current;
+// 	char		**envtab;
 
-	node = *e_lst;
-	envtab = recreate_env_tab(d->env);
-	while (d->info.executed_cmd != d->info.cmd_count && node != NULL)
-	{
-		if (d->info.pipe_count)
-			if (pipe(d->info.fd) == -1)
-				clean_exit();
-		d->info.child_pid = fork();
-		if (d->info.child_pid == -1)
-			clean_exit();
-		if (!d->info.child_pid)
-			pathfinder(d, node, envtab);
-		else
-			parent();
-		node = node->next;
-		d->info.executed_cmd++;
-	}
-	wait_child(&(d->info));
-}
+// 	current = *e_lst;
+// 	envtab = recreate_env_tab(d->env);
+// 	while (d->info.executed_cmd != d->info.cmd_count && current != NULL)
+// 	{
+// 		if (d->info.pipe_count != 0)
+// 		{
+// 			if (pipe(d->info.fd) == -1)
+// 				clean_exit_shell(FAILURE);
+// 		}
+// 		d->info.child_pid = fork();
+// 		if (d->info.child_pid == -1)
+// 			clean_exit_shell(FAILURE);
+// 		if (d->info.child_pid == 0)
+// 			pathfinder(d, current, envtab);
+// 		else
+// 			__parent(&(d->info));
+// 		current = current->next;
+// 		d->info.executed_cmd++;
+// 	}
+// 	__wait_child(&(d->info));
+// }
 
 //NOTES :
 // - Je dois reperer la presence de pipe, et ne surtout pas en ouvrir si il n'y

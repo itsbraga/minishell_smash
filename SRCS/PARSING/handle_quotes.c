@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/03 23:26:55 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/04 22:57:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ char	*other_quotes(char *str)
 			str = del_quote_pair(str, i, (i + closing_quote));
 			i += (closing_quote - 1);
 		}
-		i++;
+		else
+			i++;
 	}
 	return (str);
 }

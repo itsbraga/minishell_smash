@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_dblst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/27 22:45:39 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:51:38 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ void	token_dblst_add_back(t_token_dblst **t, t_token_dblst *new_node)
 size_t	get_token_dblst_size(t_token_dblst **t)
 {
 	size_t			size;
-	t_token_dblst	*head;
+	t_token_dblst	*current;
 
 	size = 0;
-	head = *t;
-	while (head != NULL)
+	current = *t;
+	while (current != NULL)
 	{
 		size++;
-		head = head->next;
+		current = current->next;
 	}
 	return (size);
 }

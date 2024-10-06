@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/03 20:51:31 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:51:11 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,38 @@ static t_token_type	__classify(char *token, char *prev)
 		return (REDIR_OUT_TRUNC);
 	else if (ft_strcmp(token, ">>") == 0)
 		return (REDIR_OUT_APPEND);
-	else if (prev == NULL || ft_strcmp(token, "|") == 0)
-		return (COMMAND);
 	return (WORD);
+}
+
+static void	__find_command(t_token_dblst *t)
+{
+	t_token_dblst	*current;
+
+	current = t;
+	while (current != NULL)
+	{
+		if (current->type == WORD)
+		{
+			current->type = COMMAND;
+			break ;
+		}
+		else
+			current = current->next;
+	}
 }
 
 void	lst_tokenization(t_token_dblst *t)
 {
-	t_token_dblst	*head;
+	t_token_dblst	*current;
 
-	head = t;
-	while (head != NULL)
+	current = t;
+	while (current != NULL)
 	{
-		if (head->prev != NULL)
-			head->type = __classify(head->content, head->prev->content);
+		if (current->prev != NULL)
+			current->type = __classify(current->content, current->prev->content);
 		else
-			head->type = __classify(head->content, NULL);
-		head = head->next;
+			current->type = __classify(current->content, NULL);
+		current = current->next;
 	}
+	__find_command(t);
 }

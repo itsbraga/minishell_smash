@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/27 22:48:31 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:49:59 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static void	*__create(t_gc_lst **yama, size_t size, bool is_tab)
 	t_gc_lst	*node;
 
 	ptr = malloc(size);
-	// secure_malloc(ptr);
+	secure_malloc(ptr);
 	if (ptr == NULL)
 		return (err_msg(NULL, ERR_MALLOC, 0), NULL);
 	node = new_gc_node(ptr, is_tab);
-	// secure_malloc(node);
+	secure_malloc(node);
 	if (node == NULL)
 		return (err_msg(NULL, ERR_MALLOC, 0), NULL);
 	add_gc_node(yama, node);
@@ -34,7 +34,7 @@ static void	*__add(t_gc_lst **yama, void *ptr, bool is_tab)
 	t_gc_lst *node;
 
 	node = new_gc_node(ptr, is_tab);
-	// secure_malloc(node);
+	secure_malloc(node);
 	if (node == NULL)
 		return (err_msg(NULL, ERR_MALLOC, 0), NULL);
 	add_gc_node(yama, node);

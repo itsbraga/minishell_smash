@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/03 23:25:33 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 19:29:12 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 	return (new_str);
 }
 
-// EXEMPLE : gg"$USER"wp = gg"pmateo"wp 
 static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_size)
 {
 	char	*new_str;
@@ -108,8 +107,7 @@ static char	*__handle_expand(t_data *d, char *str, char *var)
 		free(var_value);
 	return (str);
 }
-
-//EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
+ 
 char	*expand(t_data *d, char *str, bool in_heredoc)
 {
 	int		i;

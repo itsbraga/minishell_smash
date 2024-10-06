@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   our_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/03 23:20:39 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:50:57 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static char	*__find_var_path(char *to_find, t_env_lst *env)
 {
-	t_env_lst	*head;
+	t_env_lst	*current;
 	char		*path;
 	size_t		len_var_env;
 	size_t		len_to_find;
 
-	head = env;
+	current = env;
 	path = NULL;
 	len_to_find = ft_strlen(to_find);
-	while (head != NULL)
+	while (current != NULL)
 	{
-		len_var_env = ft_strlen(head->content);
-		if (ft_strncmp(head->content, to_find, len_to_find) == 0)
+		len_var_env = ft_strlen(current->content);
+		if (ft_strncmp(current->content, to_find, len_to_find) == 0)
 		{
-			path = ft_substr(head->content, len_to_find,
+			path = ft_substr(current->content, len_to_find,
 					(len_var_env - len_to_find));
 			if (path == NULL)
 			{
@@ -36,7 +36,7 @@ static char	*__find_var_path(char *to_find, t_env_lst *env)
 			}
 			return (path);
 		}
-		head = head->next;
+		current = current->next;
 	}
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_lst_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:34:57 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/03 22:30:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 22:17:59 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*token_cleanup(char *content)
 	if (__has_quotes(content) == false)
 		return (content);
 	content = empty_quotes(content);
+	content = expand(data_struct(), content, false);
 	content = other_quotes(content);
 	return (content);
 }

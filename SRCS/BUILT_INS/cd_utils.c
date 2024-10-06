@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_cd_utils.c                                      :+:      :+:    :+:   */
+/*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/09/11 18:55:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/06 21:51:58 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 {
-	t_env_lst	*head;
+	t_env_lst	*current;
 	char		*new_pwd;
 
 	new_pwd = getcwd(NULL, 0);
@@ -23,38 +23,38 @@ static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 		err_msg("0: getcwd() failed", "No such file or directory", 0);
 		return (NULL);
 	}
-	head = env;
-	while (head != NULL)
+	current = env;
+	while (current != NULL)
 	{
-		if (ft_strncmp(head->content, "PWD=", 4) == 0)
+		if (ft_strncmp(current->content, "PWD=", 4) == 0)
 		{
-			*old_pwd = ft_strdup(head->content);
-			free(head->content);
-			head->content = ft_strjoin("PWD=", new_pwd);
-			if (head->content == NULL)
+			*old_pwd = ft_strdup(current->content);
+			free(current->content);
+			current->content = ft_strjoin("PWD=", new_pwd);
+			if (current->content == NULL)
 				return (free(new_pwd), NULL);
 		}
-		head = head->next;
+		current = current->next;
 	}
 	return (new_pwd);
 }
 
 static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 {
-	t_env_lst	*head;
+	t_env_lst	*current;
 
-	head = env;
-	while (head != NULL)
+	current = env;
+	while (current != NULL)
 	{
-		if ((ft_strncmp(head->content, "OLDPWD=", 7) == 0) && old_pwd != NULL)
+		if ((ft_strncmp(current->content, "OLDPWD=", 7) == 0) && old_pwd != NULL)
 		{
-			free(head->content);
-			head->content = ft_strjoin("OLDPWD=", old_pwd + 4); // +4 pour ignorer PWD=
+			free(current->content);
+			current->content = ft_strjoin("OLDPWD=", old_pwd + 4); // +4 pour ignorer PWD=
 			free(old_pwd);
 			old_pwd = NULL;
 			break ;
 		}
-		head = head->next;
+		current = current->next;
 	}
 	if (old_pwd != NULL)
 		free(old_pwd);

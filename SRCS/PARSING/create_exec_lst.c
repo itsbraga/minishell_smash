@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_exec_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/03 22:09:14 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 22:17:09 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static void	__init_ptrs(t_ptrs *p)
 {
 	p->new_task = NULL;
 	p->i = 0;
-	p->cleaned_token = token_cleanup(data_struct()->token->content);
 }
 
 static void	__command_case(t_data *d, t_ptrs *p)
 {
+	char	*cleaned_token;
 	int		size;
 	
 	size = (sizeof(char *) * cmd_token_count(d->token));
@@ -38,45 +38,41 @@ static void	__command_case(t_data *d, t_ptrs *p)
 	secure_malloc(p->new_task);
 	p->new_task->cmd = yama(CREATE_TAB, NULL, (size + 1));
 	secure_malloc(p->new_task->cmd);
-	p->new_task->cmd[p->i] = p->cleaned_token;
+	cleaned_token = token_cleanup(d->token->content);
+	p->new_task->cmd[p->i] = cleaned_token;
+	if (ft_strchr(cleaned_token, '\'') != NULL)
+	{
+		p->new_task->absolute_path = true;
+		p->new_task->bin_path = cleaned_token;
+	}
 	printf(RED "node_cmd[0]:\t [" R "%s" RED "]\n" R, p->new_task->cmd[p->i]);
 	p->i++;
 }
 
 static void	__word_case(t_data *d, t_ptrs *p)
 {
-	int		size;
-
+	char	*cleaned_token;
+	
 	if (p->new_task != NULL)
 	{
-		p->new_task->cmd[p->i] = d->token->content;
+		cleaned_token = token_cleanup(d->token->content);
+		p->new_task->cmd[p->i] = cleaned_token;
 		printf(RED "node_cmd[i]:\t [" R "%s" RED "]\n" R, p->new_task->cmd[p->i]);
-	}
-	else
-	{
-		d->token->type = COMMAND; // redefini le WORD en COMMAND
-		size = (sizeof(char *) * cmd_token_count(d->token));
-		p->new_task = exec_lst_new_node();
-		secure_malloc(p->new_task);
-		p->new_task->cmd = yama(CREATE_TAB, NULL, (size + 1));
-		secure_malloc(p->new_task->cmd);
-		p->new_task->cmd[p->i] = p->cleaned_token;
-		printf(RED "node_cmd[x]:\t [" R "%s" RED "]\n" R, p->new_task->cmd[p->i]);	
 	}
 	p->i++;
 }
 
-// manque absolute_path + bin_path
 int	create_exec_lst(t_data *d)
 {
-	t_token_dblst	*head;
+	t_token_dblst	*current;
 	t_ptrs			p;
 	
 	if (d->token == NULL || d->token->content == NULL)
 		return (FAILURE);
-	head = d->token;
+	current = d->token;
 	__init_exec(d);
 	__init_ptrs(&p);
+	printf("-------------------------t_exec_lst-------------------------\n");
 	while (d->token != NULL)
 	{
 		if (d->token->type == COMMAND)
@@ -89,7 +85,7 @@ int	create_exec_lst(t_data *d)
 		if (d->token == NULL)
 			exec_lst_add_back(&(d->exec), p.new_task);
 	}
-	d->token = head;
+	d->token = current;
 	if (create_redir_lst(d) == FAILURE)
 		return (err_msg(NULL, "could not create redir_lst", 0), FAILURE);
 	return (SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/03 23:20:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 22:17:24 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 
 # include "../LIBFT/INCLUDES/libft.h"
 # include "../LIBFT/INCLUDES/ft_printf.h"
@@ -87,7 +88,6 @@ char			*empty_quotes(char *str);
 char			*other_quotes(char *str);
 
 // check_sequence.c
-// int				check_redir_sequence(t_token_dblst *t);
 int				check_redir_sequence(char *content);
 
 // exec_lst_utils.c
@@ -112,6 +112,7 @@ t_env_lst		*ascii_sort(char **envp, char *last_added);
 // env_utils.c
 t_env_lst		*env_new_var(char *content);
 void			del_env_var(t_env_lst **env, char *var_to_rm);
+char			**recreate_env_tab(t_env_lst **env);
 
 // create_env.c
 int				create_exp_env_list(t_env_lst **exp_env, char **envp,

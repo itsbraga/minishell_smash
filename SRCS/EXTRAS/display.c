@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/02 21:50:29 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:51:04 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ static void	__display_redir_node(t_redir_lst *node)
 
 void	display_redir_lst(t_redir_lst *r)
 {
-	t_redir_lst *head;
+	t_redir_lst *current;
 
-	head = r;
-	while (head != NULL)
+	current = r;
+	while (current != NULL)
 	{
-		__display_redir_node(head);
-		head = head->next;
+		__display_redir_node(current);
+		current = current->next;
 	}
 }

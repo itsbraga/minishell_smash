@@ -3,42 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   create_redir_lst.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 20:44:31 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/03 22:08:23 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 22:17:13 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	__redir_in_and_out(t_token_dblst *t)
+static void	__redir_in_and_out(t_data *d)
 {
 	t_redir_lst	*new_redir;
 
-	if (t->next != NULL)
+	if (d->token->next != NULL)
 	{
-		if (t->type == REDIR_IN && t->next->type == INFILE)
+		if (d->token->type == REDIR_IN && d->token->next->type == INFILE)
 		{
 			new_redir = redir_lst_new_node(REDIR_IN);
 			secure_malloc(new_redir);
-			new_redir->infile = token_cleanup(t->next->content);;
+			new_redir->infile = token_cleanup(d->token->next->content);
 			printf(BOLD PINK "new_redir:\t [" R "%d" BOLD PINK "]\n" R, new_redir->type);
 			printf(BOLD PINK "infile:\t\t [" R "%s" BOLD PINK "]\n" R, new_redir->infile);
 		}
-		else if (t->type == REDIR_OUT_TRUNC && t->next->type == OUTFILE)
+		else if (d->token->type == REDIR_OUT_TRUNC
+				&& d->token->next->type == OUTFILE)
 		{
 			new_redir = redir_lst_new_node(REDIR_OUT_TRUNC);
 			secure_malloc(new_redir);
-			new_redir->outfile = token_cleanup(t->next->content);
+			new_redir->outfile = token_cleanup(d->token->next->content);
 			printf(BOLD PINK "new_redir:\t [" R "%d" BOLD PINK "]\n" R, new_redir->type);
 			printf(BOLD PINK "outfile:\t [" R "%s" BOLD PINK "]\n" R, new_redir->outfile);
 		}
-		else if (t->type == REDIR_OUT_APPEND && t->next->type == OUTFILE)
+		else if (d->token->type == REDIR_OUT_APPEND
+				&& d->token->next->type == OUTFILE)
 		{
 			new_redir = redir_lst_new_node(REDIR_OUT_APPEND);
 			secure_malloc(new_redir);
-			new_redir->outfile = token_cleanup(t->next->content);
+			new_redir->outfile = token_cleanup(d->token->next->content);
 			printf(BOLD PINK "new_redir:\t [" R "%d" BOLD PINK "]\n" R, new_redir->type);
 			printf(BOLD PINK "outfile:\t [" R "%s" BOLD PINK "]\n" R, new_redir->outfile);
 		}
@@ -54,7 +56,7 @@ int	create_redir_lst(t_data *d)
 	lstclear_redir(&(d->exec->redir));
 	while (d->token != NULL)
 	{
-		__redir_in_and_out(d->token);
+		__redir_in_and_out(d);
 		if (d->token->type == HERE_DOC && d->token->next != NULL
 			&& d->token->next->type == LIMITER)
 		{

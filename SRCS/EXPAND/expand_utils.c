@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/03 23:25:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:49:13 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,25 @@ char	*take_var(char *str, char *var)
 char 	*search_var(char *to_find, t_env_lst *env)
 {
 	char		*to_cmp;
-	t_env_lst	*node;
+	t_env_lst	*current;
 
 	to_cmp = NULL;
-	node = env;
-	while (node != NULL)
+	current = env;
+	while (current != NULL)
 	{
-		to_cmp = ft_strldup(node->content, len_to_equal(node->content));
+		to_cmp = ft_strldup(current->content, len_to_equal(current->content));
 		secure_malloc(to_cmp);
 		(void)yama(ADD, to_cmp, 0);
 		if (ft_strcmp(to_find, to_cmp) == 0)
 		{
 			free(to_cmp);
-			return (__take_var_value(node->content));
+			return (__take_var_value(current->content));
 		}
 		else
 		{
 			free(to_cmp);
 			to_cmp = NULL;
-			node = node->next;
+			current = current->next;
 		}
 	}
 	return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token_dblst.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/03 23:23:03 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/06 21:02:16 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	create_token_dblst(t_data *d)
 	char			**seg_elems;
 	int				i;
 
-	i = 0;
 	while (d->main != NULL)
 	{
 		lstclear_token(&(d->token));
 		seg_elems = __get_all_seg_elems(d->main);
 		secure_malloc2(seg_elems, false);
+		i = 0;
 		while (seg_elems[i] != NULL)
 		{
 			new_token = token_dblst_new_node(seg_elems[i], UNKNOWN);
