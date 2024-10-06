@@ -37,7 +37,27 @@ static char	*__take_var_value(char *str)
 	return (value);
 }
 
-// LA VARIABLE CORRESPOND A TOUT CARACTERE ALPHANUMERIQUE QUI VIENT APRES LE $
+char	*__clean_translated_variable(char *str, char *var)
+{
+	char	*new_str;
+	int		i;
+	
+	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 2)));
+	secure_malloc(new_str);
+	i = 0;
+	while (str != (var - 1))
+		new_str[i++] = *str++;
+	str += 2;
+	while (*str != *var)
+		new_str[i++] = *str++;
+	str += 1;
+	while (*str)
+		new_str[i++] = *str++;
+	new_str[i] = '\0';
+	free(str);
+	return (new_str);
+}
+
 char	*take_var(char *str, char *var)
 {
 	char	*to_find;

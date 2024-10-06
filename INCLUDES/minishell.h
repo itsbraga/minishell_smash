@@ -126,6 +126,7 @@ void			create_env(t_data *d, char **envp);
 
 // expand_utils.c
 size_t			len_to_equal(char *str);
+char			*__clean_translated_variable(char *str, char *var);
 char			*take_var(char *str, char *var);
 char 			*search_var(char *to_find, t_env_lst *env);
 
