@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/06 21:53:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 19:30:20 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	__minishell(t_data *d)
 			display_main_lst(d->main);
 			if (create_token_dblst(d) == FAILURE)
 				return (FAILURE);
+			// if (d->exec != NULL)
+			// 	exec_built_in(d->exec->cmd, d);
 			// while_cmd(d, &(d->exec));
 		}
 		free(user_input);

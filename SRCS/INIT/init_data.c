@@ -12,73 +12,44 @@
 
 #include "minishell.h"
 
-/*	Readline should not count escape sequences as visible characters.
-	This is achieved by encapsulating the non-visible parts (escape
-	sequences) of the prompt between special sequences :
-	
-	-	\001 (start of non-visible sequence)
-	-	\002 (end of non-visible sequence)
-	
-	This enables readline to manage the length of the prompt correctly.
-*/
-static char	*__generate_prompt(void)
-{
-	char	*username;
-	char	*rb_username;
-	char	*header;
-	char	*part1;
-	char	*prompt;
-	
-	username = getenv("USER");
-	if (username == NULL)
-		username = "unknown";
-	rb_username = rainbow_prompt(username);
-	header = ft_strjoin("\001" BOLD PROMPT_BAR "\002", "\001" BOLD "[" "\002");
-	secure_malloc(header);
-	part1 = ft_strjoin(header, rb_username);
-	secure_malloc(part1);
-	(free(header), free(rb_username));
-	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" R "\002 $> ");
-	secure_malloc(prompt);
-	(void)yama(ADD, prompt, 0);
-	free(part1);
-	return (prompt);
+static char	*__generate_prompt(t_prompt *pr)
+{	
+	pr->username = getenv("USER");
+	if (pr->username == NULL)
+		pr->username = "unknown";
+	pr->header = ft_strjoin(rainbow_prompt(PROMPT_BAR), "[");
+	secure_malloc(pr->header);
+	pr->colored_user = ft_strjoin(BLUE, pr->username);
+	secure_malloc(pr->colored_user);
+	pr->part1 = ft_strjoin(pr->header, pr->colored_user);
+	secure_malloc(pr->part1);
+	(free(pr->header), free(pr->colored_user));
+	pr->colored_42 = ft_strjoin(GREEN, "42");
+	secure_malloc(pr->colored_42);
+	pr->tmp = ft_strjoin(R "@", pr->colored_42);
+	secure_malloc(pr->tmp);
+	free(pr->colored_42);
+	pr->part2 = ft_strjoin(pr->tmp, R "] $> ");
+	secure_malloc(pr->part2);
+	free(pr->tmp);
+	pr->prompt = ft_strjoin(pr->part1, pr->part2);
+	secure_malloc(pr->prompt);
+	(void)yama(ADD, pr->prompt, 0);
+	(free(pr->part1), free(pr->part2));
+	return (pr->prompt);
 }
-
-// static char	*__generate_prompt(void)
-// {
-// 	char	*username;
-// 	char	*rb_bar;
-// 	char	*header;
-// 	char	*part1;
-// 	char	*prompt;
-	
-// 	username = getenv("USER");
-// 	if (username == NULL)
-// 		username = "unknown";
-// 	rb_bar = rainbow_prompt("\001" BOLD PROMPT_BAR "\002");
-// 	header = ft_strjoin(rb_bar, "\001" BOLD "[" "\002");
-// 	secure_malloc(header);
-// 	part1 = ft_strjoin(header, username);
-// 	secure_malloc(part1);
-// 	(free(header), free(username));
-// 	prompt = ft_strjoin(part1, "\001" BOLD "\002" "@42]\001" R "\002 $> ");
-// 	secure_malloc(prompt);
-// 	(void)yama(ADD, prompt, 0);
-// 	free(part1);
-// 	return (prompt);
-// }
 
 // singleton version
 t_data	*data_struct(void)
 {
 	static t_data	*instance = NULL;
+	t_prompt		pr;
 
 	if (instance == NULL)
 	{
 		instance = yama(CREATE, NULL, sizeof(t_data));
 		secure_malloc(instance);
-		instance->prompt = __generate_prompt();
+		instance->prompt = __generate_prompt(&pr);
 		if (instance->prompt == NULL)
 			clean_exit_shell(FAILURE);
 		instance->main = NULL;

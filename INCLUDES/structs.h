@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 20:45:11 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 19:24:22 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ typedef enum 	e_token_type
 	REDIR_OUT_APPEND,		// 7
 	OUTFILE					// 8
 }			 	t_token_type;
+
+typedef struct s_prompt
+{
+	char	*username;
+	char	*header;
+	char	*colored_user;
+	char	*colored_42;
+	char	*tmp;
+	char	*part1;
+	char	*part2;
+	char	*prompt;
+}				t_prompt;
 
 typedef struct s_parser
 {

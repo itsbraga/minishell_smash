@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 22:22:20 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 18:03:12 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,18 @@ static void	__pipe_check(t_parser *p)
 	if (p->user_input[p->i] == '|')
 	{
 		p->i++;
+		if (p->user_input[p->i] == '|')
+		{
+			err_msg(NULL, "||", 2);
+			exit(FAILURE);
+		}
 		while (p->user_input[p->i] != '\0'
 				&& ft_isspace(p->user_input[p->i]) == 1)
 			p->i++;
 		if (p->user_input[p->i] == '|' || p->user_input[p->i] == '\0')
 		{
 			err_msg(NULL, "|", 2);
-			clean_exit_shell(FAILURE); // verifier s'il faut quitter ou pas ici
+			exit(FAILURE); // verifier s'il faut quitter ou pas ici
 		}
 	}
 }

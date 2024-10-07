@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/03 22:44:23 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 18:26:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	err_msg(char *detail, char *reason, int quotes)
 	}
 	else if (quotes == 2)
 	{
-		msg = __append_strs(__append_strs(NULL, ERR_PREFIX), ERR_NEAR_TOK);
+		msg = __append_strs(__append_strs(NULL, ERR_PREFIX), ERR_PIPE);
 		msg = __append_strs(__append_strs(msg, reason), "'");
 	}
 	else

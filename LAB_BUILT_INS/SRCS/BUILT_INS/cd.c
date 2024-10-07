@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/11 18:54:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/07 19:13:17 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ static char	*__find_var_path(char *to_find, t_env_lst *env)
 					(len_var_env - len_to_find));
 			if (path == NULL)
 			{
-				free(path);
-				return (NULL);
+				err_msg("malloc", ERR_MALLOC_LST, 0);
+				exit(FAILURE);
 			}
 			return (path);
 		}
 		head = head->next;
 	}
+	free(path);
 	return (NULL);
 }
 
