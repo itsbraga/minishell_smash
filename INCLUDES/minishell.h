@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 22:05:22 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 22:09:28 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void			create_env(t_data *d, char **envp);
 
 // expand_utils.c
 size_t			len_to_equal(char *str);
-char			*__clean_translated_variable(char *str, char *var);
+char			*clean_translated_variable(char *str, char *var);
 char			*take_var(char *str, char *var);
 char 			*search_var(char *to_find, t_env_lst *env);
 

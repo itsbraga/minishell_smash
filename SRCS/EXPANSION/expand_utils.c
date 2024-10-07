@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/06 21:49:13 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 22:09:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*__take_var_value(char *str)
 	return (value);
 }
 
-char	*__clean_translated_variable(char *str, char *var)
+char	*clean_translated_variable(char *str, char *var)
 {
 	char	*new_str;
 	int		i;
