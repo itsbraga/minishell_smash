@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 18:44:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 22:33:48 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	check_bin_path(t_exec_lst *node, bool absolute_path)
-{
-	if (access(node->bin_path, F_OK) == -1)
-	{
-		if (absolute_path == true)
-			err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, 127);
-		else
-			err_msg_cmd(node->cmd[0], NULL, ERR_CMD, 127);
-		free(node->bin_path);
-		node->bin_path = NULL;
-		return (FAILURE);
-	}
-	else if (access(node->bin_path, X_OK) == -1)
-	{
-		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
-		free(node->bin_path);
-		node->bin_path = NULL;
-		return (FAILURE);
-	}
-	return (SUCCESS);
-}
 
 char	**search_path(char **tab_path, char **env)
 {
@@ -57,7 +35,8 @@ char	**search_path(char **tab_path, char **env)
 		if (tab_path == NULL)
 		{
 			perror("malloc");
-			clean_exit_shell(FAILURE);
+			// clean_exit_shell(FAILURE);
+			exit(FAILURE);
 		}
 	}
 	return (tab_path);
@@ -87,5 +66,5 @@ char	*search_bin(char *cmd, char **tab_path)
 		else
 			return(yama(REMOVE, tab_path, 0), path_to_try);
 	}
-	return(yama(REMOVE, tab_path, 0), NULL);
+	return (yama(REMOVE, tab_path, 0), NULL);
 }

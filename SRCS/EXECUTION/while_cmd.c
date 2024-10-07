@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 21:21:42 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 22:53:56 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	__wait_child(t_exec_info *info)
 		if (waitpid(-1, &status, 0) == -1)
 		{
 			err_msg("waitpid", strerror(errno), 0);
-			clean_exit_shell(FAILURE);
+			// clean_exit_shell(FAILURE);
+			exit(FAILURE);
 		}
 		info->cmd_count--;
 	}
@@ -41,25 +42,27 @@ static void	__parent(t_exec_info *info)
 void	while_cmd(t_data *d, t_exec_lst **e_lst)
 {
 	t_exec_lst	*current;
-	char		**envtab;
+	char		**env_tab;
 
 	current = *e_lst;
-	envtab = recreate_env_tab(&(d->env));
+	env_tab = recreate_env_tab(&(d->env));
 	printf("executed_cmd = %d ; cmd_count = %d\n", d->info->executed_cmd, d->info->cmd_count);
 	printf("current = %p\n", current);
-	while (d->info->executed_cmd != d->info->cmd_count && current != NULL)
+	while ((d->info->executed_cmd != d->info->cmd_count) && current != NULL)
 	{
 		printf("début whilecmd\n");
 		if (d->info->pipe_count != 0)
 		{
 			if (pipe(d->info->fd) == -1)
-				clean_exit_shell(FAILURE);
+				// clean_exit_shell(FAILURE);
+				exit(FAILURE);
 		}
 		d->info->child_pid = fork();
 		if (d->info->child_pid == -1)
-			clean_exit_shell(FAILURE);
+			// clean_exit_shell(FAILURE);
+			exit(FAILURE);
 		if (d->info->child_pid == 0)
-			pathfinder(d, current, envtab);
+			pathfinder(d, current, env_tab);
 		else
 			__parent(d->info);
 		current = current->next;

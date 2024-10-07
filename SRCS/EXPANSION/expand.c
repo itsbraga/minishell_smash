@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 18:46:52 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 22:15:37 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static	char	*__handle_expand(t_data *d, char *str, char *var)
 	if (*var == '?')
 		handle_last_exit_code(d, str, var);
 	else if (*var == '"' || *var == '\'')
-		str = __clean_translated_variable(str, var);
+		str = clean_translated_variable(str, var);
 	else
 	{
 		to_find = take_var(str, var);

@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+/*	Readline should not count escape sequences as visible characters.
+	This is achieved by encapsulating the non-visible parts (escape
+	sequences) of the prompt between special sequences :
+	
+	-	\001 (start of non-visible sequence)
+	-	\002 (end of non-visible sequence)
+	
+	This enables readline to manage the length of the prompt correctly.
+*/
 static char	*__generate_prompt(t_prompt *pr)
 {	
 	pr->username = getenv("USER");

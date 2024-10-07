@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 22:09:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 22:54:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ void			exec_built_in(char **built_in, t_data *d);
 // exec_utils.c
 char			*search_bin(char *cmd, char **tab_path);
 char			**search_path(char **tab_path, char **env);
-int				check_bin_path(t_exec_lst *node, bool absolute_path);
 
 // exec.c
 void			exec(char *path_bin, char **cmd_and_args, char **env);

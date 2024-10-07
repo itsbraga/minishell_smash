@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 20:29:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 22:44:22 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,23 @@ void	del_env_var(t_env_lst **env, char *var_to_rm)
 char	**recreate_env_tab(t_env_lst **env)
 {
 	char		**tab;
-	t_env_lst 	*node;
+	t_env_lst 	*current;
 	int			i;
 
-	tab = malloc(get_envlst_size(env) * sizeof(char *));
-	node = *env;
+	// tab = malloc(sizeof(char *) * get_envlst_size(env));
+	// secure_malloc(tab);
+	tab = yama(CREATE_TAB, NULL, (sizeof(char *) * get_envlst_size(env)));
+	secure_malloc(tab);
+	current = *env;
 	i = 0;
-	while (node != NULL)
+	while (current != NULL)
 	{
-		tab[i] = ft_strdup(node->content);
+		// tab[i] = ft_strdup(current->content);
+		// secure_malloc(tab[i]);
+		// (void)yama(ADD, tab[i], 0);
+		tab[i] = current->content;
 		i++;
-		node = node->next;
+		current = current->next;
 	}
 	return (tab);
 }

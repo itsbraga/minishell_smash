@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 19:39:13 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 22:44:48 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	__open_heredoc(t_data *d, char *limiter)
 
 int	fill_all_heredoc(t_data *d, t_redir_lst *r)
 {
-	t_redir_lst *current;
+	t_redir_lst	*current;
 	int			latest_read_fd;
 	char		*tmp;
 

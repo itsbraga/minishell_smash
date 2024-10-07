@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 22:10:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 22:32:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	__check_bin_path(t_exec_lst *node, bool absolute_path)
 	if (access(node->bin_path, F_OK) == -1)
 	{
 		if (absolute_path == true)
-			err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, 127);
+			err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, CMD_NOT_FOUND);
 		else
-			err_msg_cmd(node->cmd[0], NULL, ERR_CMD, 127);
+			err_msg_cmd(node->cmd[0], NULL, ERR_CMD, CMD_NOT_FOUND);
 		free(node->bin_path);
 		node->bin_path = NULL;
 		return (FAILURE);

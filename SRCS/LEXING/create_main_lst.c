@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/07 20:55:23 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 22:26:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int	create_main_lst(t_data *d, char *input)
 	ft_bzero((d->info), sizeof(t_exec_info));
 	lstclear_main(&(d->main));
 	segments = __get_all_segments(input);
-	if (segments == NULL)
-		return (FAILURE);
+	secure_malloc2(segments, false);
 	(void)yama(ADD, segments, 0);
 	i = 0;
 	while (segments[i] != NULL)
@@ -73,7 +72,6 @@ int	create_main_lst(t_data *d, char *input)
 		d->info->cmd_count = i;
 		d->info->pipe_count = d->info->cmd_count - 1;
 	}
-	(void)yama(REMOVE, segments, 0);
-	__del_unwanted_whitespaces(d->main);
+	((void)yama(REMOVE, segments, 0), __del_unwanted_whitespaces(d->main));
 	return (SUCCESS);
 }
