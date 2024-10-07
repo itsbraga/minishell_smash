@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 21:51:58 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 21:16:19 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 	new_pwd = getcwd(NULL, 0);
 	if (new_pwd == NULL)
 	{
-		err_msg("0: getcwd() failed", "No such file or directory", 0);
+		err_msg("0: getcwd() failed", ERR_BAD_FILE, 0);
 		return (NULL);
 	}
 	current = env;
@@ -46,7 +46,8 @@ static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 	current = env;
 	while (current != NULL)
 	{
-		if ((ft_strncmp(current->content, "OLDPWD=", 7) == 0) && old_pwd != NULL)
+		if ((ft_strncmp(current->content, "OLDPWD=", 7) == 0)
+			&& old_pwd != NULL)
 		{
 			free(current->content);
 			current->content = ft_strjoin("OLDPWD=", old_pwd + 4); // +4 pour ignorer PWD=

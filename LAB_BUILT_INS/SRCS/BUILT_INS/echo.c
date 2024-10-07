@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   our_env.c                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/07 21:10:55 by art3mis          ###   ########.fr       */
+/*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
+/*   Updated: 2024/10/07 21:57:06 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "my_builtins.h"
 
-int	our_env(t_env_lst *env)
+int my_echo(char **args)
 {
-	t_env_lst	*tmp;
+    int i;
 
-	tmp = env;
-	while (tmp != NULL)
-	{
-		ft_printf(STDOUT_FILENO, "%s\n", tmp->content);
-		tmp = tmp->next;
-	}
-	// g->last_exit_status = 0;
-	return (SUCCESS);
+    i = 0;
+    while (args[i] != NULL)
+    {
+        ft_printf(STDOUT_FILENO, "%s", args[i]);
+        if (args[i] != NULL)
+            ft_printf(STDOUT_FILENO, ' ');
+        i++;
+    }
 }

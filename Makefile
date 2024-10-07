@@ -59,14 +59,14 @@ PARSING_DIR		=	PARSING/
 PARSING_F		=	handle_quotes.c quotes_utils.c exec_lst_utils.c \
 					check_sequence.c create_exec_lst.c create_redir_lst.c
 
-EXPAND_DIR		=	EXPAND/
+EXPAND_DIR		=	EXPANSION/
 EXPAND_F		=	expand.c expand_utils.c
 
 BUILT_INS_DIR	=	BUILT_INS/
 BUILT_INS_F		=	built_ins.c our_env.c our_pwd.c cd_utils.c our_cd.c \
 					our_exit.c our_unset.c
 
-EXEC_DIR		=	EXEC/
+EXEC_DIR		=	EXECUTION/
 EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
 
 #******************************************************************************#

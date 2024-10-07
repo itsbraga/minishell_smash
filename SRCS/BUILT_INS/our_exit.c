@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/03 23:20:50 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 21:18:02 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static int	__set_exit_status(t_data *d, char **args)
 	else if (args[1] != NULL)
 	{
 		if (ft_strisnumeric(args[1]) == 0 && args[2] != NULL)
-			return (err_msg_cmd("exit", NULL, "too many arguments", FAILURE));
+			return (err_msg_cmd("exit", NULL, ERR_ARG, FAILURE));
 		else
 			exit_status = __ft_atol(args[1]);
 	}
 	else
-		return (err_msg_cmd("exit", args[1], "numeric argument required", 2));
+		return (err_msg_cmd("exit", args[1], ERR_ARG_TYPE, MISUSE_CMD));
 	return (exit_status);
 }
 

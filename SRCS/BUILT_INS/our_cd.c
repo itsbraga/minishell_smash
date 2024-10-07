@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   our_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/06 21:50:57 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 21:20:54 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ static char	*__find_var_path(char *to_find, t_env_lst *env)
 		{
 			path = ft_substr(current->content, len_to_find,
 					(len_var_env - len_to_find));
-			if (path == NULL)
-			{
-				free(path);
-				return (NULL);
-			}
+			secure_malloc(path);
 			return (path);
 		}
 		current = current->next;
@@ -50,15 +46,13 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 	int		error;
 
 	var_path = __find_var_path(var, env);
-	ret = chdir((const char *)var_path);
+	ret = chdir(var_path);
 	if (ret != 0)
 	{
 		current = t->content;
 		next = t->next->content;
-		error = err_msg_cmd(current, next, "No such file or directory", 1);
-		free(current);
-		free(next);
-		return (error);
+		error = err_msg_cmd(current, next, ERR_BAD_FILE, FAILURE);
+		return (free(current), free(next), error);
 	}
 	if (var_path != NULL)
 		free(var_path);
@@ -81,20 +75,20 @@ int	our_cd(t_data *d)
 	int		error;
 	
 	if ((d->token->next == NULL)
-		|| (ft_strcmp((const char *)d->token->next->content, "~") == 0))
+		|| (ft_strcmp(d->token->next->content, "~") == 0))
 		ret = __go_to_env_var(d->env, "HOME=", d->token);
-	else if (ft_strcmp((const char *)d->token->next->content, "-") == 0)
+	else if (ft_strcmp(d->token->next->content, "-") == 0)
 	{
 		ret = __go_to_env_var(d->env, "OLDPWD=", d->token);
 		printf("%s\n", __find_var_path("OLDPWD=", d->env));
 	}
 	else
-		ret = chdir((const char *)d->token->next->content);
+		ret = chdir(d->token->next->content);
 	if (ret != 0)
 	{
 		current = d->token->content;
 		next = d->token->next->content;
-		error = err_msg_cmd(current, next, "No such file or directory", 1);
+		error = err_msg_cmd(current, next, ERR_BAD_FILE, FAILURE);
 		return (free(current), free(next), error);
 	}
 	change_paths(d->env, d->exp_env);

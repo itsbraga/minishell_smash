@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/03 23:20:54 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 21:11:38 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void    our_export(t_env_lst *exp_env)
     tmp = exp_env;
     while (tmp != NULL)
     {
-        ft_putstr_fd(tmp->content, 1);
-        ft_putendl_fd("", 1);
+		ft_printf(STDOUT_FILENO, "%s\n", tmp->content);
         tmp = tmp->next;
     }
 }

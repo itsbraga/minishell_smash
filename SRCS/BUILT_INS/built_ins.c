@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/03 23:21:09 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 21:15:30 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exec_built_in(char **cmd, t_data *d)
 	else if (ft_strcmp(cmd[0], "env") == 0)
 	{
 		if (cmd[1] != NULL)
-			return (err_msg(cmd[1], "No such file or directory", 1));
+			return (err_msg(cmd[1], ERR_BAD_FILE, FAILURE));
 		our_env(d->env);
 	}
 	else if (ft_strcmp(cmd[0], "exit") == 0)
