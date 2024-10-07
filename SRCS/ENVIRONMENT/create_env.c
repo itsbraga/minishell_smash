@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/06 21:51:00 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 20:29:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	create_env(t_data *d, char **envp)
 {
 	size_t	envp_size;
 
-	envp_size = get_env_size(envp);
+	envp_size = get_envtab_size(envp);
 	if (create_env_list(&(d->env), envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
 	__update_shlvl(d->env);

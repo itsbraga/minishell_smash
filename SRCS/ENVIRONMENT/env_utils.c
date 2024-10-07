@@ -6,11 +6,36 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/06 22:05:12 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 20:29:38 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+size_t	get_envlst_size(t_env_lst **env)
+{
+	size_t	size;
+	t_env_lst	*current;
+	
+	size = 0;
+	current = *env;
+	while (current != NULL)
+	{
+		size++;
+		current = current->next;
+	}
+	return (size);
+}
+
+size_t	get_envtab_size(char **env)
+{
+	size_t	size;
+	
+	size = 0;
+	while (env[size] != NULL)
+		size++;
+	return (size);
+}
 
 t_env_lst	*env_new_var(char *content)
 {
@@ -54,20 +79,20 @@ void	del_env_var(t_env_lst **env, char *var_to_rm)
     }
 }
 
-// char	**recreate_env_tab(t_env_lst **env)
-// {
-// 	char		**tab;
-// 	t_env_lst 	*node;
-// 	int			i;
+char	**recreate_env_tab(t_env_lst **env)
+{
+	char		**tab;
+	t_env_lst 	*node;
+	int			i;
 
-// 	tab = malloc(get_env_size(env) * sizeof(char *));
-// 	node = *env;
-// 	i = 0;
-// 	while (node != NULL)
-// 	{
-// 		tab[i] = ft_strdup(node->content);
-// 		i++;
-// 		node = node->next;
-// 	}
-// 	return (tab);
-// }
+	tab = malloc(get_envlst_size(env) * sizeof(char *));
+	node = *env;
+	i = 0;
+	while (node != NULL)
+	{
+		tab[i] = ft_strdup(node->content);
+		i++;
+		node = node->next;
+	}
+	return (tab);
+}

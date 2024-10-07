@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/07 19:24:22 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 21:58:39 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef struct s_data
 	char			*prompt;
 	t_main_lst		*main;
 	t_token_dblst	*token;
-	t_exec_info		info;
+	t_exec_info		*info;
 	t_exec_lst		*exec;
 	t_env_lst		*env;
 	t_env_lst		*exp_env;

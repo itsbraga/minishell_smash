@@ -6,10 +6,9 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 21:23:31 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/07 22:05:22 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -105,11 +104,12 @@ int				create_exec_lst(t_data *d);
 \******************************************************************************/
 
 // export_env_utils.c
-size_t			get_env_size(char **env);
 t_env_lst		*copy_toppest(char **envp);
 t_env_lst		*ascii_sort(char **envp, char *last_added);
 
 // env_utils.c
+size_t			get_envlst_size(t_env_lst **env);
+size_t			get_envtab_size(char **env);
 t_env_lst		*env_new_var(char *content);
 void			del_env_var(t_env_lst **env, char *var_to_rm);
 char			**recreate_env_tab(t_env_lst **env);
@@ -163,19 +163,22 @@ void			exec_built_in(char **built_in, t_data *d);
 \******************************************************************************/
 
 // exec_utils.c
-
-
-// here_doc.c
-
-
-// pathfinder.c
-
-
-// while_cmd.c
-
+char			*search_bin(char *cmd, char **tab_path);
+char			**search_path(char **tab_path, char **env);
+int				check_bin_path(t_exec_lst *node, bool absolute_path);
 
 // exec.c
+void			exec(char *path_bin, char **cmd_and_args, char **env);
+void			go_exec(t_exec_lst *node, char **env);
 
+// here_doc.c
+int				fill_all_heredoc(t_data *d, t_redir_lst *r);
+
+// pathfinder.c
+void			pathfinder(t_data *d, t_exec_lst *node, char **env);
+
+// while_cmd.c
+void			while_cmd(t_data *d, t_exec_lst **e_lst);
 
 /******************************************************************************\
  * TOOLS

@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/06 22:26:08 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 18:46:52 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 			|| (var[len_var] >= '0' && var[len_var] <= '9')
 			|| var[len_var] == '_')
 		len_var++;
-	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) + (vv_size - len_var))));
+	new_str = malloc(sizeof(char) * (ft_strlen(str) + (vv_size - len_var)));
 	secure_malloc(new_str);
+	yama(ADD, new_str, 0);
 	i = 0;
 	while (str != (var - 1))
 		new_str[i++] = *str++;
@@ -51,8 +52,7 @@ static char	*__add_var_value(char *str, char *var, char *var_value, size_t vv_si
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	free(start_str);
-	return (new_str);
+	return (free(start_str), new_str);
 }
 
 static	char	*handle_last_exit_code (t_data *d, char *str, char *var)
