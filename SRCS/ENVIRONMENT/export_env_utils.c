@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/20 17:38:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:27:13 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@ static int	__cmp_to_equal(const char *s1, const char *s2)
 	while (s1[i] == s2[i] && s1[i] && s2[i] && s1[i] != '=' && s2[i] != '=')
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-size_t	get_env_size(char **env)
-{
-	size_t	size;
-	
-	size = 0;
-	while (env[size] != NULL)
-		size++;
-	return (size);
 }
 
 // TROUVE ET COPIE LA STRING AVEC LE PLUS HAUT CODE ASCII

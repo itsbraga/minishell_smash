@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 21:02:16 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 21:27:06 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	create_token_dblst(t_data *d)
 		d->exec->heredoc_nb = 0;
 		d->main = d->main->next;
 	}
-	lstclear_exec(&(d->exec));
+	// lstclear_exec(&(d->exec));
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/17 19:50:33 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 20:28:29 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**recreate_env_tab(t_env_lst **env)
 	t_env_lst 	*node;
 	int			i;
 
-	tab = malloc(get_env_size(env) * sizeof(char *));
+	tab = malloc(get_envlst_size(env) * sizeof(char *));
 	node = *env;
 	i = 0;
 	while (node != NULL)

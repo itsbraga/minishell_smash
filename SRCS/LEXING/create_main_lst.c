@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/06 21:51:07 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/07 20:55:23 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	create_main_lst(t_data *d, char *input)
 
 	if (unclosed_quotes(input) == true)
 		return (err_msg(NULL, YELLOW "WARNING: unclosed quotes" R, 0), FAILURE);
-	ft_bzero(&(d->info), sizeof(t_exec_info));
+	d->info = yama(CREATE, NULL, sizeof(t_exec_info));
+	ft_bzero((d->info), sizeof(t_exec_info));
 	lstclear_main(&(d->main));
 	segments = __get_all_segments(input);
 	if (segments == NULL)
@@ -69,8 +70,8 @@ int	create_main_lst(t_data *d, char *input)
 		(void)yama(ADD, new_node, 0);
 		main_lst_add_back(&(d->main), new_node);
 		i++;
-		d->info.cmd_count = i;
-		d->info.pipe_count = d->info.cmd_count - 1;
+		d->info->cmd_count = i;
+		d->info->pipe_count = d->info->cmd_count - 1;
 	}
 	(void)yama(REMOVE, segments, 0);
 	__del_unwanted_whitespaces(d->main);

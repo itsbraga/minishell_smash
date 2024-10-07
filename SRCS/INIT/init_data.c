@@ -84,6 +84,7 @@ t_data	*data_struct(void)
 		instance->main = NULL;
 		instance->token = NULL;
 		instance->exec = NULL;
+		instance->info = NULL;
 		instance->env = NULL;
 		instance->exp_env = NULL;
 		instance->last_exit_status = 0;
