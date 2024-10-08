@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/08 21:46:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:30:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,16 @@
 
 void	exec_built_in(char **cmd, t_global *g)
 {
-	if (ft_strcmp(cmd[0], "pwd") == 0)
-		my_pwd();
+	if (ft_strcmp(cmd[0], "echo") == 0)
+		my_echo(cmd);
 	else if (ft_strcmp(cmd[0], "cd") == 0)
 		my_cd(g);
+	else if (ft_strcmp(cmd[0], "pwd") == 0)
+		my_pwd();
+	// else if (ft_strcmp(cmd[0], "export") == 0)
+	// 	my_export();
+	else if (ft_strcmp(cmd[0], "unset") == 0)
+		my_unset(g, cmd);
 	else if (ft_strcmp(cmd[0], "env") == 0)
 	{
 		if (cmd[1] != NULL)
@@ -46,8 +52,6 @@ void	exec_built_in(char **cmd, t_global *g)
 	}
 	else if (ft_strcmp(cmd[0], "exit") == 0)
 		my_exit(g, cmd);
-	else if (ft_strcmp(cmd[0], "unset") == 0)
-		my_unset(g, cmd + 1);
 	else if (ft_strcmp(cmd[0], "clear") == 0)
 		printf("\033[H\033[J");
 }

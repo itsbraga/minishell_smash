@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/07 21:15:30 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/08 17:02:51 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ bool	is_built_in(char *cmd)
 	int			i;
 	const char	*built_in[] =
 	{
-		"pwd",
+		"echo",
 		"cd",
-		"env",
+		"pwd",
 		// "export",
 		"unset",
+		"env",
 		"exit"
 	};
 
@@ -36,20 +37,24 @@ bool	is_built_in(char *cmd)
 
 void	exec_built_in(char **cmd, t_data *d)
 {
-	if (ft_strcmp(cmd[0], "pwd") == 0)
-		our_pwd();
+	if (ft_strcmp(cmd[0], "echo") == 0)
+		ft_echo(cmd);
 	else if (ft_strcmp(cmd[0], "cd") == 0)
-		our_cd(d);
+		ft_cd(d);
+	else if (ft_strcmp(cmd[0], "pwd") == 0)
+		ft_pwd();
+	// else if (ft_strcmp(cmd[0], "export") == 0)
+	// 	ft_export();
+	else if (ft_strcmp(cmd[0], "unset") == 0)
+		ft_unset(d, cmd);
 	else if (ft_strcmp(cmd[0], "env") == 0)
 	{
 		if (cmd[1] != NULL)
 			return (err_msg(cmd[1], ERR_BAD_FILE, FAILURE));
-		our_env(d->env);
+		ft_env(d->env);
 	}
 	else if (ft_strcmp(cmd[0], "exit") == 0)
-		our_exit(d, cmd);
-	else if (ft_strcmp(cmd[0], "unset") == 0)
-		our_unset(d, cmd + 1);
+		ft_exit(d, cmd);
 	else if (ft_strcmp(cmd[0], "clear") == 0)
 		printf("\033[H\033[J");
 }

@@ -63,8 +63,8 @@ EXPAND_DIR		=	EXPANSION/
 EXPAND_F		=	expand.c expand_utils.c
 
 BUILT_INS_DIR	=	BUILT_INS/
-BUILT_INS_F		=	built_ins.c our_env.c our_pwd.c cd_utils.c our_cd.c \
-					our_exit.c our_unset.c
+BUILT_INS_F		=	built_ins.c ft_echo.c cd_utils.c ft_cd.c ft_pwd.c \
+					ft_unset.c ft_env.c ft_exit.c
 
 EXEC_DIR		=	EXECUTION/
 EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 22:54:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/08 18:21:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,23 +137,26 @@ char			*expand(t_data *d, char *str, bool in_heredoc);
  * BUILT-INS
 \******************************************************************************/
 
-// our_unset.c
-int				our_unset(t_data *d, char **args);
+// ft_exit.c
+void			ft_exit(t_data *d, char **args);
 
-// our_exit.c
-void			our_exit(t_data *d, char **args);
+// ft_env.c
+int				ft_env(t_env_lst *env);
 
-// our_cd_utils.c
+// ft_unset.c
+int				ft_unset(t_data *d, char **args);
+
+// ft_pwd.c
+int				ft_pwd(void);
+
+// cd_utils.c
 void			change_paths(t_env_lst *env, t_env_lst *exp_env);
 
-// our_cd.c
-int				our_cd(t_data *d);
+// ft_cd.c
+int				ft_cd(t_data *d);
 
-// our_pwd.c
-int				our_pwd(void);
-
-// our_env.c
-int				our_env(t_env_lst *env);
+// ft_echo.c
+int				ft_echo(char **args);
 
 // built_ins.c
 void			exec_built_in(char **built_in, t_data *d);

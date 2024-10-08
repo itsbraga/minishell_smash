@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   our_cd.c                                           :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/07 21:20:54 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/08 18:13:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 {
 	char	*var_path;
 	int		ret;
-	char	*current;
 	char	*next;
 	int		error;
 
@@ -49,10 +48,10 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 	ret = chdir(var_path);
 	if (ret != 0)
 	{
-		current = t->content;
 		next = t->next->content;
-		error = err_msg_cmd(current, next, ERR_BAD_FILE, FAILURE);
-		return (free(current), free(next), error);
+		error = err_msg_cmd(t->content, next, ERR_BAD_FILE, FAILURE);
+		free(next);
+		return (error);
 	}
 	if (var_path != NULL)
 		free(var_path);
@@ -67,10 +66,9 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 	
 	>> bonus wildcards
 */
-int	our_cd(t_data *d)
+int	ft_cd(t_data *d)
 {
 	int		ret;
-	char	*current;
 	char	*next;
 	int		error;
 	
@@ -86,10 +84,10 @@ int	our_cd(t_data *d)
 		ret = chdir(d->token->next->content);
 	if (ret != 0)
 	{
-		current = d->token->content;
 		next = d->token->next->content;
-		error = err_msg_cmd(current, next, ERR_BAD_FILE, FAILURE);
-		return (free(current), free(next), error);
+		error = err_msg_cmd(d->token->content, next, ERR_BAD_FILE, FAILURE);
+		free(next);
+		return (error);
 	}
 	change_paths(d->env, d->exp_env);
 	// d->last_exit_status = 0;

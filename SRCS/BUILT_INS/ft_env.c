@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   our_unset.c                                        :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 18:38:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/03 23:24:25 by art3mis          ###   ########.fr       */
+/*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
+/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	our_unset(t_data *d, char **args)
+int	ft_env(t_env_lst *env)
 {
-	int		i;
+	t_env_lst	*tmp;
 
-	i = 0;
-	while (args[i] != NULL)
+	tmp = env;
+	while (tmp != NULL)
 	{
-		del_env_var(&(d->env), args[i]);
-		del_env_var(&(d->exp_env), args[i]);
-		i++;
+		ft_printf(STDOUT_FILENO, "%s\n", tmp->content);
+		tmp = tmp->next;
 	}
-	d->last_exit_status = 0;
+	// data_struct()->last_exit_status = 0;
 	return (SUCCESS);
 }

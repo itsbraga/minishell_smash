@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/07 19:13:17 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/08 18:10:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,11 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token *t)
 {
 	char	*var_path;
 	int		ret;
-	char	*current;
-	char	*next;
-	int		error;
 
 	var_path = __find_var_path(var, env);
 	ret = chdir((const char *)var_path);
 	if (ret != 0)
-	{
-		current = t->content;
-		next = t->next->content;
-		error = err_msg_cmd(current, next, "No such file or directory", 1);
-		return (free(current), free(next), error);
-	}
+		return (err_msg_cmd(t->content, t->next->content, "No such file or directory", 1));
 	if (var_path != NULL)
 		free(var_path);
 	return (ret);
@@ -75,28 +67,20 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token *t)
 int	my_cd(t_global *g)
 {
 	int		ret;
-	char	*current;
-	char	*next;
-	int		error;
 	
 	if ((g->token->next == NULL)
-		|| (ft_strcmp((const char *)g->token->next->content, "~") == 0))
+		|| (ft_strcmp(g->token->next->content, "~") == 0))
 		ret = __go_to_env_var(g->env, "HOME=", g->token);
-	else if (ft_strcmp((const char *)g->token->next->content, "-") == 0)
+	else if (ft_strcmp(g->token->next->content, "-") == 0)
 	{
 		ret = __go_to_env_var(g->env, "OLDPWD=", g->token);
 		printf("%s\n", __find_var_path("OLDPWD=", g->env));
 	}
 	else
-		ret = chdir((const char *)g->token->next->content);
+		ret = chdir(g->token->next->content);
 	if (ret != 0)
-	{
-		current = g->token->content;
-		next = g->token->next->content;
-		error = err_msg_cmd(current, next, "No such file or directory", 1);
-		return (free(current), free(next), error);
-	}
+		return (err_msg_cmd(g->token->content, g->token->next->content, "No such file or directory", 1));
 	change_paths(g->env, g->exp_env);
-	g->last_exit_status = 0;
+	// g->last_exit_status = 0;
 	return (SUCCESS);
 }

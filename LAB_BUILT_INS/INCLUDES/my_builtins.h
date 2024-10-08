@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/25 19:47:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:56:52 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int			my_env(t_env_lst *env);
 void		my_exit(t_global *g, char **args);
 void		del_env_var(t_env_lst **env, char *var_to_rm);
 int			my_unset(t_global *g, char **args);
+int			my_echo(char **args);
 
 void		err_msg(char *detail, char *reason, int quotes);
 int			err_msg_cmd(char *cmd, char *detail, char *reason, int err_status);

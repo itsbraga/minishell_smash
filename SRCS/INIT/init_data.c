@@ -28,12 +28,12 @@ static char	*__generate_prompt(t_prompt *pr)
 		pr->username = "unknown";
 	pr->header = ft_strjoin(rainbow_prompt(PROMPT_BAR), "[");
 	secure_malloc(pr->header);
-	pr->colored_user = ft_strjoin("\001" BLUE "\002", pr->username);
+	pr->colored_user = ft_strjoin("\001" BRIGHT_YELLOW "\002", pr->username);
 	secure_malloc(pr->colored_user);
 	pr->part1 = ft_strjoin(pr->header, pr->colored_user);
 	secure_malloc(pr->part1);
 	(free(pr->header), free(pr->colored_user));
-	pr->colored_42 = ft_strjoin("\001" GREEN "\002", "42");
+	pr->colored_42 = ft_strjoin("\001" RED "\002", "42");
 	secure_malloc(pr->colored_42);
 	pr->tmp = ft_strjoin("\001" R "\002" "@", pr->colored_42);
 	secure_malloc(pr->tmp);

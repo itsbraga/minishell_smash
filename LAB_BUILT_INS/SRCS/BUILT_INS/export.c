@@ -6,13 +6,14 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/08 18:14:30 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-// ONLY TO DISPLAY --> BUILT-IN EXPORT STILL TO DO
+
+
 void    my_export(t_env_lst *exp_env)
 {
     t_env_lst    *tmp;

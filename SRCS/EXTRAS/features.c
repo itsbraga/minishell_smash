@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   features.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/07 21:40:32 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/08 18:46:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*rainbow_prompt(const char *str)
 	secure_malloc(colored_str);
 	colored_str[0] = '\0';
 	i = 0;
+	ft_strcat(colored_str, "\001" BOLD "\002");
 	while (str[i] != '\0')
 	{
 		ft_strcat(colored_str, "\001");

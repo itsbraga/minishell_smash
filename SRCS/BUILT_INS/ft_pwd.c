@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   our_env.c                                          :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/07 21:10:55 by art3mis          ###   ########.fr       */
+/*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
+/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	our_env(t_env_lst *env)
+int	ft_pwd(void)
 {
-	t_env_lst	*tmp;
+	char	cwd[PATH_MAX];
 
-	tmp = env;
-	while (tmp != NULL)
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
-		ft_printf(STDOUT_FILENO, "%s\n", tmp->content);
-		tmp = tmp->next;
+		err_msg("0: getcwd() failed", ERR_BAD_FILE, 0);
+		return (errno);
 	}
-	// g->last_exit_status = 0;
+	ft_printf(STDOUT_FILENO, "%s\n", cwd);
+	// data_struct()->last_exit_status = 0;
 	return (SUCCESS);
 }
