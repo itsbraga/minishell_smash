@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 19:18:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:55:35 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ static void	__command_case(t_data *d, t_ptrs *p)
 	p->new_task->cmd = yama(CREATE_TAB, NULL, p->size);
 	secure_malloc(p->new_task->cmd);
 	cleaned_token = token_cleanup(d->token->content);
-	p->new_task->cmd[p->i] = cleaned_token;
+	p->new_task->cmd[p->i] = ft_strdup(cleaned_token);
+	secure_malloc(p->new_task->cmd[p->i]);
 	printf("ptr cmd_tok %p\n", cleaned_token);
+	(void)yama(ADD, (p->new_task->cmd[p->i]), 0);
 	if (ft_strchr(cleaned_token, '\'') != NULL)
 	{
 		p->new_task->absolute_path = true;
@@ -57,11 +59,25 @@ static void	__word_case(t_data *d, t_ptrs *p)
 	if (p->new_task != NULL)
 	{
 		cleaned_token = token_cleanup(d->token->content);
-		p->new_task->cmd[p->i] = cleaned_token;
+		p->new_task->cmd[p->i] = ft_strdup(cleaned_token);
+		secure_malloc(p->new_task->cmd[p->i]);
 		printf("ptr word_tok %p\n", cleaned_token);
+		(void)yama(ADD, (p->new_task->cmd[p->i]), 0);
 		printf(RED "node_cmd[i]:\t [" R "%s" RED "]\n" R, p->new_task->cmd[p->i]);
 	}
 	p->i++;
+}
+
+void	print_tab2(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		dprintf(2, YELLOW "tab[i] = %s ; ptr of tab[i] = %p\n" R, tab[i], tab[i]);
+		i++;
+	}
 }
 
 int	create_exec_lst(t_data *d)
@@ -87,7 +103,8 @@ int	create_exec_lst(t_data *d)
 		if (d->token == NULL)
 		{
 			p.new_task->cmd[p.i] = NULL;
-			exec_lst_add_back(&(d->exec), p.new_task);
+			print_tab2(p.new_task->cmd);
+			exec_lst_add_back(d->exec, p.new_task);
 		}
 	}
 	d->token = current;

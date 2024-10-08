@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 18:57:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:53:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct s_data
 	t_main_lst		*main;
 	t_token_dblst	*token;
 	t_exec_info		*info;
-	t_exec_lst		*exec;
+	t_exec_lst		**exec;
 	t_env_lst		*env;
 	t_env_lst		*exp_env;
 	int				last_exit_status;

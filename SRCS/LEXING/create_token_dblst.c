@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:50:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ int	create_token_dblst(t_data *d)
 		d->exec->heredoc_nb = 0;
 		d->main = d->main->next;
 	}
-	// lstclear_exec(&(d->exec));
 	return (SUCCESS);
 }
