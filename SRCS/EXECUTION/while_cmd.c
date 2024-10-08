@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 22:53:56 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/08 17:05:30 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	__wait_child(t_exec_info *info)
 
 static void	__parent(t_exec_info *info)
 {
+	printf("parent\n");
 	close(info->fd[1]);
 	if (info->executed_cmd != 0)
 		close(info->old_read_fd);

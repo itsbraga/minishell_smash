@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 22:32:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/08 17:03:23 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 	error = 0;
 	last_heredoc_fd = 0;
 	latest_redin = 0;
+	printf("debut pathfinder\n");
 	__basic_behaviour(d->info);
 	if (node->heredoc_nb > 0)
 		last_heredoc_fd = fill_all_heredoc(d, node->redir);
