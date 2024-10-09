@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 19:50:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:30:39 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	**__get_all_seg_elems(t_main_lst *main)
 {
 	t_token_parser	p;
 	size_t			seg_len;
-	
+
 	ft_bzero(&p, sizeof(p));
 	p.main = main;
 	if (p.main == NULL || p.main->content == NULL)
@@ -55,11 +55,9 @@ int	create_token_dblst(t_data *d)
 			i++;
 		}
 		lst_tokenization(d->token);
-		display_token_dblst(d->token);
+		// display_token_dblst(d->token);
 		if (create_exec_lst(d) == FAILURE)
 			return (err_msg(NULL, "could not create exec_lst", 0), FAILURE);
-		printf("heredoc count: %d\n", d->exec->heredoc_nb);
-		d->exec->heredoc_nb = 0;
 		d->main = d->main->next;
 	}
 	return (SUCCESS);

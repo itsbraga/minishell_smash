@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 21:51:11 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/09 21:31:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ static void	__find_command(t_token_dblst *t)
 
 void	lst_tokenization(t_token_dblst *t)
 {
-	t_token_dblst	*current;
+	t_token_dblst	*cur;
 
-	current = t;
-	while (current != NULL)
+	cur = t;
+	while (cur != NULL)
 	{
-		if (current->prev != NULL)
-			current->type = __classify(current->content, current->prev->content);
+		if (cur->prev != NULL)
+			cur->type = __classify(cur->content, cur->prev->content);
 		else
-			current->type = __classify(current->content, NULL);
-		current = current->next;
+			cur->type = __classify(cur->content, NULL);
+		cur = cur->next;
 	}
 	__find_command(t);
 }

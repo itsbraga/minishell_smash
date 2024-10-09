@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_dblst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 21:51:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/09 21:32:58 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 t_token_dblst	*token_dblst_new_node(char *content, t_token_type type)
 {
 	t_token_dblst	*new_node;
-	
+
 	new_node = yama(CREATE, NULL, sizeof(t_token_dblst));
 	secure_malloc(new_node);
-    new_node->type = type;
+	new_node->type = type;
 	new_node->content = ft_strdup(content);
-    secure_malloc(new_node->content);
+	secure_malloc(new_node->content);
 	(void)yama(ADD, new_node->content, 0);
 	new_node->prev = NULL;
 	new_node->next = NULL;

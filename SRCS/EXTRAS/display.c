@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 21:51:04 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/09 21:27:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,26 @@ static void	__write_type_name(t_token_type type)
 {
 	ft_printf(STDOUT_FILENO, R "is a ");
 	if (type == 0)
-		ft_printf(STDOUT_FILENO, RED "[%d ➜  COMMAND]\n" R, type);
+		ft_printf(STDOUT_FILENO, RED "[%d ➜ COMMAND]\n" R, type);
 	else if (type == 1)
-		ft_printf(STDOUT_FILENO, ORANGE "[%d ➜  WORD]\n" R, type);
+		ft_printf(STDOUT_FILENO, ORANGE "[%d ➜ WORD]\n" R, type);
 	else if (type == 2)
-		ft_printf(STDOUT_FILENO, YELLOW "[%d ➜  REDIR_IN]\n" R, type);
+		ft_printf(STDOUT_FILENO, YELLOW "[%d ➜ REDIR_IN]\n" R, type);
 	else if (type == 3)
-		ft_printf(STDOUT_FILENO, GREEN "[%d ➜  INFILE]\n" R, type);
+		ft_printf(STDOUT_FILENO, GREEN "[%d ➜ INFILE]\n" R, type);
 	else if (type == 4)
-		ft_printf(STDOUT_FILENO, BLUE "[%d ➜  HERE_DOC]\n" R, type);
+		ft_printf(STDOUT_FILENO, BLUE "[%d ➜ HERE_DOC]\n" R, type);
 	else if (type == 5)
-		ft_printf(STDOUT_FILENO, CYAN "[%d ➜  LIMITER]\n" R, type);
+		ft_printf(STDOUT_FILENO, CYAN "[%d ➜ LIMITER]\n" R, type);
 	else if (type == 6)
-		ft_printf(STDOUT_FILENO, PURPLE "[%d ➜  REDIR_OUT_TRUNC]\n" R, type);
+		ft_printf(STDOUT_FILENO, PURPLE "[%d ➜ REDIR_OUT_TRUNC]\n" R, type);
 	else if (type == 7)
-		ft_printf(STDOUT_FILENO, PINK "[%d ➜  REDIR_OUT_APPEND]\n" R, type);
+		ft_printf(STDOUT_FILENO, PINK "[%d ➜ REDIR_OUT_APPEND]\n" R, type);
 	else if (type == 8)
-		ft_printf(STDOUT_FILENO, GRAY "[%d ➜  OUTFILE]\n" R, type);
-	
+		ft_printf(STDOUT_FILENO, LIGHT_GRAY "[%d ➜ OUTFILE]\n" R, type);
 }
 
-void    display_token_dblst(t_token_dblst *t)
+void	display_token_dblst(t_token_dblst *t)
 {
 	t_token_dblst	*tmp;
 
@@ -62,7 +61,7 @@ void    display_token_dblst(t_token_dblst *t)
 		ft_printf(STDOUT_FILENO, "%s" BOLD BLUE "]\n" R, tmp->content);
 		if (tmp->type != -1)
 		{
-			ft_printf(STDOUT_FILENO, YELLOW "token_type:\t ");
+			ft_printf(STDOUT_FILENO, BLUE "type:\t\t ");
 			__write_type_name(tmp->type);
 		}
 		tmp = tmp->next;
@@ -71,18 +70,18 @@ void    display_token_dblst(t_token_dblst *t)
 
 static void	__display_redir_node(t_redir_lst *node)
 {
-	ft_printf(2, BP "redir:\t\t [" R "%d" BP "]\n" R, node->type);
+	ft_printf(2, BP "t_redir_lst:\t [" R "%d" BP "]\n" R, node->type);
 	if (node->type == REDIR_IN)
-		ft_printf(2, BP "infile:\t\t [" R "%s" BP "]\n" R, node->infile);
+		ft_printf(2, PINK "infile:\t\t [" R "%s" PINK "]\n" R, node->infile);
 	else if (node->type == REDIR_OUT_TRUNC || node->type == REDIR_OUT_APPEND)
-		ft_printf(2, BP "outfile:\t [" R "%s" BP "]\n" R, node->outfile);
+		ft_printf(2, PINK "outfile:\t [" R "%s" PINK "]\n" R, node->outfile);
 	else if (node->type == HERE_DOC)
-		ft_printf(2, BP "limiter:\t [" R "%s" BP "]\n" R, node->limiter);
+		ft_printf(2, PINK "limiter:\t [" R "%s" PINK "]\n" R, node->limiter);
 }
 
 void	display_redir_lst(t_redir_lst *r)
 {
-	t_redir_lst *current;
+	t_redir_lst	*current;
 
 	current = r;
 	while (current != NULL)

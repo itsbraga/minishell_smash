@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:29:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	__pipe_check(t_parser *p)
 			exit(FAILURE);
 		}
 		while (p->user_input[p->i] != '\0'
-				&& ft_isspace(p->user_input[p->i]) == 1)
+			&& ft_isspace(p->user_input[p->i]) == 1)
 			p->i++;
 		if (p->user_input[p->i] == '|' || p->user_input[p->i] == '\0')
 		{
@@ -51,7 +51,7 @@ static void	__pipe_check(t_parser *p)
 
 void	parse_input(t_parser *p)
 {
-	char    *tmp;
+	char	*tmp;
 
 	if (__front_check(p) == FAILURE)
 		exit(FAILURE);
@@ -63,7 +63,7 @@ void	parse_input(t_parser *p)
 		else if (p->user_input[p->i] == '"')
 			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
 		else if (p->user_input[p->i] == '|' && p->closed_quotes[0] == true
-				&& p->closed_quotes[1] == true)
+			&& p->closed_quotes[1] == true)
 			break ;
 		p->i++;
 	}

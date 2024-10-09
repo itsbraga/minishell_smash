@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/08 17:02:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:32:39 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_main_lst	*main_lst_new_node(char *content)
 {
 	t_main_lst	*new_node;
-	
+
 	new_node = yama(CREATE, NULL, sizeof(t_main_lst));
 	secure_malloc(new_node);
 	new_node->content = ft_strdup(content);

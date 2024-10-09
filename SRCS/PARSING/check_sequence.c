@@ -6,33 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:31:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int	check_redir_sequence(t_token_dblst *t)
-// {
-// 	t_token_dblst   *current;
-
-// 	current = t;
-// 	while (current != NULL)
-// 	{
-// 		if (IS_REDIR(current->type) == true)
-// 		{
-// 			if (current->next == NULL)
-// 			{
-// 				err_msg(NULL, "newline", 2);
-// 				return (FAILURE);
-// 			}
-// 		}
-// 		current = current->next;
-// 	}
-// 	return (SUCCESS);
-// }
-
-int check_redir_sequence(char *content)
+int	check_redir_sequence(char *content)
 {
 	int	i;
 

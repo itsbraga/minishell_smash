@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/08 17:02:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:25:33 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static int	__close_heredoc(int fd[], char *limiter, char *buffer)
 	buffer = NULL;
 	free(limiter);
 	close(fd[1]);
-	return(fd[0]);
+	return (fd[0]);
 }
 
 static int	__open_heredoc(t_data *d, char *limiter)
 {
 	int		fd[2];
 	bool	must_expand;
-	char 	*buffer;
+	char	*buffer;
 
 	buffer = NULL;
 	if (pipe(fd) == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/03 23:25:49 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:30:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	__get_closed_quotes(t_token_parser *p)
 
 static void	__take_seg_elem(t_token_parser *p)
 {
-	char    *tmp;
+	char	*tmp;
 
 	tmp = NULL;
 	if (p->i > p->start)
@@ -65,14 +65,14 @@ void	parse_segment(t_token_parser *p)
 			__redir_case(p);
 		else if (p->main->content[p->i] == ' '
 			&& p->closed_quotes[0] == true && p->closed_quotes[1] == true)
-        {
-            __take_seg_elem(p);
-            while (ft_isspace(p->main->content[p->i]) == 1)
-                p->i++;
+		{
+			__take_seg_elem(p);
+			while (ft_isspace(p->main->content[p->i]) == 1)
+				p->i++;
 			p->start = p->i;
-        }
-        else
-            p->i++;
+		}
+		else
+			p->i++;
 		if (p->main->content[p->i] == '\0' && (p->i > p->start))
 			__take_seg_elem(p);
 	}

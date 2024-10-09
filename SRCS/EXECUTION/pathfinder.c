@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/08 19:25:56 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:26:01 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	__redirection_in(t_redir_lst *r)
 static int	__redirection_out(t_redir_lst *r)
 {
 	int	outfile_fd;
-	int flags;
+	int	flags;
 
 	outfile_fd = 0;
 	flags = O_WRONLY | O_CREAT | O_TRUNC;
@@ -51,7 +51,7 @@ static int	__redirection_out(t_redir_lst *r)
 static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 {
 	int				error;
-	
+
 	error = 0;
 	while (node->redir != NULL)
 	{
@@ -59,8 +59,8 @@ static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 			*latest_redin = node->redir->type;
 		if (node->redir->type == REDIR_IN)
 			error = __redirection_in(node->redir);
-		else if (node->redir->type == REDIR_OUT_TRUNC ||
-					node->redir->type == REDIR_OUT_APPEND)
+		else if (node->redir->type == REDIR_OUT_TRUNC
+			|| node->redir->type == REDIR_OUT_APPEND)
 			error = __redirection_out(node->redir);
 		node->redir = node->redir->next;
 	}
@@ -82,7 +82,7 @@ static	void	__basic_behaviour(t_exec_info *info)
 
 void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 {
-	int 			error;
+	int				error;
 	int				last_heredoc_fd;
 	t_token_type	latest_redin;
 

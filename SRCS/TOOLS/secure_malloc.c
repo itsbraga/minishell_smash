@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 22:37:15 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 17:02:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:34:39 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	secure_malloc2(void *to_secure, bool full_clean)
 {
 	if (to_secure == NULL)
 	{
-		// err_msg("malloc", ERR_MALLOC, 0);
 		if (full_clean == true)
 			clean_exit_shell(FAILURE);
 		else

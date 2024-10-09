@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/08 19:25:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:57:01 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char			**recreate_env_tab(t_env_lst **env);
 
 // create_env.c
 int				create_exp_env_list(t_env_lst **exp_env, char **envp,
-size_t envp_size, size_t idx_exp_env);
+					size_t envp_size, size_t idx_exp_env);
 int				create_env_list(t_env_lst **env, char **envp);
 void			create_env(t_data *d, char **envp);
 
@@ -128,7 +128,7 @@ void			create_env(t_data *d, char **envp);
 size_t			len_to_equal(char *str);
 char			*clean_translated_variable(char *str, char *var);
 char			*take_var(char *str, char *var);
-char 			*search_var(char *to_find, t_env_lst *env);
+char			*search_var(char *to_find, t_env_lst *env);
 
 // expand.c
 char			*expand(t_data *d, char *str, bool in_heredoc);
@@ -168,9 +168,8 @@ void			exec_built_in(char **built_in, t_data *d);
 // exec_utils.c
 char			*search_bin(char *cmd, char **tab_path);
 char			**search_path(char **tab_path, char **env);
- int			check_bin_path(t_exec_lst *node, bool absolute_path);
+int				check_bin_path(t_exec_lst *node, bool absolute_path);
 int				handle_bin_path(t_exec_lst *node, char **env);
-
 
 // exec.c
 void			exec(char *path_bin, char **cmd_and_args, char **env);
@@ -192,12 +191,12 @@ void			while_cmd(t_data *d, t_exec_lst **e_lst);
 // error.c
 void			err_msg(char *detail, char *reason, int quotes);
 int				err_msg_cmd(char *cmd, char *detail, char *reason,
-int err_status);
+					int err_status);
 
 // garbage*.c ---> garbage_collector.h
 
 // secure_malloc.c
-void    		secure_malloc(void *to_secure);
+void			secure_malloc(void *to_secure);
 void			secure_malloc2(void *to_secure, bool full_clean);
 
 // lstclear.c
@@ -205,7 +204,7 @@ void			lstclear_main(t_main_lst **main);
 void			lstclear_token(t_token_dblst **t);
 void			lstclear_redir(t_redir_lst **r);
 void			lstclear_exec(t_exec_lst **e);
-void 			lstclear_env(t_env_lst **env);
+void			lstclear_env(t_env_lst **env);
 
 // cleanup.c
 void			free_data(t_data *d, bool clear_history);
@@ -224,29 +223,33 @@ t_main_lst		*main_lst_new_node(char *content);
 void			del_current_token(t_token_dblst **t, t_token_dblst *to_delete);
 size_t			get_token_dblst_size(t_token_dblst **t);
 void			token_dblst_add_back(t_token_dblst **t,
-t_token_dblst *new_node);
+					t_token_dblst *new_node);
 t_token_dblst	*token_dblst_new_node(char *content, t_token_type type);
 
 // redir_lst.c
 bool			is_redir(char *str);
 size_t			get_redir_lst_size(t_redir_lst **r);
 void			redir_lst_add_back(t_redir_lst **r, t_redir_lst *new_node);
-t_redir_lst 	*redir_lst_new_node(t_token_type type);
+t_redir_lst		*redir_lst_new_node(t_token_type type);
 
 // exec_lst.c
 size_t			get_exec_lst_size(t_exec_lst **e);
 void			exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node);
-t_exec_lst 		*exec_lst_new_node(void);
+t_exec_lst		*exec_lst_new_node(void);
 
 /******************************************************************************\
  * EXTRAS
 \******************************************************************************/
 
+// display2.c
+void			display_exec_lst(t_exec_lst *e);
+void			print_tab(char **tab);
+
 // display.c
 void			display_export_env(t_env_lst *exp_env);
 void			display_main_lst(t_main_lst *main);
 void			display_token_dblst(t_token_dblst *t);
-void    		display_redir_lst(t_redir_lst *r);
+void			display_redir_lst(t_redir_lst *r);
 
 // features.c
 void			rainbow_txt(const char *str);

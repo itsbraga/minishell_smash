@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:24:15 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	create_env_list(t_env_lst **env, char **envp)
 	return (SUCCESS);
 }
 
-int	create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size, 
+int	create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
 	size_t idx_exp_env)
 {
 	t_env_lst	*var_to_add;

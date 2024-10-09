@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/06 19:42:09 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/09 21:32:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	switch_bool(bool closed)
 	return (closed);
 }
 
-int		find_closing_quote(char *str, char quote)
+int	find_closing_quote(char *str, char quote)
 {
 	int	i;
 
@@ -41,9 +41,9 @@ bool	unclosed_quotes_return(bool closed[])
 
 char	*del_empty_quotes(char *str, int quote_idx)
 {
-	int	i;
-	int	j;
-	char *new_str;
+	int		i;
+	int		j;
+	char	*new_str;
 
 	i = 0;
 	j = 0;
@@ -68,7 +68,7 @@ char	*del_empty_quotes(char *str, int quote_idx)
 
 char	*del_quote_pair(char *str, int first, int second)
 {
-	int 	i;
+	int		i;
 	int		j;
 	char	*new_str;
 

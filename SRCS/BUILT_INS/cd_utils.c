@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 18:19:30 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:23:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 			&& old_pwd != NULL)
 		{
 			free(current->content);
-			current->content = ft_strjoin("OLDPWD=", old_pwd + 4); // +4 pour ignorer PWD=
+			current->content = ft_strjoin("OLDPWD=", old_pwd + 4);
 			free(old_pwd);
 			old_pwd = NULL;
 			break ;

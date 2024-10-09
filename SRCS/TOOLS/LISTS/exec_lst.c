@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exec_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 01:00:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 21:52:50 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/09 22:24:45 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_exec_lst *exec_lst_new_node(void)
+t_exec_lst	*exec_lst_new_node(void)
 {
 	t_exec_lst	*new_node;
-	
+
 	new_node = yama(CREATE, NULL, sizeof(t_exec_lst));
 	secure_malloc(new_node);
 	new_node->redir = NULL;

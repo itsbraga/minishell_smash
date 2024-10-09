@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 22:09:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:26:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*clean_translated_variable(char *str, char *var)
 {
 	char	*new_str;
 	int		i;
-	
+
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 2)));
 	secure_malloc(new_str);
 	i = 0;
@@ -79,7 +79,7 @@ char	*take_var(char *str, char *var)
 	return (to_find);
 }
 
-char 	*search_var(char *to_find, t_env_lst *env)
+char	*search_var(char *to_find, t_env_lst *env)
 {
 	char		*to_cmp;
 	t_env_lst	*current;

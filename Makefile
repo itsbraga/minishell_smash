@@ -36,7 +36,7 @@ DEBUG		=	-g -g3
 #******************************************************************************#
 
 EXTRAS_DIR		=	EXTRAS/
-EXTRAS_F		=	display.c features.c
+EXTRAS_F		=	display.c display2.c features.c
 
 TOOLS_DIR		=	TOOLS/
 TOOLS_F			=	error.c secure_malloc.c lstclear.c cleanup.c  \

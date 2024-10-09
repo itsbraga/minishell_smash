@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/08 17:02:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:23:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 bool	is_built_in(char *cmd)
 {
 	int			i;
-	const char	*built_in[] =
-	{
+	const char	*built_in[] = {
 		"echo",
 		"cd",
 		"pwd",

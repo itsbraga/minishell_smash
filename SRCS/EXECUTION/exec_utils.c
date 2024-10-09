@@ -6,23 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/08 19:25:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:25:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		dprintf(2, "tab[i] = %s ; ptr of tab[i] = %p\n", tab[i], tab[i]);
-		i++;
-	}
-}
 
 char	**search_path(char **tab_path, char **env)
 {
@@ -38,7 +26,7 @@ char	**search_path(char **tab_path, char **env)
 		else
 		{
 			all_path = env[i];
-			break;
+			break ;
 		}
 	}
 	if (all_path != NULL)
@@ -76,7 +64,7 @@ char	*search_bin(char *cmd, char **tab_path)
 			i++;
 		}
 		else
-			return(yama(REMOVE, tab_path, 0), path_to_try);
+			return (yama(REMOVE, tab_path, 0), path_to_try);
 	}
 	return (yama(REMOVE, tab_path, 0), NULL);
 }
@@ -105,9 +93,9 @@ char	*search_bin(char *cmd, char **tab_path)
 
 int	handle_bin_path(t_exec_lst *node, char **env)
 {
-	int	error;
-	char **tab_path;
-	
+	int		error;
+	char	**tab_path;
+
 	error = 0;
 	tab_path = NULL;
 	if (node->absolute_path == true)

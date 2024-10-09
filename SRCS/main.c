@@ -6,25 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/08 19:54:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 22:48:26 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_sig_code;
-
-void	print_tab3(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		dprintf(2, BLUE "tab[i] = %s ; ptr of tab[i] = %p\n" R, tab[i], tab[i]);
-		i++;
-	}
-}
 
 static int	__minishell(t_data *d)
 {
@@ -41,11 +29,11 @@ static int	__minishell(t_data *d)
 			display_main_lst(d->main);
 			if (create_token_dblst(d) == FAILURE)
 				return (FAILURE);
+			display_token_dblst(d->token);
+			printf("-------------------------- in main: ---------------------------\n");
+			display_exec_lst(d->exec);
 			// if (d->exec != NULL)
 			// 	while_cmd(d, &(d->exec));
-			dprintf(2, "cmd[0]: %p\n", d->exec->cmd);
-			dprintf(2, "heredoc_nb: %d\n", d->exec->heredoc_nb);
-			dprintf(2, "cmd_count: %d\n", d->info->cmd_count);
 			// 	exec_built_in(d->exec->cmd, d);
 		}
 		free(user_input);

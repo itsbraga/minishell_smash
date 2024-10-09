@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:29:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/08 19:03:49 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:17:46 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WHITE			"\e[37m"
 
 # define BRIGHT_BLACK		"\e[90m"
-# define LIGHT_GRAY     	"\e[37m"
+# define LIGHT_GRAY     	"\e[38;2;173;165;165m"
 # define BRIGHT_RED			"\e[91m"
 # define BRIGHT_GREEN		"\e[92m"
 # define BRIGHT_YELLOW		"\e[38;2;255;234;150m"

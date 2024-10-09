@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:33:58 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	*__create(t_gc_lst **yama, size_t size, bool is_tab)
 
 static void	*__add(t_gc_lst **yama, void *ptr, bool is_tab)
 {
-	t_gc_lst *node;
+	t_gc_lst	*node;
 
 	node = new_gc_node(ptr, is_tab);
 	secure_malloc(node);
@@ -43,7 +43,7 @@ static void	*__add(t_gc_lst **yama, void *ptr, bool is_tab)
 
 static int	__clean_all(t_gc_lst **yama)
 {
-	t_gc_lst *tmp;
+	t_gc_lst	*tmp;
 
 	if (yama == NULL || *yama == NULL)
 		return (FAILURE);
@@ -66,7 +66,7 @@ static int	__clean_all(t_gc_lst **yama)
 
 void	*yama(int flag, void *ptr, size_t size)
 {
-	static t_gc_lst *yama;
+	static t_gc_lst	*yama;
 
 	if (flag == CREATE)
 		return (__create(&yama, size, false));

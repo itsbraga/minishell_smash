@@ -6,14 +6,14 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 19:53:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 22:04:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef enum 	e_token_type
+typedef enum e_token_type
 {
 	UNKNOWN = -1,
 	COMMAND,				// 0
@@ -24,8 +24,8 @@ typedef enum 	e_token_type
 	LIMITER,				// 5
 	REDIR_OUT_TRUNC,		// 6
 	REDIR_OUT_APPEND,		// 7
-	OUTFILE					// 8
-}			 	t_token_type;
+	OUTFILE
+}			t_token_type;
 
 typedef struct s_prompt
 {
@@ -66,7 +66,7 @@ typedef struct s_token_parser
 	char				**seg_elems;
 	bool				closed_quotes[2];
 	bool				is_closed;
-    bool				was_closed;
+	bool				was_closed;
 }				t_token_parser;
 
 typedef struct s_main_lst
@@ -123,7 +123,7 @@ typedef struct s_data
 	t_main_lst		*main;
 	t_token_dblst	*token;
 	t_exec_info		*info;
-	t_exec_lst		**exec;
+	t_exec_lst		*exec;
 	t_env_lst		*env;
 	t_env_lst		*exp_env;
 	int				last_exit_status;

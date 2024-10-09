@@ -22,7 +22,7 @@
 	This enables readline to manage the length of the prompt correctly.
 */
 static char	*__generate_prompt(t_prompt *pr)
-{	
+{
 	pr->username = getenv("USER");
 	if (pr->username == NULL)
 		pr->username = "unknown";

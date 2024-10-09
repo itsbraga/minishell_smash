@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/08 18:13:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:23:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_cd(t_data *d)
 	int		ret;
 	char	*next;
 	int		error;
-	
+
 	if ((d->token->next == NULL)
 		|| (ft_strcmp(d->token->next->content, "~") == 0))
 		ret = __go_to_env_var(d->env, "HOME=", d->token);

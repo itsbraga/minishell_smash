@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/08 18:15:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:30:33 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	**__get_all_segments(char *input)
 {
 	t_parser	p;
 	size_t		input_len;
-	
+
 	ft_bzero(&p, sizeof(p));
 	p.user_input = input;
 	if (p.user_input == NULL || p.user_input[0] == '\0')
@@ -32,8 +32,8 @@ static char	**__get_all_segments(char *input)
 
 static void	__del_unwanted_whitespaces(t_main_lst *main)
 {
-	t_main_lst  *current;
-	char        *trimmed_token;
+	t_main_lst	*current;
+	char		*trimmed_token;
 
 	current = main;
 	while (current != NULL)

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:33:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	*new_gc_node(void *ptr, bool is_tab)
 	t_gc_lst	*node;
 
 	node = malloc(sizeof(t_gc_lst));
-	// secure_malloc(node);
-	if (node == NULL)
-		return (NULL);
+	secure_malloc(node);
 	node->ptr = ptr;
 	node->is_tab = is_tab;
 	node->next = NULL;
@@ -28,7 +26,7 @@ void	*new_gc_node(void *ptr, bool is_tab)
 
 void	add_gc_node(t_gc_lst **yama, t_gc_lst *node)
 {
-	t_gc_lst *tmp;
+	t_gc_lst	*tmp;
 
 	if (*yama == NULL)
 		*yama = node;
@@ -53,9 +51,9 @@ t_gc_lst	*last_gc_lst_node(t_gc_lst *yama)
 
 int	remove_gc_node(t_gc_lst **yama, void *ptr)
 {
-	t_gc_lst *node;
-	t_gc_lst *prev;
-	
+	t_gc_lst	*node;
+	t_gc_lst	*prev;
+
 	if (yama == NULL || *yama == NULL)
 		return (FAILURE);
 	if ((*yama)->ptr == ptr)

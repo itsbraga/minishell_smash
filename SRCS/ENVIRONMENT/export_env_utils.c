@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 20:27:13 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/09 21:24:57 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_env_lst	*ascii_sort(char **envp, char *last_added)
 			else
 			{
 				if ((__cmp_to_equal(tmp, envp[i]) > 0)
-						&& (__cmp_to_equal(tmp, last_added) != 0))
+					&& (__cmp_to_equal(tmp, last_added) != 0))
 					tmp = envp[i];
-			}	
+			}
 		}
 		i++;
 	}

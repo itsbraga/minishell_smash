@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstclear.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/03 23:27:17 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:34:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	lstclear_main(t_main_lst **main)
 {
 	t_main_lst	*tmp;
-	
+
 	if (main == NULL || (*main) == NULL)
 		return ;
 	while ((*main) != NULL)
 	{
 		tmp = (*main)->next;
 		(*main)->next = NULL;
-		free((*main)->content); 
+		free((*main)->content);
 		(*main)->next = NULL;
 		free(*main);
 		(*main) = tmp;
@@ -32,7 +32,7 @@ void	lstclear_main(t_main_lst **main)
 void	lstclear_token(t_token_dblst **t)
 {
 	t_token_dblst	*tmp;
-	
+
 	if (t == NULL || (*t) == NULL)
 		return ;
 	while ((*t) != NULL)
@@ -49,7 +49,7 @@ void	lstclear_token(t_token_dblst **t)
 void	lstclear_redir(t_redir_lst **r)
 {
 	t_redir_lst	*tmp;
-	
+
 	if (r == NULL || (*r) == NULL)
 		return ;
 	while ((*r) != NULL)
@@ -80,7 +80,7 @@ void	lstclear_exec(t_exec_lst **e)
 {
 	t_exec_lst	*tmp;
 	int			i;
-	
+
 	if (e == NULL || (*e) == NULL)
 		return ;
 	while ((*e) != NULL)
@@ -107,7 +107,7 @@ void	lstclear_exec(t_exec_lst **e)
 
 void	lstclear_env(t_env_lst **env)
 {
-	t_env_lst *tmp;
+	t_env_lst	*tmp;
 
 	if (env == NULL || (*env) == NULL)
 		return ;

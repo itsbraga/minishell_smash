@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/04 22:57:40 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/09 21:31:59 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ bool	unclosed_quotes(char *str)
 {
 	int		i;
 	bool	closed[2];
-	
+
 	i = 0;
 	closed[0] = true;
 	closed[1] = true;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		if (str[i] == '\'')
 		{
@@ -43,10 +43,10 @@ bool	unclosed_quotes(char *str)
 
 static bool	__handle_empty_quotes(char *str, int i, bool *closed)
 {
-	if ((str[i] == '"' && str[i + 1] == '"') 
+	if ((str[i] == '"' && str[i + 1] == '"')
 		&& (closed[1] != false && closed[0] != false))
 		return (true);
-	else if ((str[i] == '\'' && str[i + 1] == '\'') 
+	else if ((str[i] == '\'' && str[i + 1] == '\'')
 		&& (closed[1] != false && closed[0] != false))
 		return (true);
 	if (str[i] == '"' && closed[1] != false)
@@ -81,7 +81,7 @@ char	*empty_quotes(char *str)
 char	*other_quotes(char *str)
 {
 	int		i;
-	int 	closing_quote;
+	int		closing_quote;
 
 	i = 0;
 	closing_quote = 0;

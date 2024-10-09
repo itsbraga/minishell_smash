@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 17:16:44 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:23:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static bool	__n_option_exist(char *arg)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	i = 1;
 	flag = 0;
@@ -28,11 +28,11 @@ static bool	__n_option_exist(char *arg)
 	return (true);
 }
 
-int ft_echo(char **args)
+int	ft_echo(char **args)
 {
-	int i;
+	int	i;
 	int	n_option;
-	int flag;
+	int	flag;
 
 	i = 1;
 	n_option = __n_option_exist(args[i]);

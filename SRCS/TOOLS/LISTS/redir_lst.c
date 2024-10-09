@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:06:09 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/06 21:52:58 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/09 21:32:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_redir_lst *redir_lst_new_node(t_token_type type)
+t_redir_lst	*redir_lst_new_node(t_token_type type)
 {
 	t_redir_lst	*new_node;
-	
+
 	new_node = yama(CREATE, NULL, sizeof(t_redir_lst));
 	secure_malloc(new_node);
 	new_node->type = type;
-    new_node->limiter = NULL;
-    new_node->infile = NULL;
-    new_node->outfile = NULL;
+	new_node->limiter = NULL;
+	new_node->infile = NULL;
+	new_node->outfile = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
