@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/10 13:12:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/10 20:00:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	display_token_dblst(t_token_dblst *t)
 
 static void	__display_redir_node(t_redir_lst *node)
 {
-	ft_printf(2, R BP LIM " t_redir_lst " LIM "\n" R);
 	ft_printf(2, BP "token type:\t [" R "%d" BP "]\n" R, node->type);
 	if (node->type == REDIR_IN)
 		ft_printf(2, PINK "infile:\t\t [" R "%s" PINK "]\n" R, node->infile);
@@ -89,11 +88,12 @@ void	display_redir_lst(t_redir_lst *r)
 	t_redir_lst	*current;
 
 	current = r;
+	ft_printf(2, R BP LIM3 " t_redir_lst " LIM "\n" R);
 	while (current != NULL)
 	{
 		__display_redir_node(current);
 		current = current->next;
 	}
-	if (current == NULL)
-		ft_putendl_fd("", 2);
+	// if (current == NULL)
+	// 	ft_putendl_fd("", 2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/10 13:20:27 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/10 17:46:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void	display_exec_lst(t_exec_lst *e)
 	ft_printf(STDOUT_FILENO, R BOLD Y LIM " t_exec_lst " LIM "\n" R);
 	while (current != NULL)
 	{
-		if (current->redir != NULL)
-			display_redir_lst(current->redir);
-		else
-			ft_printf(2, Y "t_redir_lst:\t [" R "(null)" Y "]\n" R);
 		ft_printf(2, Y "heredoc_nb:\t [" R "%d" Y "]\n" R, current->heredoc_nb);
 		ft_printf(2, Y "absolute_path:\t [" R);
 		ft_printf(2, "%d" Y "]\n" R, current->absolute_path);
@@ -32,6 +28,10 @@ void	display_exec_lst(t_exec_lst *e)
 			print_tab(current->cmd);
 		else
 			ft_printf(2, Y "cmd:\t\t [" R "(null)" Y "]\n" R);
+		if (current->redir != NULL)
+			display_redir_lst(current->redir);
+		else
+			ft_printf(2, BOLD Y "t_redir_lst:\t [" R "(null)" BOLD Y "]\n" R);
 		current = current->next;
 	}
 	if (current == NULL)
@@ -46,12 +46,12 @@ void	print_tab(char **tab)
 	while (tab[i] != NULL)
 	{
 		dprintf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
-		dprintf(2, BOLD GREEN "ptr of tab[i]: " R "%p\n", tab[i]);
+		dprintf(2, BOLD GREEN "located at: " R "%p\n", tab[i]);
 		i++;
 	}
 	if (tab[i] == NULL)
 	{
 		dprintf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
-		dprintf(2, BOLD GREEN "ptr of tab[i]: " R "%p\n", tab[i]);
+		dprintf(2, BOLD GREEN "located at: " R "%p\n", tab[i]);
 	}
 }

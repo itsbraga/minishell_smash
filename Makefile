@@ -56,8 +56,9 @@ LEXING_F		=	check_input.c create_main_lst.c check_main.c \
 					tokenization.c create_token_dblst.c 
 
 PARSING_DIR		=	PARSING/
-PARSING_F		=	handle_quotes.c quotes_utils.c exec_lst_utils.c \
-					check_sequence.c create_exec_lst.c create_redir_lst.c
+PARSING_F		=	handle_quotes.c quotes_utils.c check_sequence.c \
+					exec_lst_utils.c create_exec_lst.c redir_lst_utils.c \
+					create_redir_lst.c
 
 EXPAND_DIR		=	EXPANSION/
 EXPAND_F		=	expand.c expand_utils.c

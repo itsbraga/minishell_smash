@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:06:09 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/10 14:32:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/10 18:57:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,11 @@ void	redir_lst_add_back(t_redir_lst **r, t_redir_lst *new_node)
 	t_redir_lst	*tmp;
 
 	if ((*r) == NULL)
-	{
 		*r = new_node;
-		printf("1. ptr: %p\n", new_node);
-		printf("1. type: %d\n", new_node->type);
-	}
 	else
 	{
 		tmp = __redir_lst_last_node(*r);
 		tmp->next = new_node;
-		printf("ptr: %p\n", new_node);
-		printf("type: %d\n", new_node->type);
 	}
 }
 

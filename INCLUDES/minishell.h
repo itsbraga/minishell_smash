@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:57:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:30:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,18 @@ char			*other_quotes(char *str);
 // check_sequence.c
 int				check_redir_sequence(char *content);
 
-// exec_lst_utils.c
-char			*token_cleanup(char *content);
-int				cmd_token_count(t_token_dblst *t);
+// redir_lst_utils.c
+t_redir_lst		*redir_in_n_infile(t_data *d, t_redir_lst *new_redir);
+t_redir_lst		*redir_out_trunc_n_outfile(t_data *d, t_redir_lst *new_redir);
+t_redir_lst 	*redir_out_append_n_outfile(t_data *d, t_redir_lst *new_redir);
+t_redir_lst		*heredoc_n_limiter(t_data *d, t_redir_lst *new_redir);
 
 // create_redir_lst.c
 int				create_redir_lst(t_data *d);
+
+// exec_lst_utils.c
+char			*token_cleanup(char *content);
+int				cmd_token_count(t_token_dblst *t);
 
 // create_exec_lst.c
 int				create_exec_lst(t_data *d);
