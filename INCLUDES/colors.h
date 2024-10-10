@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:29:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/09 19:17:46 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:13:36 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define RED			"\e[31m"
 # define GREEN			"\e[32m"
 # define YELLOW			"\e[33m"
+# define Y  			"\e[33m"
 # define ORANGE			"\e[38;5;208m"
 # define BLUE			"\e[34m"
 # define PURPLE			"\e[35m"

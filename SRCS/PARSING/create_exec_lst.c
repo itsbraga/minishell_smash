@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_exec_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/09 22:53:38 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/10 14:28:16 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,13 @@ int	create_exec_lst(t_data *d)
 	current = d->token;
 	__init_ptrs(&p);
 	lstclear_exec(&(d->exec));
-	printf("--------------------------- d->exec ---------------------------\n");
+	printf("----------------------------------- d->exec ------------------------------------\n");
 	while (d->token != NULL)
 	{
 		if (d->token->type == COMMAND)
 			__command_case(d->token, &p);
 		else if (d->token->type == WORD)
 			__word_case(d->token, &p);
-		else if (IS_REDIR(d->token->type) == true)
-			break ;
 		d->token = d->token->next;
 		if (d->token == NULL)
 		{
@@ -83,7 +81,41 @@ int	create_exec_lst(t_data *d)
 	}
 	d->token = current;
 	if (create_redir_lst(d) == FAILURE)
-		return (err_msg(NULL, "could not create redir_lst", 0), FAILURE);
+		return (FAILURE);
 	display_redir_lst(d->exec->redir);
 	return (SUCCESS);
 }
+
+// int	create_exec_lst(t_data *d)
+// {
+// 	t_token_dblst	*current;
+// 	t_ptrs			p;
+
+// 	if (d->token == NULL || d->token->content == NULL)
+// 		return (FAILURE);
+// 	current = d->token;
+// 	__init_ptrs(&p);
+// 	lstclear_exec(&(d->exec));
+// 	printf("----------------------------------- d->exec ------------------------------------\n");
+// 	while (d->token != NULL)
+// 	{
+// 		if (d->token->type == COMMAND)
+// 			__command_case(d->token, &p);
+// 		else if (d->token->type == WORD)
+// 			__word_case(d->token, &p);
+// 		else if (IS_REDIR(d->token->type))
+// 		{
+// 			d->token = current;
+// 			if (create_redir_lst(d) == FAILURE)
+// 				return (err_msg(NULL, "could not create redir_lst", 0), FAILURE);
+// 		}
+// 		d->token = d->token->next;
+// 		if (d->token == NULL)
+// 		{
+// 			p.new_task->cmd[p.i] = NULL;
+// 			print_tab(p.new_task->cmd);
+// 			exec_lst_add_back(&(d->exec), p.new_task);
+// 		}
+// 	}
+// 	return (SUCCESS);
+// }

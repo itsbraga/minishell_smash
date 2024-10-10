@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/09 21:27:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:12:25 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void	display_main_lst(t_main_lst *main)
 {
-	t_main_lst	*tmp;
+	t_main_lst	*current;
 
-	tmp = main;
-	ft_printf(2, "%s\n", BOLD "=========================================================================" R);
-	while (tmp != NULL)
+	current = main;
+	ft_printf(STDOUT_FILENO, R BOLD PURPLE LIM " t_main_lst " LIM "\n" R);
+	while (current != NULL)
 	{
-		ft_printf(STDOUT_FILENO, BOLD PURPLE "t_main_lst:\t [" R);
-		ft_printf(STDOUT_FILENO, "%s" BOLD PURPLE "]\n" R, tmp->content);
-		tmp = tmp->next;
+		ft_printf(STDOUT_FILENO, BOLD PURPLE "content:\t [" R);
+		ft_printf(STDOUT_FILENO, "%s" BOLD PURPLE "]\n" R, current->content);
+		current = current->next;
 	}
-	ft_printf(2, "%s\n", BOLD "=========================================================================" R);
+	if (current == NULL)
+		ft_putendl_fd("", STDOUT_FILENO);
 }
 
 static void	__write_type_name(t_token_type type)
@@ -52,25 +53,29 @@ static void	__write_type_name(t_token_type type)
 
 void	display_token_dblst(t_token_dblst *t)
 {
-	t_token_dblst	*tmp;
+	t_token_dblst	*current;
 
-	tmp = t;
-	while (tmp != NULL)
+	current = t;
+	ft_printf(STDOUT_FILENO, R BOLD BLUE LIM2 " t_token_dblst " LIM3 "\n" R);
+	while (current != NULL)
 	{
-		ft_printf(STDOUT_FILENO, R BOLD BLUE "t_token_dblst:\t [" R);
-		ft_printf(STDOUT_FILENO, "%s" BOLD BLUE "]\n" R, tmp->content);
-		if (tmp->type != -1)
+		ft_printf(STDOUT_FILENO, R BOLD BLUE "content:\t [" R);
+		ft_printf(STDOUT_FILENO, "%s" BOLD BLUE "]\n" R, current->content);
+		if (current->type != -1)
 		{
 			ft_printf(STDOUT_FILENO, BLUE "type:\t\t ");
-			__write_type_name(tmp->type);
+			__write_type_name(current->type);
 		}
-		tmp = tmp->next;
+		current = current->next;
 	}
+	if (current == NULL)
+		ft_putendl_fd("", STDOUT_FILENO);
 }
 
 static void	__display_redir_node(t_redir_lst *node)
 {
-	ft_printf(2, BP "t_redir_lst:\t [" R "%d" BP "]\n" R, node->type);
+	ft_printf(2, R BP LIM " t_redir_lst " LIM "\n" R);
+	ft_printf(2, BP "token type:\t [" R "%d" BP "]\n" R, node->type);
 	if (node->type == REDIR_IN)
 		ft_printf(2, PINK "infile:\t\t [" R "%s" PINK "]\n" R, node->infile);
 	else if (node->type == REDIR_OUT_TRUNC || node->type == REDIR_OUT_APPEND)
@@ -89,4 +94,6 @@ void	display_redir_lst(t_redir_lst *r)
 		__display_redir_node(current);
 		current = current->next;
 	}
+	if (current == NULL)
+		ft_putendl_fd("", 2);
 }

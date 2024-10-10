@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/09 22:29:30 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:20:27 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,28 @@
 
 void	display_exec_lst(t_exec_lst *e)
 {
-	t_exec_lst	*tmp;
+	t_exec_lst	*current;
 
-	tmp = e;
-	while (tmp != NULL)
+	current = e;
+	ft_printf(STDOUT_FILENO, R BOLD Y LIM " t_exec_lst " LIM "\n" R);
+	while (current != NULL)
 	{
-		// display_redir_lst(tmp->redir);
-		ft_printf(STDOUT_FILENO, R BOLD YELLOW "[t_exec_lst]\n" R);
-		ft_printf(2, YELLOW "heredoc_nb:\t [" R "%d" YELLOW "]\n" R, tmp->heredoc_nb);
-		ft_printf(2, YELLOW "absolute_path:\t [" R "%d" YELLOW "]\n" R, tmp->absolute_path);
-		ft_printf(2, YELLOW "bin_path:\t [" R "%s" YELLOW "]\n" R, tmp->bin_path);
-		print_tab(tmp->cmd);
-		tmp = tmp->next;
+		if (current->redir != NULL)
+			display_redir_lst(current->redir);
+		else
+			ft_printf(2, Y "t_redir_lst:\t [" R "(null)" Y "]\n" R);
+		ft_printf(2, Y "heredoc_nb:\t [" R "%d" Y "]\n" R, current->heredoc_nb);
+		ft_printf(2, Y "absolute_path:\t [" R);
+		ft_printf(2, "%d" Y "]\n" R, current->absolute_path);
+		ft_printf(2, Y "bin_path:\t [" R "%s" Y "]\n" R, current->bin_path);
+		if (current->cmd != NULL)
+			print_tab(current->cmd);
+		else
+			ft_printf(2, Y "cmd:\t\t [" R "(null)" Y "]\n" R);
+		current = current->next;
 	}
+	if (current == NULL)
+		ft_putendl_fd("", 2);
 }
 
 void	print_tab(char **tab)
@@ -36,9 +45,13 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
-		dprintf(2, BOLD GREEN "tab[i] = %s\t| ptr of tab[i] = %p\n" R, tab[i], tab[i]);
+		dprintf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
+		dprintf(2, BOLD GREEN "ptr of tab[i]: " R "%p\n", tab[i]);
 		i++;
 	}
 	if (tab[i] == NULL)
-		dprintf(2, BOLD GREEN "tab[i] = %s | ptr of tab[i] = %p\n" R, tab[i], tab[i]);
+	{
+		dprintf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
+		dprintf(2, BOLD GREEN "ptr of tab[i]: " R "%p\n", tab[i]);
+	}
 }
