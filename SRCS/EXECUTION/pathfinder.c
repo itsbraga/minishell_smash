@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/11 05:16:20 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/11 20:37:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,20 @@ static	void	__basic_behaviour(t_exec_info *info)
 		if (info->executed_cmd != 0)
 		{
 			dup2(info->old_read_fd, STDIN_FILENO);
-			printf("PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDIN_FILENO, info->old_read_fd);
+			dprintf(2, "PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDIN_FILENO, info->old_read_fd);
 			close(info->old_read_fd);
-			printf("PID : %d | FD(%d) à été fermé\n", getpid(), info->old_read_fd);
+			dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->old_read_fd);
 		}
+		dprintf(2, "PID : %d | executed_cmd : %d ; cmd_count : %d\n", getpid(), info->executed_cmd, info->cmd_count);
 		if (info->executed_cmd != (info->cmd_count - 1))
 		{
 			dup2(info->fd[1], STDOUT_FILENO);
-			printf("PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
+			dprintf(2, "PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
 		}
 		close(info->fd[1]);
-		printf("PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[1]);
+		dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[1]);
 		close(info->fd[0]);
-		printf("PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[0]);
+		dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[0]);
 	}
 }
 
@@ -99,7 +100,8 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 	error = 0;
 	last_heredoc_fd = 0;
 	latest_redin = 0;
-	printf("debut pathfinder\n");
+	dprintf(2, "debut pathfinder\n");
+	dprintf(2, "PID : %d | cmd[0] = %s\n", getpid(), node->cmd[0]);
 	__basic_behaviour(d->info);
 	if (node->heredoc_nb > 0)
 		last_heredoc_fd = fill_all_heredoc(d, node->redir);

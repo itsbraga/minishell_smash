@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/12 01:09:27 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/12 01:53:09 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ static void	__command_case(t_token_dblst *t, t_ptrs *p)
 {
 	char	*cleaned_token;
 
-	if (p->new_task->cmd == NULL)
-	{
-		p->size = (sizeof(char *) * (cmd_token_count(t) + 1));
-		p->new_task->cmd = yama(CREATE_TAB, NULL, p->size);
-		secure_malloc(p->new_task->cmd);
-	}
 	cleaned_token = token_cleanup(t->content);
 	p->new_task->cmd[p->i] = cleaned_token;
 	if (ft_strchr(cleaned_token, '/') != NULL)

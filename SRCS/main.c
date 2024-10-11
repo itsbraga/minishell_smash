@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/12 01:49:24 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/12 01:53:42 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	__minishell(t_data *d)
 			// }
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(d->exec);
-			// while_cmd(d, &(d->exec));
+			while_cmd(d, &(d->exec));
 			// 	exec_built_in(d->exec->cmd, d);
 		}
 		free(user_input);
