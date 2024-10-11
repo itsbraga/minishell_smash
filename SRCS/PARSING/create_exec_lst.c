@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_exec_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/10 20:33:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:50:58 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	__command_case(t_token_dblst *t, t_ptrs *p)
 	p->new_task->cmd[p->i] = ft_strdup(cleaned_token);
 	secure_malloc(p->new_task->cmd[p->i]);
 	(void)yama(ADD, (p->new_task->cmd[p->i]), 0);
-	if (ft_strchr(cleaned_token, '\'') != NULL)
+	if (ft_strchr(cleaned_token, '/') != NULL)
 	{
 		p->new_task->absolute_path = true;
 		p->new_task->bin_path = cleaned_token;

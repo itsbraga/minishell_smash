@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/11 05:24:46 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/11 17:53:53 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	__minishell(t_data *d)
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_token_dblst(d->token);
 			display_exec_lst(d->exec);
-			// while_cmd(d, &(d->exec));
+			while_cmd(d, &(d->exec));
 			// 	exec_built_in(d->exec->cmd, d);
 		}
 		free(user_input);
