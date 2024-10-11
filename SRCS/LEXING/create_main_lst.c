@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/11 05:07:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/11 23:46:41 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ static void	__del_unwanted_whitespaces(t_main_lst *main)
 	}
 }
 
+static void	__init_exec_info(t_data *d)
+{
+	d->info = yama(CREATE, NULL, sizeof(t_exec_info));
+	secure_malloc(d->info);
+	ft_bzero(d->info, sizeof(t_exec_info));
+	d->info->fd[0] = -1;
+	d->info->fd[1] = -1;
+}
+
 int	create_main_lst(t_data *d, char *input)
 {
 	t_main_lst	*new_node;
@@ -55,14 +64,11 @@ int	create_main_lst(t_data *d, char *input)
 
 	if (unclosed_quotes(input) == true)
 		return (err_msg(NULL, YELLOW "WARNING: unclosed quotes" R, 0), FAILURE);
-	d->info = yama(CREATE, NULL, sizeof(t_exec_info));
-	ft_bzero((d->info), sizeof(t_exec_info));
-	d->info->fd[0] = -1;
-	d->info->fd[1] = -1;
-	lstclear_main(&(d->main));
+	__init_exec_info(d);
 	segments = __get_all_segments(input);
 	secure_malloc2(segments, false);
 	(void)yama(ADD, segments, 0);
+	lstclear_main(&(d->main));
 	i = 0;
 	while (segments[i] != NULL)
 	{
@@ -74,6 +80,7 @@ int	create_main_lst(t_data *d, char *input)
 		d->info->cmd_count = i;
 		d->info->pipe_count = d->info->cmd_count - 1;
 	}
-	((void)yama(REMOVE, segments, 0), __del_unwanted_whitespaces(d->main));
+	(void)yama(REMOVE, segments, 0);
+	 __del_unwanted_whitespaces(d->main);
 	return (SUCCESS);
 }

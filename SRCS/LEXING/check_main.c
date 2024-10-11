@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/09 21:30:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/12 01:18:36 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	__init_token_parser(t_token_parser *p)
 
 static void	__get_closed_quotes(t_token_parser *p)
 {
-	if (p->main->content[p->i] == '\'')
+	if (p->main_content[p->i] == '\'')
 		p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
-	else if (p->main->content[p->i] == '"')
+	else if (p->main_content[p->i] == '"')
 		p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
 }
 
@@ -35,7 +35,7 @@ static void	__take_seg_elem(t_token_parser *p)
 	tmp = NULL;
 	if (p->i > p->start)
 	{
-		tmp = ft_strldup(p->main->content + p->start, (p->i - p->start));
+		tmp = ft_strldup(p->main_content + p->start, (p->i - p->start));
 		secure_malloc(tmp);
 		(void)yama(ADD, tmp, 0);
 		p->seg_elems[p->token_count] = tmp;
@@ -47,7 +47,7 @@ static void	__take_seg_elem(t_token_parser *p)
 static void	__redir_case(t_token_parser *p)
 {
 	__take_seg_elem(p);
-	if (p->main->content[p->i] == p->main->content[p->i + 1])
+	if (p->main_content[p->i] == p->main_content[p->i + 1])
 		p->i += 2;
 	else
 		p->i++;
@@ -57,23 +57,23 @@ static void	__redir_case(t_token_parser *p)
 void	parse_segment(t_token_parser *p)
 {
 	__init_token_parser(p);
-	while (p->main->content[p->i] != '\0')
+	while (p->main_content[p->i] != '\0')
 	{
 		__get_closed_quotes(p);
-		if (is_redir(&(p->main->content[p->i])) == true
+		if (is_redir(&(p->main_content[p->i])) == true
 			&& p->closed_quotes[0] == true && p->closed_quotes[1] == true)
 			__redir_case(p);
-		else if (p->main->content[p->i] == ' '
+		else if (p->main_content[p->i] == ' '
 			&& p->closed_quotes[0] == true && p->closed_quotes[1] == true)
 		{
 			__take_seg_elem(p);
-			while (ft_isspace(p->main->content[p->i]) == 1)
+			while (ft_isspace(p->main_content[p->i]) == 1)
 				p->i++;
 			p->start = p->i;
 		}
 		else
 			p->i++;
-		if (p->main->content[p->i] == '\0' && (p->i > p->start))
+		if (p->main_content[p->i] == '\0' && (p->i > p->start))
 			__take_seg_elem(p);
 	}
 }

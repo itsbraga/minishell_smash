@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/10 20:25:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/12 01:18:45 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,15 @@ typedef struct s_token_dblst
 
 typedef struct s_token_parser
 {
-	struct s_main_lst	*main;
-	int					i;
-	int					start;
-	int					token_count;
-	char				**seg_elems;
-	bool				closed_quotes[2];
-	bool				is_closed;
-	bool				was_closed;
+	// struct s_main_lst	*main;
+	char	*main_content;
+	int		i;
+	int		start;
+	int		token_count;
+	char	**seg_elems;
+	bool	closed_quotes[2];
+	bool	is_closed;
+	bool	was_closed;
 }				t_token_parser;
 
 typedef struct s_main_lst

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/10 17:46:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/12 01:47:03 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,23 @@ void	display_exec_lst(t_exec_lst *e)
 	ft_printf(STDOUT_FILENO, R BOLD Y LIM " t_exec_lst " LIM "\n" R);
 	while (current != NULL)
 	{
-		ft_printf(2, Y "heredoc_nb:\t [" R "%d" Y "]\n" R, current->heredoc_nb);
-		ft_printf(2, Y "absolute_path:\t [" R);
-		ft_printf(2, "%d" Y "]\n" R, current->absolute_path);
-		ft_printf(2, Y "bin_path:\t [" R "%s" Y "]\n" R, current->bin_path);
+		ft_printf(1, "--- NODE ---\n");
+		ft_printf(1, Y "heredoc_nb:\t [" R "%d" Y "]\n" R, current->heredoc_nb);
+		ft_printf(1, Y "absolute_path:\t [" R);
+		ft_printf(1, "%d" Y "]\n" R, current->absolute_path);
+		ft_printf(1, Y "bin_path:\t [" R "%s" Y "]\n" R, current->bin_path);
 		if (current->cmd != NULL)
 			print_tab(current->cmd);
 		else
-			ft_printf(2, Y "cmd:\t\t [" R "(null)" Y "]\n" R);
+			ft_printf(1, Y "cmd:\t\t [" R "(null)" Y "]\n" R);
 		if (current->redir != NULL)
 			display_redir_lst(current->redir);
 		else
-			ft_printf(2, BOLD Y "t_redir_lst:\t [" R "(null)" BOLD Y "]\n" R);
+			ft_printf(1, BOLD Y "t_redir_lst:\t [" R "(null)" BOLD Y "]\n" R);
 		current = current->next;
 	}
 	if (current == NULL)
-		ft_putendl_fd("", 2);
+		ft_putendl_fd("", STDOUT_FILENO);
 }
 
 void	print_tab(char **tab)

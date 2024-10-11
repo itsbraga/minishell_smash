@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/11 05:24:46 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/12 01:49:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,13 @@ static int	__minishell(t_data *d)
 			display_main_lst(d->main);
 			if (create_token_dblst(d) == FAILURE)
 				return (FAILURE);
-			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_token_dblst(d->token);
+			// if (create_token_and_exec_lsts(d) == FAILURE)
+			// {
+			// 	printf("TOKEN AND EXEC LSTS: creation failed\n");
+			// 	return (FAILURE);
+			// }
+			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(d->exec);
 			// while_cmd(d, &(d->exec));
 			// 	exec_built_in(d->exec->cmd, d);
@@ -59,6 +64,5 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n%s", BOLD WELCOME_BANNER R);
 	create_env(d, envp);
 	__minishell(d);
-	// clean_exit_shell(SUCCESS);
 	return (SUCCESS);
 }

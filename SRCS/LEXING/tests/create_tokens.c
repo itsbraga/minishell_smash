@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_token_dblst.c                               :+:      :+:    :+:   */
+/*   create_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/12 01:20:32 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/12 01:21:31 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,25 @@ static char	**__get_all_seg_elems(char *main_content)
 	return (p.seg_elems);
 }
 
-int	create_token_dblst(t_data *d)
+int	create_tokens(t_data *d)
 {
 	t_token_dblst	*new_token;
 	char			**seg_elems;
 	int				i;
 
-	while (d->main != NULL)
+	seg_elems = __get_all_seg_elems(d->main->content);
+	secure_malloc2(seg_elems, false);
+	lstclear_token(&(d->token));
+	i = 0;
+	while (seg_elems[i] != NULL)
 	{
-		seg_elems = __get_all_seg_elems(d->main->content);
-		secure_malloc2(seg_elems, false);
-		lstclear_token(&(d->token));
-		// (void)yama(ADD, seg_elems, 0);
-		i = 0;
-		while (seg_elems[i] != NULL)
-		{
-			new_token = token_dblst_new_node(seg_elems[i], UNKNOWN);
-			secure_malloc(new_token);
-			(void)yama(ADD, new_token, 0);
-			token_dblst_add_back(&(d->token), new_token);
-			i++;
-		}
-		lst_tokenization(d->token);
-		display_token_dblst(d->token);
-		if (create_exec_lst(d) == FAILURE)
-			return (FAILURE);
-		d->main = d->main->next;
+		new_token = token_dblst_new_node(seg_elems[i], UNKNOWN);
+		secure_malloc(new_token);
+		(void)yama(ADD, new_token, 0);
+		token_dblst_add_back(&(d->token), new_token);
+		i++;
 	}
-	// (void)yama(REMOVE, seg_elems, 0);
+	lst_tokenization(d->token);
+	display_token_dblst(d->token);
 	return (SUCCESS);
 }

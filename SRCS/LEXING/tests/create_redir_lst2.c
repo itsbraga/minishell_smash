@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_redir_lst.c                                 :+:      :+:    :+:   */
+/*   create_redir_lst2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 20:44:31 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/12 01:34:30 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/12 01:45:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_redir_lst	*__get_redir_infos(t_data *d)
 	return (new_redir);
 }
 
-int	create_redir_lst(t_data *d)
+int	create_redir_lst2(t_data *d, t_exec_lst *existing_task)
 {
 	t_redir_lst		*new_redir;
 
@@ -47,7 +47,7 @@ int	create_redir_lst(t_data *d)
 			d->token = d->token->next;
 		else if (new_redir != NULL)
 		{
-			redir_lst_add_back(&(d->exec->redir), new_redir);
+			redir_lst_add_back(&(existing_task->redir), new_redir);
 			d->token = d->token->next->next;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/10 20:30:25 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/12 01:43:37 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int				create_main_lst(t_data *d, char *user_input);
 // check_main.c
 void			parse_segment(t_token_parser *p);
 
-// create_token_lst.c
-int				create_token_dblst(t_data *d);
-
 // tokenization.c
 void			lst_tokenization(t_token_dblst *t);
+
+// create_token_lst.c
+int				create_token_dblst(t_data *d);
 
 /******************************************************************************\
  * PARSING
@@ -90,10 +90,10 @@ char			*other_quotes(char *str);
 int				check_redir_sequence(char *content);
 
 // redir_lst_utils.c
-t_redir_lst		*redir_in_n_infile(t_data *d, t_redir_lst *new_redir);
-t_redir_lst		*redir_out_trunc_n_outfile(t_data *d, t_redir_lst *new_redir);
-t_redir_lst 	*redir_out_append_n_outfile(t_data *d, t_redir_lst *new_redir);
-t_redir_lst		*heredoc_n_limiter(t_data *d, t_redir_lst *new_redir);
+t_redir_lst		*redir_in_n_infile(t_data *d);
+t_redir_lst		*redir_out_trunc_n_outfile(t_data *d);
+t_redir_lst 	*redir_out_append_n_outfile(t_data *d);
+t_redir_lst		*heredoc_n_limiter(t_data *d);
 
 // create_redir_lst.c
 int				create_redir_lst(t_data *d);
@@ -261,5 +261,24 @@ void			display_redir_lst(t_redir_lst *r);
 void			rainbow_txt(const char *str);
 void			rainbow_txt_nonl(const char *str);
 char			*rainbow_prompt(const char *str);
+
+
+
+/******************************************************************************\
+ * TESTS
+\******************************************************************************/
+
+// create_tokens.c
+int				create_tokens(t_data *d);
+
+// create_token_and_exec_lsts.c
+int				create_token_and_exec_lsts(t_data *d);
+
+// create_exec_tasks.c
+// int				create_exec_tasks(t_data *d, t_exec_lst *exec_tasks);
+t_exec_lst		*create_exec_tasks2(t_data *d);
+
+int				create_redir_lst2(t_data *d, t_exec_lst *existing_task);
+
 
 #endif

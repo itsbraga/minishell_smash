@@ -53,7 +53,11 @@ ENV_F			=	create_env.c env_utils.c export_env_utils.c
 
 LEXING_DIR		=	LEXING/
 LEXING_F		=	check_input.c create_main_lst.c check_main.c \
-					tokenization.c create_token_dblst.c 
+					tokenization.c create_token_dblst.c
+
+TESTS_DIR		=	LEXING/tests/
+TESTS_F			=	create_tokens.c create_exec_tasks.c create_redir_lst2.c \
+					create_token_and_exec_lsts.c
 
 PARSING_DIR		=	PARSING/
 PARSING_F		=	handle_quotes.c quotes_utils.c check_sequence.c \
@@ -81,6 +85,7 @@ SRCS_F			=	$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(ENV_DIR), $(ENV_F)) \
 					$(addprefix $(LEXING_DIR), $(LEXING_F)) \
+					$(addprefix $(TESTS_DIR), $(TESTS_F)) \
 					$(addprefix $(PARSING_DIR), $(PARSING_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(BUILT_INS_DIR), $(BUILT_INS_F)) \

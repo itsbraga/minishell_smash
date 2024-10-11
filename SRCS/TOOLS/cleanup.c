@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/09 22:07:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:19:20 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	free_data(t_data *d, bool clear_history)
 			lstclear_token(&(d->token));
 		if (d->exec != NULL)
 			lstclear_exec(&(d->exec));
+		if (d->exec->redir != NULL)
+			lstclear_redir(&(d->exec->redir));
 		if (clear_history == true)
 		{
 			if (d->env != NULL)
