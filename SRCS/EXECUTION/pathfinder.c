@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:26:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/11 05:16:20 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,25 @@ static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 
 static	void	__basic_behaviour(t_exec_info *info)
 {
-	if (info->executed_cmd != 0)
+	if (info->pipe_count != 0)
 	{
-		dup2(info->old_read_fd, STDIN_FILENO);
-		close(info->old_read_fd);
+		if (info->executed_cmd != 0)
+		{
+			dup2(info->old_read_fd, STDIN_FILENO);
+			printf("PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDIN_FILENO, info->old_read_fd);
+			close(info->old_read_fd);
+			printf("PID : %d | FD(%d) à été fermé\n", getpid(), info->old_read_fd);
+		}
+		if (info->executed_cmd != (info->cmd_count - 1))
+		{
+			dup2(info->fd[1], STDOUT_FILENO);
+			printf("PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
+		}
+		close(info->fd[1]);
+		printf("PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[1]);
+		close(info->fd[0]);
+		printf("PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[0]);
 	}
-	if (info->executed_cmd != (info->cmd_count - 1))
-		dup2(info->fd[1], STDOUT_FILENO);
-	close(info->fd[1]);
-	close(info->fd[0]);
 }
 
 void	pathfinder(t_data *d, t_exec_lst *node, char **env)

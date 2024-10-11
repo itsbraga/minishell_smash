@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/09 21:30:33 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/11 05:07:37 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	create_main_lst(t_data *d, char *input)
 		return (err_msg(NULL, YELLOW "WARNING: unclosed quotes" R, 0), FAILURE);
 	d->info = yama(CREATE, NULL, sizeof(t_exec_info));
 	ft_bzero((d->info), sizeof(t_exec_info));
+	d->info->fd[0] = -1;
+	d->info->fd[1] = -1;
 	lstclear_main(&(d->main));
 	segments = __get_all_segments(input);
 	secure_malloc2(segments, false);

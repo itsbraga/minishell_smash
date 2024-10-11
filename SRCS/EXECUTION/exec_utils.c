@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:25:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/11 04:59:41 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,10 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 		}
 		else
 		{
-			dprintf(2, "cmd[] =\n");
-			print_tab(node->cmd);
-			dprintf(2, "tab_path[] =\n");
-			print_tab(tab_path);
+			// dprintf(2, "cmd[] =\n");
+			// print_tab(node->cmd);
+			// dprintf(2, "tab_path[] =\n");
+			// print_tab(tab_path);
 			node->bin_path = search_bin(node->cmd[0], tab_path);
 		}
 		if (node->bin_path != NULL)

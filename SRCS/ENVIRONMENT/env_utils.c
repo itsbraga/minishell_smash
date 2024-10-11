@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:24:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/11 03:13:58 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**recreate_env_tab(t_env_lst **env)
 
 	// tab = malloc(sizeof(char *) * get_envlst_size(env));
 	// secure_malloc(tab);
-	tab = yama(CREATE_TAB, NULL, (sizeof(char *) * get_envlst_size(env)));
+	tab = yama(CREATE_TAB, NULL, (sizeof(char *) * (get_envlst_size(env) + 1)));
 	secure_malloc(tab);
 	current = *env;
 	i = 0;
@@ -100,5 +100,6 @@ char	**recreate_env_tab(t_env_lst **env)
 		i++;
 		current = current->next;
 	}
+	tab[i] = NULL;
 	return (tab);
 }

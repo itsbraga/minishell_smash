@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/10 19:57:30 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/11 05:24:46 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static int	__minishell(t_data *d)
 
 	while (1)
 	{
+		printf("PID : %d\n", getpid());
+		if (isatty(STDIN_FILENO) == 1)
+			printf("STDIN connected to terminal :)\n");
+		else
+			printf("STDIN isn't connected to terminal /!\\\n");
 		user_input = readline(d->prompt);
 		if (user_input != NULL && user_input[0] != '\0')
 		{
