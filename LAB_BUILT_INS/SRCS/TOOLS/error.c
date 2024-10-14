@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/09/09 20:59:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:33:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static char	*__append_strs(char *s1, char *s2)
 		return (ft_strdup(s2));
 	tmp = s1;
 	s1 = ft_strjoin(tmp, s2);
-	if (s1 == NULL)
-		return (NULL);
+	secure_malloc(s1);
 	free(tmp);
 	return (s1);
 }
@@ -38,13 +37,17 @@ void	err_msg(char *detail, char *reason, int quotes)
 		if (quotes == 1)
 		{
 			msg = __append_strs(__append_strs(NULL, ERR_PREFIX), "‘");
-			msg = __append_strs(msg, detail);
-			msg = __append_strs(msg, "’");
+			msg = __append_strs(__append_strs(msg, detail), "’");
 		}
 		else
 			msg = __append_strs(__append_strs(NULL, ERR_PREFIX), detail);
 		msg = __append_strs(msg, ": ");
 		msg = __append_strs(msg, reason);
+	}
+	else if (quotes == 2)
+	{
+		msg = __append_strs(__append_strs(NULL, ERR_PREFIX), ERR_PIPE);
+		msg = __append_strs(__append_strs(msg, reason), "'");
 	}
 	else
 		msg = __append_strs(__append_strs(NULL, ERR_PREFIX), reason);
@@ -64,10 +67,10 @@ int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_status)
 	}
 	if (detail != NULL)
 	{
-		if (ft_strncmp(cmd, "unset", 6) == 0)
+		if (ft_strncmp(cmd, "unset", 6) == 0 || ft_strncmp(cmd, "export", 6) == 0)
 			msg = __append_strs(msg, "`");
 		msg = __append_strs(msg, detail);
-		if (ft_strncmp(cmd, "unset", 6) == 0)
+		if (ft_strncmp(cmd, "unset", 6) == 0 || ft_strncmp(cmd, "export", 6) == 0)
 			msg = __append_strs(msg, "'");
 		msg = __append_strs(msg, ": ");
 	}

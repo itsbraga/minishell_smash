@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/08 16:56:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:33:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 
 # define ERR_PREFIX BOLD RED "minishell: " RESET
 # define ERR_NEAR_PIPE "syntax error near unexpected token `|'"
+# define ERR_PIPE "syntax error near unexpected token `"
 # define ERR_MALLOC_LST "failed to allocate memory for a new node"
 
 /******************************************************************************\
