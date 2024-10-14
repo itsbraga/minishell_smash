@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token_dblst.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/12 01:20:32 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/14 19:52:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	create_token_dblst(t_data *d)
 	while (d->main != NULL)
 	{
 		seg_elems = __get_all_seg_elems(d->main->content);
-		secure_malloc2(seg_elems, false);
+		secure_malloc(seg_elems);
 		lstclear_token(&(d->token));
-		// (void)yama(ADD, seg_elems, 0);
+		(void)yama(ADD, seg_elems, 0);
 		i = 0;
 		while (seg_elems[i] != NULL)
 		{
@@ -61,6 +61,7 @@ int	create_token_dblst(t_data *d)
 			return (FAILURE);
 		d->main = d->main->next;
 	}
-	// (void)yama(REMOVE, seg_elems, 0);
+	printf("11 FINISHED t_token_dblst creation\n");
+	(void)yama(REMOVE, seg_elems, 0);
 	return (SUCCESS);
 }

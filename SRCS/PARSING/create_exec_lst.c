@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_exec_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/12 01:53:09 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/14 19:38:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	__command_case(t_token_dblst *t, t_ptrs *p)
 {
 	char	*cleaned_token;
 
+	printf("2\n");
 	cleaned_token = token_cleanup(t->content);
 	p->new_task->cmd[p->i] = cleaned_token;
 	if (ft_strchr(cleaned_token, '/') != NULL)
@@ -48,6 +49,7 @@ static void	__word_case(t_token_dblst *t, t_ptrs *p)
 
 	if (p->new_task != NULL)
 	{
+		printf("3\n");
 		cleaned_token = token_cleanup(t->content);
 		p->new_task->cmd[p->i] = cleaned_token;
 	}
@@ -65,8 +67,10 @@ int	create_exec_lst(t_data *d)
 	__init_ptrs(&p);
 	lstclear_exec(&(d->exec));
 	printf("----------------------------------- d->exec ------------------------------------\n");
+	printf("0\n");
 	while (d->token != NULL)
 	{
+		printf("1\n");
 		if (p.new_task == NULL)
 			__init_exec(d->token, &p);
 		if (d->token->type == COMMAND)
@@ -77,12 +81,14 @@ int	create_exec_lst(t_data *d)
 	}
 	if (p.new_task->cmd != NULL)
 	{
+		printf("4\n");
 		p.new_task->cmd[p.i] = NULL;
 		exec_lst_add_back(&(d->exec), p.new_task);
-		// p.new_task = NULL;
 	}
 	d->token = head;
+	printf("5\n");
 	if (create_redir_lst(d) == FAILURE)
 		return (FAILURE);
+	printf("10 FINISHED t_exec_lst creation\n");
 	return (SUCCESS);
 }

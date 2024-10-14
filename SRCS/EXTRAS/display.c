@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/12 00:24:18 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/14 20:09:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	display_main_lst(t_main_lst *main)
 	t_main_lst	*current;
 
 	current = main;
-	ft_printf(STDOUT_FILENO, R BOLD PURPLE LIM " t_main_lst " LIM "\n" R);
+	ft_printf(STDOUT_FILENO, R BPP LIM " t_main_lst " LIM "\n" R);
 	while (current != NULL)
 	{
-		ft_printf(1, "--- node ---\n");
-		ft_printf(STDOUT_FILENO, BOLD PURPLE "content:\t [" R);
-		ft_printf(STDOUT_FILENO, "%s" BOLD PURPLE "]\n" R, current->content);
+		ft_printf(STDOUT_FILENO, "--- node ---\n");
+		ft_printf(STDOUT_FILENO, BPP "content:\t [" R);
+		ft_printf(STDOUT_FILENO, "%s" BPP "]\n" R, current->content);
 		current = current->next;
 	}
 	if (current == NULL)
@@ -32,23 +32,23 @@ void	display_main_lst(t_main_lst *main)
 static void	__write_type_name(t_token_type type)
 {
 	ft_printf(STDOUT_FILENO, R "is a ");
-	if (type == 0)
+	if (type == COMMAND)
 		ft_printf(STDOUT_FILENO, RED "[%d ➜ COMMAND]\n" R, type);
-	else if (type == 1)
+	else if (type == WORD)
 		ft_printf(STDOUT_FILENO, ORANGE "[%d ➜ WORD]\n" R, type);
 	else if (type == 2)
 		ft_printf(STDOUT_FILENO, YELLOW "[%d ➜ REDIR_IN]\n" R, type);
-	else if (type == 3)
+	else if (type == INFILE)
 		ft_printf(STDOUT_FILENO, GREEN "[%d ➜ INFILE]\n" R, type);
 	else if (type == 4)
 		ft_printf(STDOUT_FILENO, BLUE "[%d ➜ HERE_DOC]\n" R, type);
-	else if (type == 5)
+	else if (type == LIMITER)
 		ft_printf(STDOUT_FILENO, CYAN "[%d ➜ LIMITER]\n" R, type);
 	else if (type == 6)
 		ft_printf(STDOUT_FILENO, PURPLE "[%d ➜ REDIR_OUT_TRUNC]\n" R, type);
 	else if (type == 7)
 		ft_printf(STDOUT_FILENO, PINK "[%d ➜ REDIR_OUT_APPEND]\n" R, type);
-	else if (type == 8)
+	else if (type == OUTFILE)
 		ft_printf(STDOUT_FILENO, LIGHT_GRAY "[%d ➜ OUTFILE]\n" R, type);
 }
 
@@ -60,10 +60,10 @@ void	display_token_dblst(t_token_dblst *t)
 	ft_printf(STDOUT_FILENO, R BOLD BLUE LIM2 " t_token_dblst " LIM3 "\n" R);
 	while (current != NULL)
 	{
-		ft_printf(1, "--- node ---\n");
+		ft_printf(STDOUT_FILENO, "--- node ---\n");
 		ft_printf(STDOUT_FILENO, R BOLD BLUE "content:\t [" R);
 		ft_printf(STDOUT_FILENO, "%s" BOLD BLUE "]\n" R, current->content);
-		if (current->type != -1)
+		if (current->type != UNKNOWN)
 		{
 			ft_printf(STDOUT_FILENO, BLUE "type:\t\t ");
 			__write_type_name(current->type);
@@ -76,13 +76,27 @@ void	display_token_dblst(t_token_dblst *t)
 
 static void	__display_redir_node(t_redir_lst *node)
 {
-	ft_printf(1, BP "token type:\t [" R "%d" BP "]\n" R, node->type);
+	ft_printf(1, BP "token type:\t " R);
 	if (node->type == REDIR_IN)
+	{
+		ft_printf(1, BP "[" R "<" BP "]\n" R);
 		ft_printf(1, PINK "infile:\t\t [" R "%s" PINK "]\n" R, node->infile);
-	else if (node->type == REDIR_OUT_TRUNC || node->type == REDIR_OUT_APPEND)
-		ft_printf(1, PINK "outfile:\t [" R "%s" PINK "]\n" R, node->outfile);
+	}
 	else if (node->type == HERE_DOC)
+	{
+		ft_printf(1, BP "[" R "<<" BP "]\n" R);
 		ft_printf(1, PINK "limiter:\t [" R "%s" PINK "]\n" R, node->limiter);
+	}
+	else if (node->type == REDIR_OUT_TRUNC)
+	{
+		ft_printf(1, BP "[" R ">" BP "]\n" R);
+		ft_printf(1, PINK "outfile:\t [" R "%s" PINK "]\n" R, node->outfile);
+	}
+	else if (node->type == REDIR_OUT_APPEND)
+	{
+		ft_printf(1, BP "[" R ">>" BP "]\n" R);
+		ft_printf(1, PINK "outfile:\t [" R "%s" PINK "]\n" R, node->outfile);
+	}
 }
 
 void	display_redir_lst(t_redir_lst *r)
@@ -93,7 +107,7 @@ void	display_redir_lst(t_redir_lst *r)
 	ft_printf(STDOUT_FILENO, R BP LIM3 " t_redir_lst " LIM "\n" R);
 	while (current != NULL)
 	{
-		ft_printf(1, "--- node ---\n");
+		ft_printf(STDOUT_FILENO, "--- node ---\n");
 		__display_redir_node(current);
 		current = current->next;
 	}
