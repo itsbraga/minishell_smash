@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/14 19:52:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:51:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ int	create_token_dblst(t_data *d)
 	while (d->main != NULL)
 	{
 		seg_elems = __get_all_seg_elems(d->main->content);
-		secure_malloc(seg_elems);
+		(secure_malloc(seg_elems), (void)yama(ADD, seg_elems, 0));
 		lstclear_token(&(d->token));
-		(void)yama(ADD, seg_elems, 0);
 		i = 0;
 		while (seg_elems[i] != NULL)
 		{
@@ -61,7 +60,6 @@ int	create_token_dblst(t_data *d)
 			return (FAILURE);
 		d->main = d->main->next;
 	}
-	printf("11 FINISHED t_token_dblst creation\n");
 	(void)yama(REMOVE, seg_elems, 0);
 	return (SUCCESS);
 }

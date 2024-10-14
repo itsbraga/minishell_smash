@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/09 21:31:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:18:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,35 @@ static t_token_type	__classify(char *token, char *prev)
 
 static void	__find_command(t_token_dblst *t)
 {
-	t_token_dblst	*current;
+	t_token_dblst	*curr;
 
-	current = t;
-	while (current != NULL)
+	curr = t;
+	while (curr != NULL)
 	{
-		if (current->type == WORD)
+		if (curr->type == WORD)
 		{
-			current->type = COMMAND;
+			curr->type = COMMAND;
 			break ;
 		}
 		else
-			current = current->next;
+			curr = curr->next;
 	}
 }
 
 void	lst_tokenization(t_token_dblst *t)
 {
-	t_token_dblst	*cur;
+	t_token_dblst	*curr;
 
-	cur = t;
-	while (cur != NULL)
+	if (t == NULL || t->content == NULL)
+		return ;
+	curr = t;
+	while (curr != NULL)
 	{
-		if (cur->prev != NULL)
-			cur->type = __classify(cur->content, cur->prev->content);
+		if (curr->prev != NULL)
+			curr->type = __classify(curr->content, curr->prev->content);
 		else
-			cur->type = __classify(cur->content, NULL);
-		cur = cur->next;
+			curr->type = __classify(curr->content, NULL);
+		curr = curr->next;
 	}
 	__find_command(t);
 }

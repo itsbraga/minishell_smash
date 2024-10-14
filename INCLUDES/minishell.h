@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/14 19:56:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:57:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,14 @@ char			*other_quotes(char *str);
 int				check_redir_sequence(char *content);
 
 // redir_lst_utils.c
+void			init_ptrs(t_ptrs *p);
 t_redir_lst		*redir_in_n_infile(t_data *d);
 t_redir_lst		*redir_out_trunc_n_outfile(t_data *d);
-t_redir_lst 	*redir_out_append_n_outfile(t_data *d);
+t_redir_lst		*redir_out_append_n_outfile(t_data *d);
 t_redir_lst		*heredoc_n_limiter(t_data *d);
 
 // create_redir_lst.c
-int				create_redir_lst(t_data *d);
+int				create_redir_lst(t_data *d, t_exec_lst *existing_task);
 
 // exec_lst_utils.c
 char			*token_cleanup(char *content);
@@ -258,6 +259,5 @@ void			display_redir_lst(t_redir_lst *r);
 void			rainbow_txt(const char *str);
 void			rainbow_txt_nonl(const char *str);
 char			*rainbow_prompt(const char *str);
-
 
 #endif

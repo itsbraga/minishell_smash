@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/14 19:52:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:19:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	create_main_lst(t_data *d, char *input)
 	segments = __get_all_segments(input);
 	secure_malloc(segments);
 	(void)yama(ADD, segments, 0);
-	lstclear_main(&(d->main));
+	(lstclear_main(&(d->main)), lstclear_exec(&(d->exec)));
 	i = 0;
 	while (segments[i] != NULL)
 	{
@@ -81,6 +81,6 @@ int	create_main_lst(t_data *d, char *input)
 		d->info->pipe_count = d->info->cmd_count - 1;
 	}
 	(void)yama(REMOVE, segments, 0);
-	 __del_unwanted_whitespaces(d->main);
+	__del_unwanted_whitespaces(d->main);
 	return (SUCCESS);
 }
