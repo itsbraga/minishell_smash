@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/14 16:33:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:57:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static char	*__append_strs(char *s1, char *s2)
 		return (ft_strdup(s2));
 	tmp = s1;
 	s1 = ft_strjoin(tmp, s2);
-	secure_malloc(s1);
+	if (s1 == NULL)
+		exit(FAILURE);
 	free(tmp);
 	return (s1);
 }
