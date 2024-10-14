@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/12 01:43:37 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/14 19:56:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,10 +201,6 @@ int				err_msg_cmd(char *cmd, char *detail, char *reason,
 
 // garbage*.c ---> garbage_collector.h
 
-// secure_malloc.c
-void			secure_malloc(void *to_secure);
-void			secure_malloc2(void *to_secure, bool full_clean);
-
 // lstclear.c
 void			lstclear_main(t_main_lst **main);
 void			lstclear_token(t_token_dblst **t);
@@ -213,7 +209,7 @@ void			lstclear_exec(t_exec_lst **e);
 void			lstclear_env(t_env_lst **env);
 
 // cleanup.c
-void			free_data(t_data *d, bool clear_history);
+void			secure_malloc(void *to_secure);
 void			clean_exit_shell(int err_status);
 
 /******************************************************************************\
@@ -249,6 +245,7 @@ t_exec_lst		*exec_lst_new_node(void);
 
 // display2.c
 void			display_exec_lst(t_exec_lst *e);
+void			print_cmd(char **cmd);
 void			print_tab(char **tab);
 
 // display.c
@@ -261,24 +258,6 @@ void			display_redir_lst(t_redir_lst *r);
 void			rainbow_txt(const char *str);
 void			rainbow_txt_nonl(const char *str);
 char			*rainbow_prompt(const char *str);
-
-
-
-/******************************************************************************\
- * TESTS
-\******************************************************************************/
-
-// create_tokens.c
-int				create_tokens(t_data *d);
-
-// create_token_and_exec_lsts.c
-int				create_token_and_exec_lsts(t_data *d);
-
-// create_exec_tasks.c
-// int				create_exec_tasks(t_data *d, t_exec_lst *exec_tasks);
-t_exec_lst		*create_exec_tasks2(t_data *d);
-
-int				create_redir_lst2(t_data *d, t_exec_lst *existing_task);
 
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/12 01:53:42 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/14 20:29:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,9 @@ static int	__minishell(t_data *d)
 			display_main_lst(d->main);
 			if (create_token_dblst(d) == FAILURE)
 				return (FAILURE);
-			display_token_dblst(d->token);
-			// if (create_token_and_exec_lsts(d) == FAILURE)
-			// {
-			// 	printf("TOKEN AND EXEC LSTS: creation failed\n");
-			// 	return (FAILURE);
-			// }
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(d->exec);
-			while_cmd(d, &(d->exec));
+			// while_cmd(d, &(d->exec));
 			// 	exec_built_in(d->exec->cmd, d);
 		}
 		free(user_input);

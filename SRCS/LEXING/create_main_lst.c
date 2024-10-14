@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/11 23:46:41 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/14 19:52:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	create_main_lst(t_data *d, char *input)
 		return (err_msg(NULL, YELLOW "WARNING: unclosed quotes" R, 0), FAILURE);
 	__init_exec_info(d);
 	segments = __get_all_segments(input);
-	secure_malloc2(segments, false);
+	secure_malloc(segments);
 	(void)yama(ADD, segments, 0);
 	lstclear_main(&(d->main));
 	i = 0;

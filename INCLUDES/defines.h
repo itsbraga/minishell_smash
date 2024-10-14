@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/10 13:21:17 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/14 20:10:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 
 # include "colors.h"
 # define BP BOLD PINK
-
-# ifndef PATH_MAX
-#  define PATH_MAX 4096
-# endif
+# define BPP BOLD PURPLE
 
 /******************************************************************************\
  * HELPERS
 \******************************************************************************/
 
+# define PATH_MAX 4096
 # define IS_REDIR(t) ((t == REDIR_IN) || (t == HERE_DOC) \
 						|| (t == REDIR_OUT_TRUNC) || (t == REDIR_OUT_APPEND))
 

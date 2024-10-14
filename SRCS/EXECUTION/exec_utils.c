@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/11 04:59:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/14 20:21:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,14 @@ char	*search_bin(char *cmd, char **tab_path)
 	while (tab_path[i] != NULL)
 	{
 		tmp = ft_strjoin(tab_path[i], "/");
-		secure_malloc(tmp);
+		if (tmp == NULL)
+			return (free_tab(tab_path), NULL);
+		// secure_malloc(tmp);
 		(void)yama(ADD, tmp, 0);
 		path_to_try = ft_strjoin(tmp, cmd);
-		secure_malloc(path_to_try);
+		if (path_to_try == NULL)
+			return (free_tab(tab_path), free(tmp), free(path_to_try), NULL);
+		// secure_malloc(path_to_try);
 		(void)yama(ADD, path_to_try, 0);
 		(void)yama(REMOVE, tmp, 0);
 		if (access(path_to_try, F_OK) == -1)
