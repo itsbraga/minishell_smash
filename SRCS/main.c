@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/14 20:29:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:56:59 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	__minishell(t_data *d)
 				return (FAILURE);
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(d->exec);
-			// while_cmd(d, &(d->exec));
+			while_cmd(d, &(d->exec));
 			// 	exec_built_in(d->exec->cmd, d);
 		}
 		free(user_input);

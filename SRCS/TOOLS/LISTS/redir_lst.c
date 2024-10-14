@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:06:09 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/14 20:12:38 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:08:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,11 @@ void	redir_lst_add_back(t_redir_lst **r, t_redir_lst *new_node)
 	t_redir_lst	*tmp;
 
 	if ((*r) == NULL)
-	{
 		*r = new_node;
-		// printf("FIRST node type : %d, located at %p\n", (*r)->type, (*r));
-	}
 	else
 	{
 		tmp = __redir_lst_last_node(*r);
 		tmp->next = new_node;
-		// printf("last_node type : %d, located at %p\n", tmp->type, tmp);
-		// printf("new_node type : %d, located at %p\n", tmp->next->type, tmp->next);
 	}
 }
 
