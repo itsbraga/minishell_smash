@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/14 22:57:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:12:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <readline/history.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 # include "../LIBFT/INCLUDES/libft.h"
 # include "../LIBFT/INCLUDES/ft_printf.h"
