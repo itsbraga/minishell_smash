@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/11 18:52:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:11:12 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
 
-static int	__cmp_to_equal(const char *s1, const char *s2)
+int	__cmp_to_equal(const char *s1, const char *s2)
 {
 	size_t	i;
 
@@ -22,14 +22,47 @@ static int	__cmp_to_equal(const char *s1, const char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-size_t	get_env_size(char **env)
+char	*add_quotes_to_value(char *var)
 {
-	size_t	size;
-	
-	size = 0;
-	while (env[size] != NULL)
-		size++;
-	return (size);
+	int		i;
+	char	*new_str;
+	char	*tmp;
+
+	i = 0;
+	new_str = malloc((ft_strlen(var) + 3) * sizeof(char));
+	if (new_str == NULL)
+		exit (FAILURE);
+	tmp = var;
+	while (*var != '=')
+		new_str[i++] = *var++;
+	new_str[i++] = *var++;
+	new_str[i++] = '"';
+	while (*var != '\0')
+		new_str[i++] = *var++;
+	new_str[i++] = '"';
+	new_str[i] = '\0';
+	free(tmp);
+	return (new_str);
+}
+
+t_env_lst	*exp_env_new_var(char *content)
+{
+	t_env_lst	*new_var;
+
+	new_var = malloc(sizeof(t_env_lst));
+	if (new_var == NULL)
+		return (NULL);
+	new_var->content = ft_strdup(content);
+	if (ft_strchr(content, '=') != NULL)
+		new_var->content = add_quotes_to_value(new_var->content);
+	if (new_var->content == NULL)
+	{
+		free(new_var->content);
+		free(new_var);
+		return (NULL);
+	}
+	new_var->next = NULL;
+	return (new_var);
 }
 
 // TROUVE ET COPIE LA STRING AVEC LE PLUS HAUT CODE ASCII
@@ -52,7 +85,7 @@ t_env_lst	*copy_toppest(char **envp)
 				i++;
 		}
 	}
-	return (env_new_var(tmp_top));
+	return (exp_env_new_var(tmp_top));
 }
 
 // COMPARE LES VALEURS DANS ENV_LIST POUR TROUVER 
@@ -79,5 +112,5 @@ t_env_lst	*ascii_sort(char **envp, char *last_added)
 		}
 		i++;
 	}
-	return (env_new_var(tmp));
+	return (exp_env_new_var(tmp));
 }

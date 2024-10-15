@@ -6,21 +6,11 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/14 22:52:45 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/15 21:07:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
-
-static int	__cmp_to_equal(const char *s1, const char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i] && s1[i] != '=' && s2[i] != '=')
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
 
 static	void	__add_var_to_exp_env(t_env_lst *e_env, char *var)
 {
@@ -28,68 +18,101 @@ static	void	__add_var_to_exp_env(t_env_lst *e_env, char *var)
 	t_env_lst	*new;
 
 	curr = e_env;
-	new = env_new_var(var);
+	new = exp_env_new_var(var);
 	if (__cmp_to_equal(curr->content, new->content) > 0)
 	{
 		new->next = curr;
 		e_env = new;
+		return ;
 	}
-	else
+	while (curr->next != NULL)
 	{
-		while (curr->next != NULL)
+		if (__cmp_to_equal(curr->next->content, new->content) > 0)
 		{
-			dprintf(2, "add_var_exp\n");
-			dprintf(2, "%s\n", curr->content);
-			if (__cmp_to_equal(curr->next->content, new->content) > 0)
-			{
-				new->next = curr->next;
-				curr->next = new;
-			}
-			curr = curr->next;
+			new->next = curr->next;
+			curr->next = new;
+			return ;
 		}
+		curr = curr->next;
 	}
+	curr->next = new;
+	new->next = NULL;
 }
 
-// static	void	__add_var_to_env(t_env_lst *env, char *var)
-// {
-	
-// }
-
-char	*add_quotes_to_value(char *var)
+static	void	__add_var_to_env(t_env_lst *env, char *var)
 {
-	int		i;
-	char	*new_str;
-	char	*tmp;
+	t_env_lst	*curr;
+	t_env_lst	*new;
+
+	curr = env;
+	new = env_new_var(var);
+	while (curr->next != NULL)
+		curr = curr->next;
+	curr->next = new;
+	new->next = NULL;
+}
+
+size_t	get_varlen(char *var)
+{
+	size_t	i;
 
 	i = 0;
-	new_str = malloc((ft_strlen(var) + 3) * sizeof(char));
-	if (new_str == NULL)
-		exit (FAILURE);
-	tmp = var;
-	while (*var != '=')
-		new_str[i++] = *var++;
-	new_str[i++] = *var++;
-	new_str[i++] = '"';
-	while (*var != '\0')
-		new_str[i++] = *var++;
-	new_str[i++] = '"';
-	new_str[i] = '\0';
-	free(tmp);
-	return (new_str);
+	while (var[i] != '=' && var[i] != '\0')
+		i++;
+	return (i);
+}
+// Si to_update a une valeur et que var n'en a pas ne pas mettre a jour
+// Si 
+
+void	update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp, t_env_lst *env, char *var)
+{
+	if (ft_strchr(to_up_exp->content, '=') == NULL && to_up == NULL)
+		__add_var_to_env(env, var);
+	else if (to_up != NULL)
+	{
+		free(to_up->content);
+		to_up->content = NULL;
+		to_up->content = ft_strdup(var);
+	}
+	free(to_up_exp->content);
+	to_up_exp->content = NULL;
+	to_up_exp->content = add_quotes_to_value(var);
 }
 
-static	void	__manage_variable(t_env_lst *exp_env, t_env_lst *env, char *var)
+t_env_lst	*search_for_var(t_env_lst *env, char *var)
 {
-	(void)env;
-	if (ft_strchr(var, '=') == NULL)
-		__add_var_to_exp_env(exp_env, var);
-	else
+	t_env_lst	*curr;
+	size_t		len_var;
+
+	curr = env;
+	len_var = get_varlen(var);
+	while (curr != NULL)
 	{
-		// __add_var_to_env(env, var);
-		// printf("var = %s\n", var);
-		var = add_quotes_to_value(var);
-		// printf("after add quotes, var = %s\n", var);
-		__add_var_to_exp_env(exp_env, var);
+		if (ft_strncmp(curr->content, var, len_var) == 0)
+			return (curr);
+		curr = curr->next;
+	}
+	return (NULL);
+}
+
+static	void	__manage_variable(t_env_lst *export_env, t_env_lst *env, char *var)
+{
+	t_env_lst	*to_find;
+	t_env_lst	*to_find_exp;
+
+	to_find = search_for_var(env, var);
+	to_find_exp = search_for_var(export_env, var);
+	if (to_find_exp != NULL && ft_strchr(var, '=') != NULL)
+		update_var_val(to_find, to_find_exp, env, var);
+	else if (to_find_exp == NULL)
+	{
+		if (ft_strchr(var, '=') == NULL)
+			__add_var_to_exp_env(export_env, var);
+		else
+		{
+			__add_var_to_env(env, var);
+			__add_var_to_exp_env(export_env, var);
+		}
 	}
 	return ;
 }
@@ -99,17 +122,12 @@ int	check_arg(char *var)
 	int	i;
 
 	i = 0;
-	if (!((var[0] >= 'A' && var[0] <= 'Z')
-		|| (var[0] >= 'a' && var[0] <= 'z')
-		|| var[i] != '_'))
+	if ((ft_isalpha(var[0]) == 0 && var[0] != '_'))
 		return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
 	while (var[i] != '=' && var[i] != '\0')
 	{
-		// dprintf(2, "check_arg loop\n");
-		if ((var[i] >= 'A' && var[i] <= 'Z')
-			|| (var[i] >= 'a' && var[i] <= 'z')
-			|| (var[i] >= '0' && var[i] <= '9')
-			|| (var[i] == '_'))
+		if (ft_isalpha(var[i]) == 1
+			|| ft_isdigit(var[i]) == 1 || var[i] == '_')
 			i++;
 		else
 			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
@@ -141,8 +159,6 @@ void    my_export(t_env_lst *exp_env, t_env_lst *env, char **args)
 	{
 		while (args[i] != NULL)
 		{
-			dprintf(2, "my export loop\n");
-			dprintf(2, "args[i] = %s\n", args[i]);
 			if (check_arg(args[i]) == SUCCESS)
 				__manage_variable(exp_env, env, args[i]);
 			i++;

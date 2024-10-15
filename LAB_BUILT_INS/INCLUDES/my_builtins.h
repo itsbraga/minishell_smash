@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/14 21:03:47 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/15 18:39:50 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ void		lstclear_env(t_env_lst **env);
 int			create_env_list(t_env_lst **env, char **envp);
 void		create_env(t_global *g, char **envp);
 
+int			__cmp_to_equal(const char *s1, const char *s2);
 size_t		get_env_size(char **env);
+t_env_lst	*exp_env_new_var(char *content);
+char		*add_quotes_to_value(char *var);
 t_env_lst	*copy_toppest(char **envp);
 t_env_lst	*ascii_sort(char **envp, char *last_added);
 int			create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,

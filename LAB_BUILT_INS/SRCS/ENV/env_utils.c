@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/11 18:55:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:45:37 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_builtins.h"
-
+size_t	get_env_size(char **env)
+{
+	size_t	size;
+	
+	size = 0;
+	while (env[size] != NULL)
+		size++;
+	return (size);
+}
 t_env_lst	*env_new_var(char *content)
 {
 	t_env_lst	*new_var;
