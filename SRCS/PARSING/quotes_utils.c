@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:32:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:21:41 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	find_closing_quote(char *str, char quote)
 
 bool	unclosed_quotes_return(bool closed[])
 {
-	if (closed[0] == false || closed[1] == false)
+	if (closed[1] == false || closed[0] == false)
 		return (true);
 	else
 		return (false);

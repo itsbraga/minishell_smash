@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:31:59 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:18:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ static bool	__handle_empty_quotes(char *str, int i, bool *closed)
 	else if ((str[i] == '\'' && str[i + 1] == '\'')
 		&& (closed[1] != false && closed[0] != false))
 		return (true);
-	if (str[i] == '"' && closed[1] != false)
-		closed[0] = switch_bool(closed[0]);
-	else if (str[i] == '\'' && closed[0] != false)
+	if (str[i] == '"' && closed[0] != false)
 		closed[1] = switch_bool(closed[1]);
+	else if (str[i] == '\'' && closed[1] != false)
+		closed[0] = switch_bool(closed[0]);
 	return (false);
 }
 

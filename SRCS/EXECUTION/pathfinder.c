@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/11 20:37:40 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/16 20:00:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 
 static	void	__basic_behaviour(t_exec_info *info)
 {
+	dprintf(2, "PID : %d | executed_cmd (basic_behaviour) = %d\n", getpid(), info->executed_cmd);
 	if (info->pipe_count != 0)
 	{
 		if (info->executed_cmd != 0)
 		{
+			// dprintf(2, "GNL : %s\n", get_next_line(info->old_read_fd, 0));
 			dup2(info->old_read_fd, STDIN_FILENO);
 			dprintf(2, "PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDIN_FILENO, info->old_read_fd);
 			close(info->old_read_fd);
@@ -82,14 +84,14 @@ static	void	__basic_behaviour(t_exec_info *info)
 		if (info->executed_cmd != (info->cmd_count - 1))
 		{
 			dup2(info->fd[1], STDOUT_FILENO);
-			dprintf(2, "PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
+			// dprintf(2, "PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
 		}
 		close(info->fd[1]);
 		dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[1]);
 		close(info->fd[0]);
 		dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[0]);
 	}
-}
+} 
 
 void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 {
@@ -111,8 +113,16 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 		dup2(last_heredoc_fd, STDIN_FILENO);
 		close(last_heredoc_fd);
 	}
+	if (isatty(STDOUT_FILENO) == 1)
+			dprintf(2, "PID : %d | STDOUT connected to terminal :)\n", getpid());
+	else
+			dprintf(2, "PID : %d | STDOUT isn't connected to terminal /!\\\n", getpid());
 	if (error == FAILURE)
-		return ;
+		return ; // a changer
 	else
 		go_exec(node, env);
 }
+
+// ls | cat
+// STDIN -> ls -> dup2(fd[1], STDOUT)
+// dup2(old-read-fd, STDIN) -> cat -> STDOUT

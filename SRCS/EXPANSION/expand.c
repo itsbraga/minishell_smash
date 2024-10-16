@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:27:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:59:42 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ char	*expand(t_data *d, char *str, bool in_heredoc)
 	i = 0;
 	closed_quotes[0] = true;
 	closed_quotes[1] = true;
+	dprintf(2, "expand has been called ! (%s)\n", str);
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\'' && closed_quotes[0] == true)
-			closed_quotes[1] = switch_bool(closed_quotes[1]);
-		else if (str[i] == '"' && closed_quotes[0] == true)
+		if (str[i] == '\'' && closed_quotes[1] == true)
 			closed_quotes[0] = switch_bool(closed_quotes[0]);
+		else if (str[i] == '"' && closed_quotes[0] == true)
+			closed_quotes[1] = switch_bool(closed_quotes[1]);
 		if ((str[i] == '$' && closed_quotes[0] == true)
 			&& (str[i + 1] != ' ' && str[i + 1] != '$'))
 		{
