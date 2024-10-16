@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/15 20:12:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:21:40 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+/******************************************************************************\
+ * LIBRARIES
+\******************************************************************************/
 
 # include <stddef.h>
 # include <stdio.h>
@@ -32,8 +36,9 @@
 # include "../LIBFT/INCLUDES/get_next_line_bonus.h"
 # include "structs.h"
 # include "garbage_collector.h"
-# include "defines.h"
+# include "helpers.h"
 # include "colors.h"
+# include "custom.h"
 
 /******************************************************************************\
  * GLOBAL VARIABLE
@@ -50,10 +55,11 @@ extern int		g_sig_code;
 \******************************************************************************/
 
 // init_data.c
+char			*generate_prompt(t_prompt *pr);
 t_data			*data_struct(void);
 
 /******************************************************************************\
- * LEXING
+ * LEXING in PARSING/
 \******************************************************************************/
 
 // check_input.c
@@ -129,6 +135,13 @@ int				create_env_list(t_env_lst **env, char **envp);
 void			create_env(t_data *d, char **envp);
 
 /******************************************************************************\
+ * SIGNALS
+\******************************************************************************/
+
+// signals.c
+void			init_signals_interactive_mode(void);
+
+/******************************************************************************\
  * EXPANSION
 \******************************************************************************/
 
@@ -193,29 +206,7 @@ void			pathfinder(t_data *d, t_exec_lst *node, char **env);
 void			while_cmd(t_data *d, t_exec_lst **e_lst);
 
 /******************************************************************************\
- * TOOLS
-\******************************************************************************/
-
-// error.c
-void			err_msg(char *detail, char *reason, int quotes);
-int				err_msg_cmd(char *cmd, char *detail, char *reason,
-					int err_status);
-
-// garbage*.c ---> garbage_collector.h
-
-// lstclear.c
-void			lstclear_main(t_main_lst **main);
-void			lstclear_token(t_token_dblst **t);
-void			lstclear_redir(t_redir_lst **r);
-void			lstclear_exec(t_exec_lst **e);
-void			lstclear_env(t_env_lst **env);
-
-// cleanup.c
-void			secure_malloc(void *to_secure);
-void			clean_exit_shell(int err_status);
-
-/******************************************************************************\
- * TOOLS/LISTS
+ * LISTS in TOOLS/
 \******************************************************************************/
 
 // main_lst.c
@@ -242,23 +233,23 @@ void			exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node);
 t_exec_lst		*exec_lst_new_node(void);
 
 /******************************************************************************\
- * EXTRAS
+ * TOOLS
 \******************************************************************************/
 
-// display2.c
-void			display_exec_lst(t_exec_lst *e);
-void			print_cmd(char **cmd);
-void			print_tab(char **tab);
+// err_msg.c
+void			err_msg(char *detail, char *reason, int quotes);
+int				err_msg_cmd(char *cmd, char *detail, char *reason,
+					int err_status);
+void			secure_malloc(void *to_secure);
 
-// display.c
-void			display_export_env(t_env_lst *exp_env);
-void			display_main_lst(t_main_lst *main);
-void			display_token_dblst(t_token_dblst *t);
-void			display_redir_lst(t_redir_lst *r);
+// lstclear.c
+void			lstclear_main(t_main_lst **main);
+void			lstclear_token(t_token_dblst **t);
+void			lstclear_redir(t_redir_lst **r);
+void			lstclear_exec(t_exec_lst **e);
+void			lstclear_env(t_env_lst **env);
 
-// features.c
-void			rainbow_txt(const char *str);
-void			rainbow_txt_nonl(const char *str);
-char			*rainbow_prompt(const char *str);
+// cleanup.c
+void			clean_exit_shell(int err_status);
 
 #endif

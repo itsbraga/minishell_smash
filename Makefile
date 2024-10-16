@@ -39,7 +39,7 @@ EXTRAS_DIR		=	EXTRAS/
 EXTRAS_F		=	display.c display2.c features.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	error.c lstclear.c cleanup.c garbage_collector_utils.c \
+TOOLS_F			=	err_msg.c lstclear.c cleanup.c garbage_collector_utils.c \
 					garbage_collector.c
 
 LISTS_DIR		=	TOOLS/LISTS/
@@ -67,8 +67,8 @@ BUILT_INS_DIR	=	BUILT_INS/
 BUILT_INS_F		=	built_ins.c ft_echo.c cd_utils.c ft_cd.c ft_pwd.c \
 					ft_unset.c ft_env.c ft_exit.c
 
-SIGNALS_DIR		=	SIGNALS_DIR/
-SIGNALS_F		=	
+SIGNALS_DIR		=	SIGNALS/
+SIGNALS_F		=	signals.c
 
 EXEC_DIR		=	EXECUTION/
 EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
@@ -88,6 +88,7 @@ SRCS_F			=	$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
 					$(addprefix $(PARSING_DIR), $(PARSING_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(BUILT_INS_DIR), $(BUILT_INS_F)) \
+					$(addprefix $(SIGNALS_DIR), $(SIGNALS_F)) \
 					$(addprefix $(EXEC_DIR), $(EXEC_F)) \
 					main.c
 

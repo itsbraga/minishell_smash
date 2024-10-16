@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 17:04:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:35:38 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 static bool	__n_option_exist(char *arg)
 {
 	int i;
-	int flag;
 
 	i = 1;
-	flag = 0;
 	if (arg[0] != '-' || arg[1] != 'n')
 		return (false);
 	while (arg[i] != '\0' && arg[i] == 'n')

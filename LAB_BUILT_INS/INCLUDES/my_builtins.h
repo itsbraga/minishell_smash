@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/15 18:39:50 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/16 15:39:49 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@
 # define ERR_MALLOC_LST "failed to allocate memory for a new node"
 # define ERR_ENV_VAR "not a valid identifier"
 
+# define PROMPT_BAR "\n------------------------------------------------------------------------------------\n"
+
 /******************************************************************************\
  * GLOBAL VARIABLE
 \******************************************************************************/
@@ -86,9 +88,25 @@ typedef struct s_global
 	int			last_exit_status;
 }				t_global;
 
+typedef struct s_prompt
+{
+	char	*username;
+	char	*header;
+	char	*colored_user;
+	char	*colored_42;
+	char	*tmp;
+	char	*part1;
+	char	*part2;
+	char	*part3;
+	char	*part4;
+	char	*prompt;
+}				t_prompt;
+
 /******************************************************************************\
  * FUNCTIONS
 \******************************************************************************/
+
+char	*generate_prompt(t_prompt *pr);
 
 t_env_lst	*env_new_var(char *content);
 void		lstclear_env(t_env_lst **env);

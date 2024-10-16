@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/08 18:10:38 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:39:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token *t)
 */
 int	my_cd(t_global *g)
 {
-	int		ret;
+	int			ret;
+	t_prompt	pr;
 	
 	if ((g->token->next == NULL)
 		|| (ft_strcmp(g->token->next->content, "~") == 0))
@@ -81,6 +82,9 @@ int	my_cd(t_global *g)
 	if (ret != 0)
 		return (err_msg_cmd(g->token->content, g->token->next->content, "No such file or directory", 1));
 	change_paths(g->env, g->exp_env);
+	if (g->prompt != NULL)
+		free(g->prompt);
+	g->prompt = generate_prompt(&pr);
 	// g->last_exit_status = 0;
 	return (SUCCESS);
 }
