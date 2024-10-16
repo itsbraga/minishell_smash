@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/09 21:23:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:58:39 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 	return (ret);
 }
 
+static void	__update_prompt(t_data *d, t_prompt *pr)
+{
+	if (d->prompt != NULL)
+		free(d->prompt);
+	d->prompt = generate_prompt(pr);
+	secure_malloc(d->prompt);
+}
+
 /*	The tilde character (“~”) has a special meaning.
 	When used at the beginning of a word, it expands
 	into the name of the home directory of the named
@@ -68,9 +76,10 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 */
 int	ft_cd(t_data *d)
 {
-	int		ret;
-	char	*next;
-	int		error;
+	int			ret;
+	char		*next;
+	int			error;
+	t_prompt	pr;
 
 	if ((d->token->next == NULL)
 		|| (ft_strcmp(d->token->next->content, "~") == 0))
@@ -90,6 +99,7 @@ int	ft_cd(t_data *d)
 		return (error);
 	}
 	change_paths(d->env, d->exp_env);
+	__update_prompt(d, &pr);
 	// d->last_exit_status = 0;
 	return (SUCCESS);
 }

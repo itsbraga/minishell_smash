@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/14 20:17:15 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:10:34 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	secure_malloc(void *to_secure)
-{
-	if (to_secure == NULL)
-	{
-		err_msg("malloc", ERR_MALLOC, 0);
-		clean_exit_shell(FAILURE);
-	}
-}
 
 static void	__free_data(t_data *d, bool clear_history)
 {

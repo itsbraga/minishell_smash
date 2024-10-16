@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   err_msg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/07 18:26:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/16 16:10:40 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,13 @@ int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_status)
 	ft_putendl_fd(msg, STDERR_FILENO);
 	yama(REMOVE, msg, 0);
 	return (err_status);
+}
+
+void	secure_malloc(void *to_secure)
+{
+	if (to_secure == NULL)
+	{
+		err_msg("malloc", ERR_MALLOC, 0);
+		clean_exit_shell(FAILURE);
+	}
 }

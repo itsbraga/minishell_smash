@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/14 22:56:59 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:21:59 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	g_sig_code;
 
 static int	__minishell(t_data *d)
 {
@@ -25,6 +23,7 @@ static int	__minishell(t_data *d)
 			printf("STDIN connected to terminal :)\n");
 		else
 			printf("STDIN isn't connected to terminal /!\\\n");
+		init_signals_interactive_mode();
 		user_input = readline(d->prompt);
 		if (user_input != NULL && user_input[0] != '\0')
 		{

@@ -12,7 +12,9 @@
         "structs.h": "c",
         "numbers": "c",
         "minishell.h": "c",
-        "random": "c"
+        "random": "c",
+        "stat.h": "c",
+        "stdbool.h": "c"
     },
     "workbench.colorCustomizations": {
         "minimap.background": "#00000000",
