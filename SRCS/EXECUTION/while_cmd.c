@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/16 20:24:26 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/17 23:26:20 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,18 @@ static void	__parent(t_exec_info *info)
 	if (info->pipe_count != 0)
 	{
 		close(info->fd[1]);
-		printf("PID : %d | FD(%d) closed\n", getpid(), info->fd[1]);
+		// printf("PID : %d | FD(%d) closed\n", getpid(), info->fd[1]);
 		if (info->executed_cmd != 0)
 		{
 			close(info->old_read_fd);
-			printf("PID : %d | FD(%d) closed\n", getpid(), info->old_read_fd);
+			// printf("PID : %d | FD(%d) closed\n", getpid(), info->old_read_fd);
 		}
-		dprintf(2, "GNL : %s\n", get_next_line(info->fd[0], 0));
-		info->old_read_fd = info->fd[0];
-		printf("PID : %d | old_fd contient maintenant ce FD : %d\n", getpid(), info->old_read_fd);
+		// dprintf(2, "GNL : %s\n", get_next_line(info->fd[0], 0));
 		if (info->executed_cmd != info->cmd_count - 1)
-		{
-			close(info->fd[0]);
-			printf("PID : %d | FD(%d) closed\n", getpid(), info->fd[0]);
-		}
+			info->old_read_fd = info->fd[0];
+		// printf("PID : %d | old_fd contient maintenant ce FD : %d\n", getpid(), info->old_read_fd);
+		close(info->fd[0]);
+			// printf("PID : %d | FD(%d) closed\n", getpid(), info->fd[0]);
 	}
 	info->executed_cmd++;
 }
