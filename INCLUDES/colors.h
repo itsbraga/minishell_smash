@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:29:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/16 16:14:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/17 21:20:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define PURPLE			"\e[35m"
 # define PINK			"\e[38;2;255;182;193m"
 # define CYAN			"\e[36m"
+# define WHITE			"\e[37m"
 
 # define BRIGHT_BLACK		"\e[90m"
 # define LIGHT_GRAY     	"\e[38;2;173;165;165m"

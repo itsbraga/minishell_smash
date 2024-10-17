@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:33:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 22:03:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ void	*new_gc_node(void *ptr, bool is_tab)
 	return (node);
 }
 
+t_gc_lst	*last_gc_lst_node(t_gc_lst *yama)
+{
+	if (yama == NULL)
+		return (NULL);
+	else
+	{
+		while (yama->next != NULL)
+			yama = yama->next;
+		return (yama);
+	}
+}
+
 void	add_gc_node(t_gc_lst **yama, t_gc_lst *node)
 {
 	t_gc_lst	*tmp;
@@ -34,18 +46,6 @@ void	add_gc_node(t_gc_lst **yama, t_gc_lst *node)
 	{
 		tmp = last_gc_lst_node(*yama);
 		tmp->next = node;
-	}
-}
-
-t_gc_lst	*last_gc_lst_node(t_gc_lst *yama)
-{
-	if (yama == NULL)
-		return (NULL);
-	else
-	{
-		while (yama->next != NULL)
-			yama = yama->next;
-		return (yama);
 	}
 }
 

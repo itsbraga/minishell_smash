@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 16:59:20 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:31:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,17 @@ static int	__minishell(t_data *d)
 
 	while (1)
 	{
-		printf("PID : %d\n", getpid());
-		if (isatty(STDIN_FILENO) == 1)
-			printf("STDIN connected to terminal :)\n");
-		else
-			printf("STDIN isn't connected to terminal /!\\\n");
+		display_shell_info();
 		setup_signals();
 		user_input = readline(d->prompt);
-		if (user_input == NULL || user_input[0] == '\0')
+		if (user_input == NULL)
 		{
 			free(user_input);
 			free(d->prompt);
 			ft_printf(STDERR_FILENO, "exit\n");
 			break ;
 		}
-		else
+		else if (user_input != NULL && user_input[0] != '\0')
 		{
 			add_history(user_input);
 			if (create_main_lst(d, user_input) == FAILURE)

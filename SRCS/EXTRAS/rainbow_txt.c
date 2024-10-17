@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   features.c                                         :+:      :+:    :+:   */
+/*   rainbow_txt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/17 10:40:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/17 22:08:33 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*rainbow_prompt(const char *str)
 	secure_malloc(colored_str);
 	colored_str[0] = '\0';
 	i = 0;
-	ft_strcat(colored_str, "\001" BOLD "\002");
+	// ft_strcat(colored_str, "\001" BOLD "\002");
 	while (str[i] != '\0')
 	{
 		ft_strcat(colored_str, "\001");
@@ -69,6 +69,6 @@ char	*rainbow_prompt(const char *str)
 		ft_strcat(colored_str, (char []){str[i], '\0'});
 		i++;
 	}
-	ft_strcat(colored_str, "\001" R "\002");
+	// ft_strcat(colored_str, "\001" R "\002");
 	return (colored_str);
 }

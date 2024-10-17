@@ -36,7 +36,7 @@ DEBUG		=	-g -g3
 #******************************************************************************#
 
 EXTRAS_DIR		=	EXTRAS/
-EXTRAS_F		=	display.c display2.c features.c
+EXTRAS_F		=	display.c display_2.c rainbow_txt.c
 
 TOOLS_DIR		=	TOOLS/
 TOOLS_F			=	err_msg.c lstclear.c cleanup.c garbage_collector_utils.c \

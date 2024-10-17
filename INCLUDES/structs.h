@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/17 17:36:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 22:01:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ typedef struct s_prompt
 {
 	char	*username;
 	char	*header;
-	char	*colored_user;
-	char	*colored_42;
+	char	*rainbow_user;
+	char	*rainbow_42;
 	char	*tmp;
-	char	*ccwd;
+	char	*custom_cwd;
 	char	*part1;
 	char	*part2;
 	char	*part3;
-	char	*part4;
 	char	*prompt;
 }				t_prompt;
 
@@ -131,5 +130,16 @@ typedef struct s_data
 	t_env_lst		*exp_env;
 	int				last_exit_status;
 }				t_data;
+
+/******************************************************************************\
+ * YAMA: Garbage collector
+\******************************************************************************/
+
+typedef struct s_gc_lst
+{
+	void			*ptr;
+	bool			is_tab;
+	struct s_gc_lst *next;
+}				t_gc_lst;
 
 #endif

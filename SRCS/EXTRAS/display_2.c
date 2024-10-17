@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display2.c                                         :+:      :+:    :+:   */
+/*   display_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/14 22:32:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 22:06:39 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,13 @@ void	print_tab(char **tab)
 		dprintf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
 		dprintf(2, BOLD GREEN "located at: " R "%p\n", tab[i]);
 	}
+}
+
+void	display_shell_info(void)
+{
+	ft_printf(STDOUT_FILENO, "PID : %d\n", getpid());
+	if (isatty(STDIN_FILENO) == 1)
+		printf("STDIN connected to terminal :)\n");
+	else
+		printf("STDIN isn't connected to terminal /!\\\n");
 }

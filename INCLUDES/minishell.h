@@ -6,40 +6,14 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 16:56:20 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 22:15:26 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-/******************************************************************************\
- * LIBRARIES
-\******************************************************************************/
-
-# include <stddef.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <stdbool.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-# include <signal.h>
-
-# include "../LIBFT/INCLUDES/libft.h"
-# include "../LIBFT/INCLUDES/ft_printf.h"
-# include "../LIBFT/INCLUDES/get_next_line_bonus.h"
-# include "structs.h"
-# include "garbage_collector.h"
-# include "helpers.h"
-# include "colors.h"
-# include "custom.h"
+# include "libraries.h"
 
 /******************************************************************************\
  * GLOBAL VARIABLE
@@ -55,8 +29,11 @@ extern int		g_sig_code;
  * INIT
 \******************************************************************************/
 
-// init_data.c
+// prompt.c
 char			*generate_prompt(t_prompt *pr);
+void			update_prompt(t_data *d, t_prompt *pr);
+
+// init_data.c
 t_data			*data_struct(void);
 
 /******************************************************************************\
@@ -249,6 +226,16 @@ void			lstclear_token(t_token_dblst **t);
 void			lstclear_redir(t_redir_lst **r);
 void			lstclear_exec(t_exec_lst **e);
 void			lstclear_env(t_env_lst **env);
+
+// garbage_collector_utils.c
+void			free_tab(char **tab);
+int				remove_gc_node(t_gc_lst**yama, void *ptr);
+void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
+t_gc_lst		*last_gc_lst_node(t_gc_lst *yama);
+void			*new_gc_node(void *ptr, bool is_tab);
+
+// garbage_collector.c
+void			*yama(int flag, void *ptr, size_t size);
 
 // cleanup.c
 void			clean_exit_shell(int err_status);

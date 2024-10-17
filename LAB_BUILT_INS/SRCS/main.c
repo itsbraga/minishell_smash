@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 17:35:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 22:57:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static void	__custom_cwd(t_prompt *pr)
 	}
 	tmp = ft_substr(cwd, 14, (ft_strlen(cwd) - 14));
 	secure_malloc(tmp);
-	pr->ccwd = ft_strjoin("\001" "🗿" "\002", tmp);
-	secure_malloc(pr->ccwd);
+	pr->custom_cwd = ft_strjoin("~", tmp);
+	secure_malloc(pr->custom_cwd);
 }
 
 char	*generate_prompt(t_prompt *pr)
@@ -79,10 +79,10 @@ char	*generate_prompt(t_prompt *pr)
 	secure_malloc(pr->part2);
 	free(pr->tmp);
 	__custom_cwd(pr);
-	pr->part3 = ft_strjoin(pr->part2, pr->ccwd);
+	pr->part3 = ft_strjoin(pr->part2, pr->custom_cwd);
 	secure_malloc(pr->part3);
 	free(pr->part2);
-	free(pr->ccwd);
+	free(pr->custom_cwd);
 	pr->part4 = ft_strjoin(pr->part3, " $> ");
 	secure_malloc(pr->part4);
 	free(pr->part3);

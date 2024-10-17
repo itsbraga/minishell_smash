@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 17:29:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 21:29:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct s_prompt
 	char	*colored_user;
 	char	*colored_42;
 	char	*tmp;
-	char	*ccwd;
+	char	*custom_cwd;
 	char	*part1;
 	char	*part2;
 	char	*part3;
