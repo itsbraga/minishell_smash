@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/17 11:12:51 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/17 15:40:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	__n_option_exist(char *arg)
 	return (true);
 }
 
-int my_echo(char **args)
+int ft_echo(char **args)
 {
 	int i;
 	int flag;

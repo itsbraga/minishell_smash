@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/16 15:25:53 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:36:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_prompt
 	char	*colored_user;
 	char	*colored_42;
 	char	*tmp;
+	char	*ccwd;
 	char	*part1;
 	char	*part2;
 	char	*part3;

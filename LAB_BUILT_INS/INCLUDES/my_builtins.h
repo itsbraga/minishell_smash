@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 11:03:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:29:51 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
 # include "../../LIBFT/INCLUDES/libft.h"
 # include "../../LIBFT/INCLUDES/ft_printf.h"
@@ -34,6 +35,8 @@
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
+
+# define _XOPEN_SOURCE 700
 
 /******************************************************************************\
  * EXIT STATUS
@@ -95,6 +98,7 @@ typedef struct s_prompt
 	char	*colored_user;
 	char	*colored_42;
 	char	*tmp;
+	char	*ccwd;
 	char	*part1;
 	char	*part2;
 	char	*part3;
@@ -106,7 +110,8 @@ typedef struct s_prompt
  * FUNCTIONS
 \******************************************************************************/
 
-char	*generate_prompt(t_prompt *pr);
+void		setup_signals(void);
+char		*generate_prompt(t_prompt *pr);
 
 t_env_lst	*env_new_var(char *content);
 void		lstclear_env(t_env_lst **env);

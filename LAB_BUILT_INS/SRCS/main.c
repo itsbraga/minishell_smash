@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 11:02:58 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:35:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,19 @@ void	secure_malloc(void *to_secure)
 */
 static void	__part_one(t_prompt *pr)
 {
-	pr->header = ft_strjoin(rainbow_prompt(PROMPT_BAR), "[");
-	secure_malloc(pr->header);
+	// char	*rb_bar;
+
+	// rb_bar = rainbow_prompt(PROMPT_BAR);
+	// secure_malloc(rb_bar);
+	// pr->header = ft_strjoin(rb_bar, "[");
+	// secure_malloc(pr->header);
+	// free(rb_bar);
 	pr->colored_user = ft_strjoin("\001" BRIGHT_YELLOW "\002", pr->username);
 	secure_malloc(pr->colored_user);
-	pr->part1 = ft_strjoin(pr->header, pr->colored_user);
+	// pr->part1 = ft_strjoin(pr->header, pr->colored_user);
+	pr->part1 = ft_strjoin("[", pr->colored_user);
 	secure_malloc(pr->part1);
-	free(pr->header);
+	// free(pr->header);
 	free(pr->colored_user);
 	pr->colored_42 = ft_strjoin("\001" RED "\002", "42");
 	secure_malloc(pr->colored_42);
@@ -47,39 +53,36 @@ static void	__part_one(t_prompt *pr)
 	free(pr->colored_42);
 }
 
-// static void	__part_one(t_prompt *pr)
-// {
-// 	// pr->header = ft_strjoin(rainbow_prompt(PROMPT_BAR), "[");
-// 	// secure_malloc(pr->header);
-// 	pr->colored_user = ft_strjoin("\001" BRIGHT_YELLOW "\002", pr->username);
-// 	secure_malloc(pr->colored_user);
-// 	pr->part1 = ft_strjoin("[", pr->colored_user);
-// 	secure_malloc(pr->part1);
-// 	// free(pr->header);
-// 	free(pr->colored_user);
-// 	pr->colored_42 = ft_strjoin("\001" RED "\002", "42");
-// 	secure_malloc(pr->colored_42);
-// 	pr->tmp = ft_strjoin("\001" RESET "\002" "@", pr->colored_42);
-// 	secure_malloc(pr->tmp);
-// 	free(pr->colored_42);
-// }
+static void	__custom_cwd(t_prompt *pr)
+{
+	char	cwd[PATH_MAX];
+	char	*tmp;
+
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
+		err_msg("0: getcwd() failed", "No such file or directory", 0);
+		return ;
+	}
+	tmp = ft_substr(cwd, 14, (ft_strlen(cwd) - 14));
+	secure_malloc(tmp);
+	pr->ccwd = ft_strjoin("\001" "🗿" "\002", tmp);
+	secure_malloc(pr->ccwd);
+}
 
 char	*generate_prompt(t_prompt *pr)
 {
-	char	cwd[PATH_MAX];
-
 	pr->username = getenv("USER");
 	if (pr->username == NULL)
 		pr->username = "unknown";
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-		perror("getcwd() error");
 	__part_one(pr);
 	pr->part2 = ft_strjoin(pr->tmp, "\001" RESET "\002" "] ");
 	secure_malloc(pr->part2);
 	free(pr->tmp);
-	pr->part3 = ft_strjoin(pr->part2, cwd);
+	__custom_cwd(pr);
+	pr->part3 = ft_strjoin(pr->part2, pr->ccwd);
 	secure_malloc(pr->part3);
 	free(pr->part2);
+	free(pr->ccwd);
 	pr->part4 = ft_strjoin(pr->part3, " $> ");
 	secure_malloc(pr->part4);
 	free(pr->part3);
@@ -92,20 +95,27 @@ char	*generate_prompt(t_prompt *pr)
 
 // char	*generate_prompt(t_prompt *pr)
 // {
+// 	char	cwd[PATH_MAX];
+
 // 	pr->username = getenv("USER");
 // 	if (pr->username == NULL)
 // 		pr->username = "unknown";
+// 	if (getcwd(cwd, sizeof(cwd)) == NULL)
+// 		perror("getcwd() error");
 // 	__part_one(pr);
 // 	pr->part2 = ft_strjoin(pr->tmp, "\001" RESET "\002" "] ");
 // 	secure_malloc(pr->part2);
 // 	free(pr->tmp);
-// 	pr->part3 = ft_strjoin(pr->part2, " $> ");
+// 	pr->part3 = ft_strjoin(pr->part2, cwd);
 // 	secure_malloc(pr->part3);
 // 	free(pr->part2);
-// 	pr->prompt = ft_strjoin(pr->part1, pr->part3);
+// 	pr->part4 = ft_strjoin(pr->part3, " $> ");
+// 	secure_malloc(pr->part4);
+// 	free(pr->part3);
+// 	pr->prompt = ft_strjoin(pr->part1, pr->part4);
 // 	secure_malloc(pr->prompt);
 // 	free(pr->part1);
-// 	free(pr->part3);
+// 	free(pr->part4);
 // 	return (pr->prompt);
 // }
 
@@ -136,11 +146,19 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n%s", BOLD WELCOME_BANNER RESET);
 	__init_global(&g);
 	create_env(&g, envp);
+	setup_signals();
 	while (1)
 	{
 		i = 0;
 		g.input = readline(g.prompt);
-		if (*g.input != '\0')
+		if (g.input == NULL || g.input[0] == '\0')
+		{
+			free(g.input);
+			free(g.prompt);
+			printf("exit");
+			break ;
+		}
+		else
 		{
 			add_history(g.input);
 			cmd = ft_split(g.input, ' ');

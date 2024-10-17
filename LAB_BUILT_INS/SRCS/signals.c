@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 16:56:40 by annabrag         ###   ########.fr       */
+/*   Created: 2024/10/17 16:28:03 by annabrag          #+#    #+#             */
+/*   Updated: 2024/10/17 17:01:22 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	g_sig_code;
+#include "my_builtins.h"
 
 /*	rl_on_new_line()
 	
@@ -25,8 +23,8 @@ static void	__sigint_handler(int sig)
 	if (sig == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		rl_replace_line("", 0);
 		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
@@ -40,7 +38,6 @@ static void	__sigquit_handler(void)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-// Interactive mode
 void	setup_signals(void)
 {
 	struct sigaction	sa;

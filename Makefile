@@ -46,7 +46,7 @@ LISTS_DIR		=	TOOLS/LISTS/
 LISTS_F			=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
 
 INIT_DIR		=	INIT/
-INIT_F			=	init_data.c
+INIT_F			=	prompt.c init_data.c
 
 ENV_DIR			=	ENVIRONMENT/
 ENV_F			=	create_env.c env_utils.c export_env_utils.c
