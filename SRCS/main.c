@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 23:31:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:34:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static int	__minishell(t_data *d)
 		user_input = readline(d->prompt);
 		if (user_input == NULL)
 		{
-			free(user_input);
-			free(d->prompt);
 			ft_printf(STDERR_FILENO, "exit\n");
 			break ;
 		}

@@ -6,20 +6,20 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/09 21:29:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:37:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	__front_check(t_parser *p)
-{
-	while (ft_isspace(p->user_input[p->i]) == 1)
-		p->i++;
-	if (p->user_input[p->i] == '\0')
-		return (FAILURE);
-	return (SUCCESS);
-}
+// static int	__front_check(t_parser *p)
+// {
+// 	while (ft_isspace(p->user_input[p->i]) == 1)
+// 		p->i++;
+// 	if (p->user_input[p->i] == '\0')
+// 		return (FAILURE);
+// 	return (SUCCESS);
+// }
 
 static void	__init_parser(t_parser *p)
 {
@@ -53,8 +53,8 @@ void	parse_input(t_parser *p)
 {
 	char	*tmp;
 
-	if (__front_check(p) == FAILURE)
-		exit(FAILURE);
+	// if (__front_check(p) == FAILURE)
+	// 	exit(FAILURE);
 	__init_parser(p);
 	while (p->user_input[p->i] != '\0')
 	{
