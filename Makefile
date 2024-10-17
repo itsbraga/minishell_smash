@@ -51,7 +51,7 @@ INIT_F			=	init_data.c
 ENV_DIR			=	ENVIRONMENT/
 ENV_F			=	create_env.c env_utils.c export_env_utils.c
 
-LEXING_DIR		=	PARSING/LEXING/
+LEXING_DIR		=	LEXING/
 LEXING_F		=	check_input.c create_main_lst.c check_main.c \
 					tokenization.c create_token_dblst.c
 

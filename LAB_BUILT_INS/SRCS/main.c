@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/16 15:39:44 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/17 11:02:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,23 @@ static void	__part_one(t_prompt *pr)
 	free(pr->colored_42);
 }
 
+// static void	__part_one(t_prompt *pr)
+// {
+// 	// pr->header = ft_strjoin(rainbow_prompt(PROMPT_BAR), "[");
+// 	// secure_malloc(pr->header);
+// 	pr->colored_user = ft_strjoin("\001" BRIGHT_YELLOW "\002", pr->username);
+// 	secure_malloc(pr->colored_user);
+// 	pr->part1 = ft_strjoin("[", pr->colored_user);
+// 	secure_malloc(pr->part1);
+// 	// free(pr->header);
+// 	free(pr->colored_user);
+// 	pr->colored_42 = ft_strjoin("\001" RED "\002", "42");
+// 	secure_malloc(pr->colored_42);
+// 	pr->tmp = ft_strjoin("\001" RESET "\002" "@", pr->colored_42);
+// 	secure_malloc(pr->tmp);
+// 	free(pr->colored_42);
+// }
+
 char	*generate_prompt(t_prompt *pr)
 {
 	char	cwd[PATH_MAX];
@@ -73,10 +90,29 @@ char	*generate_prompt(t_prompt *pr)
 	return (pr->prompt);
 }
 
+// char	*generate_prompt(t_prompt *pr)
+// {
+// 	pr->username = getenv("USER");
+// 	if (pr->username == NULL)
+// 		pr->username = "unknown";
+// 	__part_one(pr);
+// 	pr->part2 = ft_strjoin(pr->tmp, "\001" RESET "\002" "] ");
+// 	secure_malloc(pr->part2);
+// 	free(pr->tmp);
+// 	pr->part3 = ft_strjoin(pr->part2, " $> ");
+// 	secure_malloc(pr->part3);
+// 	free(pr->part2);
+// 	pr->prompt = ft_strjoin(pr->part1, pr->part3);
+// 	secure_malloc(pr->prompt);
+// 	free(pr->part1);
+// 	free(pr->part3);
+// 	return (pr->prompt);
+// }
+
 static void    __init_global(t_global *g)
 {
 	t_prompt	pr;
-	
+
 	g->prompt = generate_prompt(&pr);
 	if (g->prompt == NULL)
 		(exit(FAILURE));

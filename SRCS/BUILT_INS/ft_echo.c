@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/10 12:51:02 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/17 11:12:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ static bool	__n_option_exist(char *arg)
 	return (true);
 }
 
-int	ft_echo(char **args)
+int my_echo(char **args)
 {
-	int	i;
-	int	n_option;
-	int	flag;
+	int i;
+	int flag;
 
 	i = 1;
-	n_option = __n_option_exist(args[i]);
 	flag = 0;
-	if (args[i] != NULL && (n_option == true))
+	while (args[i] != NULL && __n_option_exist(args[i]) == true)
 	{
 		flag = 1;
 		i++;
@@ -49,5 +47,10 @@ int	ft_echo(char **args)
 	}
 	if (flag == 0)
 		ft_putchar_fd('\n', STDOUT_FILENO);
+	else
+	{
+		rl_on_new_line();		// resyncrhonize readline
+		rl_replace_line("", 0);	// clear current line
+	}
 	return (SUCCESS);
 }
