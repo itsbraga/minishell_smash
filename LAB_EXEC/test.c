@@ -14,21 +14,52 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	char *cmd[3];
-	char *bin_path;
+	pid_t	child_pid;
+	int tmp_fd;
+	int	fd[2];
 
-	cmd[0] = "cat";
-	cmd[1] = "Makefile*/blablaprout123344";
-	// cmd[0] = "ls";
-	// cmd[1] = "-l";
-	cmd[2] = NULL;
-	bin_path = "/usr/bin/cat";
-	if (execve(bin_path, cmd, envp) == -1)
-	{
-		printf("%s\n", strerror(errno));
-		exit(EXIT_FAILURE);
-	}
-	// if (access(bin_path, X_OK == -1))
+	if (pipe(fd) == -1)
+		return (EXIT_FAILURE);
+	tmp_fd = 0;
+	printf("PIPE FDS MAIN\n");
+	printf("fd[1] = %d | fd[0] = %d\n", fd[1], fd[0]);
+	dup2(tmp_fd, fd[0]);
+	printf("dup2(tmp_fd, fd[0])\nfd[0] = %d | tmp_fd = %d\n", fd[0], tmp_fd);
+	dup2(fd[1], fd[0]);
+	printf("dup2(fd[1], fd[0])\nfd[0] = %d | fd[1] = %d\n", fd[0], fd[1]);
+
+	
+
+
+
+	return (EXIT_SUCCESS);
+
+
+
+
+
+
+
+
+
+
+
+
+	// char *cmd[3];
+	// char *bin_path;
+
+	// cmd[0] = "cat";
+	// cmd[1] = "Makefile*/blablaprout123344";
+	// // cmd[0] = "ls";
+	// // cmd[1] = "-l";
+	// cmd[2] = NULL;
+	// bin_path = "/usr/bin/cat";
+	// if (execve(bin_path, cmd, envp) == -1)
+	// {
+	// 	printf("%s\n", strerror(errno));
+	// 	exit(EXIT_FAILURE);
+	// }
+	// // if (access(bin_path, X_OK == -1))
 	// {
 	// 	printf("%s\n", strerror(errno));
 	// 	exit(EXIT_FAILURE);
