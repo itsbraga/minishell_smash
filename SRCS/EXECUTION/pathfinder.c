@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 23:27:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/19 00:17:31 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,15 @@ static	void	__basic_behaviour(t_exec_info *info)
 		if (info->executed_cmd != (info->cmd_count - 1))
 		{
 			dup2(info->fd[1], STDOUT_FILENO);
-			// dprintf(2, "PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
+			dprintf(2, "PID : %d | FD(%d) à été trompé et écrit au même endroit que FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
 		}
 		if (info->executed_cmd != 0)
 		{
 			// dprintf(2, "GNL : %s\n", get_next_line(info->old_read_fd, 0));
-			dup2(info->old_read_fd, STDIN_FILENO);
-			// dprintf(2, "PID : %d | FD(%d) à été redirigé vers FD(%d)\n", getpid(), STDIN_FILENO, info->old_read_fd);
+			// dup2(info->old_read_fd, STDIN_FILENO);
+			// dprintf(2, "PID : %d | FD(%d) à été trompé et lit au même endroit que FD(%d)\n", getpid(), STDIN_FILENO, info->old_read_fd);
+			 if (dup2(info->old_read_fd, STDIN_FILENO) == -1)
+                dprintf(2, "PID : %d | dup2 a échoué: %s\n", getpid(), strerror(errno));
 			close(info->old_read_fd);
 			// dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->old_read_fd);
 		}
@@ -105,6 +107,7 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 	dprintf(2, "debut pathfinder\n");
 	dprintf(2, "PID : %d | cmd[0] = %s\n", getpid(), node->cmd[0]);
 	__basic_behaviour(d->info);
+	dprintf(2, "heredoc_nb = %d\n", node->heredoc_nb);
 	if (node->heredoc_nb > 0)
 		last_heredoc_fd = fill_all_heredoc(d, node->redir);
 	error = __handle_all_redir(node, &latest_redin);
@@ -113,10 +116,18 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 		dup2(last_heredoc_fd, STDIN_FILENO);
 		close(last_heredoc_fd);
 	}
-	if (isatty(STDOUT_FILENO) == 1)
-			dprintf(2, "PID : %d | STDOUT connected to terminal :)\n", getpid());
+	if (isatty(STDIN_FILENO) == 1)
+			dprintf(2, "PID : %d | FD(0) lit sur STDIN :)\n", getpid());
 	else
-			dprintf(2, "PID : %d | STDOUT isn't connected to terminal /!\\\n", getpid());
+			dprintf(2, "PID : %d | FD(0) ne lit pas sur STDIN /!\\\n", getpid());
+	if (isatty(STDOUT_FILENO) == 1)
+			dprintf(2, "PID : %d | FD(1) écrit sur STDOUT :)\n", getpid());
+	else
+			dprintf(2, "PID : %d | FD(1) n'écrit pas sur STDOUT /!\\\n", getpid());
+	// dprintf(2, "PID %d executing '%s' - stdin=%d, stdout=%d\n", 
+    //         getpid(), node->cmd[0], 
+    //         fcntl(STDIN_FILENO, F_GETFD),
+    //         fcntl(STDOUT_FILENO, F_GETFD));
 	if (error == FAILURE)
 		return ; // a changer
 	else

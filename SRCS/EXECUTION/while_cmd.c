@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 23:26:20 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/18 22:10:45 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static void	__parent(t_exec_info *info)
 			// printf("PID : %d | FD(%d) closed\n", getpid(), info->old_read_fd);
 		}
 		// dprintf(2, "GNL : %s\n", get_next_line(info->fd[0], 0));
-		if (info->executed_cmd != info->cmd_count - 1)
-			info->old_read_fd = info->fd[0];
+		info->old_read_fd = info->fd[0];
 		// printf("PID : %d | old_fd contient maintenant ce FD : %d\n", getpid(), info->old_read_fd);
+		if (info->executed_cmd == info->cmd_count - 1)
 		close(info->fd[0]);
 			// printf("PID : %d | FD(%d) closed\n", getpid(), info->fd[0]);
 	}
@@ -65,10 +65,10 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 	printf("executed_cmd = %d ; cmd_count = %d\n", d->info->executed_cmd, d->info->cmd_count);
 	while ((d->info->executed_cmd != d->info->cmd_count) && current != NULL)
 	{
-		printf("début whilecmd\n");
-		printf("current = %p\n", current);
-		printf("current->next = %p\n", current->next);
-		if (d->info->pipe_count != 0)
+		// printf("début whilecmd\n");
+		// printf("current = %p\n", current);
+		// printf("current->next = %p\n", current->next);
+		if (d->info->pipe_count != 0 && d->info->executed_cmd != d->info->cmd_count - 1)
 		{
 			if (pipe(d->info->fd) == -1)
 				// clean_exit_shell(FAILURE);
