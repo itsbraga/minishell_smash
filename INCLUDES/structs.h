@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/17 22:01:25 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/19 04:36:49 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_exec_info
 	int		executed_cmd;
 	int		pipe_count;
 	int		fd[2];
+	int		stdin_backup;
 	int		old_read_fd;
 	int		child_pid;
 }				t_exec_info;

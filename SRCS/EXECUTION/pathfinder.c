@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/19 00:17:31 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/19 05:03:02 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 static	void	__basic_behaviour(t_exec_info *info)
 {
 	dprintf(2, "PID : %d | executed_cmd (basic_behaviour) = %d\n", getpid(), info->executed_cmd);
+	info->stdin_backup = dup(STDIN_FILENO);
+	if (isatty(info->stdin_backup) == 1)
+			dprintf(2, "PID : %d | FD(stdinbackup) lit sur STDIN :)\n", getpid());
+	else
+			dprintf(2, "PID : %d | FD(stdinbackup) ne lit pas sur STDIN /!\\\n", getpid());
+	// get_next_line(info->stdin_backup, 0);
+	//  dprintf(2, "PID : %d | dup2 a échoué: %s\n", getpid(), strerror(errno));
 	if (info->pipe_count != 0)
 	{
 		if (info->executed_cmd != (info->cmd_count - 1))
