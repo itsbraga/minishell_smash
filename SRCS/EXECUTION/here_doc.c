@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/19 05:03:52 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/19 19:58:07 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int	fill_all_heredoc(t_data *d, t_redir_lst *r)
 	current = r;
 	latest_read_fd = 0;
 	tmp = NULL;
-	if (isatty(d->info->stdin_backup) == 1)
-			dprintf(2, "PID : %d | FD(stdinbackup) lit sur STDIN :)\n", getpid());
-	else
-			dprintf(2, "PID : %d | FD(stdinbackup) ne lit pas sur STDIN /!\\\n", getpid());
-	if (dup2(d->info->stdin_backup, STDIN_FILENO) == -1)
-        dprintf(2, "PID : %d | dup2 a échoué: %s\n", getpid(), strerror(errno));
-	close(d->info->stdin_backup);
+	// if (isatty(d->info->stdin_backup) == 1)
+	// 		dprintf(2, "PID : %d | FD(stdinbackup) lit sur STDIN :)\n", getpid());
+	// else
+	// 		dprintf(2, "PID : %d | FD(stdinbackup) ne lit pas sur STDIN /!\\\n", getpid());
+	// if (dup2(d->info->stdin_backup, STDIN_FILENO) == -1)
+    //     dprintf(2, "PID : %d | dup2 a échoué: %s\n", getpid(), strerror(errno));
+	// close(d->info->stdin_backup);
 	while (current != NULL)
 	{
 		if (current->type == HERE_DOC)

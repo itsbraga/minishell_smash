@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_exec_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/14 22:56:30 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/19 20:05:45 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int	create_exec_lst(t_data *d)
 		else if (d->token->type == WORD)
 			__word_case(d->token, &p);
 		else if (p.new_task != NULL && d->token->type == HERE_DOC)
+		{
 			p.new_task->heredoc_nb++;
+			d->info->all_cmd_heredoc_nb++;
+		}
 		d->token = d->token->next;
 	}
 	__add_new_task(d, &p);

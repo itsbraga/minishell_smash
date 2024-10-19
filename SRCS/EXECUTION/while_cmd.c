@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/19 04:35:12 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/19 20:43:35 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 
 	current = *e_lst;
 	env_tab = recreate_env_tab(&(d->env));
-	printf("executed_cmd = %d ; cmd_count = %d\n", d->info->executed_cmd, d->info->cmd_count);
+	if (d->info->all_cmd_heredoc_nb > 16)
+		(err_msg(NULL, ERR_MAX_HD, 0), clean_exit_shell(MISUSE_CMD));
 	while ((d->info->executed_cmd != d->info->cmd_count) && current != NULL)
 	{
-		// printf("début whilecmd\n");
-		// printf("current = %p\n", current);
-		// printf("current->next = %p\n", current->next);
 		if (d->info->pipe_count != 0 && d->info->executed_cmd != d->info->cmd_count - 1)
 		{
 			if (pipe(d->info->fd) == -1)
@@ -83,7 +81,6 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 		else
 			__parent(d->info);
 		current = current->next;
-		printf("in loop (while_cmd)\n");
 	}
 	__wait_child(d->info);
 }
