@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/19 19:58:07 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/20 21:10:05 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	__open_heredoc(t_data *d, char *limiter)
 	while (1)
 	{
 		ft_printf(2, "> ");
-		buffer = get_next_line(0, 0);
+		buffer = get_next_line(0, 0); // readline ?
 		dprintf(2, "before heredoc gnl | buffer = %s\n", buffer);
 		if (buffer == NULL)
 			break ;
@@ -64,22 +64,15 @@ static int	__open_heredoc(t_data *d, char *limiter)
 	return (__close_heredoc(fd, limiter, buffer));
 }
 
-int	fill_all_heredoc(t_data *d, t_redir_lst *r)
+int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 {
 	t_redir_lst	*current;
-	int			latest_read_fd;
 	char		*tmp;
+	int			latest_read_fd;
 
 	current = r;
-	latest_read_fd = 0;
 	tmp = NULL;
-	// if (isatty(d->info->stdin_backup) == 1)
-	// 		dprintf(2, "PID : %d | FD(stdinbackup) lit sur STDIN :)\n", getpid());
-	// else
-	// 		dprintf(2, "PID : %d | FD(stdinbackup) ne lit pas sur STDIN /!\\\n", getpid());
-	// if (dup2(d->info->stdin_backup, STDIN_FILENO) == -1)
-    //     dprintf(2, "PID : %d | dup2 a échoué: %s\n", getpid(), strerror(errno));
-	// close(d->info->stdin_backup);
+	latest_read_fd = 0;
 	while (current != NULL)
 	{
 		if (current->type == HERE_DOC)
@@ -93,4 +86,19 @@ int	fill_all_heredoc(t_data *d, t_redir_lst *r)
 		current = current->next;
 	}
 	return (latest_read_fd);
+}
+
+void	handle_heredoc(t_data *d, t_exec_lst **e_lst)
+{
+	t_exec_lst	*current;
+	int	i; i = 1;
+
+	current = *e_lst;
+	while (current != NULL)
+	{
+		if (current->heredoc_nb > 0)
+			current->latest_hd = __fill_all_heredoc(d, current->redir);
+		current = current->next;
+	}
+	return ;
 }

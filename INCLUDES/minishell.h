@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 22:15:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:51:39 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void			exec(char *path_bin, char **cmd_and_args, char **env);
 void			go_exec(t_exec_lst *node, char **env);
 
 // here_doc.c
-int				fill_all_heredoc(t_data *d, t_redir_lst *r);
+void			handle_heredoc(t_data *d, t_exec_lst **e_lst);
 
 // pathfinder.c
 void			pathfinder(t_data *d, t_exec_lst *node, char **env);
