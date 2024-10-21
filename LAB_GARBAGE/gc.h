@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:27:20 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/20 22:12:44 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 20:00:10 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define ADD_TAB 3
 # define REMOVE -1
 # define CLEAN_ALL -2
+# define PRINT_LST -3
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -41,8 +42,9 @@ typedef struct s_gc_lst
 	struct s_gc_lst *next;
 }				t_gc_lst;
 
-void		free_tab(char **tab);
-int			remove_gc_node(t_gc_lst**yama, void *ptr);
+int			free_gc_tab(t_gc_lst **yama, char **tab);
+int			handle_remove(t_gc_lst **yama, void *ptr);
+int			remove_gc_node(t_gc_lst **yama, void *ptr);
 void		add_gc_node(t_gc_lst **yama, t_gc_lst *node);
 t_gc_lst	*last_gc_lst_node(t_gc_lst *yama);
 void		*new_gc_node(void *ptr, bool is_tab);

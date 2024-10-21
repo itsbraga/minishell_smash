@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 00:26:44 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 20:08:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,44 +47,35 @@ static void	*__add(t_gc_lst **yama, void *ptr, bool is_tab)
 	return (ptr);
 }
 
+static int	__handle_remove(t_gc_lst **yama, void *ptr)
+{
+	t_gc_lst	*node;
+
+	node = *yama;
+	while (node->ptr != ptr)
+		node = node->next;
+	if (node->is_tab == true)
+		return (free_gc_tab(yama, node->ptr));
+	else
+		return (remove_gc_node(yama, ptr));
+}
+
 static int	__clean_all(t_gc_lst **yama)
 {
 	t_gc_lst	*tmp;
 
-	if (yama == NULL || (*yama) == NULL)
+	if (yama == NULL || *yama == NULL)
 		return (FAILURE);
 	while ((*yama) != NULL)
 	{
 		tmp = (*yama)->next;
 		(*yama)->next = NULL;
-		if ((*yama)->is_tab == true)
-			free_tab((char **)(*yama)->ptr);
-		else
-		{
-			free((*yama)->ptr);
-			(*yama)->ptr = NULL;
-		}
+		free((*yama)->ptr);
+		(*yama)->ptr = NULL;
 		free((*yama));
 		(*yama) = tmp;
 	}
 	return (SUCCESS);
-}
-
-void	free_tab(char **tab)
-{
-	int	i;
-
-	if (tab == NULL)
-		return ;
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	free(tab);
-	tab = NULL;
 }
 
 void	*yama(int flag, void *ptr, size_t size)
@@ -101,7 +92,7 @@ void	*yama(int flag, void *ptr, size_t size)
 		return (__add(&yama, ptr, true));
 	else if (flag == REMOVE)
 	{
-		if (remove_gc_node(&yama, ptr) == FAILURE)
+		if (__handle_remove(&yama, ptr) == FAILURE)
 			err_msg(NULL, "No allocation freed, Yama is empty", 0);
 		return (NULL);
 	}

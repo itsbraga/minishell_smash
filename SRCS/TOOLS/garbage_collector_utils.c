@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage_collector_lst.c                            :+:      :+:    :+:   */
+/*   garbage_collector_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 00:26:30 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 20:09:27 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,34 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 	{
 		node = *yama;
 		*yama = (*yama)->next;
-		if (node->is_tab == true)
-			free_tab((char **)node->ptr);
-		else
-			free(node->ptr);
+		free(node->ptr);
+		node->ptr = NULL;
 		free(node);
 		return (SUCCESS);
 	}
 	prev = *yama;
 	while (prev->next != NULL && prev->next->ptr != ptr)
 		prev = prev->next;
-	if (prev->next != NULL)
-	{
-		node = prev->next;
-		prev->next = (prev->next)->next;
-		if (node->is_tab == true)
-			free_tab((char **)node->ptr);
-		else
-			free(node->ptr);
-		free(node);
-	}
+	node = prev->next;
+	prev->next = (prev->next)->next;
+	free(node->ptr);
+	node->ptr = NULL;
+	free(node);
 	return (SUCCESS);
+}
+
+int	free_gc_tab(t_gc_lst **yama, char **tab)
+{
+	int	error;
+	int	i;
+
+	error = 0;
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		error = remove_gc_node(yama, tab[i]);
+		i++;
+	}
+	remove_gc_node(yama, tab);
+	return (error);
 }
