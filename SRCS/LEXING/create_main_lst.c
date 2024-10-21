@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 21:15:47 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:21:50 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	create_main_lst(t_data *d, char *input)
 	segments = __get_all_segments(input);
 	if (segments == NULL)
 		return (SUCCESS); // a verifier par rapport aux childs
-	(lstclear_main(&(d->main)), lstclear_exec(&(d->exec)));
+	// lstclear_main(&(d->main));
+	// lstclear_exec(&(d->exec));
 	i = 0;
 	while (segments[i] != NULL)
 	{

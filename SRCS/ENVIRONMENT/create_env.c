@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 00:08:40 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:00:07 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ int	create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
 		if (idx_exp_env == 0)
 			var_to_add = copy_toppest(envp);
 		else
-		{
 			var_to_add = ascii_sort(envp, last->content);
-			secure_malloc(var_to_add, true);
+		if (var_to_add == NULL)
+		{
+			lstclear_env(exp_env);
+			return (FAILURE);
 		}
 		if (last == NULL)
 			*exp_env = var_to_add;
@@ -80,10 +82,10 @@ static void	__update_shlvl(t_env_lst *env)
 			new_value = ft_itoa(var_value);
 			secure_malloc(new_value, true);
 			(void)yama(ADD, new_value, 0);
-			(void)yama(REMOVE, current->content, 0);
+			free(current->content);
 			current->content = ft_strjoin("SHLVL=", new_value);
 			secure_malloc(current->content, true);
-			(void)yama(ADD, current->content, 0);
+			// (void)yama(ADD, current->content, 0);
 			(void)yama(REMOVE, new_value, 0);
 		}
 		current = current->next;

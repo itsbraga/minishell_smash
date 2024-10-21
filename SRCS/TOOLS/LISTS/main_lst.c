@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 21:18:19 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:24:21 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_main_lst	*main_lst_new_node(char *content)
 	new_node = malloc(sizeof(t_main_lst));
 	secure_malloc(new_node, true);
 	new_node->content = ft_strdup(content);
-	if (new_node->content == NULL)
 	secure_malloc(new_node->content, true);
 	new_node->next = NULL;
 	return (new_node);

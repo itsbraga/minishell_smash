@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 21:22:32 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:08:56 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,14 +227,14 @@ void			lstclear_redir(t_redir_lst **r);
 void			lstclear_exec(t_exec_lst **e);
 void			lstclear_env(t_env_lst **env);
 
-// garbage_collector.c
-int				free_gc_tab(t_gc_lst **yama, char **ptr);
-void			*yama(int flag, void *ptr, size_t size);
-
-// garbage_collector_lst.c
+// garbage_collector_utils.c
 int				remove_gc_node(t_gc_lst**yama, void *ptr);
 void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
 void			*new_gc_node(void *ptr, bool is_tab);
+
+// garbage_collector.c
+int				free_gc_tab(t_gc_lst **yama, char **ptr);
+void			*yama(int flag, void *ptr, size_t size);
 
 // cleanup.c
 void			secure_malloc(void *to_secure, bool cleanup);

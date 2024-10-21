@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 00:08:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:00:45 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ t_env_lst	*env_new_var(char *content)
 {
 	t_env_lst	*new_var;
 
-	new_var = yama(CREATE, NULL, sizeof(t_env_lst));
+	new_var = malloc(sizeof(t_env_lst));
 	secure_malloc(new_var, true);
 	new_var->content = ft_strdup(content);
 	secure_malloc(new_var->content, true);
-	(void)yama(ADD, new_var->content, 0);
 	new_var->next = NULL;
 	return (new_var);
 }
@@ -70,8 +69,8 @@ void	del_env_var(t_env_lst **env, char *var_to_rm)
 				*env = current->next; // Si le node à supprimer est le premier de la liste
 			else
 				prev->next = current->next; // Si le node à supprimer est au milieu ou à la fin
-			(void)yama(REMOVE, current->content, 0);
-			(void)yama(REMOVE, current, 0);
+			free(current->content);
+			free(current);
 			return ;
 		}
 		prev = current;

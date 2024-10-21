@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 21:28:01 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:03:40 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	__free_data(t_data *d, bool clear_history)
 				lstclear_env(&(d->exp_env));
 			rl_clear_history();
 		}
-		// free(d);
+		free(d);
 	}
 }
 
