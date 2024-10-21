@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 02:33:09 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 20:24:05 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,11 +211,6 @@ size_t			get_exec_lst_size(t_exec_lst **e);
 void			exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node);
 t_exec_lst		*exec_lst_new_node(void);
 
-// garbage_collector_lst.c
-int				remove_gc_node(t_gc_lst**yama, void *ptr);
-void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
-void			*new_gc_node(void *ptr, bool is_tab);
-
 /******************************************************************************\
  * TOOLS
 \******************************************************************************/
@@ -233,8 +228,13 @@ void			lstclear_exec(t_exec_lst **e);
 void			lstclear_env(t_env_lst **env);
 
 // garbage_collector.c
-void			free_tab(char **tab);
+void			free_gc_tab(t_gc_lst **yama, char **ptr);
 void			*yama(int flag, void *ptr, size_t size);
+
+// garbage_collector_lst.c
+int				remove_gc_node(t_gc_lst**yama, void *ptr);
+void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
+void			*new_gc_node(void *ptr, bool is_tab);
 
 // cleanup.c
 void			secure_malloc(void *to_secure, bool cleanup);
