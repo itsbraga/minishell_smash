@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 00:13:03 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:20:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void	__init_exec(t_token_dblst *t, t_ptrs *p)
 {
 	p->new_task = exec_lst_new_node();
 	secure_malloc(p->new_task, true);
-	p->size = (sizeof(char *) * (cmd_token_count(t) + 1));
-	p->new_task->cmd = yama(CREATE_TAB, NULL, p->size);
+	p->new_task->cmd = malloc(sizeof(char *) * (cmd_token_count(t) + 1));
 	secure_malloc(p->new_task->cmd, true);
 }
 

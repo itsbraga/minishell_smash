@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 20:33:03 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 21:22:32 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ void			*new_gc_node(void *ptr, bool is_tab);
 
 // cleanup.c
 void			secure_malloc(void *to_secure, bool cleanup);
+void			free_tab(char **tab);
 void			clean_exit_shell(int err_status);
 
 #endif

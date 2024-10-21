@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 02:26:55 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:15:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,12 @@ int	create_main_lst(t_data *d, char *input)
 	segments = __get_all_segments(input);
 	if (segments == NULL)
 		return (SUCCESS); // a verifier par rapport aux childs
-	(void)yama(ADD_TAB, segments, 0);
 	(lstclear_main(&(d->main)), lstclear_exec(&(d->exec)));
 	i = 0;
 	while (segments[i] != NULL)
 	{
 		new_node = main_lst_new_node(segments[i]);
 		secure_malloc(new_node, true);
-		(void)yama(ADD, new_node, 0);
 		main_lst_add_back(&(d->main), new_node);
 		i++;
 		d->info->cmd_count = i;

@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 01:00:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 00:13:37 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:11:49 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_exec_lst	*exec_lst_new_node(void)
 {
 	t_exec_lst	*new_node;
 
-	new_node = yama(CREATE, NULL, sizeof(t_exec_lst));
+	new_node = malloc(sizeof(t_exec_lst));
 	secure_malloc(new_node, true);
 	new_node->redir = NULL;
 	new_node->heredoc_nb = 0;

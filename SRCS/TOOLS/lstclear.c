@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstclear.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:49:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 20:30:10 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 21:22:43 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	lstclear_exec(t_exec_lst **e)
 		free((*e)->bin_path);
 		(*e)->bin_path = NULL;
 		if ((*e)->cmd != NULL)
-			yama(REMOVE, (*e)->cmd, 0);
+			free_tab((*e)->cmd);
 		free(*e);
 		(*e) = tmp;
 	}

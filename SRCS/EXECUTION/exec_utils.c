@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 00:09:05 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:26:18 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,7 @@ char	**search_path(char **tab_path, char **env)
 	if (all_path != NULL)
 	{
 		tab_path = yama(ADD_TAB, ft_split(all_path, ':'), 0);
-		if (tab_path == NULL)
-		{
-			perror("malloc");
-			exit(FAILURE);
-		}
-		// secure_malloc(tab_path, true);
+		secure_malloc(tab_path, true);
 	}
 	return (tab_path);
 }
@@ -53,13 +48,13 @@ char	*search_bin(char *cmd, char **tab_path)
 	{
 		tmp = ft_strjoin(tab_path[i], "/");
 		if (tmp == NULL)
-			return ((void)yama(REMOVE, tab_path, 0), NULL);
+			return ((void)yama(REMOVE, tab_path, 0), NULL); // voir si on remplace par secure_malloc
 		(void)yama(ADD, tmp, 0);
 		path_to_try = ft_strjoin(tmp, cmd);
 		if (path_to_try == NULL)
 		{
-			(void)yama(REMOVE, tab_path, 0);
-			return (free(tmp), free(path_to_try), NULL);
+			(void)yama(REMOVE, tab_path, 0); // voir si on remplace par secure_malloc
+			return (free(tmp), free(path_to_try), NULL); // voir si on remplace par secure_malloc
 		}
 		(void)yama(ADD, path_to_try, 0);
 		(void)yama(REMOVE, tmp, 0);

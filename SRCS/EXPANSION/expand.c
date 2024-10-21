@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 00:10:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 19:45:13 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ size_t vv_size)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	return (free(start_str), new_str);
+	(void)start_str;
+	// return (free(start_str), new_str);
+	return (new_str);
 }
 
 static char	*handle_last_exit_code(t_data *d, char *str, char *var)

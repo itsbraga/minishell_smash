@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 00:11:27 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:14:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	__take_seg_elem(t_token_parser *p)
 	{
 		tmp = ft_strldup(p->main_content + p->start, (p->i - p->start));
 		secure_malloc(tmp, true);
-		// (void)yama(ADD, tmp, 0);
+		(void)yama(ADD, tmp, 0);
 		p->seg_elems[p->token_count] = tmp;
 		p->token_count++;
 	}

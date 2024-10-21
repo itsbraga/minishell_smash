@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 02:33:37 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 19:08:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 void	handle_heredoc(t_data *d, t_exec_lst **e_lst)
 {
 	t_exec_lst	*current;
-	int	i; i = 1;
 
 	current = *e_lst;
 	while (current != NULL)

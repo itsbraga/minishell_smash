@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 02:27:29 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:16:00 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ int	create_token_dblst(t_data *d)
 		seg_elems = __get_all_seg_elems(d->main->content);
 		if (seg_elems == NULL)
 			return (SUCCESS); // a verifier par rapport aux childs
-		(void)yama(ADD_TAB, seg_elems, 0);
 		lstclear_token(&(d->token));
 		i = 0;
 		while (seg_elems[i] != NULL)
 		{
 			new_token = token_dblst_new_node(seg_elems[i], UNKNOWN);
 			secure_malloc(new_token, true);
-			(void)yama(ADD, new_token, 0);
 			token_dblst_add_back(&(d->token), new_token);
 			i++;
 		}

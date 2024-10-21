@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 02:33:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:21:07 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct s_ptrs
 {
 	struct s_exec_lst	*new_task;
 	int					i;
-	size_t				size;
 }				t_ptrs;
 
 typedef struct s_exec_lst

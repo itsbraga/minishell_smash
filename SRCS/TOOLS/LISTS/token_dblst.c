@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 00:14:06 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:12:31 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ t_token_dblst	*token_dblst_new_node(char *content, t_token_type type)
 {
 	t_token_dblst	*new_node;
 
-	new_node = yama(CREATE, NULL, sizeof(t_token_dblst));
+	new_node = malloc(sizeof(t_token_dblst));
 	secure_malloc(new_node, true);
 	new_node->type = type;
 	new_node->content = ft_strdup(content);
 	secure_malloc(new_node->content, true);
-	(void)yama(ADD, new_node->content, 0);
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);
