@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 21:26:18 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 21:41:54 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,10 @@ char	*search_bin(char *cmd, char **tab_path)
 	while (tab_path[i] != NULL)
 	{
 		tmp = ft_strjoin(tab_path[i], "/");
-		if (tmp == NULL)
-			return ((void)yama(REMOVE, tab_path, 0), NULL); // voir si on remplace par secure_malloc
+		secure_malloc(tmp, true); // voir si on remplace par secure_malloc
 		(void)yama(ADD, tmp, 0);
 		path_to_try = ft_strjoin(tmp, cmd);
-		if (path_to_try == NULL)
-		{
-			(void)yama(REMOVE, tab_path, 0); // voir si on remplace par secure_malloc
-			return (free(tmp), free(path_to_try), NULL); // voir si on remplace par secure_malloc
-		}
+		secure_malloc(path_to_try, true);
 		(void)yama(ADD, path_to_try, 0);
 		(void)yama(REMOVE, tmp, 0);
 		if (access(path_to_try, F_OK) == -1)
