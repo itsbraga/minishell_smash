@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 20:24:05 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 20:33:03 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void			lstclear_exec(t_exec_lst **e);
 void			lstclear_env(t_env_lst **env);
 
 // garbage_collector.c
-void			free_gc_tab(t_gc_lst **yama, char **ptr);
+int				free_gc_tab(t_gc_lst **yama, char **ptr);
 void			*yama(int flag, void *ptr, size_t size);
 
 // garbage_collector_lst.c
