@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 22:15:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 02:08:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ int				create_token_dblst(t_data *d);
  * PARSING
 \******************************************************************************/
 
+// check_sequence.c
+int				check_redir_sequence(char *content, t_token_parser *p);
+
 // quotes_utils.c
 bool			switch_bool(bool closed);
 int				find_closing_quote(char *str, char quote);
@@ -71,11 +74,7 @@ bool			unclosed_quotes(char *str);
 char			*empty_quotes(char *str);
 char			*other_quotes(char *str);
 
-// check_sequence.c
-int				check_redir_sequence(char *content);
-
 // redir_lst_utils.c
-void			init_ptrs(t_ptrs *p);
 t_redir_lst		*redir_in_n_infile(t_data *d);
 t_redir_lst		*redir_out_trunc_n_outfile(t_data *d);
 t_redir_lst		*redir_out_append_n_outfile(t_data *d);
@@ -85,6 +84,7 @@ t_redir_lst		*heredoc_n_limiter(t_data *d);
 int				create_redir_lst(t_data *d, t_exec_lst *existing_task);
 
 // exec_lst_utils.c
+void			init_ptrs(t_ptrs *p);
 char			*token_cleanup(char *content);
 int				cmd_token_count(t_token_dblst *t);
 
@@ -191,6 +191,7 @@ void			while_cmd(t_data *d, t_exec_lst **e_lst);
 size_t			get_main_lst_size(t_main_lst **main);
 void			main_lst_add_back(t_main_lst **main, t_main_lst *new_node);
 t_main_lst		*main_lst_new_node(char *content);
+void			del_unwanted_whitespaces(t_main_lst *main);
 
 // token_dblst.c
 void			del_current_token(t_token_dblst **t, t_token_dblst *to_delete);
@@ -210,6 +211,11 @@ size_t			get_exec_lst_size(t_exec_lst **e);
 void			exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node);
 t_exec_lst		*exec_lst_new_node(void);
 
+// garbage_collector_lst.c
+int				remove_gc_node(t_gc_lst**yama, void *ptr);
+void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
+void			*new_gc_node(void *ptr, bool is_tab);
+
 /******************************************************************************\
  * TOOLS
 \******************************************************************************/
@@ -218,7 +224,6 @@ t_exec_lst		*exec_lst_new_node(void);
 void			err_msg(char *detail, char *reason, int quotes);
 int				err_msg_cmd(char *cmd, char *detail, char *reason,
 					int err_status);
-void			secure_malloc(void *to_secure);
 
 // lstclear.c
 void			lstclear_main(t_main_lst **main);
@@ -227,17 +232,12 @@ void			lstclear_redir(t_redir_lst **r);
 void			lstclear_exec(t_exec_lst **e);
 void			lstclear_env(t_env_lst **env);
 
-// garbage_collector_utils.c
-void			free_tab(char **tab);
-int				remove_gc_node(t_gc_lst**yama, void *ptr);
-void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
-t_gc_lst		*last_gc_lst_node(t_gc_lst *yama);
-void			*new_gc_node(void *ptr, bool is_tab);
-
 // garbage_collector.c
+void			free_tab(char **tab);
 void			*yama(int flag, void *ptr, size_t size);
 
 // cleanup.c
+void			secure_malloc(void *to_secure, bool cleanup);
 void			clean_exit_shell(int err_status);
 
 #endif

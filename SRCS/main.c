@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 23:34:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:34:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,16 @@ static int	__minishell(t_data *d)
 		display_shell_info();
 		setup_signals();
 		user_input = readline(d->prompt);
-		if (user_input == NULL)
+		if (user_input == NULL) // Gestion de CTRL+D (EOF)
 		{
 			ft_printf(STDERR_FILENO, "exit\n");
 			break ;
 		}
-		else if (user_input != NULL && user_input[0] != '\0')
+		else if (user_input[0] != '\0')
 		{
 			add_history(user_input);
-			if (create_main_lst(d, user_input) == FAILURE)
-				return (FAILURE);
-			display_main_lst(d->main);
+			if (create_main_lst(d, user_input) == SUCCESS)
+				display_main_lst(d->main);
 			if (create_token_dblst(d) == FAILURE)
 				return (FAILURE);
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rainbow_txt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/17 22:08:33 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:10:16 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*rainbow_prompt(const char *str)
 
 	len = (ft_strlen(str) * (10 + 4) + ft_strlen(R) + 5);
 	colored_str = yama(CREATE, NULL, len);
-	secure_malloc(colored_str);
+	secure_malloc(colored_str, true);
 	colored_str[0] = '\0';
 	i = 0;
 	// ft_strcat(colored_str, "\001" BOLD "\002");

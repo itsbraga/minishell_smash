@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:24:15 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:08:40 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	create_env_list(t_env_lst **env, char **envp)
 	while (envp[i] != NULL)
 	{
 		var = env_new_var(envp[i]);
-		secure_malloc(var);
+		secure_malloc(var, true);
 		if (last == NULL)
 			*env = var;
 		else
@@ -50,11 +50,9 @@ int	create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
 		if (idx_exp_env == 0)
 			var_to_add = copy_toppest(envp);
 		else
-			var_to_add = ascii_sort(envp, last->content);
-		if (var_to_add == NULL)
 		{
-			lstclear_env(exp_env);
-			return (FAILURE);
+			var_to_add = ascii_sort(envp, last->content);
+			secure_malloc(var_to_add, true);
 		}
 		if (last == NULL)
 			*exp_env = var_to_add;
@@ -80,13 +78,13 @@ static void	__update_shlvl(t_env_lst *env)
 			var_value = ft_atoi(current->content + 6, 0);
 			var_value += 1;
 			new_value = ft_itoa(var_value);
-			secure_malloc(new_value);
+			secure_malloc(new_value, true);
 			(void)yama(ADD, new_value, 0);
-			free(current->content);
+			(void)yama(REMOVE, current->content, 0);
 			current->content = ft_strjoin("SHLVL=", new_value);
-			secure_malloc(current->content);
+			secure_malloc(current->content, true);
 			(void)yama(ADD, current->content, 0);
-			free(new_value);
+			(void)yama(REMOVE, new_value, 0);
 		}
 		current = current->next;
 	}

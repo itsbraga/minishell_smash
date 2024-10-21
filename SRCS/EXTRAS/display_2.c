@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 22:06:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/20 23:01:31 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	print_tab(char **tab)
 
 void	display_shell_info(void)
 {
-	ft_printf(STDOUT_FILENO, "PID : %d\n", getpid());
+	ft_printf(STDOUT_FILENO, "\rPID : %d\n", getpid());
 	if (isatty(STDIN_FILENO) == 1)
 		printf("STDIN connected to terminal :)\n");
 	else

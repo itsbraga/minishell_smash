@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/14 20:21:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:09:05 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ char	**search_path(char **tab_path, char **env)
 		if (tab_path == NULL)
 		{
 			perror("malloc");
-			// clean_exit_shell(FAILURE);
 			exit(FAILURE);
 		}
+		// secure_malloc(tab_path, true);
 	}
 	return (tab_path);
 }
@@ -53,13 +53,14 @@ char	*search_bin(char *cmd, char **tab_path)
 	{
 		tmp = ft_strjoin(tab_path[i], "/");
 		if (tmp == NULL)
-			return (free_tab(tab_path), NULL);
-		// secure_malloc(tmp);
+			return ((void)yama(REMOVE, tab_path, 0), NULL);
 		(void)yama(ADD, tmp, 0);
 		path_to_try = ft_strjoin(tmp, cmd);
 		if (path_to_try == NULL)
-			return (free_tab(tab_path), free(tmp), free(path_to_try), NULL);
-		// secure_malloc(path_to_try);
+		{
+			(void)yama(REMOVE, tab_path, 0);
+			return (free(tmp), free(path_to_try), NULL);
+		}
 		(void)yama(ADD, path_to_try, 0);
 		(void)yama(REMOVE, tmp, 0);
 		if (access(path_to_try, F_OK) == -1)
@@ -68,9 +69,9 @@ char	*search_bin(char *cmd, char **tab_path)
 			i++;
 		}
 		else
-			return (yama(REMOVE, tab_path, 0), path_to_try);
+			return ((void)yama(REMOVE, tab_path, 0), path_to_try);
 	}
-	return (yama(REMOVE, tab_path, 0), NULL);
+	return ((void)yama(REMOVE, tab_path, 0), NULL);
 }
 
  int	check_bin_path(t_exec_lst *node, bool absolute_path)
@@ -81,14 +82,16 @@ char	*search_bin(char *cmd, char **tab_path)
 			err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, CMD_NOT_FOUND);
 		else
 			err_msg_cmd(node->cmd[0], NULL, ERR_CMD, CMD_NOT_FOUND);
-		free(node->bin_path);
+		(void)yama(REMOVE, node->bin_path, 0);
+		// free(node->bin_path);
 		node->bin_path = NULL;
 		return (FAILURE);
 	}
 	else if (access(node->bin_path, X_OK) == -1)
 	{
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
-		free(node->bin_path);
+		(void)yama(REMOVE, node->bin_path, 0);
+		// free(node->bin_path);
 		node->bin_path = NULL;
 		return (FAILURE);
 	}
@@ -113,13 +116,7 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 			error = 1;
 		}
 		else
-		{
-			// dprintf(2, "cmd[] =\n");
-			// print_tab(node->cmd);
-			// dprintf(2, "tab_path[] =\n");
-			// print_tab(tab_path);
 			node->bin_path = search_bin(node->cmd[0], tab_path);
-		}
 		if (node->bin_path != NULL)
 			error = check_bin_path(node, node->absolute_path);
 	}

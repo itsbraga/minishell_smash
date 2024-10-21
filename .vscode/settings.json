@@ -14,7 +14,9 @@
         "minishell.h": "c",
         "random": "c",
         "stat.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "libft.h": "c",
+        "algorithm": "c"
     },
     "workbench.colorCustomizations": {
         "minimap.background": "#00000000",

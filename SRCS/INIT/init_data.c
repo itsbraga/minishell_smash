@@ -21,9 +21,9 @@ t_data	*data_struct(void)
 	if (instance == NULL)
 	{
 		instance = yama(CREATE, NULL, sizeof(t_data));
-		secure_malloc(instance);
+		secure_malloc(instance, true);
 		instance->prompt = generate_prompt(&pr);
-		secure_malloc(instance->prompt);
+		secure_malloc(instance->prompt, true);
 		instance->main = NULL;
 		instance->token = NULL;
 		instance->exec = NULL;

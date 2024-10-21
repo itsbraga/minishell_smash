@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/16 16:21:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 00:13:11 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*del_empty_quotes(char *str, int quote_idx)
 	i = 0;
 	j = 0;
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 1)));
-	secure_malloc(new_str);
+	secure_malloc(new_str, true);
 	while (i != quote_idx)
 	{
 		new_str[i] = str[i];
@@ -74,7 +74,7 @@ char	*del_quote_pair(char *str, int first, int second)
 
 	i = 0;
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 1)));
-	secure_malloc(new_str);
+	secure_malloc(new_str, true);
 	while (i != first)
 	{
 		new_str[i] = str[i];

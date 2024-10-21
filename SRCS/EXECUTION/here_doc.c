@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/19 19:58:07 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 00:09:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	fill_all_heredoc(t_data *d, t_redir_lst *r)
 		{
 			tmp = current->limiter;
 			current->limiter = ft_strjoin(current->limiter, "\n");
-			secure_malloc(current->limiter);
+			secure_malloc(current->limiter, true);
 			yama(REMOVE, tmp, 0);
 			latest_read_fd = __open_heredoc(d, current->limiter);
 		}

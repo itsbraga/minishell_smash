@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 22:14:49 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:08:15 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*__find_var_path(char *to_find, t_env_lst *env)
 		{
 			path = ft_substr(current->content, len_to_find,
 					(len_var_env - len_to_find));
-			secure_malloc(path);
+			secure_malloc(path, true);
 			return (path);
 		}
 		current = current->next;

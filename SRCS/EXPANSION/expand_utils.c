@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:26:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:09:52 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*__take_var_value(char *str)
 	while (str[i] != '=')
 		i++;
 	value = ft_strdup((str + i + 1));
-	secure_malloc(value);
+	secure_malloc(value, true);
 	(void)yama(ADD, value, 0);
 	return (value);
 }
@@ -43,7 +43,7 @@ char	*clean_translated_variable(char *str, char *var)
 	int		i;
 
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 2)));
-	secure_malloc(new_str);
+	secure_malloc(new_str, true);
 	i = 0;
 	while (str != (var - 1))
 		new_str[i++] = *str++;
@@ -74,7 +74,7 @@ char	*take_var(char *str, char *var)
 			|| str[j] == '_'))
 		j++;
 	to_find = ft_strldup(&(str[i]), (j - i));
-	secure_malloc(to_find);
+	secure_malloc(to_find, true);
 	(void)yama(ADD, to_find, 0);
 	return (to_find);
 }
@@ -89,16 +89,16 @@ char	*search_var(char *to_find, t_env_lst *env)
 	while (current != NULL)
 	{
 		to_cmp = ft_strldup(current->content, len_to_equal(current->content));
-		secure_malloc(to_cmp);
+		secure_malloc(to_cmp, true);
 		(void)yama(ADD, to_cmp, 0);
 		if (ft_strcmp(to_find, to_cmp) == 0)
 		{
-			free(to_cmp);
+			(void)yama(REMOVE, to_cmp, 0);
 			return (__take_var_value(current->content));
 		}
 		else
 		{
-			free(to_cmp);
+			(void)yama(REMOVE, to_cmp, 0);
 			to_cmp = NULL;
 			current = current->next;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/19 20:04:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 01:54:08 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_prompt
 	char	*part2;
 	char	*part3;
 	char	*prompt;
+	char	*line_1;
+	char	*line_2;
 }				t_prompt;
 
 typedef struct s_parser
@@ -67,8 +69,9 @@ typedef struct s_token_parser
 	int		token_count;
 	char	**seg_elems;
 	bool	closed_quotes[2];
-	bool	is_closed;
-	bool	was_closed;
+	char	redir;
+	int		count;
+	int		j;
 }				t_token_parser;
 
 typedef struct s_main_lst

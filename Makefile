@@ -39,11 +39,11 @@ EXTRAS_DIR		=	EXTRAS/
 EXTRAS_F		=	display.c display_2.c rainbow_txt.c
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	err_msg.c lstclear.c cleanup.c garbage_collector_utils.c \
-					garbage_collector.c
+TOOLS_F			=	err_msg.c lstclear.c cleanup.c garbage_collector.c
 
 LISTS_DIR		=	TOOLS/LISTS/
-LISTS_F			=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
+LISTS_F			=	main_lst.c token_dblst.c redir_lst.c exec_lst.c \
+					garbage_collector_lst.c
 
 INIT_DIR		=	INIT/
 INIT_F			=	prompt.c init_data.c

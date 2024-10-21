@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   exec_lst_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:34:57 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/16 16:23:06 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 01:09:08 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	init_ptrs(t_ptrs *p)
+{
+	p->new_task = NULL;
+	p->i = 0;
+	p->size = 0;
+}
 
 char	*token_cleanup(char *content)
 {

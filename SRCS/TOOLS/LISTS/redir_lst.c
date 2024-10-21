@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:06:09 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/14 22:08:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:13:57 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_redir_lst	*redir_lst_new_node(t_token_type type)
 	t_redir_lst	*new_node;
 
 	new_node = yama(CREATE, NULL, sizeof(t_redir_lst));
-	secure_malloc(new_node);
+	secure_malloc(new_node, true);
 	new_node->type = type;
 	new_node->limiter = NULL;
 	new_node->infile = NULL;

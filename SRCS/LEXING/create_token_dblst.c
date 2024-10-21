@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token_dblst.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/14 22:51:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 02:27:29 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,17 @@ static char	**__get_all_seg_elems(char *main_content)
 	t_token_parser	p;
 	size_t			seg_len;
 
-	ft_bzero(&p, sizeof(p));
-	p.main_content = main_content;
-	if (p.main_content == NULL || p.main_content[0] == '\0')
+	if (main_content == NULL || main_content[0] == '\0')
 		return (NULL);
-	seg_len = ft_strlen(main_content);
+	ft_bzero(&p, sizeof(t_token_parser));
+	p.main_content = main_content;
+	if (check_redir_sequence(p.main_content, &p) == FAILURE)
+		return (NULL);
+	seg_len = ft_strlen(p.main_content);
 	p.seg_elems = yama(CREATE_TAB, NULL, (sizeof(char *) * (seg_len + 1)));
-	secure_malloc(p.seg_elems);
+	secure_malloc(p.seg_elems, true);
 	while (p.main_content[p.i] != '\0')
-	{
-		if (check_redir_sequence(p.main_content) == FAILURE)
-			return (NULL);
 		parse_segment(&p);
-	}
 	p.seg_elems[p.token_count] = NULL;
 	return (p.seg_elems);
 }
@@ -43,13 +41,15 @@ int	create_token_dblst(t_data *d)
 	while (d->main != NULL)
 	{
 		seg_elems = __get_all_seg_elems(d->main->content);
-		(secure_malloc(seg_elems), (void)yama(ADD, seg_elems, 0));
+		if (seg_elems == NULL)
+			return (SUCCESS); // a verifier par rapport aux childs
+		(void)yama(ADD_TAB, seg_elems, 0);
 		lstclear_token(&(d->token));
 		i = 0;
 		while (seg_elems[i] != NULL)
 		{
 			new_token = token_dblst_new_node(seg_elems[i], UNKNOWN);
-			secure_malloc(new_token);
+			secure_malloc(new_token, true);
 			(void)yama(ADD, new_token, 0);
 			token_dblst_add_back(&(d->token), new_token);
 			i++;

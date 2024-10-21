@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/19 20:58:06 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/20 18:06:37 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 	// else
 	// 		dprintf(2, "PID : %d | FD(1) n'écrit pas sur STDOUT /!\\\n", getpid());
 	if (error == FAILURE)
-		exit (FAILURE); // cause des leaks
+		exit(FAILURE); // cause des leaks
 	else
 		go_exec(node, env);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage_collector_utils.c                          :+:      :+:    :+:   */
+/*   garbage_collector_lst.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/17 22:03:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:26:30 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,21 @@ void	*new_gc_node(void *ptr, bool is_tab)
 	t_gc_lst	*node;
 
 	node = malloc(sizeof(t_gc_lst));
-	secure_malloc(node);
+	if (node == NULL)
+		return (err_msg(NULL, ERR_MALLOC, 0), NULL);
 	node->ptr = ptr;
 	node->is_tab = is_tab;
 	node->next = NULL;
 	return (node);
 }
 
-t_gc_lst	*last_gc_lst_node(t_gc_lst *yama)
+static t_gc_lst	*__last_gc_lst_node(t_gc_lst *yama)
 {
 	if (yama == NULL)
 		return (NULL);
-	else
-	{
-		while (yama->next != NULL)
-			yama = yama->next;
-		return (yama);
-	}
+	while (yama->next != NULL)
+		yama = yama->next;
+	return (yama);
 }
 
 void	add_gc_node(t_gc_lst **yama, t_gc_lst *node)
@@ -44,7 +42,7 @@ void	add_gc_node(t_gc_lst **yama, t_gc_lst *node)
 		*yama = node;
 	else
 	{
-		tmp = last_gc_lst_node(*yama);
+		tmp = __last_gc_lst_node(*yama);
 		tmp->next = node;
 	}
 }
@@ -68,26 +66,17 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 		return (SUCCESS);
 	}
 	prev = *yama;
-	while (prev->next->ptr != ptr && prev->next != NULL)
+	while (prev->next != NULL && prev->next->ptr != ptr)
 		prev = prev->next;
-	node = prev->next;
-	prev->next = (prev->next)->next;
-	free(node->ptr);
-	free(node);
-	return (SUCCESS);
-}
-
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
+	if (prev->next != NULL)
 	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
+		node = prev->next;
+		prev->next = (prev->next)->next;
+		if (node->is_tab == true)
+			free_tab((char **)node->ptr);
+		else
+			free(node->ptr);
+		free(node);
 	}
-	free(tab);
-	tab = NULL;
+	return (SUCCESS);
 }

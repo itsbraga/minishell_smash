@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_exec_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/19 20:05:45 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 00:13:03 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	__init_exec(t_token_dblst *t, t_ptrs *p)
 {
 	p->new_task = exec_lst_new_node();
-	secure_malloc(p->new_task);
+	secure_malloc(p->new_task, true);
 	p->size = (sizeof(char *) * (cmd_token_count(t) + 1));
 	p->new_task->cmd = yama(CREATE_TAB, NULL, p->size);
-	secure_malloc(p->new_task->cmd);
+	secure_malloc(p->new_task->cmd, true);
 }
 
 static void	__command_case(t_token_dblst *t, t_ptrs *p)

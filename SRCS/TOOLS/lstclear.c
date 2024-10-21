@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstclear.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/14 20:13:50 by annabrag         ###   ########.fr       */
+/*   Created: 2024/10/20 18:49:55 by art3mis           #+#    #+#             */
+/*   Updated: 2024/10/21 00:27:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	lstclear_main(t_main_lst **main)
 		tmp = (*main)->next;
 		(*main)->next = NULL;
 		free((*main)->content);
-		(*main)->next = NULL;
+		(*main)->content = NULL;
 		free(*main);
 		(*main) = tmp;
 	}
@@ -57,20 +57,11 @@ void	lstclear_redir(t_redir_lst **r)
 		tmp = (*r)->next;
 		(*r)->next = NULL;
 		if ((*r)->limiter != NULL)
-		{
-			free((*r)->limiter);
-			(*r)->limiter = NULL;
-		}
+			free((*r)->limiter), (*r)->limiter = NULL;
 		if ((*r)->infile != NULL)
-		{
-			free((*r)->infile);
-			(*r)->infile = NULL;
-		}
+			free((*r)->infile), (*r)->infile = NULL;
 		if ((*r)->outfile != NULL)
-		{
-			free((*r)->outfile);
-			(*r)->outfile = NULL;
-		}
+			free((*r)->outfile), (*r)->outfile = NULL;
 		free(*r);
 		(*r) = tmp;
 	}
@@ -79,7 +70,6 @@ void	lstclear_redir(t_redir_lst **r)
 void	lstclear_exec(t_exec_lst **e)
 {
 	t_exec_lst	*tmp;
-	int			i;
 
 	if (e == NULL || (*e) == NULL)
 		return ;
@@ -92,14 +82,7 @@ void	lstclear_exec(t_exec_lst **e)
 		free((*e)->bin_path);
 		(*e)->bin_path = NULL;
 		if ((*e)->cmd != NULL)
-		{
-			i = 0;
-			free((*e)->cmd[i]);
-			(*e)->cmd[i] = NULL;
-			i++;
-		}
-		free((*e)->cmd);
-		(*e)->cmd = NULL;
+			free_tab((*e)->cmd);
 		free(*e);
 		(*e) = tmp;
 	}

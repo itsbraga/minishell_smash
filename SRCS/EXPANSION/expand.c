@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/19 03:05:32 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/21 00:10:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 
 	end_var = var + var_size;
 	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - var_size)));
-	secure_malloc(new_str);
+	secure_malloc(new_str, true);
 	ft_strlcpy(new_str, str, (var - str));
 	ft_strcpy(new_str + ((var - 1) - str), end_var);
 	free(str);
@@ -42,7 +42,7 @@ size_t vv_size)
 		|| var[len_var] == '_')
 		len_var++;
 	new_str = malloc(sizeof(char) * (ft_strlen(str) + (vv_size - len_var)));
-	secure_malloc(new_str);
+	secure_malloc(new_str, true);
 	yama(ADD, new_str, 0);
 	i = 0;
 	while (str != (var - 1))
@@ -62,7 +62,7 @@ static char	*handle_last_exit_code(t_data *d, char *str, char *var)
 
 	var_value = NULL;
 	var_value = ft_itoa(d->last_exit_status);
-	secure_malloc(var_value);
+	secure_malloc(var_value, true);
 	(void)yama(ADD, var_value, 0);
 	str = __add_var_value(str, var, var_value, ft_strlen(var_value));
 	return (str);
@@ -114,8 +114,7 @@ char	*expand(t_data *d, char *str, bool in_heredoc)
 			&& (str[i + 1] != ' ' && str[i + 1] != '$'))
 		{
 			str = __handle_expand(d, str, &(str[i + 1]));
-			if (str == NULL)
-				return (NULL);
+			secure_malloc(str, true);
 		}
 		i++;
 	}

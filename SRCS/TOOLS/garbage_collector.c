@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/09 21:33:58 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/21 00:26:44 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ static void	*__create(t_gc_lst **yama, size_t size, bool is_tab)
 	t_gc_lst	*node;
 
 	ptr = malloc(size);
-	secure_malloc(ptr);
 	if (ptr == NULL)
-		return (err_msg(NULL, ERR_MALLOC, 0), NULL);
+	{
+		err_msg(NULL, ERR_MALLOC, 0);
+		return (NULL);
+	}
 	node = new_gc_node(ptr, is_tab);
-	secure_malloc(node);
 	if (node == NULL)
-		return (err_msg(NULL, ERR_MALLOC, 0), NULL);
+	{
+		err_msg(NULL, ERR_MALLOC, 0);
+		return (NULL);
+	}
 	add_gc_node(yama, node);
 	return (ptr);
 }
@@ -34,9 +38,11 @@ static void	*__add(t_gc_lst **yama, void *ptr, bool is_tab)
 	t_gc_lst	*node;
 
 	node = new_gc_node(ptr, is_tab);
-	secure_malloc(node);
 	if (node == NULL)
-		return (err_msg(NULL, ERR_MALLOC, 0), NULL);
+	{
+		err_msg(NULL, ERR_MALLOC, 0);
+		return (NULL);
+	}
 	add_gc_node(yama, node);
 	return (ptr);
 }
@@ -45,7 +51,7 @@ static int	__clean_all(t_gc_lst **yama)
 {
 	t_gc_lst	*tmp;
 
-	if (yama == NULL || *yama == NULL)
+	if (yama == NULL || (*yama) == NULL)
 		return (FAILURE);
 	while ((*yama) != NULL)
 	{
@@ -62,6 +68,23 @@ static int	__clean_all(t_gc_lst **yama)
 		(*yama) = tmp;
 	}
 	return (SUCCESS);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	if (tab == NULL)
+		return ;
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
 }
 
 void	*yama(int flag, void *ptr, size_t size)
