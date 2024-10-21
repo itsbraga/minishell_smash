@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_lst_utils.c                                   :+:      :+:    :+:   */
+/*   signals_here_doc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 12:34:57 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 23:06:28 by art3mis          ###   ########.fr       */
+/*   Created: 2024/10/21 22:39:40 by art3mis           #+#    #+#             */
+/*   Updated: 2024/10/21 22:57:44 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_ptrs(t_ptrs *p)
+static void __sigint_handler_heredoc(int sig)
 {
-	p->new_task = NULL;
-	p->i = 0;
+	(void)sig;
+	ft_putchar_fd('\n', STDOUT_FILENO);
+    // fonction pour fermer le fd
+	g_sig_code = 2; // verifier
 }
 
-char	*token_cleanup(char *content)
+// appeler cet handler dans la fonction d'ouverture d'here_doc
+void    set_signals_in_heredoc(void)
 {
-	t_data	*d;
+    struct sigaction	sa;
 
-	d = data_struct();
-	content = empty_quotes(content);
-	content = expand(d, content, false);
-	content = other_quotes(content);
-	return (content);
-}
-
-int	cmd_token_count(t_token_dblst *t)
-{
-	int	count;
-
-	count = 0;
-	while (t != NULL)
-	{
-		if (t->type == COMMAND || t->type == WORD)
-			count++;
-		t = t->next;
-	}
-	return (count);
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = __sigint_handler_heredoc;
+	sigaction(SIGINT, &sa, NULL);
+	handle_sigquit();
 }

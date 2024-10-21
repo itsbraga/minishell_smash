@@ -68,7 +68,7 @@ BUILT_INS_F		=	built_ins.c ft_echo.c cd_utils.c ft_cd.c ft_pwd.c \
 					ft_unset.c ft_env.c ft_exit.c
 
 SIGNALS_DIR		=	SIGNALS/
-SIGNALS_F		=	signals.c
+SIGNALS_F		=	signals.c signals_here_doc.c
 
 EXEC_DIR		=	EXECUTION/
 EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c

@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 22:08:56 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:58:09 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,11 @@ void			create_env(t_data *d, char **envp);
 \******************************************************************************/
 
 // signals.c
-void			setup_signals(void);
+void			handle_sigquit(void);
+void			set_signals(void);
+
+// signals_here_doc.c
+void    		set_signals_in_heredoc(void);
 
 /******************************************************************************\
  * EXPANSION

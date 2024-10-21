@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 19:08:51 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 23:02:15 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	__open_heredoc(t_data *d, char *limiter)
 		clean_exit_shell(FAILURE);
 	}
 	must_expand = __manage_limiter(&limiter);
+	// signal(SIGINT, set_signals_in_heredoc);
 	while (1)
 	{
 		ft_printf(2, "> ");
@@ -80,7 +81,7 @@ int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 			tmp = current->limiter;
 			current->limiter = ft_strjoin(current->limiter, "\n");
 			secure_malloc(current->limiter, true);
-			yama(REMOVE, tmp, 0);
+			free(tmp);
 			latest_read_fd = __open_heredoc(d, current->limiter);
 		}
 		current = current->next;

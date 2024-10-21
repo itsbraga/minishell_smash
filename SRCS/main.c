@@ -6,20 +6,22 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 22:21:07 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 23:10:49 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	__minishell(t_data *d)
+int	g_sig_code;
+
+static void	__minishell(t_data *d)
 {
 	char	*user_input;
 
 	while (1)
 	{
 		display_shell_info();
-		setup_signals();
+		set_signals();
 		user_input = readline(d->prompt);
 		if (user_input == NULL) // Gestion de CTRL+D (EOF)
 		{
@@ -32,7 +34,7 @@ static int	__minishell(t_data *d)
 			if (create_main_lst(d, user_input) == SUCCESS)
 				display_main_lst(d->main);
 			if (create_token_dblst(d) == FAILURE)
-				return (FAILURE);
+				return ;
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(d->exec);
 			while_cmd(d, &(d->exec));
@@ -43,7 +45,6 @@ static int	__minishell(t_data *d)
 		lstclear_exec(&(d->exec));
 		free(user_input);
 	}
-	return (SUCCESS);
 }
 
 int	main(int argc, char **argv, char **envp)

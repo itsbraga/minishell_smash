@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 02:35:11 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 23:04:36 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ static void	__wait_child(t_exec_info *info)
 	{
 		printf("PID : %d | waiting for child... (wait_child)\n", getpid());
 		if (waitpid(-1, &status, 0) == -1)
-		{
-			err_msg("waitpid", strerror(errno), 0);
-			// clean_exit_shell(FAILURE);
-			exit(FAILURE);
-		}
+			(err_msg("waitpid", strerror(errno), 0), clean_exit_shell(FAILURE));
 		child_count--;
 		printf("PID : %d | a child is done ! (wait_child)\n", getpid());
 	}
@@ -64,7 +60,6 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 	env_tab = recreate_env_tab(&(d->env));
 	if (d->info->all_cmd_heredoc_nb > 16)
 		(err_msg(NULL, ERR_MAX_HD, 0), clean_exit_shell(MISUSE_CMD));
-		// (err_msg(NULL, ERR_MAX_HD, 0), exit(MISUSE_CMD));
 	handle_heredoc(d, e_lst);
 	while ((d->info->executed_cmd != d->info->cmd_count) && current != NULL)
 	{
@@ -73,12 +68,10 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 		{
 			if (pipe(d->info->fd) == -1)
 				clean_exit_shell(FAILURE);
-				// exit(FAILURE);
 		}
 		d->info->child_pid = fork();
 		if (d->info->child_pid == -1)
 			clean_exit_shell(FAILURE);
-			// exit(FAILURE);
 		if (d->info->child_pid == 0)
 			pathfinder(d, current, env_tab);
 		else

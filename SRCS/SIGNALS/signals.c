@@ -6,21 +6,13 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/20 23:36:40 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 22:57:42 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_sig_code;
-
-/*	rl_on_new_line()
-	
-	Tell the update routines that we have moved
-	onto a new (empty) line, usually after
-	outputting a newline '\n'
-*/
-static void	__sigint_handler(int sig)
+static void	__handle_sigint(int sig)
 {
 	t_prompt	pr;
 	t_data		*d;
@@ -28,7 +20,7 @@ static void	__sigint_handler(int sig)
 	size_t		line1_len;
 	
 	(void)sig;
-	write(STDOUT_FILENO, "\n", 1);
+	ft_putchar_fd('\n', STDOUT_FILENO);
 	d = data_struct();
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -41,25 +33,27 @@ static void	__sigint_handler(int sig)
 		write(STDOUT_FILENO, d->prompt, line1_len);
 		rl_redisplay();
 	}
+	g_sig_code = 1; // verifier
 }
 
-static void	__sigquit_handler(void)
+void	handle_sigquit(void)
 {
 	struct sigaction	sa;
 
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
 	sa.sa_handler = SIG_IGN;
-	sa.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
 	sigaction(SIGQUIT, &sa, NULL);
+	g_sig_code = 1; // verifier
 }
 
-void	setup_signals(void)
+void	set_signals(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_handler = __sigint_handler;
-	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = __handle_sigint;
 	sigaction(SIGINT, &sa, NULL);
-	__sigquit_handler();
+	handle_sigquit();
 }

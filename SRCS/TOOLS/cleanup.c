@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 22:03:40 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 23:09:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	secure_malloc(void *to_secure, bool cleanup)
 	{
 		err_msg("malloc", strerror(errno), 0);
 		if (cleanup == true)
-			clean_exit_shell(FAILURE);
+			clean_exit_shell(FAILURE); // de meme pour le code ici (cf. en bas)
 	}
 }
 
@@ -69,7 +69,6 @@ void	clean_exit_shell(int err_status)
 	if (d != NULL)
 		__free_data(d, true);
 	yama(CLEAN_ALL, NULL, 0);
-	rl_clear_history();
 	printf("%s\n", BOLD BLUE BYE_MSG R);
-	exit(err_status);
+	exit(err_status); // verifier si on ne doit pas plutot quitter avec last_exit_code
 }
