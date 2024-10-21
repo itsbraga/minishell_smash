@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/20 18:06:37 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 02:33:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,31 +105,19 @@ static	void	__basic_behaviour(t_exec_info *info, int heredoc_nb)
 void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 {
 	int				error;
-	int				last_heredoc_fd;
 	t_token_type	latest_redin;
 
 	error = 0;
-	last_heredoc_fd = 0;
 	latest_redin = 0;
 	dprintf(2, "debut pathfinder\n");
 	dprintf(2, "PID : %d | cmd[0] = %s\n", getpid(), node->cmd[0]);
 	__basic_behaviour(d->info, node->heredoc_nb);
-	if (node->heredoc_nb > 0)
-		last_heredoc_fd = fill_all_heredoc(d, node->redir);
 	error = __handle_all_redir(node, &latest_redin);
 	if (latest_redin == HERE_DOC)
 	{
-		dup2(last_heredoc_fd, STDIN_FILENO);
-		close(last_heredoc_fd);
+		dup2(node->latest_hd, STDIN_FILENO);
+		close(node->latest_hd);
 	}
-	// if (isatty(STDIN_FILENO) == 1)
-	// 		dprintf(2, "PID : %d | FD(0) lit sur STDIN :)\n", getpid());
-	// else
-	// 		dprintf(2, "PID : %d | FD(0) ne lit pas sur STDIN /!\\\n", getpid());
-	// if (isatty(STDOUT_FILENO) == 1)
-	// 		dprintf(2, "PID : %d | FD(1) écrit sur STDOUT :)\n", getpid());
-	// else
-	// 		dprintf(2, "PID : %d | FD(1) n'écrit pas sur STDOUT /!\\\n", getpid());
 	if (error == FAILURE)
 		exit(FAILURE); // cause des leaks
 	else

@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 01:26:53 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 02:35:11 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 	if (d->info->all_cmd_heredoc_nb > 16)
 		(err_msg(NULL, ERR_MAX_HD, 0), clean_exit_shell(MISUSE_CMD));
 		// (err_msg(NULL, ERR_MAX_HD, 0), exit(MISUSE_CMD));
+	handle_heredoc(d, e_lst);
 	while ((d->info->executed_cmd != d->info->cmd_count) && current != NULL)
 	{
-		if (d->info->pipe_count != 0 && d->info->executed_cmd != d->info->cmd_count - 1)
+		if (d->info->pipe_count != 0
+			&& d->info->executed_cmd != d->info->cmd_count - 1)
 		{
 			if (pipe(d->info->fd) == -1)
 				clean_exit_shell(FAILURE);

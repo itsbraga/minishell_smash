@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 02:08:51 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/21 02:33:09 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void			exec(char *path_bin, char **cmd_and_args, char **env);
 void			go_exec(t_exec_lst *node, char **env);
 
 // here_doc.c
-int				fill_all_heredoc(t_data *d, t_redir_lst *r);
+void			handle_heredoc(t_data *d, t_exec_lst **e_lst);
 
 // pathfinder.c
 void			pathfinder(t_data *d, t_exec_lst *node, char **env);
