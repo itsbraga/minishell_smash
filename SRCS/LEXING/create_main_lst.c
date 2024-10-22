@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 22:21:50 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:56:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing-lexing.h"
 
 static void	__init_exec_info(t_data *d)
 {
@@ -50,9 +50,7 @@ int	create_main_lst(t_data *d, char *input)
 	__init_exec_info(d);
 	segments = __get_all_segments(input);
 	if (segments == NULL)
-		return (SUCCESS); // a verifier par rapport aux childs
-	// lstclear_main(&(d->main));
-	// lstclear_exec(&(d->exec));
+		return ((void)yama(REMOVE, segments, 0), SUCCESS); // a verifier par rapport aux childs
 	i = 0;
 	while (segments[i] != NULL)
 	{

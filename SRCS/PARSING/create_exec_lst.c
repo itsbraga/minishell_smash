@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 21:20:47 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 21:16:02 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing-lexing.h"
 
 static void	__init_exec(t_token_dblst *t, t_ptrs *p)
 {
@@ -80,6 +80,6 @@ int	create_exec_lst(t_data *d)
 	__add_new_task(d, &p);
 	d->token = head;
 	if (create_redir_lst(d, p.new_task) == FAILURE)
-		return (FAILURE);
-	return (SUCCESS);
+		return (d->last_exit_status = FAILURE);
+	return (d->last_exit_status = SUCCESS);
 }

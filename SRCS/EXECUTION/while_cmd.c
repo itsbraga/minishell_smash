@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 23:04:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 21:17:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 static void	__wait_child(t_exec_info *info)
 {
@@ -59,7 +59,7 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 	current = *e_lst;
 	env_tab = recreate_env_tab(&(d->env));
 	if (d->info->all_cmd_heredoc_nb > 16)
-		(err_msg(NULL, ERR_MAX_HD, 0), clean_exit_shell(MISUSE_CMD));
+		(err_msg(NULL, ERR_MAX_HD, 0), clean_exit_shell(BAD_USAGE));
 	handle_heredoc(d, e_lst);
 	while ((d->info->executed_cmd != d->info->cmd_count) && current != NULL)
 	{

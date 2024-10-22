@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 20:30:40 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 01:08:55 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 21:07:31 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing-lexing.h"
 
 t_redir_lst	*redir_in_n_infile(t_data *d)
 {

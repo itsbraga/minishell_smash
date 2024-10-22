@@ -6,22 +6,22 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 21:14:19 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 21:17:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing-lexing.h"
 
 static int	__front_check(t_parser *p)
 {
 	while (ft_isspace(p->user_input[p->i]) == 1)
 		p->i++;
 	if (p->user_input[p->i] == '\0')
-		return (42); // doit renvoyer un prompt
+		return (BAD_USAGE); // doit renvoyer un prompt
 	if (p->user_input[p->i] == '|')
 	{
 		err_msg(NULL, "|", 2);
-		return (42); // doit renvoyer un prompt
+		return (BAD_USAGE); // doit renvoyer un prompt
 	}
 	return (SUCCESS);
 }
@@ -41,7 +41,7 @@ static int	__pipe_check(t_parser *p)
 		if (p->user_input[p->i] == '|')
 		{
 			err_msg(NULL, "||", 2);
-			return (42); // doit renvoyer un prompt
+			return (BAD_USAGE); // doit renvoyer un prompt
 		}
 		while (p->user_input[p->i] != '\0'
 			&& ft_isspace(p->user_input[p->i]) == 1)
@@ -49,7 +49,7 @@ static int	__pipe_check(t_parser *p)
 		if (p->user_input[p->i] == '|' || p->user_input[p->i] == '\0')
 		{
 			err_msg(NULL, "|", 2);
-			return (42); // doit renvoyer un prompt
+			return (BAD_USAGE); // doit renvoyer un prompt
 		}
 	}
 	return (SUCCESS);
@@ -60,7 +60,7 @@ void	parse_input(t_parser *p)
 	char	*tmp;
 
 	__init_parser(p);
-	if (__front_check(p) == 42)
+	if (__front_check(p) == BAD_USAGE)
 		return ;
 	while (p->user_input[p->i] != '\0')
 	{
@@ -79,7 +79,7 @@ void	parse_input(t_parser *p)
 	p->segment[p->seg_count++] = tmp;
 	if (p->closed_quotes[0] == true && p->closed_quotes[1] == true)
 	{
-		if (__pipe_check(p) == 42)
+		if (__pipe_check(p) == BAD_USAGE)
 			return ;
 	}
 }

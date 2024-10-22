@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/20 17:09:42 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:52:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 void	exec(char *path_bin, char **cmd_and_args, char **env)
 {
@@ -18,16 +18,20 @@ void	exec(char *path_bin, char **cmd_and_args, char **env)
 	if (execve(path_bin, cmd_and_args, env) == -1)
 	{
 		dprintf(2, "PID : %d | execve failed /!\\(exec)\n", getpid());
-		free(path_bin);
-		path_bin = NULL;
-		exit(FAILURE); // à changer
+		free_and_set_null(path_bin);
+		exit(FAILURE); // à changer ---> clean_exit_shell(errno) ?
 	}
 }
 
 void	go_exec(t_exec_lst *node, char **env)
 {
+	t_data	*d;
+
+	d = data_struct();
+	if (execute_built_in(d, node->cmd) == FAILURE)
+		err_msg(NULL, "built-in cannot be executed", 0);
 	if (handle_bin_path(node, env) == 0)
 		exec(node->bin_path, node->cmd, env);
 	else
-		exit(FAILURE); // à changer
+		exit(FAILURE); // à changer ---> clean_exit_shell(errno) ?
 }

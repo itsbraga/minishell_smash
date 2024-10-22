@@ -6,49 +6,34 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 02:29:30 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 21:17:47 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing-lexing.h"
 
 static int	__different_cases(char *content, t_token_parser *p)
 {
 	if (p->redir == '>' && p->count > 2)
-	{
-		err_msg(NULL, ">>", 2);
-		return (FAILURE);
-	}
+		return (err_msg(NULL, ">>", 2), BAD_USAGE);
 	else if (p->redir == '<' && p->count > 2)
-	{
-		err_msg(NULL, "<<", 2);
-		return (FAILURE);
-	}
+		return (err_msg(NULL, "<<", 2), BAD_USAGE);
 	else if (p->redir == '>' && p->count == 1 && content[p->j] == '>')
-	{
-		err_msg(NULL, ">", 2);
-		return (FAILURE);
-	}
+		return (err_msg(NULL, ">", 2), BAD_USAGE);
 	else if (p->redir == '<' && p->count == 1 && content[p->j] == '<')
-	{
-		err_msg(NULL, "<", 2);
-		return (FAILURE);
-	}
+		return (err_msg(NULL, "<", 2), BAD_USAGE);
 	else if (content[p->j] == '\0')
-	{
-		err_msg(NULL, "newline", 2);
-		return (FAILURE);
-	}
+		return (err_msg(NULL, "newline", 2), BAD_USAGE);
 	else if (content[p->j] == '|')
-	{
-		err_msg(NULL, "|", 2);
-		return (FAILURE);
-	}
+		return (err_msg(NULL, "|", 2), BAD_USAGE);
 	return (SUCCESS);
 }
 
 int	check_redir_sequence(char *content, t_token_parser *p)
 {
+	t_data	*d;
+
+	d = data_struct();
 	while (content[p->j] != '\0')
 	{
 		if (is_redir(content) == true)
@@ -62,10 +47,10 @@ int	check_redir_sequence(char *content, t_token_parser *p)
 				p->j++;
 			}
 			if (__different_cases(content, p) == FAILURE)
-				return (FAILURE);
+				return (d->last_exit_status = BAD_USAGE);
 		}
 		else
 			p->j++;
 	}
-	return (SUCCESS);
+	return (d->last_exit_status = SUCCESS);
 }

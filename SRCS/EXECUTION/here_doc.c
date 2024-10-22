@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 23:02:15 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:24:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 static bool	__manage_limiter(char **limiter)
 {
@@ -24,12 +24,11 @@ static bool	__manage_limiter(char **limiter)
 	}
 }
 
-static int	__close_heredoc(int fd[], char *limiter, char *buffer)
+static int	__close_heredoc(int fd[], char *limiter, char *line)
 {
 	get_next_line(0, 1);
-	free(buffer);
-	buffer = NULL;
-	free(limiter);
+	free_and_set_null(line);
+	free_and_set_null(limiter);
 	close(fd[1]);
 	return (fd[0]);
 }
@@ -38,9 +37,9 @@ static int	__open_heredoc(t_data *d, char *limiter)
 {
 	int		fd[2];
 	bool	must_expand;
-	char	*buffer;
+	char	*line;
 
-	buffer = NULL;
+	line = NULL;
 	if (pipe(fd) == -1)
 	{
 		err_msg(NULL, strerror(errno), 0);
@@ -51,18 +50,18 @@ static int	__open_heredoc(t_data *d, char *limiter)
 	while (1)
 	{
 		ft_printf(2, "> ");
-		buffer = get_next_line(0, 0); // readline ?
-		dprintf(2, "before heredoc gnl | buffer = %s\n", buffer);
-		if (buffer == NULL)
+		line = get_next_line(0, 0); // readline ?
+		dprintf(2, "before heredoc gnl | line = %s\n", line);
+		if (line == NULL)
 			break ;
-		if (ft_strcmp(limiter, buffer) == 0)
+		if (ft_strcmp(limiter, line) == 0)
 			break ;
 		if (must_expand == true)
-			buffer = expand(d, buffer, true);
-		ft_printf(fd[1], "%s", buffer);
-		free(buffer);
+			line = expand(d, line, true);
+		ft_printf(fd[1], "%s", line);
+		free_and_set_null(line);
 	}
-	return (__close_heredoc(fd, limiter, buffer));
+	return (__close_heredoc(fd, limiter, line));
 }
 
 int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
@@ -81,7 +80,7 @@ int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 			tmp = current->limiter;
 			current->limiter = ft_strjoin(current->limiter, "\n");
 			secure_malloc(current->limiter, true);
-			free(tmp);
+			free_and_set_null(tmp);
 			latest_read_fd = __open_heredoc(d, current->limiter);
 		}
 		current = current->next;

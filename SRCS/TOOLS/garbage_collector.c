@@ -6,11 +6,11 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 22:36:09 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 00:22:38 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tools.h"
 
 static void	*__create(t_gc_lst **yama, size_t size, bool is_tab)
 {
@@ -70,9 +70,9 @@ static int	__clean_all(t_gc_lst **yama)
 	{
 		tmp = (*yama)->next;
 		(*yama)->next = NULL;
-		free((*yama)->ptr);
-		(*yama)->ptr = NULL;
-		free((*yama));
+		free_and_set_null((*yama)->ptr);
+		free_and_set_null((*yama));
+		// free((*yama));
 		(*yama) = tmp;
 	}
 	return (SUCCESS);

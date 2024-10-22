@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_utils.c                                         :+:      :+:    :+:   */
+/*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 00:08:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:16:18 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 {
@@ -29,11 +29,11 @@ static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 		if (ft_strncmp(current->content, "PWD=", 4) == 0)
 		{
 			*old_pwd = ft_strdup(current->content);
-			(void)yama(REMOVE, current->content, 0);
+			free(current->content);
 			current->content = ft_strjoin("PWD=", new_pwd);
 			if (current->content == NULL)
 				return (free(new_pwd), NULL);
-			(void)yama(ADD, current->content, 0);
+			// (void)yama(ADD, current->content, 0);
 		}
 		current = current->next;
 	}
@@ -50,10 +50,10 @@ static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 		if ((ft_strncmp(current->content, "OLDPWD=", 7) == 0)
 			&& old_pwd != NULL)
 		{
-			(void)yama(REMOVE, current->content, 0);
+			free(current->content);
 			current->content = ft_strjoin("OLDPWD=", old_pwd + 4);
 			secure_malloc(current->content, true);
-			(void)yama(ADD, current->content, 0);
+			// (void)yama(ADD, current->content, 0);
 			free(old_pwd);
 			old_pwd = NULL;
 			break ;
@@ -82,5 +82,7 @@ void	change_paths(t_env_lst *env, t_env_lst *exp_env)
 	__update_oldpwd(env, old_pwd);
 	__update_oldpwd(exp_env, exp_old_pwd);
 	free(new_pwd);
+	new_pwd = NULL;
 	free(exp_new_pwd);
+	exp_new_pwd = NULL;
 }

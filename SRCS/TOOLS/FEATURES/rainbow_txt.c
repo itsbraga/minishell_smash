@@ -6,47 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 00:29:12 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 00:10:16 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 21:04:50 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	rainbow_txt(const char *str)
-{
-	const char	*colors[7] = {RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, PINK};
-	int			nb_colors;
-	size_t		i;
-	size_t		len;
-
-	nb_colors = sizeof(colors) / sizeof(colors[0]);
-	i = 0;
-	len = ft_strlen(str);
-	while (i < len)
-	{
-		printf("%s%c", colors[i % nb_colors], str[i]);
-		i++;
-	}
-	printf("%s\n", R);
-}
-
-void	rainbow_txt_nonl(const char *str)
-{
-	const char	*colors[7] = {RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, PINK};
-	int			nb_colors;
-	size_t		i;
-	size_t		len;
-
-	nb_colors = sizeof(colors) / sizeof(colors[0]);
-	i = 0;
-	len = ft_strlen(str);
-	while (i < len)
-	{
-		printf("%s%c", colors[i % nb_colors], str[i]);
-		i++;
-	}
-	printf(R);
-}
+#include "tools.h"
 
 char	*rainbow_prompt(const char *str)
 {

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:24:17 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 int	ft_pwd(void)
 {
 	char	cwd[PATH_MAX];
+	t_data	*d;
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
@@ -22,6 +23,6 @@ int	ft_pwd(void)
 		return (errno);
 	}
 	ft_printf(STDOUT_FILENO, "%s\n", cwd);
-	// data_struct()->last_exit_status = 0;
-	return (SUCCESS);
+	d = data_struct();
+	return (d->last_exit_status = SUCCESS);
 }

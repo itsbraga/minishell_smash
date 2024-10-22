@@ -6,42 +6,32 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 21:21:07 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 20:40:23 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+# include "libraries.h"
+
+/******************************************************************************\
+ * PARSING including LEXING
+\******************************************************************************/
+
 typedef enum e_token_type
 {
 	UNKNOWN = -1,
-	COMMAND,				// 0
-	WORD,					// 1
-	REDIR_IN,				// 2
-	INFILE,					// 3
-	HERE_DOC,				// 4
-	LIMITER,				// 5
-	REDIR_OUT_TRUNC,		// 6
-	REDIR_OUT_APPEND,		// 7
+	COMMAND,
+	WORD,
+	REDIR_IN,
+	INFILE,
+	HERE_DOC,
+	LIMITER,
+	REDIR_OUT_TRUNC,
+	REDIR_OUT_APPEND,
 	OUTFILE
 }			t_token_type;
-
-typedef struct s_prompt
-{
-	char	*username;
-	char	*header;
-	char	*rainbow_user;
-	char	*rainbow_42;
-	char	*tmp;
-	char	*custom_cwd;
-	char	*part1;
-	char	*part2;
-	char	*part3;
-	char	*prompt;
-	char	*line_1;
-	char	*line_2;
-}				t_prompt;
 
 typedef struct s_parser
 {
@@ -80,6 +70,10 @@ typedef struct s_main_lst
 	struct s_main_lst	*next;
 }				t_main_lst;
 
+/******************************************************************************\
+ * BEFORE EXECUTION
+\******************************************************************************/
+
 typedef struct s_redir_lst
 {
 	t_token_type		type;
@@ -117,11 +111,41 @@ typedef struct s_exec_info
 	int		child_pid;
 }				t_exec_info;
 
+/******************************************************************************\
+ * YAMA: Garbage collector
+\******************************************************************************/
+
+typedef struct s_gc_lst
+{
+	void			*ptr;
+	bool			is_tab;
+	struct s_gc_lst *next;
+}				t_gc_lst;
+
+/******************************************************************************\
+ * GENERAL
+\******************************************************************************/
+
 typedef struct s_env_lst
 {
 	char				*content;
 	struct s_env_lst	*next;
 }				t_env_lst;
+
+typedef struct s_prompt
+{
+	char	*username;
+	char	*header;
+	char	*rainbow_user;
+	char	*rainbow_42;
+	char	*tmp;
+	char	*custom_cwd;
+	char	*part1;
+	char	*part2;
+	char	*part3;
+	char	*line_1;
+	char	*line_2;
+}				t_prompt;
 
 typedef struct s_data
 {
@@ -134,16 +158,5 @@ typedef struct s_data
 	t_env_lst		*exp_env;
 	int				last_exit_status;
 }				t_data;
-
-/******************************************************************************\
- * YAMA: Garbage collector
-\******************************************************************************/
-
-typedef struct s_gc_lst
-{
-	void			*ptr;
-	bool			is_tab;
-	struct s_gc_lst *next;
-}				t_gc_lst;
 
 #endif

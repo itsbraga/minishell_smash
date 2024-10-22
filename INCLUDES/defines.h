@@ -1,19 +1,77 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   custom.h                                           :+:      :+:    :+:   */
+/*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 16:15:15 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 03:55:06 by pmateo           ###   ########.fr       */
+/*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
+/*   Updated: 2024/10/22 21:18:11 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUSTOM_H
-# define CUSTOM_H
+#ifndef DEFINES_H
+# define DEFINES_H
 
-# include "colors.h"
+# include "libraries.h"
+
+/******************************************************************************\
+ * GENERAL
+\******************************************************************************/
+
+# define _XOPEN_SOURCE 700
+# define PATH_MAX 4096
+# define IS_REDIR(t) ((t == REDIR_IN) || (t == HERE_DOC) \
+						|| (t == REDIR_OUT_TRUNC) || (t == REDIR_OUT_APPEND))
+
+/******************************************************************************\
+ * YAMA'S FLAGS
+\******************************************************************************/
+
+# define CREATE 0
+# define CREATE_TAB 1
+# define ADD 2
+# define ADD_TAB 3
+# define REMOVE -1
+# define CLEAN_ALL -2
+
+/******************************************************************************\
+ * EXIT STATUS
+\******************************************************************************/
+
+# define SUCCESS 0
+# define FAILURE 1
+
+# define BAD_USAGE 2
+# define CMD_CANNOT_EXEC 126
+# define CMD_NOT_FOUND 127
+# define OUT_OF_RANGE 255
+
+# define CTRL_C_EXIT 130 // 128 + signal 2 (SIGINT)
+# define CTRL_SL_EXIT 143 // 128 + signal 15 (SIGTERM)
+
+/******************************************************************************\
+ * ERROR
+\******************************************************************************/
+
+# define ERR_PREFIX (BOLD RED "smash: " R)
+
+// syntax / user error
+# define ERR_PIPE "syntax error near unexpected token `"
+# define ERR_QUOTES "failed to handle quotes"
+# define ERR_ENV_VAR "not a valid identifier"
+# define ERR_ARG "too many arguments"
+# define ERR_ARG_TYPE "numeric argument required"
+
+// creation
+# define ERR_MALLOC "cannot allocate memory"
+
+// exec
+# define ERR_CMD "command not found"
+# define ERR_BAD_PERM "Permission denied"
+# define ERR_BAD_FILE "No such file or directory"
+# define ERR_NO_ENV "$PATH doesn't exist, please specify absolute path"
+# define ERR_MAX_HD "maximum here-document count exceeded"
 
 /******************************************************************************\
  * CUSTOM
@@ -29,27 +87,5 @@
 # define LIM3 "================================="
 
 # define BYE_MSG "XOXO 💋"
-
-/******************************************************************************\
- * DISPLAY FUNCTIONS
-\******************************************************************************/
-
-// display_2.c
-void			display_exec_lst(t_exec_lst *e);
-void			print_cmd(char **cmd);
-void			print_tab(char **tab);
-void			print_tab2(char **tab);
-void			display_shell_info(void);
-
-// display.c
-void			display_export_env(t_env_lst *exp_env);
-void			display_main_lst(t_main_lst *main);
-void			display_token_dblst(t_token_dblst *t);
-void			display_redir_lst(t_redir_lst *r);
-
-// rainbow_txt.c
-void			rainbow_txt(const char *str);
-void			rainbow_txt_nonl(const char *str);
-char			*rainbow_prompt(const char *str);
 
 #endif

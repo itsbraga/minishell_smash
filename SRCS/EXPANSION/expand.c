@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 19:45:13 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:26:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 	secure_malloc(new_str, true);
 	ft_strlcpy(new_str, str, (var - str));
 	ft_strcpy(new_str + ((var - 1) - str), end_var);
-	free(str);
+	free_and_set_null(str);
 	return (new_str);
 }
 
@@ -53,9 +53,7 @@ size_t vv_size)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	(void)start_str;
-	// return (free(start_str), new_str);
-	return (new_str);
+	return (free(start_str), new_str);
 }
 
 static char	*handle_last_exit_code(t_data *d, char *str, char *var)
@@ -91,9 +89,9 @@ static	char	*__handle_expand(t_data *d, char *str, char *var)
 			str = __add_var_value(str, var, var_value, ft_strlen(var_value));
 	}
 	if (to_find != NULL)
-		free(to_find);
+		free_and_set_null(to_find);
 	if (var_value != NULL)
-		free(var_value);
+		free_and_set_null(var_value);
 	return (str);
 }
 

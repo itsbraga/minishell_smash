@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 22:21:56 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:56:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing-lexing.h"
 
 static char	**__get_all_seg_elems(char *main_content)
 {
@@ -42,8 +42,7 @@ int	create_token_dblst(t_data *d)
 	{
 		seg_elems = __get_all_seg_elems(d->main->content);
 		if (seg_elems == NULL)
-			return (SUCCESS); // a verifier par rapport aux childs
-		// lstclear_token(&(d->token));
+			return ((void)yama(REMOVE, seg_elems, 0), SUCCESS); // a verifier par rapport aux childs
 		i = 0;
 		while (seg_elems[i] != NULL)
 		{

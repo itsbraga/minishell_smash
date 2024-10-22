@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/17 15:40:27 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:23:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 static bool	__n_option_exist(char *arg)
 {
@@ -25,8 +25,11 @@ static bool	__n_option_exist(char *arg)
 		return (false);
 	return (true);
 }
-
-int ft_echo(char **args)
+/*
+	rl_on_new_line();			--> resynchronize readline
+	rl_replace_line("", 0);		--> clear current line
+*/
+int ft_echo(t_data *d, char **args)
 {
 	int i;
 	int flag;
@@ -49,8 +52,8 @@ int ft_echo(char **args)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	else
 	{
-		rl_on_new_line();		// resyncrhonize readline
+		rl_on_new_line();		// resynchronize readline
 		rl_replace_line("", 0);	// clear current line
 	}
-	return (SUCCESS);
+	return (d->last_exit_status = SUCCESS);
 }

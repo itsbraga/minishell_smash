@@ -6,21 +6,19 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 22:57:42 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 22:48:23 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	__handle_sigint(int sig)
+static void	__rl_reset_custom_prompt(void)
 {
 	t_prompt	pr;
 	t_data		*d;
 	char		*nl_pos;
 	size_t		line1_len;
-	
-	(void)sig;
-	ft_putchar_fd('\n', STDOUT_FILENO);
+
 	d = data_struct();
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -33,27 +31,22 @@ static void	__handle_sigint(int sig)
 		write(STDOUT_FILENO, d->prompt, line1_len);
 		rl_redisplay();
 	}
-	g_sig_code = 1; // verifier
 }
 
-void	handle_sigquit(void)
+static void	__sigint_handler(int signo)
 {
-	struct sigaction	sa;
+	t_data	*d;
 
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sa.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sa, NULL);
-	g_sig_code = 1; // verifier
+	(void)signo;
+	d = data_struct();
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	g_sig_code = 1;
+	d->last_exit_status = 130;
+	__rl_reset_custom_prompt();
 }
 
 void	set_signals(void)
 {
-	struct sigaction	sa;
-
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sa.sa_handler = __handle_sigint;
-	sigaction(SIGINT, &sa, NULL);
-	handle_sigquit();
+	signal(SIGINT, &__sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

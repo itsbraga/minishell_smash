@@ -6,13 +6,13 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 23:10:49 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:58:52 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_sig_code;
+int	g_sig_code = 0;
 
 static void	__minishell(t_data *d)
 {
@@ -26,7 +26,7 @@ static void	__minishell(t_data *d)
 		if (user_input == NULL) // Gestion de CTRL+D (EOF)
 		{
 			ft_printf(STDERR_FILENO, "exit\n");
-			break ;
+			break ; // clean_exit_shell(SUCCESS);
 		}
 		else if (user_input[0] != '\0')
 		{
@@ -37,13 +37,9 @@ static void	__minishell(t_data *d)
 				return ;
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(d->exec);
-			while_cmd(d, &(d->exec));
-			// 	exec_built_in(d->exec->cmd, d);
+			// while_cmd(d, &(d->exec));
 		}
-		lstclear_main(&(d->main));
-		lstclear_token(&(d->token));
-		lstclear_exec(&(d->exec));
-		free(user_input);
+		clean_after_execution(d, user_input);
 	}
 }
 

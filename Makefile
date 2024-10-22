@@ -35,15 +35,15 @@ DEBUG		=	-g -g3
 #	SOURCES
 #******************************************************************************#
 
-EXTRAS_DIR		=	EXTRAS/
-EXTRAS_F		=	display.c display_2.c rainbow_txt.c
-
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	err_msg.c lstclear.c cleanup.c garbage_collector.c \
-					garbage_collector_utils.c
+TOOLS_F			=	err_msg.c lstclear.c cleanup.c garbage_collector_utils.c \
+					garbage_collector.c secure.c
 
 LISTS_DIR		=	TOOLS/LISTS/
 LISTS_F			=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
+
+FEATURES_DIR	=	TOOLS/FEATURES/
+FEATURES_F		=	display.c display_2.c rainbow_txt.c
 
 INIT_DIR		=	INIT/
 INIT_F			=	prompt.c init_data.c
@@ -64,8 +64,8 @@ EXPAND_DIR		=	EXPANSION/
 EXPAND_F		=	expand.c expand_utils.c
 
 BUILT_INS_DIR	=	BUILT_INS/
-BUILT_INS_F		=	built_ins.c ft_echo.c cd_utils.c ft_cd.c ft_pwd.c \
-					ft_unset.c ft_env.c ft_exit.c
+BUILT_INS_F		=	built_ins.c ft_echo.c ft_cd_utils.c ft_cd.c ft_pwd.c \
+					ft_export_utils.c ft_export.c ft_unset.c ft_env.c ft_exit.c
 
 SIGNALS_DIR		=	SIGNALS/
 SIGNALS_F		=	signals.c signals_here_doc.c
@@ -78,7 +78,7 @@ EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
 #******************************************************************************#
 
 SRCS_DIR		=	SRCS/
-SRCS_F			=	$(addprefix $(EXTRAS_DIR), $(EXTRAS_F)) \
+SRCS_F			=	$(addprefix $(FEATURES_DIR), $(FEATURES_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(LISTS_DIR), $(LISTS_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \

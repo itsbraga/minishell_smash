@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 04:46:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/22 23:22:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 char	**search_path(char **tab_path, char **env)
 {
@@ -97,15 +97,13 @@ char	*search_bin(char *cmd, char **tab_path)
 			err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, CMD_NOT_FOUND);
 		else
 			err_msg_cmd(node->cmd[0], NULL, ERR_CMD, CMD_NOT_FOUND);
-		free(node->bin_path);
-		node->bin_path = NULL;
+		free_and_set_null(node->bin_path);
 		return (FAILURE);
 	}
 	else if (access(node->bin_path, X_OK) == -1)
 	{
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
-		free(node->bin_path);
-		node->bin_path = NULL;
+		free_and_set_null(node->bin_path);
 		return (FAILURE);
 	}
 	return (SUCCESS);

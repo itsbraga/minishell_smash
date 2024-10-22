@@ -3,25 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/09 21:24:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:43:52 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
-// ONLY TO DISPLAY --> BUILT-IN EXPORT STILL TO DO
-void	ft_export(t_env_lst *exp_env)
+static void	__manage_variable(t_env_lst *export_env, t_env_lst *env, char *var)
 {
-	t_env_lst	*tmp;
+	t_env_lst	*to_find;
+	t_env_lst	*to_find_exp;
 
-	tmp = exp_env;
-	while (tmp != NULL)
+	to_find = search_for_var(env, var);
+	to_find_exp = search_for_var(export_env, var);
+	if (to_find_exp != NULL && ft_strchr(var, '=') != NULL)
+		update_var_val(to_find, to_find_exp, env, var);
+	else if (to_find_exp == NULL)
 	{
-		ft_printf(STDOUT_FILENO, "%s\n", tmp->content);
-		tmp = tmp->next;
+		if (ft_strchr(var, '=') == NULL)
+			add_var_to_exp_env(export_env, var);
+		else
+		{
+			add_var_to_env(env, var);
+			add_var_to_exp_env(export_env, var);
+		}
 	}
-	// data_struct()->last_exit_status = 0;
+	return ;
 }
+
+static int	__check_args(char *var)
+{
+	int	i;
+
+	i = 0;
+	if ((ft_isalpha(var[0]) == 0) && var[0] != '_')
+		return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
+	while (var[i] != '=' && var[i] != '\0')
+	{
+		if (ft_isalpha(var[i]) == 1
+			|| ft_isdigit(var[i]) == 1 || var[i] == '_')
+			i++;
+		else
+			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
+	}
+	return (SUCCESS);
+}
+
+static void	__print_export_env(t_env_lst *exp_env)
+{
+	t_env_lst    *current;
+
+    current = exp_env;
+	while (current != NULL)
+	{
+        ft_printf(1, "export ");
+		ft_printf(1, "%s\n", current->content);
+        current = current->next;
+  	}
+}
+
+int	ft_export(t_env_lst *exp_env, t_env_lst *env, char **args)
+{
+	t_data		*d;
+	unsigned	int	i;
+
+	d = data_struct();
+	i = 1;
+	if (args[1] == NULL)
+		__print_export_env(exp_env);
+	else
+	{
+		while (args[i] != NULL)
+		{
+			if (__check_args(args[i]) == SUCCESS)
+				__manage_variable(exp_env, env, args[i]);
+			i++;
+		}
+	}
+	return (d->last_exit_status = SUCCESS);
+}
+	
+// code de sortie ?
+// si ajout de $WAOUH elle doit se glisser apres VTE_VERSION et
+//	avant XAUTHORITY

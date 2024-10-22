@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 22:00:45 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:21:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	del_env_var(t_env_lst **env, char *var_to_rm)
 				*env = current->next; // Si le node à supprimer est le premier de la liste
 			else
 				prev->next = current->next; // Si le node à supprimer est au milieu ou à la fin
-			free(current->content);
-			free(current);
+			free_and_set_null(current->content);
+			free_and_set_null(current);
 			return ;
 		}
 		prev = current;
