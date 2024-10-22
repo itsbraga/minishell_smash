@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 04:46:45 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 00:18:19 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_tab(char **tab)
 	tab = NULL;
 }
 
-int	free_gc_tab(t_gc_lst **yama, char **tab)
+int	free_gc_tab(t_gc_lst **y, char **tab)
 {
 	int	error;
 	int	i;
@@ -48,14 +48,23 @@ int	free_gc_tab(t_gc_lst **yama, char **tab)
 	i = 0;
 	// dprintf(2, "free_gc_tab\n");
 	// print_tab2(tab);
+	// if (yama(SEARCH, tab, 0) == NULL)
+	// 	dprintf(2, "free_gc_tab | tab n'est pas présent dans yama\n");
+	// else
+	// 	dprintf(2, "free_gc_tab | tab est présent dans yama\n");
 	while (tab[i] != NULL)
 	{
 		// dprintf(2, "free_gc_tab | i = %d\n", i);
-		error = remove_gc_node(yama, tab[i]);
+		// if (yama(SEARCH, tab[i], 0) == NULL)
+		// 	dprintf(2, "free_gc_tab | tab[%d] n'est pas présent dans yama\n", i);
+		// else
+		// 	dprintf(2, "free_gc_tab | tab[%d] est présent dans yama\n", i);
+		// dprintf(2, "free_gc_tab | error = %d\n", error);
+		error = remove_gc_node(y, tab[i]);
 		i++;
 	}
 	// dprintf(2, "free_gc_tab = %p\n", tab);
-	remove_gc_node(yama, tab);
+	remove_gc_node(y, tab);
 	return (error);
 }
 

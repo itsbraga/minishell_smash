@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 20:08:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/22 22:36:09 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,26 @@ static int	__clean_all(t_gc_lst **yama)
 	return (SUCCESS);
 }
 
+void	*search_ptr(t_gc_lst **yama, void *ptr)
+{
+	t_gc_lst *curr;
+
+	curr = *yama;
+	while (curr != NULL)
+	{
+		if (curr->ptr == ptr)
+			return (curr->ptr);
+		curr = curr->next;
+	}
+	return (NULL);
+}
+
 void	*yama(int flag, void *ptr, size_t size)
 {
 	static t_gc_lst	*yama;
 
+	if (flag == SEARCH)
+		return (search_ptr(&yama, ptr));
 	if (flag == CREATE)
 		return (__create(&yama, size, false));
 	else if (flag == CREATE_TAB)

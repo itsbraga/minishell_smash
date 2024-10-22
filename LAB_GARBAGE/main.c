@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:41:52 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 20:02:00 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/22 21:48:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ int	main(void)
 	// char 	*alloc4;
 	
 	printf("-----------------test1---------------\n");
+	// alloc3 = yama(CREATE, NULL, sizeof(int));
 	tab = (char **)yama(CREATE_TAB, NULL, sizeof(char *) * 4);
 	if (!tab)
 		return (1);
 	// secure_malloc(tab);
 	tab[0] = (char *)yama(ADD, ft_strdup("Hello"), 0);
 	tab[1] = (char *)yama(ADD, ft_strdup("World"), 0);
+	alloc1 = yama(ADD, ft_strdup("c comment"), 0);
 	tab[2] = (char *)yama(ADD, ft_strdup("Yama"), 0);
 	tab[3] = NULL;
 	printf("tab:\n");
@@ -53,6 +55,7 @@ int	main(void)
 		printf("  %s\n", tab[i]);
 		i++;
 	}
+	yama(PRINT_LST, NULL, 0);
 	yama(REMOVE, tab, 0);
 	yama(PRINT_LST, NULL, 0);
 	// tab = NULL;

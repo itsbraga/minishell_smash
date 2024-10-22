@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 20:04:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/22 21:45:31 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,19 @@ static int	__clean_all(t_gc_lst **yama)
 	return (SUCCESS);
 }
 
-// void	display_gc_lst(t_gc_lst *gc)
-// {
-// 	t_gc_lst	*current;
+void	display_gc_lst(t_gc_lst *gc)
+{
+	t_gc_lst	*current;
 
-// 	current = gc;
-// 	dprintf(STDOUT_FILENO,"##### t_gc_lst #####\n");
-// 	while (current != NULL)
-// 	{
-// 		dprintf(STDOUT_FILENO, "--- node ---\n");
-// 		dprintf(STDOUT_FILENO, "ptr = [%p] | str = [%s]\n", current->ptr, (char *)current->ptr);
-// 		current = current->next;
-// 	}
-// }
+	current = gc;
+	dprintf(STDOUT_FILENO,"##### t_gc_lst #####\n");
+	while (current != NULL)
+	{
+		dprintf(STDOUT_FILENO, "--- node ---\n");
+		dprintf(STDOUT_FILENO, "ptr = [%p] | str = [%s]\n", current->ptr, (char *)current->ptr);
+		current = current->next;
+	}
+}
 
 void	*yama(int flag, void *ptr, size_t size)
 {
