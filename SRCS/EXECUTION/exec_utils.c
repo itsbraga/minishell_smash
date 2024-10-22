@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 23:03:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 04:46:17 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,28 @@ char	**search_path(char **tab_path, char **env)
 	return (tab_path);
 }
 
+void	print_tab2(char **tab)
+{
+	int i;
+
+	i = 0;
+	if (tab)
+		dprintf(2, "tab_path existe\n");
+	else
+		dprintf(2, "tab_path n'existe pas\n");
+	if (tab[i])
+	{
+		while (tab[i])
+		{
+			dprintf(2, "tab[%d] = %s\n", i, tab[i]);
+			i++;
+		}
+	}
+	else
+		dprintf(2, "tab_path existe mais est vide\n");
+
+}
+
 char	*search_bin(char *cmd, char **tab_path)
 {
 	char	*path_to_try;
@@ -59,7 +81,10 @@ char	*search_bin(char *cmd, char **tab_path)
 			i++;
 		}
 		else
+		{
+			// print_tab2(tab_path);
 			return ((void)yama(REMOVE, tab_path, 0), path_to_try);
+		}
 	}
 	return ((void)yama(REMOVE, tab_path, 0), NULL);
 }

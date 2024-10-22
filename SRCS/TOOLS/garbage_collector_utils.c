@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 22:21:23 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 04:46:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,21 @@ void	add_gc_node(t_gc_lst **yama, t_gc_lst *node)
 	}
 }
 
+// static	int	remove_gc_node2(t_gc_lst **yama, void *ptr)
+// {
+// 	t_gc_lst	*node;
+// 	t_gc_lst	*prev;
+	
+// 	prev = *yama;
+// 	while (prev->next != NULL && prev->next->ptr != ptr)
+// 		prev = prev->next;
+// 	node = prev->next;
+// 	prev->next = (prev->next)->next;
+// 	free(node->ptr);
+// 	node->ptr = NULL;
+// 	free(node);
+// }
+
 int	remove_gc_node(t_gc_lst **yama, void *ptr)
 {
 	t_gc_lst	*node;
@@ -65,27 +80,15 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 	}
 	prev = *yama;
 	while (prev->next != NULL && prev->next->ptr != ptr)
+	{
+		// dprintf(2, "prev->content = %s\n", (char *)prev->ptr);
 		prev = prev->next;
+	}
 	node = prev->next;
+	// dprintf(2, "ligne 69 : node = %p\n", node);
 	prev->next = (prev->next)->next;
 	free(node->ptr);
 	node->ptr = NULL;
 	free(node);
 	return (SUCCESS);
-}
-
-int	free_gc_tab(t_gc_lst **yama, char **tab)
-{
-	int	error;
-	int	i;
-
-	error = 0;
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		error = remove_gc_node(yama, tab[i]);
-		i++;
-	}
-	remove_gc_node(yama, tab);
-	return (error);
 }

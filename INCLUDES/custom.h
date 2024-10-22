@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:15:15 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/17 22:10:02 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/22 03:55:06 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 void			display_exec_lst(t_exec_lst *e);
 void			print_cmd(char **cmd);
 void			print_tab(char **tab);
+void			print_tab2(char **tab);
 void			display_shell_info(void);
 
 // display.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 23:09:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 04:46:45 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,26 @@ void	free_tab(char **tab)
 	}
 	free(tab);
 	tab = NULL;
+}
+
+int	free_gc_tab(t_gc_lst **yama, char **tab)
+{
+	int	error;
+	int	i;
+
+	error = 0;
+	i = 0;
+	// dprintf(2, "free_gc_tab\n");
+	// print_tab2(tab);
+	while (tab[i] != NULL)
+	{
+		// dprintf(2, "free_gc_tab | i = %d\n", i);
+		error = remove_gc_node(yama, tab[i]);
+		i++;
+	}
+	// dprintf(2, "free_gc_tab = %p\n", tab);
+	remove_gc_node(yama, tab);
+	return (error);
 }
 
 static void	__free_data(t_data *d, bool clear_history)
