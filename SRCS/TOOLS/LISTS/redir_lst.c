@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:06:09 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 21:12:22 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 21:05:03 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tools.h"
 
 t_redir_lst	*redir_lst_new_node(t_token_type type)
 {

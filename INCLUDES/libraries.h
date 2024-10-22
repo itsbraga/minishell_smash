@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libraries.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:58:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 22:05:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/22 22:59:28 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@
 # include "../LIBFT/INCLUDES/libft.h"
 # include "../LIBFT/INCLUDES/ft_printf.h"
 # include "../LIBFT/INCLUDES/get_next_line_bonus.h"
+
 # include "structs.h"
-# include "helpers.h"
+# include "defines.h"
+# include "parsing-lexing.h"
+# include "exec.h"
+# include "minishell.h"
+# include "tools.h"
 # include "colors.h"
-# include "custom.h"
 
 #endif

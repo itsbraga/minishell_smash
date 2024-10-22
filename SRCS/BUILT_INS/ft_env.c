@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/08 17:03:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:43:36 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 int	ft_env(t_env_lst *env)
 {
 	t_env_lst	*tmp;
+	t_data		*d;
 
 	tmp = env;
+	d = data_struct();
 	while (tmp != NULL)
 	{
 		ft_printf(STDOUT_FILENO, "%s\n", tmp->content);
 		tmp = tmp->next;
 	}
-	// data_struct()->last_exit_status = 0;
-	return (SUCCESS);
+	return (d->last_exit_status = SUCCESS);
 }

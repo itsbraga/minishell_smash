@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/21 00:08:15 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:17:24 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 static char	*__find_var_path(char *to_find, t_env_lst *env)
 {
@@ -54,7 +54,7 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 		return (error);
 	}
 	if (var_path != NULL)
-		free(var_path);
+		free_and_set_null(var_path);
 	return (ret);
 }
 
@@ -80,10 +80,9 @@ int	ft_cd(t_data *d)
 		next = d->token->next->content;
 		error = err_msg_cmd(d->token->content, next, ERR_BAD_FILE, FAILURE);
 		free(next);
-		return (error);
+		return (d->last_exit_status = error);
 	}
 	change_paths(d->env, d->exp_env);
 	update_prompt(d, &pr);
-	// d->last_exit_status = 0;
-	return (SUCCESS);
+	return (d->last_exit_status = ret);
 }

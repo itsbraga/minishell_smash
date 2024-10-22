@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 00:09:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:24:23 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*clean_translated_variable(char *str, char *var)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	free(str);
+	free_and_set_null(str);
 	return (new_str);
 }
 

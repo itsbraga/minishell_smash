@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 04:46:45 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/22 23:30:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tools.h"
 
-void	secure_malloc(void *to_secure, bool cleanup)
+void	clean_after_execution(t_data *d, char *user_input)
 {
-	if (to_secure == NULL)
-	{
-		err_msg("malloc", strerror(errno), 0);
-		if (cleanup == true)
-			clean_exit_shell(FAILURE); // de meme pour le code ici (cf. en bas)
-	}
+	lstclear_main(&(d->main));
+	lstclear_token(&(d->token));
+	lstclear_exec(&(d->exec));
+	free_and_set_null(user_input);
 }
 
 void	free_tab(char **tab)
@@ -31,12 +29,10 @@ void	free_tab(char **tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
-		free(tab[i]);
-		tab[i] = NULL;
+		free_and_set_null(tab[i]);
 		i++;
 	}
-	free(tab);
-	tab = NULL;
+	free_and_set_null(tab);
 }
 
 int	free_gc_tab(t_gc_lst **yama, char **tab)
@@ -63,6 +59,8 @@ static void	__free_data(t_data *d, bool clear_history)
 {
 	if (d != NULL)
 	{
+		if (d->prompt != NULL)
+			free_and_set_null(d->prompt);
 		if (d->main != NULL)
 			lstclear_main(&(d->main));
 		if (d->token != NULL)

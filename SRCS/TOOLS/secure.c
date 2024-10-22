@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   secure.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 18:38:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 20:24:20 by art3mis          ###   ########.fr       */
+/*   Created: 2024/10/22 20:30:48 by art3mis           #+#    #+#             */
+/*   Updated: 2024/10/22 21:05:52 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "tools.h"
 
-int	ft_unset(t_data *d, char **args)
+void	secure_malloc(void *to_secure, bool cleanup)
 {
-	int		i;
-
-	i = 1;
-	while (args[i] != NULL)
+	if (to_secure == NULL)
 	{
-		del_env_var(&(d->env), args[i]);
-		del_env_var(&(d->exp_env), args[i]);
-		i++;
+		err_msg("malloc", strerror(errno), 0);
+		if (cleanup == true)
+			clean_exit_shell(FAILURE); // de meme pour le code ici (cf. en bas)
 	}
-	return (d->last_exit_status = SUCCESS);
+}
+
+void    free_and_set_null(void *to_free)
+{
+	free(to_free);
+    to_free = NULL;
 }

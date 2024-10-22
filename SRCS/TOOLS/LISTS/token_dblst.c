@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 22:24:12 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:35:43 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tools.h"
 
 t_token_dblst	*token_dblst_new_node(char *content, t_token_type type)
 {
@@ -81,6 +81,6 @@ void	del_current_token(t_token_dblst **t, t_token_dblst *to_delete)
 		if (to_delete->next != NULL)
 			to_delete->next->prev = to_delete->prev; // le prev du next devient le prev du noeud supprime
 	}
-	free(to_delete->content);
-	free(to_delete);
+	free_and_set_null(to_delete->content);
+	free_and_set_null(to_delete);
 }

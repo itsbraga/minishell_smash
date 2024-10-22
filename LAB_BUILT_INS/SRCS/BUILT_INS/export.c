@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/15 21:07:26 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/22 18:48:27 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ size_t	get_varlen(char *var)
 		i++;
 	return (i);
 }
+
 // Si to_update a une valeur et que var n'en a pas ne pas mettre a jour
 // Si 
-
 void	update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp, t_env_lst *env, char *var)
 {
 	if (ft_strchr(to_up_exp->content, '=') == NULL && to_up == NULL)

@@ -6,11 +6,11 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:49:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/21 21:22:43 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/22 23:34:39 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tools.h"
 
 void	lstclear_main(t_main_lst **main)
 {
@@ -22,8 +22,7 @@ void	lstclear_main(t_main_lst **main)
 	{
 		tmp = (*main)->next;
 		(*main)->next = NULL;
-		free((*main)->content);
-		(*main)->content = NULL;
+		free_and_set_null((*main)->content);
 		free(*main);
 		(*main) = tmp;
 	}
@@ -39,8 +38,7 @@ void	lstclear_token(t_token_dblst **t)
 	{
 		tmp = (*t)->next;
 		(*t)->next = NULL;
-		free((*t)->content);
-		(*t)->content = NULL;
+		free_and_set_null((*t)->content);
 		free(*t);
 		(*t) = tmp;
 	}
@@ -57,11 +55,11 @@ void	lstclear_redir(t_redir_lst **r)
 		tmp = (*r)->next;
 		(*r)->next = NULL;
 		if ((*r)->limiter != NULL)
-			free((*r)->limiter), (*r)->limiter = NULL;
+			free_and_set_null((*r)->limiter);
 		if ((*r)->infile != NULL)
-			free((*r)->infile), (*r)->infile = NULL;
+			free_and_set_null((*r)->infile);
 		if ((*r)->outfile != NULL)
-			free((*r)->outfile), (*r)->outfile = NULL;
+			free_and_set_null((*r)->outfile);
 		free(*r);
 		(*r) = tmp;
 	}
@@ -79,8 +77,7 @@ void	lstclear_exec(t_exec_lst **e)
 		(*e)->next = NULL;
 		if ((*e)->redir != NULL)
 			lstclear_redir(&((*e)->redir));
-		free((*e)->bin_path);
-		(*e)->bin_path = NULL;
+		free_and_set_null((*e)->bin_path);
 		if ((*e)->cmd != NULL)
 			free_tab((*e)->cmd);
 		free(*e);
@@ -98,8 +95,7 @@ void	lstclear_env(t_env_lst **env)
 	{
 		tmp = (*env)->next;
 		(*env)->next = NULL;
-		free((*env)->content);
-		(*env)->content = NULL;
+		free_and_set_null((*env)->content);
 		free(*env);
 		(*env) = tmp;
 	}

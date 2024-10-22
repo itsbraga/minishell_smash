@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 04:46:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/22 23:31:28 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tools.h"
 
 void	*new_gc_node(void *ptr, bool is_tab)
 {
@@ -73,9 +73,9 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 	{
 		node = *yama;
 		*yama = (*yama)->next;
-		free(node->ptr);
-		node->ptr = NULL;
-		free(node);
+		free_and_set_null(node->ptr);
+		free_and_set_null(node);
+		// free(node);
 		return (SUCCESS);
 	}
 	prev = *yama;
@@ -87,8 +87,8 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 	node = prev->next;
 	// dprintf(2, "ligne 69 : node = %p\n", node);
 	prev->next = (prev->next)->next;
-	free(node->ptr);
-	node->ptr = NULL;
-	free(node);
+	free_and_set_null(node->ptr);
+	free_and_set_null(node);
+	// free(node);
 	return (SUCCESS);
 }
