@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 23:22:33 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 16:30:00 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,6 @@ char	**search_path(char **tab_path, char **env)
 		secure_malloc(tab_path, true);
 	}
 	return (tab_path);
-}
-
-void	print_tab2(char **tab)
-{
-	int i;
-
-	i = 0;
-	if (tab)
-		dprintf(2, "tab_path existe\n");
-	else
-		dprintf(2, "tab_path n'existe pas\n");
-	if (tab[i])
-	{
-		while (tab[i])
-		{
-			dprintf(2, "tab[%d] = %s\n", i, tab[i]);
-			i++;
-		}
-	}
-	else
-		dprintf(2, "tab_path existe mais est vide\n");
-
 }
 
 char	*search_bin(char *cmd, char **tab_path)
@@ -89,8 +67,28 @@ char	*search_bin(char *cmd, char **tab_path)
 	return ((void)yama(REMOVE, tab_path, 0), NULL);
 }
 
+static	bool	__check_if_is_dir(char *bin_path)
+{
+	struct stat s_bin_path;
+	
+	if (stat(bin_path, &s_bin_path) != 0)
+	{
+		err_msg("stat", strerror(errno), 0);
+		clean_exit_shell(1);
+	}
+	if (S_ISDIR(s_bin_path.st_mode) != 0)
+	{
+		err_msg(bin_path, ERR_IS_DIR, 0);
+		return (true);
+	}
+	else
+		return (false);	
+}
+
  int	check_bin_path(t_exec_lst *node, bool absolute_path)
 {
+	if (__check_if_is_dir(node->bin_path) == true)
+		clean_exit_shell(CMD_CANNOT_EXEC);
 	if (access(node->bin_path, F_OK) == -1)
 	{
 		if (absolute_path == true)
