@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 19:33:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 22:28:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-bool	is_built_in(char *cmd)
+bool	is_built_in(char **cmd)
 {
 	int			i;
 	const char	*built_in[] = {
@@ -28,8 +28,9 @@ bool	is_built_in(char *cmd)
 	i = 0;
 	while (built_in[i] != NULL)
 	{
-		if (ft_strcmp(built_in[i++], cmd) == 0)
+		if (ft_strcmp(built_in[i], *cmd) == 0)
 			return (true);
+		i++;
 	}
 	return (false);
 }
@@ -50,8 +51,5 @@ int	execute_built_in(t_data *d, char **cmd)
 		return (ft_env(d->env, cmd));
 	else if (ft_strcmp(cmd[0], "exit") == 0)
 		ft_exit(d, cmd);
-	else
-		return
-	d->last_exit_status = SUCCESS;
-	return (d->last_exit_status);
+	return (NOT_A_BUILTIN);
 }

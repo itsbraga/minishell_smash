@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 18:57:53 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 22:43:45 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ static int	__open_heredoc(t_data *d, char *limiter)
 
 	line = NULL;
 	if (pipe(fd) == -1)
-	{
-		err_msg(NULL, strerror(errno), 0);
-		clean_exit_shell(FAILURE);
-	}
+		(err_msg(NULL, strerror(errno), 0), exit(FAILURE));
 	must_expand = __manage_limiter(&limiter);
 	// signal(SIGINT, set_signals_in_heredoc);
 	while (1)

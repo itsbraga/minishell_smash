@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 20:30:40 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:07:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing-lexing.h"
+#include "parsing_lexing.h"
 
 t_redir_lst	*redir_in_n_infile(t_token_dblst *curr)
 {

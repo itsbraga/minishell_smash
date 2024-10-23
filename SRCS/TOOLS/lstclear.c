@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:49:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 19:06:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 22:42:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	lstclear_main(t_main_lst **main)
 	{
 		tmp = (*main)->next;
 		(*main)->next = NULL;
-		free_and_set_null((*main)->content);
+		// free_and_set_null((*main)->content);
 		free(*main);
 		(*main) = tmp;
 	}
@@ -54,8 +54,8 @@ void	lstclear_redir(t_redir_lst **r)
 	{
 		tmp = (*r)->next;
 		(*r)->next = NULL;
-		if ((*r)->limiter != NULL)
-			free_and_set_null((*r)->limiter);
+		// if ((*r)->limiter != NULL)
+		// 	free_and_set_null((*r)->limiter);
 		if ((*r)->infile != NULL)
 			free_and_set_null((*r)->infile);
 		if ((*r)->outfile != NULL)

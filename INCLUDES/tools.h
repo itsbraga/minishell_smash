@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 18:43:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:06:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * TOOLS
 \******************************************************************************/
 
-// err_msg.c
+// error_handler.c
 void			err_msg(char *detail, char *reason, int quotes);
 int				err_msg_cmd(char *cmd, char *detail, char *reason,
 					int err_status);

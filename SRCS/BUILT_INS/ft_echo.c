@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 18:51:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 22:58:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ int	ft_echo(t_data *d, char **args)
 	else
 		__resync_rl();
 	d->last_exit_status = SUCCESS;
-	return (d->last_exit_status);
+	return (SUCCESS);
 }

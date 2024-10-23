@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:29:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/17 21:20:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 21:59:01 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define COLORS_H
 
 # define R  			"\e[0m"
+# define BP				"\e[38;2;255;182;193m\e[1m"
+# define BPP			"\e[35m\e[1m"
+# define BR				"\e[31m\e[1m"
 
 # define BOLD			"\e[1m"
 # define ITAL			"\e[3m"

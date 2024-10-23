@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 18:53:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 22:59:52 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	ft_export(t_env_lst *exp_env, t_env_lst *env, char **args)
 		}
 	}
 	d->last_exit_status = SUCCESS;
-	return (d->last_exit_status);
+	return (SUCCESS);
 }
 
 // code de sortie ?

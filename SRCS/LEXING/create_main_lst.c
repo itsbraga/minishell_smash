@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 18:27:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:07:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing-lexing.h"
+#include "parsing_lexing.h"
 
 static void	__init_exec_info(t_data *d)
 {

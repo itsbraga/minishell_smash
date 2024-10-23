@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libraries.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:58:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 22:59:28 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 20:08:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 # include "structs.h"
 # include "defines.h"
-# include "parsing-lexing.h"
+# include "parsing_lexing.h"
 # include "exec.h"
 # include "minishell.h"
 # include "tools.h"

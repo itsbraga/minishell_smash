@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/10/23 18:51:34 by pmateo           ###   ########.fr       */
-=======
-/*   Updated: 2024/10/23 18:19:22 by annabrag         ###   ########.fr       */
->>>>>>> 407f7ebf419472a222507389a69cff9b344fe92c
+/*   Updated: 2024/10/23 20:33:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +43,8 @@ static void	__minishell(t_data *d)
 				display_token_dblst(&(d->token));
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(&(d->exec));
-<<<<<<< HEAD
-			while_cmd(d, &(d->exec));
-=======
 			if (error != 1)
 				while_cmd(d, &(d->exec));
->>>>>>> 407f7ebf419472a222507389a69cff9b344fe92c
 		}
 		clean_after_execution(d, input);
 	}

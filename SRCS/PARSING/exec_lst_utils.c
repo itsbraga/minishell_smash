@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_lst_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:34:57 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:07:24 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 20:07:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing-lexing.h"
+#include "parsing_lexing.h"
 
 void	init_ptrs(t_ptrs *p)
 {

@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 19:02:40 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:35:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing-lexing.h"
+#include "parsing_lexing.h"
 
 static char	**__get_all_seg_elems(char *main_content)
 {
@@ -54,7 +54,7 @@ int	create_token_dblst(t_data *d)
 		if (create_exec_lst(d) == FAILURE)
 			return (FAILURE);
 		curr = curr->next;
+		// (void)yama(REMOVE, seg_elems, 0);
 	}
-	(void)yama(REMOVE, seg_elems, 0);
 	return (SUCCESS);
 }

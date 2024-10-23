@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 18:52:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:11:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static long long	__ft_atol(char *arg)
 	return ((res * sign) % 256);
 }
 
-static int	__set_exit_status(t_data *d, char **args)
+static int	__get_exit_status(t_data *d, char **args)
 {
 	long long	exit_status;
 
@@ -60,12 +60,12 @@ static int	__set_exit_status(t_data *d, char **args)
 
 void	ft_exit(t_data *d, char **args)
 {
-	int	exit_status;
+	int	code;
 
-	exit_status = 0;
+	code = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
-	exit_status = __set_exit_status(d, args);
-	d->last_exit_status = exit_status;
-	if (exit_status != 1)
-		clean_exit_shell(d->last_exit_status);
+	code = __get_exit_status(d, args);
+	d->last_exit_status = code;
+	if (code != 1)
+		clean_exit_shell(code);
 }

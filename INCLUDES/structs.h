@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 18:43:11 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:54:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_parser
 {
 	char	*input;
 	int		i;
+	int		rcount;
 	int		start;
 	int		seg_count;
 	char	**segment;
@@ -59,9 +60,6 @@ typedef struct s_token_parser
 	int		token_count;
 	char	**seg_elems;
 	bool	closed_quotes[2];
-	char	redir;
-	int		count;
-	int		j;
 }				t_token_parser;
 
 typedef struct s_main_lst

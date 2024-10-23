@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 19:30:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 22:58:24 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_env(t_env_lst *env, char **args)
 	{
 		err_msg(args[1], ERR_BAD_FILE, 1);
 		d->last_exit_status = 127;
-		return (d->last_exit_status);
+		return (127);
 	}
 	while (tmp != NULL)
 	{
@@ -31,5 +31,5 @@ int	ft_env(t_env_lst *env, char **args)
 		tmp = tmp->next;
 	}
 	d->last_exit_status = SUCCESS;
-	return (d->last_exit_status);
+	return (SUCCESS);
 }

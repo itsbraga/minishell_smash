@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 14:54:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:07:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing-lexing.h"
+#include "parsing_lexing.h"
 
 static char	*__del_var(char *str, char *var, size_t var_size)
 {

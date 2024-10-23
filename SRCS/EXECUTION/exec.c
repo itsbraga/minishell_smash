@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 19:25:44 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 23:12:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	go_exec(t_exec_lst *node, char **env)
 	t_data	*d;
 
 	d = data_struct();
-	if (execute_built_in(d, node->cmd) == FAILURE)
+	if (execute_built_in(d, node->cmd) == 1)
 	{
 		err_msg(node->cmd[0], strerror(errno), 0);
 		yama(REMOVE, env, 0);
-		exit (d->last_exit_status);
+		exit(d->last_exit_status);
 	}
 	if (handle_bin_path(node, env) == 0)
 		exec(node->bin_path, node->cmd, env);
@@ -42,3 +42,29 @@ void	go_exec(t_exec_lst *node, char **env)
 		exit(FAILURE);
 	}
 }
+
+// void	go_exec(t_exec_lst *node, char **env)
+// {
+// 	t_data	*d;
+
+// 	d = data_struct();
+// 	if (is_built_in(node->cmd) == false)
+// 	{
+// 		if (handle_bin_path(node, env) == 0)
+// 			exec(node->bin_path, node->cmd, env);
+// 		else
+// 		{
+// 			yama(REMOVE, env, 0);
+// 			exit(FAILURE);
+// 		}
+// 	}
+// 	else
+// 	{
+// 		if (execute_built_in(d, node->cmd) == NOT_A_BUILTIN)
+// 		{
+// 			err_msg(node->cmd[0], strerror(errno), 0);
+// 			yama(REMOVE, env, 0);
+// 			exit (d->last_exit_status);
+// 		}
+// 	}
+// }

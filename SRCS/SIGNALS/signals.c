@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 19:03:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:02:58 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	__sigint_handler(int signo)
 	d = data_struct();
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	g_sig_code = 1;
-	d->last_exit_status = 130;
+	d->last_exit_status = CTRL_C;
 	rl_reset_custom_prompt();
 }
 
@@ -60,7 +60,7 @@ static void	__sigint_handler_heredoc(int sig)
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	// fonction pour fermer le fd
 	g_sig_code = 1;
-	d->last_exit_status = 130;
+	d->last_exit_status = CTRL_C;
 }
 
 // appeler cet handler dans la fonction d'ouverture d'here_doc

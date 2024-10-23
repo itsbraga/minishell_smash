@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing-lexing.h                                   :+:      :+:    :+:   */
+/*   parsing_lexing.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 18:41:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:47:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING-LEXING_H
-# define PARSING-LEXING_H
+#ifndef PARSING_LEXING_H
+# define PARSING_LEXING_H
 
 # include "libraries.h"
 
@@ -19,13 +19,16 @@
  * LEXING
 \******************************************************************************/
 
-// check_input.c
+// parse_input.c
 int				parse_input(t_parser *p);
+
+// parse_input2.c
+int				check_order(t_parser *p);
 
 // create_main_lst.c
 int				create_main_lst(t_data *d, char *input);
 
-// check_main.c
+// parse_main.c
 void			parse_segment(t_token_parser *p);
 
 // tokenization.c

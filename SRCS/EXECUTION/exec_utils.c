@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 19:15:30 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 21:03:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ char	*search_bin(char *cmd, char **tab_path)
 	return ((void)yama(REMOVE, tab_path, 0), NULL);
 }
 
-static	bool	__check_if_is_dir(char *bin_path)
+static bool	__check_if_is_dir(char *bin_path)
 {
-	struct stat s_bin_path;
-	
+	struct stat	s_bin_path;
+
 	if (stat(bin_path, &s_bin_path) != 0)
 	{
 		err_msg("stat", strerror(errno), 0);
@@ -79,10 +79,10 @@ static	bool	__check_if_is_dir(char *bin_path)
 		return (true);
 	}
 	else
-		return (false);	
+		return (false);
 }
 
- int	check_bin_path(t_exec_lst *node, bool absolute_path)
+int	check_bin_path(t_exec_lst *node, bool absolute_path)
 {
 	dprintf(2, "check_bin_path | bin_path = %s\n", node->bin_path);
 	if (__check_if_is_dir(node->bin_path) == true)

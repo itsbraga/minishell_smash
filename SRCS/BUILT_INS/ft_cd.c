@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 22:57:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int	ft_cd(t_data *d)
 		next = d->token->next->content;
 		error = err_msg_cmd(d->token->content, next, ERR_BAD_FILE, FAILURE);
 		d->last_exit_status = error;
-		return (free_and_set_null(next), d->last_exit_status);
+		return (free_and_set_null(next), error);
 	}
 	(change_paths(d->env, d->exp_env), update_prompt(d, &pr));
 	d->last_exit_status = ret;
-	return (d->last_exit_status);
+	return (ret);
 }

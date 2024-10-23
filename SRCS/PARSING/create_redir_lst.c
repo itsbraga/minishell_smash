@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 20:44:31 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:01:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing-lexing.h"
+#include "parsing_lexing.h"
 
 static t_redir_lst	*__get_redir_infos(t_token_dblst *curr)
 {
@@ -35,6 +35,14 @@ static t_redir_lst	*__get_redir_infos(t_token_dblst *curr)
 	return (new_redir);
 }
 
+static bool	__type_is_redir(t_token_type type)
+{
+	if (type == REDIR_IN || type == HERE_DOC || type == REDIR_OUT_TRUNC
+		|| type == REDIR_OUT_APPEND)
+		return (true);
+	return (false);
+}
+
 int	create_redir_lst(t_data *d, t_exec_lst *existing_task)
 {
 	t_token_dblst	*curr;
@@ -45,7 +53,7 @@ int	create_redir_lst(t_data *d, t_exec_lst *existing_task)
 	while (curr != NULL)
 	{
 		new_redir = __get_redir_infos(curr);
-		if (IS_REDIR(curr->type) == false)
+		if (__type_is_redir(curr->type) == false)
 			curr = curr->next;
 		else if (new_redir != NULL)
 		{
@@ -53,5 +61,6 @@ int	create_redir_lst(t_data *d, t_exec_lst *existing_task)
 			curr = curr->next->next;
 		}
 	}
+	d->last_exit_status = SUCCESS;
 	return (SUCCESS);
 }
