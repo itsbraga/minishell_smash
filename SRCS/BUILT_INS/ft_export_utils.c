@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:03:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 23:46:48 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:52:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,50 @@
 
 void	add_var_to_exp_env(t_env_lst *e_env, char *var)
 {
-	t_env_lst	*current;
+	t_env_lst	*curr;
 	t_env_lst	*new;
 
-	current = e_env;
+	curr = e_env;
 	new = exp_env_new_var(var);
-	if (cmp_to_equal(current->content, new->content) > 0)
+	if (cmp_to_equal(curr->content, new->content) > 0)
 	{
-		new->next = current;
+		new->next = curr;
 		e_env = new;
 		return ;
 	}
-	while (current->next != NULL)
+	while (curr->next != NULL)
 	{
-		if (cmp_to_equal(current->next->content, new->content) > 0)
+		if (cmp_to_equal(curr->next->content, new->content) > 0)
 		{
-			new->next = current->next;
-			current->next = new;
+			new->next = curr->next;
+			curr->next = new;
 			return ;
 		}
-		current = current->next;
+		curr = curr->next;
 	}
-	current->next = new;
+	curr->next = new;
 	new->next = NULL;
 }
 
 void	add_var_to_env(t_env_lst *env, char *var)
 {
-	t_env_lst	*current;
+	t_env_lst	*curr;
 	t_env_lst	*new;
 
-	current = env;
+	curr = env;
 	new = env_new_var(var);
-	while (current->next != NULL)
-		current = current->next;
-	current->next = new;
+	while (curr->next != NULL)
+		curr = curr->next;
+	curr->next = new;
 	new->next = NULL;
 }
 
-static size_t   __get_varlen(char *var)
+static size_t	__get_varlen(char *var)
 {
 	size_t	i;
 
 	i = 0;
-	while (var[i] != '=' && var[i] != '\0')
+	while (var[i] != '\0' && var[i] != '=')
 		i++;
 	return (i);
 }
@@ -78,16 +78,16 @@ t_env_lst *env, char *var)
 
 t_env_lst	*search_for_var(t_env_lst *env, char *var)
 {
-	t_env_lst	*current;
+	t_env_lst	*curr;
 	size_t		len_var;
 
-	current = env;
+	curr = env;
 	len_var = __get_varlen(var);
-	while (current != NULL)
+	while (curr != NULL)
 	{
-		if (ft_strncmp(current->content, var, len_var) == 0)
-			return (current);
-		current = current->next;
+		if (ft_strncmp(curr->content, var, len_var) == 0)
+			return (curr);
+		curr = curr->next;
 	}
 	return (NULL);
 }

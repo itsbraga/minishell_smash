@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage_collector_utils.c                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:54:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 14:55:57 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:07:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*search_ptr(t_gc_lst **yama, void *ptr)
 {
-	t_gc_lst *curr;
+	t_gc_lst	*curr;
 
 	curr = *yama;
 	while (curr != NULL)
@@ -25,6 +25,7 @@ void	*search_ptr(t_gc_lst **yama, void *ptr)
 	}
 	return (NULL);
 }
+
 int	handle_remove(t_gc_lst **yama, void *ptr)
 {
 	t_gc_lst	*node;

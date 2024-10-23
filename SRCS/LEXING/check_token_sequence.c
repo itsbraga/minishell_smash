@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_sequence.c                                   :+:      :+:    :+:   */
+/*   check_token_sequence.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 16:22:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ static int	__different_cases(char *content, t_token_parser *p)
 	return (SUCCESS);
 }
 
-int	check_redir_sequence(char *content, t_token_parser *p)
+int	check_token_sequence(t_data *d, t_token_dblst *t)
 {
-	t_data	*d;
+	t_token_dblst	*curr;
 
-	d = data_struct();
-	while (content[p->j] != '\0')
+	curr = t;
+	while (curr != NULL)
 	{
-		if (is_redir(content) == true)
+		if (IS_REDIR(curr) == true && curr->next == NULL)
+			return (err_msg(NULL, "newline", 2), BAD_USAGE);
+		else if ()
 		{
 			p->redir = content[p->j];
 			p->count = 1;
@@ -45,10 +47,10 @@ int	check_redir_sequence(char *content, t_token_parser *p)
 				p->j++;
 			}
 			if (__different_cases(content, p) == FAILURE)
-				return (d->last_exit_status = BAD_USAGE);
+				return (BAD_USAGE);
 		}
 		else
-			p->j++;
+			curr = curr->next;
 	}
-	return (d->last_exit_status = SUCCESS);
+	return (SUCCESS);
 }

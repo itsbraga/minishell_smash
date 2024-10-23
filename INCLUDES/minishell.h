@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 14:53:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:04:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ void			create_env(t_data *d, char **envp);
 \******************************************************************************/
 
 // signals.c
+void			rl_reset_custom_prompt(void);
 void			handle_sigquit(void);
 void			set_signals(void);
-
-// signals_here_doc.c
-void    		set_signals_in_heredoc(void);
+void			set_signals_in_heredoc(void);
 
 /******************************************************************************\
  * INIT

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:06:09 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:05:03 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	redir_lst_add_back(t_redir_lst **r, t_redir_lst *new_node)
 size_t	get_redir_lst_size(t_redir_lst **r)
 {
 	size_t		size;
-	t_redir_lst	*current;
+	t_redir_lst	*curr;
 
 	size = 0;
-	current = *r;
-	while (current != NULL)
+	curr = *r;
+	while (curr != NULL)
 	{
 		size++;
-		current = current->next;
+		curr = curr->next;
 	}
 	return (size);
 }

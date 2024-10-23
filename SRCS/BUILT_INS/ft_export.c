@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 20:43:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:53:26 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,21 @@ static int	__check_args(char *var)
 
 static void	__print_export_env(t_env_lst *exp_env)
 {
-	t_env_lst    *current;
+	t_env_lst	*curr;
 
-    current = exp_env;
-	while (current != NULL)
+	curr = exp_env;
+	while (curr != NULL)
 	{
-        ft_printf(1, "export ");
-		ft_printf(1, "%s\n", current->content);
-        current = current->next;
-  	}
+		ft_printf(1, "export ");
+		ft_printf(1, "%s\n", curr->content);
+		curr = curr->next;
+	}
 }
 
 int	ft_export(t_env_lst *exp_env, t_env_lst *env, char **args)
 {
-	t_data		*d;
-	unsigned	int	i;
+	t_data			*d;
+	unsigned int	i;
 
 	d = data_struct();
 	i = 1;
@@ -83,9 +83,10 @@ int	ft_export(t_env_lst *exp_env, t_env_lst *env, char **args)
 			i++;
 		}
 	}
-	return (d->last_exit_status = SUCCESS);
+	d->last_exit_status = SUCCESS;
+	return (d->last_exit_status);
 }
-	
+
 // code de sortie ?
 // si ajout de $WAOUH elle doit se glisser apres VTE_VERSION et
 //	avant XAUTHORITY

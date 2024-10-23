@@ -6,12 +6,12 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 16:35:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:39 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_LEXING_H
-# define PARSING_LEXING_H
+#ifndef PARSING-LEXING_H
+# define PARSING-LEXING_H
 
 # include "libraries.h"
 
@@ -31,15 +31,15 @@ void			parse_segment(t_token_parser *p);
 // tokenization.c
 void			lst_tokenization(t_token_dblst *t);
 
+// check_token_sequence.c
+int				check_token_sequence(t_data *d, t_token_dblst *t);
+
 // create_token_lst.c
 int				create_token_dblst(t_data *d);
 
 /******************************************************************************\
  * PARSING
 \******************************************************************************/
-
-// check_sequence.c
-int				check_redir_sequence(char *content, t_token_parser *p);
 
 // quotes_utils.c
 bool			switch_bool(bool closed);
@@ -54,10 +54,10 @@ char			*empty_quotes(char *str);
 char			*other_quotes(char *str);
 
 // redir_lst_utils.c
-t_redir_lst		*redir_in_n_infile(t_token_dblst *current);
-t_redir_lst		*redir_out_trunc_n_outfile(t_token_dblst *current);
-t_redir_lst		*redir_out_append_n_outfile(t_token_dblst *current);
-t_redir_lst		*heredoc_n_limiter(t_token_dblst *current);
+t_redir_lst		*redir_in_n_infile(t_token_dblst *curr);
+t_redir_lst		*redir_out_trunc_n_outfile(t_token_dblst *curr);
+t_redir_lst		*redir_out_append_n_outfile(t_token_dblst *curr);
+t_redir_lst		*heredoc_n_limiter(t_token_dblst *curr);
 
 // create_redir_lst.c
 int				create_redir_lst(t_data *d, t_exec_lst *existing_task);

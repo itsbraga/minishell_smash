@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 15:28:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,25 @@ static void	__add_new_task(t_data *d, t_ptrs *p)
 
 int	create_exec_lst(t_data *d)
 {
-	t_token_dblst	*current;
+	t_token_dblst	*curr;
 	t_ptrs			p;
 
-	current = d->token;
+	curr = d->token;
 	init_ptrs(&p);
-	while (current != NULL)
+	while (curr != NULL)
 	{
 		if (p.new_task == NULL)
-			__init_exec(current, &p);
-		if (current->type == COMMAND)
-			__command_case(current, &p);
-		else if (current->type == WORD)
-			__word_case(current, &p);
-		else if (p.new_task != NULL && current->type == HERE_DOC)
+			__init_exec(curr, &p);
+		if (curr->type == COMMAND)
+			__command_case(curr, &p);
+		else if (curr->type == WORD)
+			__word_case(curr, &p);
+		else if (p.new_task != NULL && curr->type == HERE_DOC)
 		{
 			p.new_task->heredoc_nb++;
 			d->info->all_cmd_heredoc_nb++;
 		}
-		current = current->next;
+		curr = curr->next;
 	}
 	__add_new_task(d, &p);
 	if (create_redir_lst(d, p.new_task) == FAILURE)

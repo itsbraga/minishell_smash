@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 15:15:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	display_main_lst(t_main_lst **main)
 {
-	t_main_lst	*current;
+	t_main_lst	*curr;
 
-	current = *main;
+	curr = *main;
 	ft_printf(STDOUT_FILENO, R BPP LIM " t_main_lst " LIM "\n" R);
-	while (current != NULL)
+	while (curr != NULL)
 	{
 		ft_printf(STDOUT_FILENO, "--- node ---\n");
 		ft_printf(STDOUT_FILENO, BPP "content:\t [" R);
-		ft_printf(STDOUT_FILENO, "%s" BPP "]\n" R, current->content);
-		current = current->next;
+		ft_printf(STDOUT_FILENO, "%s" BPP "]\n" R, curr->content);
+		curr = curr->next;
 	}
-	if (current == NULL)
+	if (curr == NULL)
 		ft_putendl_fd("", STDOUT_FILENO);
 }
 
@@ -54,23 +54,23 @@ static void	__write_type_name(t_token_type type)
 
 void	display_token_dblst(t_token_dblst **t)
 {
-	t_token_dblst	*current;
+	t_token_dblst	*curr;
 
-	current = *t;
+	curr = *t;
 	ft_printf(STDOUT_FILENO, R BOLD BLUE LIM2 " t_token_dblst " LIM3 "\n" R);
-	while (current != NULL)
+	while (curr != NULL)
 	{
 		ft_printf(STDOUT_FILENO, "--- node ---\n");
 		ft_printf(STDOUT_FILENO, R BOLD BLUE "content:\t [" R);
-		ft_printf(STDOUT_FILENO, "%s" BOLD BLUE "]\n" R, current->content);
-		if (current->type != UNKNOWN)
+		ft_printf(STDOUT_FILENO, "%s" BOLD BLUE "]\n" R, curr->content);
+		if (curr->type != UNKNOWN)
 		{
 			ft_printf(STDOUT_FILENO, BLUE "type:\t\t ");
-			__write_type_name(current->type);
+			__write_type_name(curr->type);
 		}
-		current = current->next;
+		curr = curr->next;
 	}
-	if (current == NULL)
+	if (curr == NULL)
 		ft_putendl_fd("", STDOUT_FILENO);
 }
 
@@ -101,14 +101,14 @@ static void	__display_redir_node(t_redir_lst *node)
 
 void	display_redir_lst(t_redir_lst **r)
 {
-	t_redir_lst	*current;
+	t_redir_lst	*curr;
 
-	current = *r;
+	curr = *r;
 	ft_printf(STDOUT_FILENO, R BP LIM3 " t_redir_lst " LIM "\n" R);
-	while (current != NULL)
+	while (curr != NULL)
 	{
 		ft_printf(STDOUT_FILENO, "--- node ---\n");
-		__display_redir_node(current);
-		current = current->next;
+		__display_redir_node(curr);
+		curr = curr->next;
 	}
 }

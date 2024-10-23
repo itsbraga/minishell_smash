@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 23:24:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:57:53 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	__open_heredoc(t_data *d, char *limiter)
 	while (1)
 	{
 		ft_printf(2, "> ");
-		line = get_next_line(0, 0); // readline ?
+		line = get_next_line(0, 0);
 		dprintf(2, "before heredoc gnl | line = %s\n", line);
 		if (line == NULL)
 			break ;
@@ -66,38 +66,38 @@ static int	__open_heredoc(t_data *d, char *limiter)
 
 int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 {
-	t_redir_lst	*current;
+	t_redir_lst	*curr;
 	char		*tmp;
 	int			latest_read_fd;
 
-	current = r;
+	curr = r;
 	tmp = NULL;
 	latest_read_fd = 0;
-	while (current != NULL)
+	while (curr != NULL)
 	{
-		if (current->type == HERE_DOC)
+		if (curr->type == HERE_DOC)
 		{
-			tmp = current->limiter;
-			current->limiter = ft_strjoin(current->limiter, "\n");
-			secure_malloc(current->limiter, true);
+			tmp = curr->limiter;
+			curr->limiter = ft_strjoin(curr->limiter, "\n");
+			secure_malloc(curr->limiter, true);
 			free_and_set_null(tmp);
-			latest_read_fd = __open_heredoc(d, current->limiter);
+			latest_read_fd = __open_heredoc(d, curr->limiter);
 		}
-		current = current->next;
+		curr = curr->next;
 	}
 	return (latest_read_fd);
 }
 
 void	handle_heredoc(t_data *d, t_exec_lst **e_lst)
 {
-	t_exec_lst	*current;
+	t_exec_lst	*curr;
 
-	current = *e_lst;
-	while (current != NULL)
+	curr = *e_lst;
+	while (curr != NULL)
 	{
-		if (current->heredoc_nb > 0)
-			current->latest_hd = __fill_all_heredoc(d, current->redir);
-		current = current->next;
+		if (curr->heredoc_nb > 0)
+			curr->latest_hd = __fill_all_heredoc(d, curr->redir);
+		curr = curr->next;
 	}
 	return ;
 }

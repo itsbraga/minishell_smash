@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 20:24:17 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:53:41 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	ft_pwd(void)
 	}
 	ft_printf(STDOUT_FILENO, "%s\n", cwd);
 	d = data_struct();
-	return (d->last_exit_status = SUCCESS);
+	d->last_exit_status = SUCCESS;
+	return (d->last_exit_status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 23:21:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:57:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ t_env_lst	*env_new_var(char *content)
 size_t	get_envlst_size(t_env_lst **env)
 {
 	size_t		size;
-	t_env_lst	*current;
+	t_env_lst	*curr;
 
 	size = 0;
-	current = *env;
-	while (current != NULL)
+	curr = *env;
+	while (curr != NULL)
 	{
 		size++;
-		current = current->next;
+		curr = curr->next;
 	}
 	return (size);
 }
@@ -52,50 +52,49 @@ size_t	get_envtab_size(char **env)
 void	del_env_var(t_env_lst **env, char *var_to_rm)
 {
 	t_env_lst	*prev;
-	t_env_lst	*current;
+	t_env_lst	*curr;
 	int			len_var_to_rm;
 
 	if (env == NULL || (*env) == NULL || var_to_rm == NULL)
 		return ;
 	prev = NULL;
-	current = *env;
+	curr = *env;
 	len_var_to_rm = ft_strlen(var_to_rm);
-	while (current != NULL)
+	while (curr != NULL)
 	{
-		if ((ft_strncmp(current->content, var_to_rm, len_var_to_rm) == 0)
-			&& (current->content[len_var_to_rm] == '='))
+		if ((ft_strncmp(curr->content, var_to_rm, len_var_to_rm) == 0)
+			&& (curr->content[len_var_to_rm] == '='))
 		{
 			if (prev == NULL)
-				*env = current->next; // Si le node à supprimer est le premier de la liste
+				*env = curr->next;
 			else
-				prev->next = current->next; // Si le node à supprimer est au milieu ou à la fin
-			free_and_set_null(current->content);
-			free_and_set_null(current);
+				prev->next = curr->next;
+			free_and_set_null(curr->content);
+			free_and_set_null(curr);
 			return ;
 		}
-		prev = current;
-		current = current->next;
+		prev = curr;
+		curr = curr->next;
 	}
 }
 
 char	**recreate_env_tab(t_env_lst **env)
 {
 	char		**tab;
-	t_env_lst	*current;
+	t_env_lst	*curr;
 	int			i;
 
 	tab = yama(CREATE_TAB, NULL, (sizeof(char *) * (get_envlst_size(env) + 1)));
 	secure_malloc(tab, true);
-	current = *env;
+	curr = *env;
 	i = 0;
-	while (current != NULL)
+	while (curr != NULL)
 	{
-		// tab[i] = ft_strdup(current->content);
-		// secure_malloc(tab[i]);
-		// (void)yama(ADD, tab[i], 0);
-		tab[i] = current->content;
+		tab[i] = ft_strdup(curr->content);
+		secure_malloc(tab[i]);
+		(void)yama(ADD, tab[i], 0);
 		i++;
-		current = current->next;
+		curr = curr->next;
 	}
 	tab[i] = NULL;
 	return (tab);

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 14:54:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,25 +82,25 @@ char	*take_var(char *str, char *var)
 char	*search_var(char *to_find, t_env_lst *env)
 {
 	char		*to_cmp;
-	t_env_lst	*current;
+	t_env_lst	*curr;
 
 	to_cmp = NULL;
-	current = env;
-	while (current != NULL)
+	curr = env;
+	while (curr != NULL)
 	{
-		to_cmp = ft_strldup(current->content, len_to_equal(current->content));
+		to_cmp = ft_strldup(curr->content, len_to_equal(curr->content));
 		secure_malloc(to_cmp, true);
 		(void)yama(ADD, to_cmp, 0);
 		if (ft_strcmp(to_find, to_cmp) == 0)
 		{
 			(void)yama(REMOVE, to_cmp, 0);
-			return (__take_var_value(current->content));
+			return (__take_var_value(curr->content));
 		}
 		else
 		{
 			(void)yama(REMOVE, to_cmp, 0);
 			to_cmp = NULL;
-			current = current->next;
+			curr = curr->next;
 		}
 	}
 	return (NULL);

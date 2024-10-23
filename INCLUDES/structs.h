@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 16:35:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:43:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_gc_lst
 {
 	void			*ptr;
 	bool			is_tab;
-	struct s_gc_lst *next;
+	struct s_gc_lst	*next;
 }				t_gc_lst;
 
 /******************************************************************************\

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 16:28:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:05:52 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	clean_after_execution(t_data *d, char *input)
 {
-	lstclear_main(&(d->main));
-	// lstclear_token(&(d->token));
-	lstclear_exec(&(d->exec));
+	if (d->main != NULL)
+		lstclear_main(&(d->main));
+	if (d->token != NULL)
+		lstclear_token(&(d->token));
+	if (d->exec != NULL)
+		lstclear_exec(&(d->exec));
 	free_and_set_null(input);
 }
 
@@ -84,10 +87,10 @@ static void	__free_data(t_data *d, bool clear_history)
 				lstclear_env(&(d->exp_env));
 			rl_clear_history();
 		}
-		// free(d);
 	}
 }
 
+// verifier si on ne doit pas plutot quitter avec last_exit_code
 void	clean_exit_shell(int err_status)
 {
 	t_data	*d;
@@ -96,5 +99,5 @@ void	clean_exit_shell(int err_status)
 	if (d != NULL)
 		__free_data(d, true);
 	yama(CLEAN_ALL, NULL, 0);
-	exit(err_status); // verifier si on ne doit pas plutot quitter avec last_exit_code
+	exit(err_status);
 }

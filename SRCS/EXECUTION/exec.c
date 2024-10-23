@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 19:07:46 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 19:25:44 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ void	go_exec(t_exec_lst *node, char **env)
 
 	d = data_struct();
 	if (execute_built_in(d, node->cmd) == FAILURE)
-		err_msg(NULL, "built-in cannot be executed", 0);
+	{
+		err_msg(node->cmd[0], strerror(errno), 0);
+		yama(REMOVE, env, 0);
+		exit (d->last_exit_status);
+	}
 	if (handle_bin_path(node, env) == 0)
 		exec(node->bin_path, node->cmd, env);
 	else

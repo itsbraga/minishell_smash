@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstclear.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:49:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 23:34:39 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:06:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	lstclear_exec(t_exec_lst **e)
 		(*e)->next = NULL;
 		if ((*e)->redir != NULL)
 			lstclear_redir(&((*e)->redir));
-		free_and_set_null((*e)->bin_path);
 		if ((*e)->cmd != NULL)
 			free_tab((*e)->cmd);
 		free(*e);

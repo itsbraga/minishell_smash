@@ -6,7 +6,11 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/10/23 18:51:34 by pmateo           ###   ########.fr       */
+=======
+/*   Updated: 2024/10/23 18:19:22 by annabrag         ###   ########.fr       */
+>>>>>>> 407f7ebf419472a222507389a69cff9b344fe92c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +21,9 @@ int	g_sig_code = 0;
 static void	__minishell(t_data *d)
 {
 	char	*input;
+	int		error;
 
+	error = 0;
 	while (1)
 	{
 		display_shell_info();
@@ -26,24 +32,29 @@ static void	__minishell(t_data *d)
 		if (input == NULL) // Gestion de CTRL+D (EOF)
 		{
 			ft_printf(STDERR_FILENO, "exit\n");
-			break ; //clean_exit_shell(SUCCESS);
+			break ;
 		}
 		else if (input[0] != '\0')
 		{
 			add_history(input);
-			if (create_main_lst(d, input) == SUCCESS)
+			if (create_main_lst(d, input) == FAILURE)
+				error = 1;
+			else
 				display_main_lst(&(d->main));
-			if (create_token_dblst(d) == SUCCESS)
+			if (create_token_dblst(d) == FAILURE)
+				error = 1;
+			else
 				display_token_dblst(&(d->token));
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(&(d->exec));
+<<<<<<< HEAD
 			while_cmd(d, &(d->exec));
+=======
+			if (error != 1)
+				while_cmd(d, &(d->exec));
+>>>>>>> 407f7ebf419472a222507389a69cff9b344fe92c
 		}
-		printf("before clean\n");
-		display_main_lst(&(d->main));
 		clean_after_execution(d, input);
-		printf("after clean\n");
-		display_main_lst(&(d->main));
 	}
 }
 

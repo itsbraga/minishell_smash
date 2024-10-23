@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 13:47:59 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 19:06:51 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,5 @@ void	*yama(int flag, void *ptr, size_t size)
 			err_msg(NULL, "No allocation freed, Yama is empty", 0);
 		return (NULL);
 	}
-	else
-		return (err_msg(NULL, "This Yama flag doesn't exist", 0), NULL);
+	return (err_msg(NULL, "This Yama flag doesn't exist", 0), NULL);
 }
