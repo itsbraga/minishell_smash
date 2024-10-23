@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 15:16:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:23:38 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,28 @@ void	print_cmd(char **cmd)
 		dprintf(2, "%p\n", cmd[i]);
 		i++;
 	}
+}
+
+void	print_tab2(char **tab)
+{
+	int i;
+
+	i = 0;
+	if (tab)
+		dprintf(2, "tab existe\n");
+	else
+		dprintf(2, "tab n'existe pas\n");
+	if (tab[i])
+	{
+		while (tab[i])
+		{
+			dprintf(2, "tab[%d] = %s\n", i, tab[i]);
+			i++;
+		}
+	}
+	else
+		dprintf(2, "tab existe mais est vide\n");
+
 }
 
 void	print_tab(char **tab)

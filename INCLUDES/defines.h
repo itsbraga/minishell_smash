@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 13:27:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:52:34 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 # define ERR_CMD "command not found"
 # define ERR_BAD_PERM "Permission denied"
 # define ERR_BAD_FILE "No such file or directory"
+# define ERR_IS_DIR "Is a directory"
 # define ERR_NO_ENV "$PATH doesn't exist, please specify absolute path"
 # define ERR_MAX_HD "maximum here-document count exceeded"
 
