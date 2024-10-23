@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 23:52:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:07:46 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@ void	go_exec(t_exec_lst *node, char **env)
 	if (handle_bin_path(node, env) == 0)
 		exec(node->bin_path, node->cmd, env);
 	else
-		exit(FAILURE); // à changer ---> clean_exit_shell(errno) ?
+	{
+		yama(REMOVE, env, 0);
+		exit(FAILURE);
+	}
 }
