@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 23:49:58 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:53:19 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,5 @@ void			update_prompt(t_data *d, t_prompt *pr);
 
 // init_data.c
 t_data			*data_struct(void);
-
-/******************************************************************************\
- * EXPANSION
-\******************************************************************************/
-
-// expand_utils.c
-size_t			len_to_equal(char *str);
-char			*clean_translated_variable(char *str, char *var);
-char			*take_var(char *str, char *var);
-char			*search_var(char *to_find, t_env_lst *env);
-
-// expand.c
-char			*expand(t_data *d, char *str, bool in_heredoc);
 
 #endif

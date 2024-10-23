@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_main_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 23:56:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:44:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int	create_main_lst(t_data *d, char *input)
 	int			i;
 
 	if (unclosed_quotes(input) == true)
-		return (err_msg(NULL, YELLOW "WARNING: unclosed quotes" R, 0), FAILURE);
+		return (err_msg(NULL, YELLOW "warning: unclosed quotes" R, 0), FAILURE);
 	__init_exec_info(d);
 	segments = __get_all_segments(input);
 	if (segments == NULL)
-		return ((void)yama(REMOVE, segments, 0), SUCCESS); // a verifier par rapport aux childs
+		return ((void)yama(REMOVE, segments, 0), SUCCESS);
 	i = 0;
 	while (segments[i] != NULL)
 	{

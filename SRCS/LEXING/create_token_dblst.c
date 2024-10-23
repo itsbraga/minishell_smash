@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token_dblst.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 23:56:26 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:44:52 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	create_token_dblst(t_data *d)
 	{
 		seg_elems = __get_all_seg_elems(d->main->content);
 		if (seg_elems == NULL)
-			return ((void)yama(REMOVE, seg_elems, 0), SUCCESS); // a verifier par rapport aux childs
+			return ((void)yama(REMOVE, seg_elems, 0), SUCCESS);
 		i = 0;
 		while (seg_elems[i] != NULL)
 		{

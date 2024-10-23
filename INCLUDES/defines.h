@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:18:11 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 13:27:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
  * GENERAL
 \******************************************************************************/
 
-# define _XOPEN_SOURCE 700
 # define PATH_MAX 4096
 # define IS_REDIR(t) ((t == REDIR_IN) || (t == HERE_DOC) \
 						|| (t == REDIR_OUT_TRUNC) || (t == REDIR_OUT_APPEND))
@@ -34,6 +33,7 @@
 # define ADD_TAB 3
 # define REMOVE -1
 # define CLEAN_ALL -2
+# define SEARCH -4
 
 /******************************************************************************\
  * EXIT STATUS
@@ -85,7 +85,5 @@
 # define LIM "=================================="
 # define LIM2 "================================"
 # define LIM3 "================================="
-
-# define BYE_MSG "XOXO 💋"
 
 #endif

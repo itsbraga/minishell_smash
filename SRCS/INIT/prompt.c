@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:42:29 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 23:28:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 13:20:24 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	__part_one(t_prompt *pr)
 	pr->part2 = ft_strjoin(pr->part1, "\001" R "@42] " "\002");
 	secure_malloc(pr->part2, true);
 	free_and_set_null(pr->part1);
-	// free(pr->part1);
 }
 
 static void	__custom_cwd(t_prompt *pr)
@@ -44,14 +43,12 @@ static void	__custom_cwd(t_prompt *pr)
 		return (err_msg("0: getcwd() failed", ERR_BAD_FILE, 0));
 	extracted = ft_substr(cwd, 14, (ft_strlen(cwd) - 14));
 	secure_malloc(extracted, true);
-	relative_cwd = ft_strjoin("~/", extracted);
+	relative_cwd = ft_strjoin("~", extracted);
 	secure_malloc(relative_cwd, true);
 	free_and_set_null(extracted);
-	// free(extracted);
 	pr->custom_cwd = ft_strjoin("\001" ITAL LIGHT_GRAY "\002", relative_cwd);
 	secure_malloc(pr->custom_cwd, true);
 	free_and_set_null(relative_cwd);
-	// free(relative_cwd);
 }
 
 char	*generate_prompt(t_prompt *pr, t_data *d)
@@ -65,12 +62,9 @@ char	*generate_prompt(t_prompt *pr, t_data *d)
 	secure_malloc(pr->part3, true);
 	free_and_set_null(pr->part2);
 	free_and_set_null(pr->custom_cwd);
-	// free(pr->part2);
-	// free(pr->custom_cwd);
 	d->prompt = ft_strjoin(pr->part3, "\001" R "\002" "\n$> ");
 	secure_malloc(d->prompt, true);
 	free_and_set_null(pr->part3);
-	// free(pr->part3);
 	return (d->prompt);
 }
 

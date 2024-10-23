@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 23:16:18 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 13:30:50 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 			free(current->content);
 			current->content = ft_strjoin("PWD=", new_pwd);
 			if (current->content == NULL)
-				return (free(new_pwd), NULL);
+				return (free_and_set_null(new_pwd), NULL);
 			// (void)yama(ADD, current->content, 0);
 		}
 		current = current->next;
@@ -54,14 +54,13 @@ static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 			current->content = ft_strjoin("OLDPWD=", old_pwd + 4);
 			secure_malloc(current->content, true);
 			// (void)yama(ADD, current->content, 0);
-			free(old_pwd);
-			old_pwd = NULL;
+			free_and_set_null(old_pwd);
 			break ;
 		}
 		current = current->next;
 	}
 	if (old_pwd != NULL)
-		free(old_pwd);
+		free_and_set_null(old_pwd);
 }
 
 void	change_paths(t_env_lst *env, t_env_lst *exp_env)
@@ -81,8 +80,6 @@ void	change_paths(t_env_lst *env, t_env_lst *exp_env)
 		return ;
 	__update_oldpwd(env, old_pwd);
 	__update_oldpwd(exp_env, exp_old_pwd);
-	free(new_pwd);
-	new_pwd = NULL;
-	free(exp_new_pwd);
-	exp_new_pwd = NULL;
+	free_and_set_null(new_pwd);
+	free_and_set_null(exp_new_pwd);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 23:24:23 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:54:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing-lexing.h"
 
 size_t	len_to_equal(char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 00:22:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 13:27:27 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	__free_data(t_data *d, bool clear_history)
 				lstclear_env(&(d->exp_env));
 			rl_clear_history();
 		}
-		free(d);
+		// free(d);
 	}
 }
 
@@ -96,6 +96,5 @@ void	clean_exit_shell(int err_status)
 	if (d != NULL)
 		__free_data(d, true);
 	yama(CLEAN_ALL, NULL, 0);
-	printf("%s\n", BOLD BLUE BYE_MSG R);
 	exit(err_status); // verifier si on ne doit pas plutot quitter avec last_exit_code
 }

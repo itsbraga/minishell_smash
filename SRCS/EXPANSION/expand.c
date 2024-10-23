@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 23:26:26 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:54:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing-lexing.h"
 
 static char	*__del_var(char *str, char *var, size_t var_size)
 {
@@ -53,7 +53,7 @@ size_t vv_size)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	return (free(start_str), new_str);
+	return (free_and_set_null(start_str), new_str);
 }
 
 static char	*handle_last_exit_code(t_data *d, char *str, char *var)

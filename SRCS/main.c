@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 23:58:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:50:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	__minishell(t_data *d)
 		if (user_input == NULL) // Gestion de CTRL+D (EOF)
 		{
 			ft_printf(STDERR_FILENO, "exit\n");
-			break ; // clean_exit_shell(SUCCESS);
+			break ; //clean_exit_shell(SUCCESS);
 		}
 		else if (user_input[0] != '\0')
 		{
@@ -39,7 +39,11 @@ static void	__minishell(t_data *d)
 			display_exec_lst(d->exec);
 			// while_cmd(d, &(d->exec));
 		}
+		printf("before clean\n");
+		display_main_lst(d->main);
 		clean_after_execution(d, user_input);
+		printf("after clean\n");
+		display_main_lst(d->main);
 	}
 }
 

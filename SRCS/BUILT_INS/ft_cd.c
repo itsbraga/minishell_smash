@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 23:17:24 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 13:31:20 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 	{
 		next = t->next->content;
 		error = err_msg_cmd(t->content, next, ERR_BAD_FILE, FAILURE);
-		free(next);
+		free_and_set_null(next);
 		return (error);
 	}
 	if (var_path != NULL)
@@ -79,7 +79,7 @@ int	ft_cd(t_data *d)
 	{
 		next = d->token->next->content;
 		error = err_msg_cmd(d->token->content, next, ERR_BAD_FILE, FAILURE);
-		free(next);
+		free_and_set_null(next);
 		return (d->last_exit_status = error);
 	}
 	change_paths(d->env, d->exp_env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing-lexing.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 19:24:58 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:53:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,18 @@ int				cmd_token_count(t_token_dblst *t);
 
 // create_exec_lst.c
 int				create_exec_lst(t_data *d);
+
+/******************************************************************************\
+ * EXPANSION
+\******************************************************************************/
+
+// expand_utils.c
+size_t			len_to_equal(char *str);
+char			*clean_translated_variable(char *str, char *var);
+char			*take_var(char *str, char *var);
+char			*search_var(char *to_find, t_env_lst *env);
+
+// expand.c
+char			*expand(t_data *d, char *str, bool in_heredoc);
 
 #endif
