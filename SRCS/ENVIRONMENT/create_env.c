@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/21 22:00:07 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:54:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,26 @@ int	create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
 
 static void	__update_shlvl(t_env_lst *env)
 {
-	t_env_lst	*current;
+	t_env_lst	*curr;
 	int			var_value;
 	char		*new_value;
 
-	current = env;
-	while (current != NULL)
+	curr = env;
+	while (curr != NULL)
 	{
-		if (ft_strncmp(current->content, "SHLVL=", 6) == 0)
+		if (ft_strncmp(curr->content, "SHLVL=", 6) == 0)
 		{
-			var_value = ft_atoi(current->content + 6, 0);
+			var_value = ft_atoi(curr->content + 6, 0);
 			var_value += 1;
 			new_value = ft_itoa(var_value);
 			secure_malloc(new_value, true);
 			(void)yama(ADD, new_value, 0);
-			free(current->content);
-			current->content = ft_strjoin("SHLVL=", new_value);
-			secure_malloc(current->content, true);
-			// (void)yama(ADD, current->content, 0);
+			free(curr->content);
+			curr->content = ft_strjoin("SHLVL=", new_value);
+			secure_malloc(curr->content, true);
 			(void)yama(REMOVE, new_value, 0);
 		}
-		current = current->next;
+		curr = curr->next;
 	}
 }
 

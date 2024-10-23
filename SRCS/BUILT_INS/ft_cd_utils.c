@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 13:30:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:48:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 {
-	t_env_lst	*current;
+	t_env_lst	*curr;
 	char		*new_pwd;
 
 	new_pwd = getcwd(NULL, 0);
@@ -23,41 +23,39 @@ static char	*__update_pwd(t_env_lst *env, char **old_pwd)
 		err_msg("0: getcwd() failed", ERR_BAD_FILE, 0);
 		return (NULL);
 	}
-	current = env;
-	while (current != NULL)
+	curr = env;
+	while (curr != NULL)
 	{
-		if (ft_strncmp(current->content, "PWD=", 4) == 0)
+		if (ft_strncmp(curr->content, "PWD=", 4) == 0)
 		{
-			*old_pwd = ft_strdup(current->content);
-			free(current->content);
-			current->content = ft_strjoin("PWD=", new_pwd);
-			if (current->content == NULL)
-				return (free_and_set_null(new_pwd), NULL);
-			// (void)yama(ADD, current->content, 0);
+			*old_pwd = ft_strdup(curr->content);
+			free(curr->content);
+			curr->content = ft_strjoin("PWD=", new_pwd);
+			if (curr->content == NULL)
+				(free_and_set_null(new_pwd), exit(FAILURE));
 		}
-		current = current->next;
+		curr = curr->next;
 	}
 	return (new_pwd);
 }
 
 static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 {
-	t_env_lst	*current;
+	t_env_lst	*curr;
 
-	current = env;
-	while (current != NULL)
+	curr = env;
+	while (curr != NULL)
 	{
-		if ((ft_strncmp(current->content, "OLDPWD=", 7) == 0)
+		if ((ft_strncmp(curr->content, "OLDPWD=", 7) == 0)
 			&& old_pwd != NULL)
 		{
-			free(current->content);
-			current->content = ft_strjoin("OLDPWD=", old_pwd + 4);
-			secure_malloc(current->content, true);
-			// (void)yama(ADD, current->content, 0);
+			free(curr->content);
+			curr->content = ft_strjoin("OLDPWD=", old_pwd + 4);
+			secure_malloc(curr->content, true);
 			free_and_set_null(old_pwd);
 			break ;
 		}
-		current = current->next;
+		curr = curr->next;
 	}
 	if (old_pwd != NULL)
 		free_and_set_null(old_pwd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 21:05:00 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,31 @@ void	main_lst_add_back(t_main_lst **main, t_main_lst *new_node)
 size_t	get_main_lst_size(t_main_lst **main)
 {
 	size_t		size;
-	t_main_lst	*current;
+	t_main_lst	*curr;
 
 	size = 0;
-	current = *main;
-	while (current != NULL)
+	curr = *main;
+	while (curr != NULL)
 	{
 		size++;
-		current = current->next;
+		curr = curr->next;
 	}
 	return (size);
 }
 
 void	del_unwanted_whitespaces(t_main_lst *main)
 {
-	t_main_lst	*current;
+	t_main_lst	*curr;
 	char		*trimmed_token;
 
-	current = main;
-	while (current != NULL)
+	curr = main;
+	while (curr != NULL)
 	{
-		trimmed_token = ft_strtrim(current->content, " ");
+		trimmed_token = ft_strtrim(curr->content, " ");
 		secure_malloc(trimmed_token, true);
 		(void)yama(ADD, trimmed_token, 0);
-		free(current->content);
-		current->content = trimmed_token;
-		current = current->next;
+		free(curr->content);
+		curr->content = trimmed_token;
+		curr = curr->next;
 	}
 }

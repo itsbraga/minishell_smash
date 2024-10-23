@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 16:30:00 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 17:52:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static	bool	__check_if_is_dir(char *bin_path)
 	if (stat(bin_path, &s_bin_path) != 0)
 	{
 		err_msg("stat", strerror(errno), 0);
-		clean_exit_shell(1);
+		exit(FAILURE);
 	}
 	if (S_ISDIR(s_bin_path.st_mode) != 0)
 	{
@@ -88,7 +88,7 @@ static	bool	__check_if_is_dir(char *bin_path)
  int	check_bin_path(t_exec_lst *node, bool absolute_path)
 {
 	if (__check_if_is_dir(node->bin_path) == true)
-		clean_exit_shell(CMD_CANNOT_EXEC);
+		exit(CMD_CANNOT_EXEC);
 	if (access(node->bin_path, F_OK) == -1)
 	{
 		if (absolute_path == true)

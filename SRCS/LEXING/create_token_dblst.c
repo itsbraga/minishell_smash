@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 16:23:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:02:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static char	**__get_all_seg_elems(char *main_content)
 		return (NULL);
 	ft_bzero(&p, sizeof(t_token_parser));
 	p.main_content = main_content;
-	if (check_redir_sequence(p.main_content, &p) == FAILURE)
-		return (NULL);
 	seg_len = ft_strlen(p.main_content);
 	p.seg_elems = yama(CREATE_TAB, NULL, (sizeof(char *) * (seg_len + 1)));
 	secure_malloc(p.seg_elems, true);
@@ -34,31 +32,29 @@ static char	**__get_all_seg_elems(char *main_content)
 
 int	create_token_dblst(t_data *d)
 {
-	t_main_lst		*current;
+	t_main_lst		*curr;
 	t_token_dblst	*new_token;
 	char			**seg_elems;
-	int				i;
 
-	current = d->main;
-	while (current != NULL)
+	curr = d->main;
+	while (curr != NULL)
 	{
-		seg_elems = __get_all_seg_elems(current->content);
-		secure_malloc(seg_elems, true);
+		seg_elems = __get_all_seg_elems(curr->content);
+		if (seg_elems == NULL)
+			return (FAILURE);
 		lstclear_token(&(d->token));
-		i = 0;
-		while (seg_elems[i] != NULL)
+		while (*seg_elems != NULL)
 		{
-			new_token = token_dblst_new_node(seg_elems[i], UNKNOWN);
+			new_token = token_dblst_new_node(*seg_elems, UNKNOWN);
 			secure_malloc(new_token, true);
 			token_dblst_add_back(&(d->token), new_token);
-			i++;
+			seg_elems++;
 		}
 		lst_tokenization(d->token);
-		// display_token_dblst(&(d->token));
 		if (create_exec_lst(d) == FAILURE)
 			return (FAILURE);
-		current = current->next;
-		(void)yama(REMOVE, seg_elems, 0);
+		curr = curr->next;
 	}
+	(void)yama(REMOVE, seg_elems, 0);
 	return (SUCCESS);
 }

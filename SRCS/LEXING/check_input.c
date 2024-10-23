@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 16:34:44 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:00:45 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,10 @@ static int	__front_check(t_parser *p)
 	while (ft_isspace(p->input[p->i]) == 1)
 		p->i++;
 	if (p->input[p->i] == '\0')
-		return (BAD_USAGE); // a changer
-	else if (p->input[p->i] == '|' || (p->input[p->i] == '|'
-			&& (p->input[p->i] == '<' || p->input[p->i] == '>')))
+		return (SUCCESS);
+	if (p->input[p->i] == '|')
 	{
 		err_msg(NULL, "|", 2);
-		return (BAD_USAGE);
-	}
-	else if ((p->input[p->i] == '<' || p->input[p->i] == '>')
-			&& p->input[p->i + 1] == '\0')
-	{
-		err_msg(NULL, "newline", 2);
-		return (BAD_USAGE);
-	}
-	else if (ft_strncmp(p->input, "<<", 2) == 0
-			|| ft_strncmp(p->input, ">>", 2) == 0)
-	{
-		err_msg(NULL, "newline", 2);
 		return (BAD_USAGE);
 	}
 	return (SUCCESS);
@@ -54,7 +41,7 @@ static int	__pipe_check_end(t_parser *p)
 		if (p->input[p->i] == '|')
 		{
 			err_msg(NULL, "||", 2);
-			return (BAD_USAGE); // doit renvoyer un prompt
+			return (BAD_USAGE);
 		}
 		while (p->input[p->i] != '\0'
 			&& ft_isspace(p->input[p->i]) == 1)
@@ -62,7 +49,7 @@ static int	__pipe_check_end(t_parser *p)
 		if (p->input[p->i] == '|' || p->input[p->i] == '\0')
 		{
 			err_msg(NULL, "|", 2);
-			return (BAD_USAGE); // doit renvoyer un prompt
+			return (BAD_USAGE);
 		}
 	}
 	return (SUCCESS);
@@ -87,8 +74,7 @@ int	parse_input(t_parser *p)
 		p->i++;
 	}
 	tmp = ft_strldup(p->input + p->start, (p->i - p->start));
-	secure_malloc(tmp, false);
-	(void)yama(ADD, tmp, 0);
+	(secure_malloc(tmp, false), (void)yama(ADD, tmp, 0));
 	p->segment[p->seg_count++] = tmp;
 	if (p->closed_quotes[0] == true && p->closed_quotes[1] == true)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 22:56:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:06:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:01:15 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	__get_closed_quotes(t_token_parser *p)
 		p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
 }
 
+// p->start = p->i		--> redefinir le debut du token
 static void	__take_seg_elem(t_token_parser *p)
 {
 	char	*tmp;
@@ -41,7 +42,7 @@ static void	__take_seg_elem(t_token_parser *p)
 		p->seg_elems[p->token_count] = tmp;
 		p->token_count++;
 	}
-	p->start = p->i; // Redéfinir le début pour le prochain token
+	p->start = p->i;
 }
 
 static void	__redir_case(t_token_parser *p)

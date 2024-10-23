@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 20:43:36 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:51:41 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	ft_env(t_env_lst *env)
 		ft_printf(STDOUT_FILENO, "%s\n", tmp->content);
 		tmp = tmp->next;
 	}
-	return (d->last_exit_status = SUCCESS);
+	d->last_exit_status = SUCCESS;
+	return (d->last_exit_status);
 }

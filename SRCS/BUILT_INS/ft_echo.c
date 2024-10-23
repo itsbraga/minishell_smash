@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 20:23:51 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:51:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,17 @@ static bool	__n_option_exist(char *arg)
 		return (false);
 	return (true);
 }
-/*
-	rl_on_new_line();			--> resynchronize readline
-	rl_replace_line("", 0);		--> clear current line
-*/
-int ft_echo(t_data *d, char **args)
+
+static void	__resync_rl(void)
 {
-	int i;
-	int flag;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+}
+
+int	ft_echo(t_data *d, char **args)
+{
+	int	i;
+	int	flag;
 
 	i = 1;
 	flag = 0;
@@ -51,9 +54,7 @@ int ft_echo(t_data *d, char **args)
 	if (flag == 0)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	else
-	{
-		rl_on_new_line();		// resynchronize readline
-		rl_replace_line("", 0);	// clear current line
-	}
-	return (d->last_exit_status = SUCCESS);
+		__resync_rl();
+	d->last_exit_status = SUCCESS;
+	return (d->last_exit_status);
 }

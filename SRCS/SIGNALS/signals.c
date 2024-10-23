@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 22:48:23 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:03:47 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	__rl_reset_custom_prompt(void)
+void	rl_reset_custom_prompt(void)
 {
 	t_prompt	pr;
 	t_data		*d;
@@ -42,11 +42,30 @@ static void	__sigint_handler(int signo)
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	g_sig_code = 1;
 	d->last_exit_status = 130;
-	__rl_reset_custom_prompt();
+	rl_reset_custom_prompt();
 }
 
 void	set_signals(void)
 {
 	signal(SIGINT, &__sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+static void	__sigint_handler_heredoc(int sig)
+{
+	t_data	*d;
+
+	(void)sig;
+	d = data_struct();
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	// fonction pour fermer le fd
+	g_sig_code = 1;
+	d->last_exit_status = 130;
+}
+
+// appeler cet handler dans la fonction d'ouverture d'here_doc
+void	set_signals_in_heredoc(void)
+{
+	signal(SIGINT, &__sigint_handler_heredoc);
 	signal(SIGQUIT, SIG_IGN);
 }

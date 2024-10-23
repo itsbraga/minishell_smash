@@ -37,11 +37,13 @@ DEBUG		=	-g -g3
 #******************************************************************************#
 
 TOOLS_DIR		=	TOOLS/
-TOOLS_F			=	err_msg.c lstclear.c cleanup.c garbage_collector_utils.c \
-					garbage_collector.c garbage_collector_lst_utils.c secure.c
+TOOLS_F			=	err_msg.c lstclear.c cleanup.c secure.c
 
 LISTS_DIR		=	TOOLS/MINISHELL_LISTS/
 LISTS_F			=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
+
+GARBAGE_DIR		=	TOOLS/GARBAGE_COLLECTOR/
+GARBAGE_F		=	utils.c lst_utils.c garbage_collector.c
 
 FEATURES_DIR	=	TOOLS/FEATURES/
 FEATURES_F		=	display.c display_2.c rainbow_txt.c
@@ -54,12 +56,11 @@ ENV_F			=	create_env.c env_utils.c export_env_utils.c
 
 LEXING_DIR		=	LEXING/
 LEXING_F		=	check_input.c create_main_lst.c check_main.c \
-					tokenization.c create_token_dblst.c
+					tokenization.c check_token_sequence.c create_token_dblst.c
 
 PARSING_DIR		=	PARSING/
-PARSING_F		=	handle_quotes.c quotes_utils.c check_sequence.c \
-					exec_lst_utils.c create_exec_lst.c redir_lst_utils.c \
-					create_redir_lst.c
+PARSING_F		=	handle_quotes.c quotes_utils.c exec_lst_utils.c \
+					create_exec_lst.c redir_lst_utils.c create_redir_lst.c
 
 EXPAND_DIR		=	EXPANSION/
 EXPAND_F		=	expand.c expand_utils.c
@@ -69,7 +70,7 @@ BUILT_INS_F		=	built_ins.c ft_echo.c ft_cd_utils.c ft_cd.c ft_pwd.c \
 					ft_export_utils.c ft_export.c ft_unset.c ft_env.c ft_exit.c
 
 SIGNALS_DIR		=	SIGNALS/
-SIGNALS_F		=	signals.c signals_here_doc.c
+SIGNALS_F		=	signals.c
 
 EXEC_DIR		=	EXECUTION/
 EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
@@ -79,8 +80,9 @@ EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
 #******************************************************************************#
 
 SRCS_DIR		=	SRCS/
-SRCS_F			=	$(addprefix $(FEATURES_DIR), $(FEATURES_F)) \
-					$(addprefix $(LISTS_DIR), $(LISTS_F)) \
+SRCS_F			=	$(addprefix $(LISTS_DIR), $(LISTS_F)) \
+					$(addprefix $(GARBAGE_DIR), $(GARBAGE_F)) \
+					$(addprefix $(FEATURES_DIR), $(FEATURES_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(ENV_DIR), $(ENV_F)) \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 01:00:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:04:57 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	exec_lst_add_back(t_exec_lst **e, t_exec_lst *new_node)
 size_t	get_exec_lst_size(t_exec_lst **e)
 {
 	size_t		size;
-	t_exec_lst	*current;
+	t_exec_lst	*curr;
 
 	size = 0;
-	current = *e;
-	while (current != NULL)
+	curr = *e;
+	while (curr != NULL)
 	{
 		size++;
-		current = current->next;
+		curr = curr->next;
 	}
 	return (size);
 }

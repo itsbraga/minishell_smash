@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 16:23:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 19:07:19 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 void	display_exec_lst(t_exec_lst **e)
 {
-	t_exec_lst	*current;
+	t_exec_lst	*curr;
 
-	current = *e;
+	curr = *e;
 	ft_printf(1, R BOLD Y LIM " t_exec_lst " LIM "\n" R);
-	while (current != NULL)
+	while (curr != NULL)
 	{
 		ft_printf(1, "--- NODE ---\n");
-		ft_printf(1, Y "heredoc_nb:\t [" R "%d" Y "]\n" R, current->heredoc_nb);
+		ft_printf(1, Y "heredoc_nb:\t [" R "%d" Y "]\n" R, curr->heredoc_nb);
 		ft_printf(1, Y "absolute_path:\t [" R);
-		ft_printf(1, "%d" Y "]\n" R, current->absolute_path);
-		ft_printf(1, Y "bin_path:\t [" R "%s" Y "]\n" R, current->bin_path);
-		if (current->cmd != NULL)
-			print_cmd(current->cmd);
+		ft_printf(1, "%d" Y "]\n" R, curr->absolute_path);
+		ft_printf(1, Y "bin_path:\t [" R "%s" Y "]\n" R, curr->bin_path);
+		if (curr->cmd != NULL)
+			print_cmd(curr->cmd);
 		else
 			ft_printf(1, Y "cmd:\t\t [" R "(null)" Y "]\n" R);
-		if (current->redir != NULL)
-			display_redir_lst(&(current->redir));
+		if (curr->redir != NULL)
+			display_redir_lst(&(curr->redir));
 		else
 			ft_printf(1, BOLD Y "t_redir_lst:\t [" R "(null)" BOLD Y "]\n" R);
-		current = current->next;
+		curr = curr->next;
 	}
-	if (current == NULL)
+	if (curr == NULL)
 		ft_putendl_fd("", 1);
 }
 
@@ -54,7 +54,7 @@ void	print_cmd(char **cmd)
 
 void	print_tab2(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (tab)
@@ -71,7 +71,6 @@ void	print_tab2(char **tab)
 	}
 	else
 		dprintf(2, "tab existe mais est vide\n");
-
 }
 
 void	print_tab(char **tab)

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 13:31:20 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 static char	*__find_var_path(char *to_find, t_env_lst *env)
 {
-	t_env_lst	*current;
+	t_env_lst	*curr;
 	char		*path;
 	size_t		len_var_env;
 	size_t		len_to_find;
 
-	current = env;
+	curr = env;
 	path = NULL;
 	len_to_find = ft_strlen(to_find);
-	while (current != NULL)
+	while (curr != NULL)
 	{
-		len_var_env = ft_strlen(current->content);
-		if (ft_strncmp(current->content, to_find, len_to_find) == 0)
+		len_var_env = ft_strlen(curr->content);
+		if (ft_strncmp(curr->content, to_find, len_to_find) == 0)
 		{
-			path = ft_substr(current->content, len_to_find,
+			path = ft_substr(curr->content, len_to_find,
 					(len_var_env - len_to_find));
 			secure_malloc(path, true);
 			return (path);
 		}
-		current = current->next;
+		curr = curr->next;
 	}
 	return (NULL);
 }
@@ -71,7 +71,7 @@ int	ft_cd(t_data *d)
 	else if (ft_strcmp(d->token->next->content, "-") == 0)
 	{
 		ret = __go_to_env_var(d->env, "OLDPWD=", d->token);
-		printf("%s\n", __find_var_path("OLDPWD=", d->env));
+		ft_printf(STDOUT_FILENO, "%s\n", __find_var_path("OLDPWD=", d->env));
 	}
 	else
 		ret = chdir(d->token->next->content);
@@ -79,10 +79,10 @@ int	ft_cd(t_data *d)
 	{
 		next = d->token->next->content;
 		error = err_msg_cmd(d->token->content, next, ERR_BAD_FILE, FAILURE);
-		free_and_set_null(next);
-		return (d->last_exit_status = error);
+		d->last_exit_status = error;
+		return (free_and_set_null(next), d->last_exit_status);
 	}
-	change_paths(d->env, d->exp_env);
-	update_prompt(d, &pr);
-	return (d->last_exit_status = ret);
+	(change_paths(d->env, d->exp_env), update_prompt(d, &pr));
+	d->last_exit_status = ret;
+	return (d->last_exit_status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 21:17:47 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:52:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ static int	__set_exit_status(t_data *d, char **args)
 void	ft_exit(t_data *d, char **args)
 {
 	int	exit_status;
-	
+
 	exit_status = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
 	exit_status = __set_exit_status(d, args);
+	d->last_exit_status = exit_status;
 	if (exit_status != 1)
-		clean_exit_shell(d->last_exit_status = exit_status);
+		clean_exit_shell(d->last_exit_status);
 }

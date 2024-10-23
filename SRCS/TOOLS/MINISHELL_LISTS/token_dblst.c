@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_dblst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 23:35:43 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:05:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	token_dblst_add_back(t_token_dblst **t, t_token_dblst *new_node)
 size_t	get_token_dblst_size(t_token_dblst **t)
 {
 	size_t			size;
-	t_token_dblst	*current;
+	t_token_dblst	*curr;
 
 	size = 0;
-	current = *t;
-	while (current != NULL)
+	curr = *t;
+	while (curr != NULL)
 	{
 		size++;
-		current = current->next;
+		curr = curr->next;
 	}
 	return (size);
 }
@@ -68,18 +68,18 @@ void	del_current_token(t_token_dblst **t, t_token_dblst *to_delete)
 {
 	if (t == NULL || (*t) == NULL || to_delete == NULL)
 		return ;
-	if (*t == to_delete)	// cas ou to_delete est le premier noeud
+	if (*t == to_delete)
 	{
-		*t = to_delete->next;	// le suivant devient la nouvelle tete de liste
+		*t = to_delete->next;
 		if (*t != NULL)
-			(*t)->prev = NULL;	// si la liste n'est pas vide, on met a jour le precedent
+			(*t)->prev = NULL;
 	}
-	else // cas ou to_delete est au milieu / a la fin
+	else
 	{
 		if (to_delete->prev != NULL)
-			to_delete->prev->next = to_delete->next; // le next du prev devient le next du noeud supprime
+			to_delete->prev->next = to_delete->next;
 		if (to_delete->next != NULL)
-			to_delete->next->prev = to_delete->prev; // le prev du next devient le prev du noeud supprime
+			to_delete->next->prev = to_delete->prev;
 	}
 	free_and_set_null(to_delete->content);
 	free_and_set_null(to_delete);

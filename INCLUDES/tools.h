@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 16:35:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:43:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				err_msg_cmd(char *cmd, char *detail, char *reason,
 					int err_status);
 
 // secure.c
-void    		free_and_set_null(void *to_free);
+void			free_and_set_null(void *to_free);
 void			secure_malloc(void *to_secure, bool cleanup);
 
 // lstclear.c
@@ -35,24 +35,27 @@ void			lstclear_token(t_token_dblst **t);
 void			lstclear_main(t_main_lst **main);
 void			lstclear_env(t_env_lst **env);
 
-// garbage_collector_lst_utils.c
-int				remove_gc_node(t_gc_lst**yama, void *ptr);
-void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
-void			*new_gc_node(void *ptr, bool is_tab);
-
-// garbage_collector_utils.c
-void			*search_ptr(t_gc_lst **yama, void *ptr);
-int				handle_remove(t_gc_lst **yama, void *ptr);
-
-
-// garbage_collector.c
-void			*yama(int flag, void *ptr, size_t size);
-
 // cleanup.c
 void			clean_after_execution(t_data *d, char *input);
 void			free_tab(char **tab);
 int				free_gc_tab(t_gc_lst **yama, char **ptr);
 void			clean_exit_shell(int err_status);
+
+/******************************************************************************\
+ * GARBAGE_COLLECTOR
+\******************************************************************************/
+
+// lst_utils.c
+int				remove_gc_node(t_gc_lst**yama, void *ptr);
+void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
+void			*new_gc_node(void *ptr, bool is_tab);
+
+// utils.c
+void			*search_ptr(t_gc_lst **yama, void *ptr);
+int				handle_remove(t_gc_lst **yama, void *ptr);
+
+// garbage_collector.c
+void			*yama(int flag, void *ptr, size_t size);
 
 /******************************************************************************\
  * MINISHELL_LISTS

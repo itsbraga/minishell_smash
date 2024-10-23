@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   secure.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:30:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:05:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 19:06:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	secure_malloc(void *to_secure, bool cleanup)
 	{
 		err_msg("malloc", strerror(errno), 0);
 		if (cleanup == true)
-			clean_exit_shell(FAILURE); // de meme pour le code ici (cf. en bas)
+			clean_exit_shell(FAILURE);
 	}
 }
 
-void    free_and_set_null(void *to_free)
+void	free_and_set_null(void *to_free)
 {
 	free(to_free);
-    to_free = NULL;
+	to_free = NULL;
 }

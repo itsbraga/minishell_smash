@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 15:53:33 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 18:59:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ static void	__parent(t_exec_info *info)
 
 void	while_cmd(t_data *d, t_exec_lst **e_lst)
 {
-	t_exec_lst	*current;
+	t_exec_lst	*curr;
 	char		**env_tab;
 
-	current = *e_lst;
+	curr = *e_lst;
 	env_tab = recreate_env_tab(&(d->env));
 	if (d->info->all_cmd_heredoc_nb > 16)
 		(err_msg(NULL, ERR_MAX_HD, 0), clean_exit_shell(BAD_USAGE));
 	handle_heredoc(d, e_lst);
-	while ((d->info->executed_cmd != d->info->cmd_count) && current != NULL)
+	while ((d->info->executed_cmd != d->info->cmd_count) && curr != NULL)
 	{
 		if (d->info->pipe_count != 0
-			&& d->info->executed_cmd != d->info->cmd_count - 1)
+			&& (d->info->executed_cmd != d->info->cmd_count - 1))
 		{
 			if (pipe(d->info->fd) == -1)
 				clean_exit_shell(FAILURE);
@@ -73,10 +73,10 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 		if (d->info->child_pid == -1)
 			clean_exit_shell(FAILURE);
 		if (d->info->child_pid == 0)
-			pathfinder(d, current, env_tab);
+			pathfinder(d, curr, env_tab);
 		else
 			__parent(d->info);
-		current = current->next;
+		curr = curr->next;
 	}
 	__wait_child(d->info);
 }
