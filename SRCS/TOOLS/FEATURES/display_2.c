@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   display_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 21:04:38 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:16:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-void	display_exec_lst(t_exec_lst *e)
+void	display_exec_lst(t_exec_lst **e)
 {
 	t_exec_lst	*current;
 
-	current = e;
+	current = *e;
 	ft_printf(1, R BOLD Y LIM " t_exec_lst " LIM "\n" R);
 	while (current != NULL)
 	{
@@ -30,7 +30,7 @@ void	display_exec_lst(t_exec_lst *e)
 		else
 			ft_printf(1, Y "cmd:\t\t [" R "(null)" Y "]\n" R);
 		if (current->redir != NULL)
-			display_redir_lst(current->redir);
+			display_redir_lst(&(current->redir));
 		else
 			ft_printf(1, BOLD Y "t_redir_lst:\t [" R "(null)" BOLD Y "]\n" R);
 		current = current->next;

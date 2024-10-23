@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 23:27:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:04:44 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:15:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-void	display_main_lst(t_main_lst *main)
+void	display_main_lst(t_main_lst **main)
 {
 	t_main_lst	*current;
 
-	current = main;
+	current = *main;
 	ft_printf(STDOUT_FILENO, R BPP LIM " t_main_lst " LIM "\n" R);
 	while (current != NULL)
 	{
@@ -52,11 +52,11 @@ static void	__write_type_name(t_token_type type)
 		ft_printf(STDOUT_FILENO, LIGHT_GRAY "[%d ➜ OUTFILE]\n" R, type);
 }
 
-void	display_token_dblst(t_token_dblst *t)
+void	display_token_dblst(t_token_dblst **t)
 {
 	t_token_dblst	*current;
 
-	current = t;
+	current = *t;
 	ft_printf(STDOUT_FILENO, R BOLD BLUE LIM2 " t_token_dblst " LIM3 "\n" R);
 	while (current != NULL)
 	{
@@ -99,11 +99,11 @@ static void	__display_redir_node(t_redir_lst *node)
 	}
 }
 
-void	display_redir_lst(t_redir_lst *r)
+void	display_redir_lst(t_redir_lst **r)
 {
 	t_redir_lst	*current;
 
-	current = r;
+	current = *r;
 	ft_printf(STDOUT_FILENO, R BP LIM3 " t_redir_lst " LIM "\n" R);
 	while (current != NULL)
 	{

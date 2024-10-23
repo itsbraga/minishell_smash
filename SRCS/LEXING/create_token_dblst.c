@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 14:44:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:35:02 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,18 @@ static char	**__get_all_seg_elems(char *main_content)
 
 int	create_token_dblst(t_data *d)
 {
+	t_main_lst		*current;
 	t_token_dblst	*new_token;
 	char			**seg_elems;
 	int				i;
 
-	while (d->main != NULL)
+	current = d->main;
+	while (current != NULL)
 	{
-		seg_elems = __get_all_seg_elems(d->main->content);
+		seg_elems = __get_all_seg_elems(current->content);
 		if (seg_elems == NULL)
 			return ((void)yama(REMOVE, seg_elems, 0), SUCCESS);
+		lstclear_token(&(d->token));
 		i = 0;
 		while (seg_elems[i] != NULL)
 		{
@@ -52,10 +55,10 @@ int	create_token_dblst(t_data *d)
 			i++;
 		}
 		lst_tokenization(d->token);
-		display_token_dblst(d->token);
+		display_token_dblst(&(d->token));
 		if (create_exec_lst(d) == FAILURE)
 			return (FAILURE);
-		d->main = d->main->next;
+		current = current->next;
 		(void)yama(REMOVE, seg_elems, 0);
 	}
 	return (SUCCESS);

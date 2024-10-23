@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_exec_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:16:02 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:28:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	__command_case(t_token_dblst *t, t_ptrs *p)
 {
 	char	*cleaned_token;
 
-	cleaned_token = token_cleanup(t->content);
+	cleaned_token = token_cleanup(ft_strdup(t->content));
 	p->new_task->cmd[p->i] = cleaned_token;
 	if (ft_strchr(cleaned_token, '/') != NULL)
 	{
@@ -40,7 +40,7 @@ static void	__word_case(t_token_dblst *t, t_ptrs *p)
 
 	if (p->new_task != NULL)
 	{
-		cleaned_token = token_cleanup(t->content);
+		cleaned_token = token_cleanup(ft_strdup(t->content));
 		p->new_task->cmd[p->i] = cleaned_token;
 	}
 	p->i++;
@@ -57,28 +57,27 @@ static void	__add_new_task(t_data *d, t_ptrs *p)
 
 int	create_exec_lst(t_data *d)
 {
-	t_token_dblst	*head;
+	t_token_dblst	*current;
 	t_ptrs			p;
 
-	head = d->token;
+	current = d->token;
 	init_ptrs(&p);
-	while (d->token != NULL)
+	while (current != NULL)
 	{
 		if (p.new_task == NULL)
-			__init_exec(d->token, &p);
-		if (d->token->type == COMMAND)
-			__command_case(d->token, &p);
-		else if (d->token->type == WORD)
-			__word_case(d->token, &p);
-		else if (p.new_task != NULL && d->token->type == HERE_DOC)
+			__init_exec(current, &p);
+		if (current->type == COMMAND)
+			__command_case(current, &p);
+		else if (current->type == WORD)
+			__word_case(current, &p);
+		else if (p.new_task != NULL && current->type == HERE_DOC)
 		{
 			p.new_task->heredoc_nb++;
 			d->info->all_cmd_heredoc_nb++;
 		}
-		d->token = d->token->next;
+		current = current->next;
 	}
 	__add_new_task(d, &p);
-	d->token = head;
 	if (create_redir_lst(d, p.new_task) == FAILURE)
 		return (d->last_exit_status = FAILURE);
 	return (d->last_exit_status = SUCCESS);

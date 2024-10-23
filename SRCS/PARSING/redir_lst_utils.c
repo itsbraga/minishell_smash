@@ -3,51 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 20:30:40 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/22 21:07:31 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:13:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing-lexing.h"
 
-t_redir_lst	*redir_in_n_infile(t_data *d)
+t_redir_lst	*redir_in_n_infile(t_token_dblst *current)
 {
 	t_redir_lst	*new_redir;
 
 	new_redir = redir_lst_new_node(REDIR_IN);
 	secure_malloc(new_redir, true);
-	new_redir->infile = token_cleanup(d->token->next->content);
+	new_redir->infile = token_cleanup(current->next->content);
 	return (new_redir);
 }
 
-t_redir_lst	*redir_out_trunc_n_outfile(t_data *d)
+t_redir_lst	*redir_out_trunc_n_outfile(t_token_dblst *current)
 {
 	t_redir_lst	*new_redir;
 
 	new_redir = redir_lst_new_node(REDIR_OUT_TRUNC);
 	secure_malloc(new_redir, true);
-	new_redir->outfile = token_cleanup(d->token->next->content);
+	new_redir->outfile = token_cleanup(current->next->content);
 	return (new_redir);
 }
 
-t_redir_lst	*redir_out_append_n_outfile(t_data *d)
+t_redir_lst	*redir_out_append_n_outfile(t_token_dblst *current)
 {
 	t_redir_lst	*new_redir;
 
 	new_redir = redir_lst_new_node(REDIR_OUT_APPEND);
 	secure_malloc(new_redir, true);
-	new_redir->outfile = token_cleanup(d->token->next->content);
+	new_redir->outfile = token_cleanup(current->next->content);
 	return (new_redir);
 }
 
-t_redir_lst	*heredoc_n_limiter(t_data *d)
+t_redir_lst	*heredoc_n_limiter(t_token_dblst *current)
 {
 	t_redir_lst	*new_redir;
 
 	new_redir = redir_lst_new_node(HERE_DOC);
 	secure_malloc(new_redir, true);
-	new_redir->limiter = d->token->next->content;
+	new_redir->limiter = current->next->content;
 	return (new_redir);
 }

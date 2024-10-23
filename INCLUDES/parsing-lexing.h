@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 14:53:40 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:14:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ char			*empty_quotes(char *str);
 char			*other_quotes(char *str);
 
 // redir_lst_utils.c
-t_redir_lst		*redir_in_n_infile(t_data *d);
-t_redir_lst		*redir_out_trunc_n_outfile(t_data *d);
-t_redir_lst		*redir_out_append_n_outfile(t_data *d);
-t_redir_lst		*heredoc_n_limiter(t_data *d);
+t_redir_lst		*redir_in_n_infile(t_token_dblst *current);
+t_redir_lst		*redir_out_trunc_n_outfile(t_token_dblst *current);
+t_redir_lst		*redir_out_append_n_outfile(t_token_dblst *current);
+t_redir_lst		*heredoc_n_limiter(t_token_dblst *current);
 
 // create_redir_lst.c
 int				create_redir_lst(t_data *d, t_exec_lst *existing_task);

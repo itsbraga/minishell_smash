@@ -80,8 +80,8 @@ EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c exec.c
 
 SRCS_DIR		=	SRCS/
 SRCS_F			=	$(addprefix $(FEATURES_DIR), $(FEATURES_F)) \
-					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(LISTS_DIR), $(LISTS_F)) \
+					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(ENV_DIR), $(ENV_F)) \
 					$(addprefix $(LEXING_DIR), $(LEXING_F)) \

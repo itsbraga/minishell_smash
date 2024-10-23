@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:17:47 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:42:30 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	parse_input(t_parser *p)
 
 	__init_parser(p);
 	if (__front_check(p) == BAD_USAGE)
-		return ;
+		exit(BAD_USAGE);
 	while (p->user_input[p->i] != '\0')
 	{
 		if (p->user_input[p->i] == '\'')
@@ -80,6 +80,6 @@ void	parse_input(t_parser *p)
 	if (p->closed_quotes[0] == true && p->closed_quotes[1] == true)
 	{
 		if (__pipe_check(p) == BAD_USAGE)
-			return ;
+			exit(BAD_USAGE);
 	}
 }

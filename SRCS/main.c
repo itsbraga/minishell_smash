@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 14:56:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:18:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ static void	__minishell(t_data *d)
 		{
 			add_history(user_input);
 			if (create_main_lst(d, user_input) == SUCCESS)
-				display_main_lst(d->main);
+				display_main_lst(&(d->main));
 			if (create_token_dblst(d) == FAILURE)
 				return ;
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
-			display_exec_lst(d->exec);
+			display_exec_lst(&(d->exec));
 			while_cmd(d, &(d->exec));
 		}
 		printf("before clean\n");
-		display_main_lst(d->main);
+		display_main_lst(&(d->main));
 		clean_after_execution(d, user_input);
 		printf("after clean\n");
-		display_main_lst(d->main);
+		display_main_lst(&(d->main));
 	}
 }
 
