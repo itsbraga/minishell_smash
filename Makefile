@@ -38,9 +38,9 @@ DEBUG		=	-g -g3
 
 TOOLS_DIR		=	TOOLS/
 TOOLS_F			=	err_msg.c lstclear.c cleanup.c garbage_collector_utils.c \
-					garbage_collector.c secure.c
+					garbage_collector.c garbage_collector_lst_utils.c secure.c
 
-LISTS_DIR		=	TOOLS/LISTS/
+LISTS_DIR		=	TOOLS/MINISHELL_LISTS/
 LISTS_F			=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
 
 FEATURES_DIR	=	TOOLS/FEATURES/

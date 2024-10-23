@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 00:22:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/23 13:47:59 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,35 @@ static void	*__create(t_gc_lst **yama, size_t size, bool is_tab)
 	return (ptr);
 }
 
+static	void	*__add_tab(t_gc_lst **yama, void *ptr)
+{
+	int			i;
+	char		**tab;
+	t_gc_lst	*node;
+
+	i = 0;
+	tab = (char **)ptr;
+	node = new_gc_node(tab, true);
+	if (node == NULL)
+		return (err_msg(NULL, ERR_MALLOC, 0), NULL);
+	add_gc_node(yama, node);
+	while (tab[i] != NULL)
+	{
+		node = new_gc_node(tab[i], false);
+		if (node == NULL)
+			return (err_msg(NULL, ERR_MALLOC, 0), NULL);
+		add_gc_node(yama, node);
+		i++;
+	}
+	return (ptr);
+}
+
 static void	*__add(t_gc_lst **yama, void *ptr, bool is_tab)
 {
 	t_gc_lst	*node;
 
+	if (is_tab == true)
+		return (__add_tab(yama, ptr));
 	node = new_gc_node(ptr, is_tab);
 	if (node == NULL)
 	{
@@ -45,19 +70,6 @@ static void	*__add(t_gc_lst **yama, void *ptr, bool is_tab)
 	}
 	add_gc_node(yama, node);
 	return (ptr);
-}
-
-static int	__handle_remove(t_gc_lst **yama, void *ptr)
-{
-	t_gc_lst	*node;
-
-	node = *yama;
-	while (node->ptr != ptr)
-		node = node->next;
-	if (node->is_tab == true)
-		return (free_gc_tab(yama, node->ptr));
-	else
-		return (remove_gc_node(yama, ptr));
 }
 
 static int	__clean_all(t_gc_lst **yama)
@@ -72,24 +84,9 @@ static int	__clean_all(t_gc_lst **yama)
 		(*yama)->next = NULL;
 		free_and_set_null((*yama)->ptr);
 		free_and_set_null((*yama));
-		// free((*yama));
 		(*yama) = tmp;
 	}
 	return (SUCCESS);
-}
-
-void	*search_ptr(t_gc_lst **yama, void *ptr)
-{
-	t_gc_lst *curr;
-
-	curr = *yama;
-	while (curr != NULL)
-	{
-		if (curr->ptr == ptr)
-			return (curr->ptr);
-		curr = curr->next;
-	}
-	return (NULL);
 }
 
 void	*yama(int flag, void *ptr, size_t size)
@@ -108,7 +105,7 @@ void	*yama(int flag, void *ptr, size_t size)
 		return (__add(&yama, ptr, true));
 	else if (flag == REMOVE)
 	{
-		if (__handle_remove(&yama, ptr) == FAILURE)
+		if (handle_remove(&yama, ptr) == FAILURE)
 			err_msg(NULL, "No allocation freed, Yama is empty", 0);
 		return (NULL);
 	}

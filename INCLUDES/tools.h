@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 22:55:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 14:56:59 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,15 @@ void			lstclear_token(t_token_dblst **t);
 void			lstclear_main(t_main_lst **main);
 void			lstclear_env(t_env_lst **env);
 
-// garbage_collector_utils.c
+// garbage_collector_lst_utils.c
 int				remove_gc_node(t_gc_lst**yama, void *ptr);
 void			add_gc_node(t_gc_lst **yama, t_gc_lst *node);
 void			*new_gc_node(void *ptr, bool is_tab);
+
+// garbage_collector_utils.c
+void			*search_ptr(t_gc_lst **yama, void *ptr);
+int				handle_remove(t_gc_lst **yama, void *ptr);
+
 
 // garbage_collector.c
 void			*yama(int flag, void *ptr, size_t size);
@@ -50,7 +55,7 @@ int				free_gc_tab(t_gc_lst **yama, char **ptr);
 void			clean_exit_shell(int err_status);
 
 /******************************************************************************\
- * LISTS
+ * MINISHELL_LISTS
 \******************************************************************************/
 
 // main_lst.c
