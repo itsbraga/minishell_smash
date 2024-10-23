@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 15:18:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:28:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,32 @@ int	g_sig_code = 0;
 
 static void	__minishell(t_data *d)
 {
-	char	*user_input;
+	char	*input;
 
 	while (1)
 	{
 		display_shell_info();
 		set_signals();
-		user_input = readline(d->prompt);
-		if (user_input == NULL) // Gestion de CTRL+D (EOF)
+		input = readline(d->prompt);
+		if (input == NULL) // Gestion de CTRL+D (EOF)
 		{
 			ft_printf(STDERR_FILENO, "exit\n");
 			break ; //clean_exit_shell(SUCCESS);
 		}
-		else if (user_input[0] != '\0')
+		else if (input[0] != '\0')
 		{
-			add_history(user_input);
-			if (create_main_lst(d, user_input) == SUCCESS)
+			add_history(input);
+			if (create_main_lst(d, input) == SUCCESS)
 				display_main_lst(&(d->main));
-			if (create_token_dblst(d) == FAILURE)
-				return ;
+			if (create_token_dblst(d) == SUCCESS)
+				display_token_dblst(&(d->token));
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(&(d->exec));
-			while_cmd(d, &(d->exec));
+			// while_cmd(d, &(d->exec));
 		}
 		printf("before clean\n");
 		display_main_lst(&(d->main));
-		clean_after_execution(d, user_input);
+		clean_after_execution(d, input);
 		printf("after clean\n");
 		display_main_lst(&(d->main));
 	}

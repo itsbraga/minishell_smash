@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 15:14:08 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:35:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 \******************************************************************************/
 
 // check_input.c
-void			parse_input(t_parser *p);
+int				parse_input(t_parser *p);
 
 // create_main_lst.c
-int				create_main_lst(t_data *d, char *user_input);
+int				create_main_lst(t_data *d, char *input);
 
 // check_main.c
 void			parse_segment(t_token_parser *p);

@@ -6,18 +6,18 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 15:36:50 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:28:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-void	clean_after_execution(t_data *d, char *user_input)
+void	clean_after_execution(t_data *d, char *input)
 {
 	lstclear_main(&(d->main));
-	lstclear_token(&(d->token));
+	// lstclear_token(&(d->token));
 	lstclear_exec(&(d->exec));
-	free_and_set_null(user_input);
+	free_and_set_null(input);
 }
 
 void	free_tab(char **tab)

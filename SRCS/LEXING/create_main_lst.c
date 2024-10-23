@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 14:44:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:28:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ static char	**__get_all_segments(char *input)
 	if (input == NULL || input[0] == '\0')
 		return (NULL);
 	ft_bzero(&p, sizeof(t_parser));
-	p.user_input = input;
-	input_len = ft_strlen(p.user_input);
+	p.input = input;
+	input_len = ft_strlen(p.input);
 	p.segment = yama(CREATE_TAB, NULL, (sizeof(char *) * (input_len + 1)));
 	secure_malloc(p.segment, true);
-	while (p.user_input[p.i] != '\0')
-		parse_input(&p);
+	while (p.input[p.i] != '\0')
+	{
+		if (parse_input(&p) == BAD_USAGE)
+			return (NULL);
+	}
 	p.segment[p.seg_count] = NULL;
 	return (p.segment);
 }
@@ -50,7 +53,7 @@ int	create_main_lst(t_data *d, char *input)
 	__init_exec_info(d);
 	segments = __get_all_segments(input);
 	if (segments == NULL)
-		return ((void)yama(REMOVE, segments, 0), SUCCESS);
+		return (SUCCESS);
 	i = 0;
 	while (segments[i] != NULL)
 	{

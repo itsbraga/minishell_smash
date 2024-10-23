@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:23:05 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/22 21:07:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:57:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 static t_token_type	__classify(char *token, char *prev)
 {
+	if (ft_strcmp(token, "<<") == 0)
+		return (HERE_DOC);
+	else if (ft_strcmp(token, "<") == 0)
+		return (REDIR_IN);
+	else if (ft_strcmp(token, ">") == 0)
+		return (REDIR_OUT_TRUNC);
+	else if (ft_strcmp(token, ">>") == 0)
+		return (REDIR_OUT_APPEND);
 	if (prev != NULL)
 	{
 		if (ft_strcmp(prev, "<<") == 0)
@@ -23,14 +31,6 @@ static t_token_type	__classify(char *token, char *prev)
 		else if (ft_strcmp(prev, ">") == 0 || ft_strcmp(prev, ">>") == 0)
 			return (OUTFILE);
 	}
-	if (ft_strcmp(token, "<<") == 0)
-		return (HERE_DOC);
-	else if (ft_strcmp(token, "<") == 0)
-		return (REDIR_IN);
-	else if (ft_strcmp(token, ">") == 0)
-		return (REDIR_OUT_TRUNC);
-	else if (ft_strcmp(token, ">>") == 0)
-		return (REDIR_OUT_APPEND);
 	return (WORD);
 }
 

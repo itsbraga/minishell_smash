@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 15:05:20 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:35:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				handle_remove(t_gc_lst **yama, void *ptr);
 void			*yama(int flag, void *ptr, size_t size);
 
 // cleanup.c
-void			clean_after_execution(t_data *d, char *user_input);
+void			clean_after_execution(t_data *d, char *input);
 void			free_tab(char **tab);
 int				free_gc_tab(t_gc_lst **yama, char **ptr);
 void			clean_exit_shell(int err_status);

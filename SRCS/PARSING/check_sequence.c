@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 15:44:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:22:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	__different_cases(char *content, t_token_parser *p)
 		return (err_msg(NULL, ">", 2), BAD_USAGE);
 	else if (p->redir == '<' && p->count == 1 && content[p->j] == '<')
 		return (err_msg(NULL, "<", 2), BAD_USAGE);
-	// else if (content[p->j] == '\0')
-	// 	return (err_msg(NULL, "newline", 2), BAD_USAGE);
+	else if (content[p->j] == '\0')
+		return (err_msg(NULL, "newline", 2), BAD_USAGE);
 	return (SUCCESS);
 }
 
