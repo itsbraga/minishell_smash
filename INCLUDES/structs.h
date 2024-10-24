@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 21:44:51 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/24 21:47:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 /******************************************************************************\
  * PARSING including LEXING
 \******************************************************************************/
+
+typedef enum e_mode
+{
+	ADD_C = 42,
+	GET
+}			t_mode;
 
 typedef enum e_token_type
 {
@@ -38,6 +44,9 @@ typedef struct s_parser
 	char	*input;
 	int		i;
 	int		rcount;
+	char	next_redir;
+	size_t	next_count;
+	size_t	orig_i;
 	int		start;
 	int		seg_count;
 	char	**segment;
@@ -154,7 +163,6 @@ typedef struct s_data
 	t_exec_lst		*exec;
 	t_env_lst		*env;
 	t_env_lst		*exp_env;
-	int				last_exit_status;
 }				t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 00:00:57 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:16:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	__init_parser(t_parser *p)
 	p->closed_quotes[0] = true;
 	p->closed_quotes[1] = true;
 	p->start = p->i;
-	p->rcount = 0;
 }
 
 static int	__first_check(t_parser *p)
@@ -25,23 +24,11 @@ static int	__first_check(t_parser *p)
 	while (ft_isspace(p->input[p->i]) == 1)
 		p->i++;
 	if (p->input[p->i] == '\0')
-		return (SUCCESS);
-	if (p->input[p->i] == '|')
+		return (BAD_USAGE);
+	else if (p->input[p->i] == '|')
 		return (err_msg(NULL, "|", 2), BAD_USAGE);
-	// else if (p->input[p->i] == '>' && p->count > 2)
-	// 	return (err_msg(NULL, ">>", 2), BAD_USAGE);
-	// else if (p->input[p->i] == '<' && p->count > 2)
-	// 	return (err_msg(NULL, "<<", 2), BAD_USAGE);
-	// else if (p->input[p->i] == '>' && p->count == 1 && content[p->j] == '>')
-	// 	return (err_msg(NULL, ">", 2), BAD_USAGE);
-	// else if (p->input[p->i] == '<' && p->count == 1 && content[p->j] == '<')
-	// 	return (err_msg(NULL, "<", 2), BAD_USAGE);
-	// else if (content[p->j] == '\0')
-	// 	return (err_msg(NULL, "newline", 2), BAD_USAGE);
 	return (SUCCESS);
 }
-
-int	check_order(t_parser *p);
 
 static int	__pipe_check_end(t_parser *p)
 {
@@ -72,6 +59,9 @@ int	parse_input(t_parser *p)
 	__init_parser(p);
 	if (__first_check(p) == BAD_USAGE)
 		return (BAD_USAGE);
+	if (check_order(p) == BAD_USAGE)
+		return (BAD_USAGE);
+	p->i = p->start;
 	while (p->input[p->i] != '\0')
 	{
 		if (p->input[p->i] == '\'')

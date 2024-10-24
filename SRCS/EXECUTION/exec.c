@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/24 17:50:33 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/24 21:51:04 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ void	exec(char *path_bin, char **cmd_and_args, char **env)
 	{
 		dprintf(2, "PID : %d | execve failed /!\\(exec)\n", getpid());
 		free_and_set_null(path_bin);
-		exit(FAILURE); // à changer ---> clean_exit_shell(errno) ?
+		exit(ft_exit_status(FAILURE, ADD)); // à changer ---> clean_exit_shell(errno) ?
 	}
 }
 
 void	go_exec(t_exec_lst *node, char **env)
 {
-	t_data	*d;
-
-	d = data_struct();
 	if (is_built_in(node->cmd) == false)
 	{
 		if (handle_bin_path(node, env) == 0)
@@ -35,16 +32,16 @@ void	go_exec(t_exec_lst *node, char **env)
 		else
 		{
 			yama(REMOVE, env, 0);
-			exit(FAILURE);
+			exit(ft_exit_status(FAILURE, ADD));
 		}
 	}
 	else
 	{
-		if (execute_built_in(d, node->cmd) == NOT_A_BUILTIN)
+		if (execute_built_in(d, node->cmd) == FAILURE)
 		{
 			err_msg(node->cmd[0], strerror(errno), 0);
 			yama(REMOVE, env, 0);
-			exit (d->last_exit_status);
+			exit(ft_exit_status(FAILURE, ADD));
 		}
 	}
 }

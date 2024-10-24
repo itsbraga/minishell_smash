@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 22:00:45 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:18:30 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 \******************************************************************************/
 
 // ft_exit.c
-void			ft_exit(t_data *d, char **args);
+void			ft_exit(char **args);
 
 // ft_env.c
 int				ft_env(t_env_lst *env, char **args);
@@ -48,7 +48,7 @@ void			change_paths(t_env_lst *env, t_env_lst *exp_env);
 int				ft_cd(t_data *d);
 
 // ft_echo.c
-int				ft_echo(t_data *d, char **args);
+int				ft_echo(char **args);
 
 // built_ins.c
 bool			is_built_in(char **cmd);

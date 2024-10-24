@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 23:11:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:13:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int	create_exec_lst(t_data *d)
 	}
 	__add_new_task(d, &p);
 	if (create_redir_lst(d, p.new_task) == FAILURE)
-		return (d->last_exit_status = FAILURE);
-	return (d->last_exit_status = SUCCESS);
+		return (ft_exit_status(FAILURE, ADD));
+	return (ft_exit_status(SUCCESS, ADD));
 }

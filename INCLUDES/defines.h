@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 23:02:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:09:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@
 # define ERR_MALLOC "cannot allocate memory"
 
 // exec
+# define ERR_PWD "pwd: error retrieving current directory: "
+# define ERR_GETCWD "getcwd: cannot access parent directories: "
 # define ERR_CMD "command not found"
 # define ERR_BAD_PERM "Permission denied"
 # define ERR_BAD_FILE "No such file or directory"

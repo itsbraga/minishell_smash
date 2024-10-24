@@ -30,7 +30,6 @@ t_data	*data_struct(void)
 		instance->info = NULL;
 		instance->env = NULL;
 		instance->exp_env = NULL;
-		instance->last_exit_status = 0;
 	}
 	return (instance);
 }

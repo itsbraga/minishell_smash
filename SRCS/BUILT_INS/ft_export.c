@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 22:59:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:05:57 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,28 @@ static void	__manage_variable(t_env_lst *export_env, t_env_lst *env, char *var)
 
 static int	__check_args(char *var)
 {
+	int	ret;
 	int	i;
 
+	ret = 0;
 	i = 0;
 	if ((ft_isalpha(var[0]) == 0) && var[0] != '_')
-		return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
+	{
+		ret = ft_exit_status(FAILURE, ADD);
+		return (err_msg_cmd("export", var, ERR_ENV_VAR, ret));
+	}
 	while (var[i] != '=' && var[i] != '\0')
 	{
 		if (ft_isalpha(var[i]) == 1
 			|| ft_isdigit(var[i]) == 1 || var[i] == '_')
 			i++;
 		else
-			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
+		{
+			ret = ft_exit_status(FAILURE, ADD);
+			return (err_msg_cmd("export", var, ERR_ENV_VAR, ret));
+		}
 	}
-	return (SUCCESS);
+	return (ft_exit_status(SUCCESS, ADD));
 }
 
 static void	__print_export_env(t_env_lst *exp_env)
@@ -67,10 +75,8 @@ static void	__print_export_env(t_env_lst *exp_env)
 
 int	ft_export(t_env_lst *exp_env, t_env_lst *env, char **args)
 {
-	t_data			*d;
 	unsigned int	i;
 
-	d = data_struct();
 	i = 1;
 	if (args[1] == NULL)
 		__print_export_env(exp_env);
@@ -83,8 +89,7 @@ int	ft_export(t_env_lst *exp_env, t_env_lst *env, char **args)
 			i++;
 		}
 	}
-	d->last_exit_status = SUCCESS;
-	return (SUCCESS);
+	return (ft_exit_status(SUCCESS, ADD));
 }
 
 // code de sortie ?

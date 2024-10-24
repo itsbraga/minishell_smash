@@ -6,7 +6,11 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/10/24 17:43:38 by pmateo           ###   ########.fr       */
+=======
+/*   Updated: 2024/10/24 17:43:27 by annabrag         ###   ########.fr       */
+>>>>>>> f6551493298bd68e0e2c8f8b33b70413f9813763
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +47,8 @@ static void	__minishell(t_data *d)
 				display_token_dblst(&(d->token));
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			display_exec_lst(&(d->exec));
-			if (error != 1)
-				while_cmd(d, &(d->exec));
+			// if (error != 1)
+			// 	while_cmd(d, &(d->exec));
 		}
 		clean_after_execution(d, input);
 	}

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 22:43:45 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:45:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int	__open_heredoc(t_data *d, char *limiter)
 	{
 		ft_printf(2, "> ");
 		line = get_next_line(0, 0);
+		// if (g_sig_code == 2)
 		dprintf(2, "before heredoc gnl | line = %s\n", line);
 		if (line == NULL)
 			break ;

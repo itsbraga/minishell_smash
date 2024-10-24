@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 22:58:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:18:41 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	__resync_rl(void)
 	rl_replace_line("", 0);
 }
 
-int	ft_echo(t_data *d, char **args)
+int	ft_echo(char **args)
 {
 	int	i;
 	int	flag;
@@ -55,6 +55,5 @@ int	ft_echo(t_data *d, char **args)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	else
 		__resync_rl();
-	d->last_exit_status = SUCCESS;
-	return (SUCCESS);
+	return (ft_exit_status(SUCCESS, ADD));
 }
