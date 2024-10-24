@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:02:17 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 21:16:22 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:20:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int	create_main_lst(t_data *d, char *input)
 	segments = __get_all_segments(input);
 	if (segments == NULL)
 		return (FAILURE);
-	if (segments[0] == NULL || *segments[0] == '\0')
-		return ((void)yama(REMOVE, segments, 0), FAILURE);
 	i = 0;
 	while (segments[i] != NULL)
 	{
