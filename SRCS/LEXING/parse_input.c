@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 19:14:40 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:16:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	__first_check(t_parser *p)
 	while (ft_isspace(p->input[p->i]) == 1)
 		p->i++;
 	if (p->input[p->i] == '\0')
-		return (SUCCESS);
+		return (BAD_USAGE);
 	else if (p->input[p->i] == '|')
 		return (err_msg(NULL, "|", 2), BAD_USAGE);
 	return (SUCCESS);

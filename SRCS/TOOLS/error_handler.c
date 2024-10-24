@@ -6,11 +6,22 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 23:09:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 20:57:53 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
+
+int	ft_exit_status(int exit_status, int mode)
+{
+	static int	code; 
+	
+	if (mode == ADD_C)
+		code = exit_status;
+	if (mode == GET)
+		return (code);
+	return (code);
+}
 
 static char	*__append_strs(char *s1, char *s2)
 {

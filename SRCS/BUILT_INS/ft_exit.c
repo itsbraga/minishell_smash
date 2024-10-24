@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 23:11:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:03:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static long long	__ft_atol(char *arg)
 	return ((res * sign) % 256);
 }
 
-static int	__get_exit_status(t_data *d, char **args)
+static int	__get_exit_status(char **args)
 {
 	long long	exit_status;
 
 	exit_status = 0;
 	if (args == NULL || args[1] == NULL)
-		exit_status = d->last_exit_status;
+		exit_status = ft_exit_status(0, GET);
 	else if (args[1] != NULL)
 	{
 		if ((ft_strisnumeric(args[1]) == 0) && args[2] != NULL)
@@ -55,17 +55,16 @@ static int	__get_exit_status(t_data *d, char **args)
 	}
 	else
 		return (err_msg_cmd("exit", args[1], ERR_ARG_TYPE, BAD_USAGE));
-	return (exit_status);
+	return (ft_exit_status(exit_status, ADD));
 }
 
-void	ft_exit(t_data *d, char **args)
+void	ft_exit(char **args)
 {
-	int	code;
+	int	exit_status;
 
-	code = 0;
+	exit_status = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
-	code = __get_exit_status(d, args);
-	d->last_exit_status = code;
-	if (code != 1)
-		clean_exit_shell(code);
+	exit_status = __get_exit_status(args);
+	if (exit_status != 1)
+		clean_exit_shell(exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 19:38:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 20:58:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef enum e_mode
 {
-	ADD = 42,
+	ADD_C = 42,
 	GET
 }			t_mode;
 
@@ -163,7 +163,6 @@ typedef struct s_data
 	t_exec_lst		*exec;
 	t_env_lst		*env;
 	t_env_lst		*exp_env;
-	int				last_exit_status;
 }				t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 19:51:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 20:51:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	__specific_cases(t_parser *p)
 		p->next_count = 0;
 		while (p->input[p->i + p->next_count] == p->next_redir)
 			p->next_count++;
-		if (p->next_count >= 2)
-		{
-			if (p->next_redir == '>')
-				return (err_msg(NULL, ">>", 2), BAD_USAGE);
+		if (p->next_count >= 3 && p->next_redir == '<')
+			return (err_msg(NULL, "<<<", 2), BAD_USAGE);
+		else if (p->next_count == 2 && p->next_redir == '<')
 			return (err_msg(NULL, "<<", 2), BAD_USAGE);
-		}
+		else if (p->next_count >= 2 && p->next_redir == '>')
+			return (err_msg(NULL, ">>", 2), BAD_USAGE);
 		if (p->input[p->i + p->next_count] == '\0')
 		{
 			if (p->next_redir == '>')
@@ -54,7 +54,6 @@ static int	__different_cases(t_parser *p)
 		p->i = start_i;
 		if (curr_char == '>')
 			return (err_msg(NULL, ">>", 2), BAD_USAGE);
-		return (err_msg(NULL, "<<", 2), BAD_USAGE);
 	}
 	while (ft_isspace(p->input[p->i]) == 1)
 		p->i++;

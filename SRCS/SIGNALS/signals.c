@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 18:45:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:19:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ void	rl_reset_custom_prompt(void)
 
 static void	__sigint_handler(int signo)
 {
-	t_data	*d;
-
 	(void)signo;
-	d = data_struct();
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	g_sig_code = 1;
-	d->last_exit_status = CTRL_C;
+	ft_exit_status(CTRL_C, ADD);
 	rl_reset_custom_prompt();
 }
 
@@ -53,14 +50,11 @@ void	set_signals(void)
 
 static void	__sigint_handler_heredoc(int sig)
 {
-	t_data	*d;
-
 	(void)sig;
-	d = data_struct();
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	// fonction pour fermer le fd
 	g_sig_code = 2;
-	d->last_exit_status = CTRL_C;
+	ft_exit_status(CTRL_C, ADD);
 }
 
 // appeler cet handler dans la fonction d'ouverture d'here_doc
