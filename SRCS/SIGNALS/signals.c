@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 23:02:58 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:45:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	__sigint_handler_heredoc(int sig)
 	d = data_struct();
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	// fonction pour fermer le fd
-	g_sig_code = 1;
+	g_sig_code = 2;
 	d->last_exit_status = CTRL_C;
 }
 

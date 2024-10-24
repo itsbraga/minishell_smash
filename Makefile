@@ -56,8 +56,7 @@ ENV_F			=	create_env.c env_utils.c export_env_utils.c
 
 LEXING_DIR		=	LEXING/
 LEXING_F		=	parse_input.c parse_input2.c create_main_lst.c \
-					parse_main.c tokenization.c check_token_sequence.c \
-					create_token_dblst.c
+					parse_main.c tokenization.c create_token_dblst.c
 
 PARSING_DIR		=	PARSING/
 PARSING_F		=	handle_quotes.c quotes_utils.c exec_lst_utils.c \

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 23:54:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:38:01 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 /******************************************************************************\
  * PARSING including LEXING
 \******************************************************************************/
+
+typedef enum e_mode
+{
+	ADD = 42,
+	GET
+}			t_mode;
 
 typedef enum e_token_type
 {
@@ -38,6 +44,9 @@ typedef struct s_parser
 	char	*input;
 	int		i;
 	int		rcount;
+	char	next_redir;
+	size_t	next_count;
+	size_t	orig_i;
 	int		start;
 	int		seg_count;
 	char	**segment;
