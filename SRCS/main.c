@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 20:33:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:43:38 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	main(int argc, char **argv, char **envp)
 	}
 	printf("\n%s", BOLD WELCOME_BANNER R);
 	create_env(d, envp);
+	get_parent_pid(d);
+	dprintf(2, "ppid  = %d\n", d->ppid);
 	__minishell(d);
 	return (SUCCESS);
 }

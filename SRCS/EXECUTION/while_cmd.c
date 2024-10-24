@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 18:59:38 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 20:56:05 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,36 @@ static void	__parent(t_exec_info *info)
 	info->executed_cmd++;
 }
 
+void	solo_exit_case(t_data *d, t_exec_lst *e_lst)
+{
+	if (d->info->cmd_count == 1)
+	{
+		if (e_lst->cmd[0] != NULL && ft_strcmp(e_lst->cmd[0], "exit") == 0)
+			ft_exit(d, e_lst->cmd);
+	}
+	return ;
+}
+
+static char **__before_while_cmd(t_data *d, t_exec_lst **e_lst)
+{
+	solo_exit_case(d, e_lst);
+	if (d->info->all_cmd_heredoc_nb > 16)
+	{
+		err_msg(NULL, ERR_MAX_HD, 0);
+		clean_exit_shell(BAD_USAGE);
+	}
+	handle_heredoc(d, e_lst);
+	return (recreate_env_tab(&(d->env)));
+}
+
 void	while_cmd(t_data *d, t_exec_lst **e_lst)
 {
 	t_exec_lst	*curr;
 	char		**env_tab;
 
 	curr = *e_lst;
-	env_tab = recreate_env_tab(&(d->env));
-	if (d->info->all_cmd_heredoc_nb > 16)
-		(err_msg(NULL, ERR_MAX_HD, 0), clean_exit_shell(BAD_USAGE));
-	handle_heredoc(d, e_lst);
+	env_tab = __before_while_cmd(d, e_lst);
+	yama(ADD_TAB, NULL, 0);
 	while ((d->info->executed_cmd != d->info->cmd_count) && curr != NULL)
 	{
 		if (d->info->pipe_count != 0

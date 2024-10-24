@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 22:28:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:01:35 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int	execute_built_in(t_data *d, char **cmd)
 		return (ft_env(d->env, cmd));
 	else if (ft_strcmp(cmd[0], "exit") == 0)
 		ft_exit(d, cmd);
-	return (NOT_A_BUILTIN);
+	else
+		return (NOT_A_BUILTIN);
 }

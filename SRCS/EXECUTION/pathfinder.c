@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/22 21:10:31 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/24 20:58:32 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,10 @@ static	void	__basic_behaviour(t_exec_info *info, int heredoc_nb)
 		if (info->executed_cmd != (info->cmd_count - 1))
 		{
 			dup2(info->fd[1], STDOUT_FILENO);
-			dprintf(2, "PID : %d | FD(%d) à été trompé et écrit au même endroit que FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
+			// dprintf(2, "PID : %d | FD(%d) à été trompé et écrit au même endroit que FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
 		}
 		if (info->executed_cmd != 0)
 		{
-			// dprintf(2, "GNL : %s\n", get_next_line(info->old_read_fd, 0));
-			// dup2(info->old_read_fd, STDIN_FILENO);
-			// dprintf(2, "PID : %d | FD(%d) à été trompé et lit au même endroit que FD(%d)\n", getpid(), STDIN_FILENO, info->old_read_fd);
 			if (heredoc_nb == 0)
 				dup2(info->old_read_fd, STDIN_FILENO);
 			close(info->old_read_fd);

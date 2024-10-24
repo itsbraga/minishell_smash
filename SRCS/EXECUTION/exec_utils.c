@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 21:03:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:56:15 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,10 @@ static bool	__check_if_is_dir(char *bin_path)
 
 int	check_bin_path(t_exec_lst *node, bool absolute_path)
 {
-	dprintf(2, "check_bin_path | bin_path = %s\n", node->bin_path);
 	if (__check_if_is_dir(node->bin_path) == true)
 		exit(CMD_CANNOT_EXEC);
 	if (access(node->bin_path, F_OK) == -1)
 	{
-		dprintf(2, "access = -1\n");
 		if (absolute_path == true)
 			err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, CMD_NOT_FOUND);
 		else
@@ -125,10 +123,10 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 		}
 		else
 			node->bin_path = search_bin(node->cmd[0], tab_path);
-		dprintf(2, "handle_bin_path | bin path = %s\n", node->bin_path);
-		// si binpath == NULL error = 1
 		if (node->bin_path != NULL)
 			error = check_bin_path(node, node->absolute_path);
+		else
+			error = 1;
 	}
 	return (error);
 }
