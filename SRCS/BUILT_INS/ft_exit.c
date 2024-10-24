@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 21:03:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:07:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,30 @@ static int	__get_exit_status(char **args)
 	else if (args[1] != NULL)
 	{
 		if ((ft_strisnumeric(args[1]) == 0) && args[2] != NULL)
+		{
+			ft_exit_status(FAILURE, ADD);
 			return (err_msg_cmd("exit", NULL, ERR_ARG, FAILURE));
+		}
+		else if ((ft_strisnumeric(args[1]) != 0) && args[2] != NULL)
+		{
+			ft_exit_status(BAD_USAGE, ADD);
+			return (err_msg_cmd("exit", args[1], ERR_ARG_TYPE, BAD_USAGE));
+		}
 		else
 			exit_status = __ft_atol(args[1]);
 	}
-	else
-		return (err_msg_cmd("exit", args[1], ERR_ARG_TYPE, BAD_USAGE));
 	return (ft_exit_status(exit_status, ADD));
 }
 
-void	ft_exit(char **args)
+int	ft_exit(char **args)
 {
 	int	exit_status;
 
 	exit_status = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
 	exit_status = __get_exit_status(args);
-	if (exit_status != 1)
+	if (exit_status >= 2)
 		clean_exit_shell(exit_status);
+	else
+		return (ft_exit_status(0, GET));
 }

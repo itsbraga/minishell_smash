@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/24 15:56:15 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/24 22:35:46 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static bool	__check_if_is_dir(char *bin_path)
 	if (stat(bin_path, &s_bin_path) != 0)
 	{
 		err_msg("stat", strerror(errno), 0);
-		exit(FAILURE);
+		exit(ft_exit_status(FAILURE, ADD));
 	}
 	if (S_ISDIR(s_bin_path.st_mode) != 0)
 	{
@@ -85,18 +85,25 @@ static bool	__check_if_is_dir(char *bin_path)
 int	check_bin_path(t_exec_lst *node, bool absolute_path)
 {
 	if (__check_if_is_dir(node->bin_path) == true)
-		exit(CMD_CANNOT_EXEC);
+		exit(ft_exit_status(CMD_CANNOT_EXEC, ADD));
 	if (access(node->bin_path, F_OK) == -1)
 	{
 		if (absolute_path == true)
+		{
+			ft_exit_status(CMD_NOT_FOUND, ADD);
 			err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, CMD_NOT_FOUND);
+		}
 		else
+		{
+			ft_exit_status(CMD_NOT_FOUND, ADD);
 			err_msg_cmd(node->cmd[0], NULL, ERR_CMD, CMD_NOT_FOUND);
+		}
 		free_and_set_null(node->bin_path);
 		return (FAILURE);
 	}
 	else if (access(node->bin_path, X_OK) == -1)
 	{
+		ft_exit_status(CMD_CANNOT_EXEC, ADD);
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
 		free_and_set_null(node->bin_path);
 		return (FAILURE);

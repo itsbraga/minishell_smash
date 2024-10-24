@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 20:59:58 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:19:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 	}
 	if (var_path != NULL)
 		free_and_set_null(var_path);
-	return (ft_exit_status(ret, ADD));
+	return (ret);
 }
 
 int	ft_cd(t_data *d)
@@ -82,6 +82,7 @@ int	ft_cd(t_data *d)
 		free_and_set_null(next);
 		return (ft_exit_status(error, ADD));
 	}
-	(change_paths(d->env, d->exp_env), update_prompt(d, &pr));
+	change_paths(d->env, d->exp_env);
+	update_prompt(d, &pr);
 	return (ft_exit_status(ret, ADD));
 }

@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/24 20:58:32 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/24 22:59:06 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	__redirection_in(t_redir_lst *r)
 	if (infile_fd == -1)
 	{
 		err_msg(r->infile, strerror(errno), 0);
-		return (FAILURE);
+		return (ft_exit_status(FAILURE, ADD));
 	}
 	dup2(infile_fd, STDIN_FILENO);
 	close(infile_fd);
@@ -41,7 +41,7 @@ static int	__redirection_out(t_redir_lst *r)
 	if (outfile_fd == -1)
 	{
 		err_msg(r->outfile, strerror(errno), 0);
-		return (FAILURE);
+		return (ft_exit_status(FAILURE, ADD));
 	}
 	dup2(outfile_fd, STDOUT_FILENO);
 	close(outfile_fd);
@@ -69,33 +69,20 @@ static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 
 static	void	__basic_behaviour(t_exec_info *info, int heredoc_nb)
 {
-	dprintf(2, "PID : %d | executed_cmd (basic_behaviour) = %d\n", getpid(), info->executed_cmd);
-	// info->stdin_backup = dup(STDIN_FILENO);
-	// if (isatty(info->stdin_backup) == 1)
-	// 		dprintf(2, "PID : %d | FD(stdinbackup) lit sur STDIN :)\n", getpid());
-	// else
-	// 		dprintf(2, "PID : %d | FD(stdinbackup) ne lit pas sur STDIN /!\\\n", getpid());
-	// get_next_line(info->stdin_backup, 0);
-	//  dprintf(2, "PID : %d | dup2 a échoué: %s\n", getpid(), strerror(errno));
 	if (info->pipe_count != 0)
 	{
 		if (info->executed_cmd != (info->cmd_count - 1))
 		{
 			dup2(info->fd[1], STDOUT_FILENO);
-			// dprintf(2, "PID : %d | FD(%d) à été trompé et écrit au même endroit que FD(%d)\n", getpid(), STDOUT_FILENO, info->fd[1]);
 		}
 		if (info->executed_cmd != 0)
 		{
 			if (heredoc_nb == 0)
 				dup2(info->old_read_fd, STDIN_FILENO);
 			close(info->old_read_fd);
-			// dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->old_read_fd);
 		}
-		// dprintf(2, "PID : %d | executed_cmd : %d ; cmd_count : %d\n", getpid(), info->executed_cmd, info->cmd_count);
 		close(info->fd[1]);
-		// dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[1]);
 		close(info->fd[0]);
-		// dprintf(2, "PID : %d | FD(%d) à été fermé\n", getpid(), info->fd[0]);
 	}
 } 
 
@@ -106,8 +93,6 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 
 	error = 0;
 	latest_redin = 0;
-	dprintf(2, "debut pathfinder\n");
-	dprintf(2, "PID : %d | cmd[0] = %s\n", getpid(), node->cmd[0]);
 	__basic_behaviour(d->info, node->heredoc_nb);
 	error = __handle_all_redir(node, &latest_redin);
 	if (latest_redin == HERE_DOC)
@@ -116,11 +101,10 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 		close(node->latest_hd);
 	}
 	if (error == FAILURE)
-		exit(FAILURE); // cause des leaks
+	{
+		yama(REMOVE, env, 0);
+		exit(ft_exit_status(0, GET));
+	}
 	else
 		go_exec(node, env);
 }
-
-// ls | cat
-// STDIN -> ls -> dup2(fd[1], STDOUT)
-// dup2(old-read-fd, STDIN) -> cat -> STDOUT

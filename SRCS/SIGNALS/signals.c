@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 21:52:13 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/24 23:27:44 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	__sigint_handler(int signo)
 {
 	(void)signo;
 	ft_putchar_fd('\n', STDOUT_FILENO);
-	g_sig_code = 1;
 	ft_exit_status(CTRL_C, ADD);
 	rl_reset_custom_prompt();
 }
@@ -53,7 +52,6 @@ static void	__sigint_handler_heredoc(int sig)
 	(void)sig;
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	// fonction pour fermer le fd
-	g_sig_code = 2;
 	ft_exit_status(CTRL_C, ADD);
 }
 

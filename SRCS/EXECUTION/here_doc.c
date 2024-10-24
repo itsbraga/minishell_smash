@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/24 18:45:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/24 23:23:16 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ static int	__open_heredoc(t_data *d, char *limiter)
 	if (pipe(fd) == -1)
 		(err_msg(NULL, strerror(errno), 0), exit(FAILURE));
 	must_expand = __manage_limiter(&limiter);
-	// signal(SIGINT, set_signals_in_heredoc);
+	set_signals_in_heredoc();
 	while (1)
 	{
 		ft_printf(2, "> ");
 		line = get_next_line(0, 0);
-		// if (g_sig_code == 2)
-		dprintf(2, "before heredoc gnl | line = %s\n", line);
+		if (g_sig_code == SIGINT)
+		{
+			
+		}
 		if (line == NULL)
 			break ;
 		if (ft_strcmp(limiter, line) == 0)
