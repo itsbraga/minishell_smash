@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 22:07:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/25 15:20:24 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int	ft_exit(char **args)
 	ft_putendl_fd("exit", STDERR_FILENO);
 	exit_status = __get_exit_status(args);
 	if (exit_status >= 2)
+	{
 		clean_exit_shell(exit_status);
+		return (ft_exit_status(exit_status, ADD));
+	}
 	else
 		return (ft_exit_status(0, GET));
 }

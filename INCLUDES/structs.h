@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 21:47:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/25 15:25:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,16 +142,11 @@ typedef struct s_env_lst
 typedef struct s_prompt
 {
 	char	*username;
-	char	*header;
 	char	*rainbow_user;
-	char	*rainbow_42;
-	char	*tmp;
 	char	*custom_cwd;
 	char	*part1;
 	char	*part2;
 	char	*part3;
-	char	*line_1;
-	char	*line_2;
 }				t_prompt;
 
 typedef struct s_data

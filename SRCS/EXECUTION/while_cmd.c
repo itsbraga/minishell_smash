@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/24 22:54:14 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/25 15:20:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	solo_exit_case(t_data *d, t_exec_lst *e_lst)
 
 static char **__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 {
-	solo_exit_case(d, e_lst); 
+	solo_exit_case(d, *e_lst); 
 	if (d->info->all_cmd_heredoc_nb > 16)
 	{
 		err_msg(NULL, ERR_MAX_HD, 0);
