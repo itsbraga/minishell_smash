@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/25 15:25:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:10:44 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef enum e_token_type
 typedef struct s_parser
 {
 	char	*input;
+	char	*tmp;
 	int		i;
 	int		rcount;
 	char	next_redir;
