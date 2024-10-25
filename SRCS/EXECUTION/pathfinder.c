@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/24 22:59:06 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/26 00:50:16 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static	void	__basic_behaviour(t_exec_info *info, int heredoc_nb)
 	}
 } 
 
-void	pathfinder(t_data *d, t_exec_lst *node, char **env)
+void	pathfinder(t_data *d, t_exec_lst *node)
 {
 	int				error;
 	t_token_type	latest_redin;
@@ -101,10 +101,7 @@ void	pathfinder(t_data *d, t_exec_lst *node, char **env)
 		close(node->latest_hd);
 	}
 	if (error == FAILURE)
-	{
-		yama(REMOVE, env, 0);
-		exit(ft_exit_status(0, GET));
-	}
+		clean_exit_shell(ft_exit_status(0, GET));
 	else
-		go_exec(node, env);
+		go_exec(node);
 }

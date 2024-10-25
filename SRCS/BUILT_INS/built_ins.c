@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/25 21:00:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/26 00:43:03 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,6 @@ void	execute_parent_built_in(t_data *d, char **cmd)
 	else if (ft_strcmp(cmd[0], "exit") == 0)
 		ft_exit(cmd);
 }
+
+//nous pouvons potentiellement passer tout les builtins executé obligatoirement dans un parent
+// en retour de type void car ft_exit_code() renseignera le code erreur

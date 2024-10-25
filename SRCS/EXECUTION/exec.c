@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/25 21:16:25 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/26 00:52:14 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ void	go_exec(t_exec_lst *node)
 	d = data_struct();
 	ret = 0;
 	env_tab = NULL;
-	ret = execute_built_in(d, node->cmd);
+	ret = execute_child_built_in(d, node->cmd);
 	dprintf(2, "go_exec | ret = %d\n", ret);
 	if (ret != NOT_A_BUILTIN)
 		clean_exit_shell(ft_exit_status(0, GET));
 	else if (ret == NOT_A_BUILTIN)
 	{
-		env_tab = recreate_env_tab(d->env);
-		if (handle_bin_path(node, env) == 0)
+		env_tab = recreate_env_tab(&d->env);
+		if (handle_bin_path(node, env_tab) == 0)
 			exec(node->bin_path, node->cmd, env_tab);
 		else
 		{
-			yama(REMOVE, env, 0);
+			yama(REMOVE, env_tab, 0);
 			exit(ft_exit_status(0, GET));
 		}
 	}

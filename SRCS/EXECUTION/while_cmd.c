@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/25 21:05:53 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/26 00:50:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,10 @@ static void	__parent(t_exec_info *info)
 	info->executed_cmd++;
 }
 
-void	solo_exit_case(t_data *d, t_exec_lst *e_lst)
-{
-	if (d->info->cmd_count == 1)
-	{
-		if (e_lst->cmd[0] != NULL && ft_strcmp(e_lst->cmd[0], "exit") == 0)
-			ft_exit(e_lst->cmd);
-	}
-	return ;
-}
-
 static void	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 {
 	if (d->info->cmd_count == 1)
-		execute_parent_built_in(d, e_lst->cmd);
+		execute_parent_built_in(d, (*e_lst)->cmd);
 	if (d->info->all_cmd_heredoc_nb > 16)
 	{
 		err_msg(NULL, ERR_MAX_HD, 0);
@@ -85,7 +75,7 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 		if (d->info->child_pid == -1)
 			clean_exit_shell(FAILURE);
 		if (d->info->child_pid == 0)
-			pathfinder(d, curr, env_tab);
+			pathfinder(d, curr);
 		else
 			__parent(d->info);
 		curr = curr->next;

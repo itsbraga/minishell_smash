@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 21:56:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/26 00:50:37 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int				ft_echo(char **args);
 
 // built_ins.c
 bool			is_built_in(char **cmd);
-int				execute_built_in(t_data *d, char **cmd);
+int				execute_child_built_in(t_data *d, char **cmd);
+void			execute_parent_built_in(t_data *d, char **cmd);
+
 
 /******************************************************************************\
  * EXECUTION
@@ -66,13 +68,13 @@ int				handle_bin_path(t_exec_lst *node, char **env);
 
 // exec.c
 void			exec(char *path_bin, char **cmd_and_args, char **env);
-void			go_exec(t_exec_lst *node, char **env);
+void			go_exec(t_exec_lst *node);
 
 // here_doc.c
 void			handle_heredoc(t_data *d, t_exec_lst **e_lst);
 
 // pathfinder.c
-void			pathfinder(t_data *d, t_exec_lst *node, char **env);
+void			pathfinder(t_data *d, t_exec_lst *node);
 
 // while_cmd.c
 void			while_cmd(t_data *d, t_exec_lst **e_lst);
