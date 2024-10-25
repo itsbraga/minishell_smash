@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 23:19:57 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/25 21:17:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_exit_status(int exit_status, int mode)
 {
 	static int	code = 0; 
 	
-	if (mode == ADD_C)
+	if (mode == ADD)
 		code = exit_status;
 	if (mode == GET)
 		return (code);
