@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 21:16:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:13:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,8 @@ static int	__pipe_check_end(t_parser *p)
 
 int	parse_input(t_parser *p)
 {
-	char	*tmp;
-
 	__init_parser(p);
-	if (__first_check(p) == BAD_USAGE)
-		return (BAD_USAGE);
-	if (check_order(p) == BAD_USAGE)
+	if (__first_check(p) == BAD_USAGE || check_order(p) == BAD_USAGE)
 		return (BAD_USAGE);
 	p->i = p->start;
 	while (p->input[p->i] != '\0')
@@ -73,9 +69,10 @@ int	parse_input(t_parser *p)
 			break ;
 		p->i++;
 	}
-	tmp = ft_strldup(p->input + p->start, (p->i - p->start));
-	(secure_malloc(tmp, false), (void)yama(ADD, tmp, 0));
-	p->segment[p->seg_count++] = tmp;
+	p->tmp = ft_strldup(p->input + p->start, (p->i - p->start));
+	secure_malloc(p->tmp, false);
+	(void)yama(ADD, p->tmp, 0);
+	p->segment[p->seg_count++] = p->tmp;
 	if (p->closed_quotes[0] == true && p->closed_quotes[1] == true)
 	{
 		if (__pipe_check_end(p) == BAD_USAGE)

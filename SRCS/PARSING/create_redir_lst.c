@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 20:44:31 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 21:13:25 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:30:39 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	create_redir_lst(t_data *d, t_exec_lst *existing_task)
 	new_redir = NULL;
 	while (curr != NULL)
 	{
+		// printf("salut\n");
 		new_redir = __get_redir_infos(curr);
 		if (__type_is_redir(curr->type) == false)
 			curr = curr->next;
