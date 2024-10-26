@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/24 21:17:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/26 18:59:32 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static char	*__handle_last_exit_code(char *str, char *var)
 
 	var_value = ft_itoa(ft_exit_status(0, GET));
 	secure_malloc(var_value, true);
-	(void)yama(ADD, var_value, 0);
 	str = __add_var_value(str, var, var_value, ft_strlen(var_value));
+	free_and_set_null(var_value);
 	return (str);
 }
 
@@ -75,7 +75,7 @@ static	char	*__handle_expand(t_data *d, char *str, char *var)
 	to_find = NULL;
 	var_value = NULL;
 	if (*var == '?')
-		__handle_last_exit_code(str, var);
+		str = __handle_last_exit_code(str, var);
 	else if (*var == '"' || *var == '\'')
 		str = clean_translated_variable(str, var);
 	else

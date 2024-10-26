@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/25 15:26:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/26 18:49:10 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	__minishell(t_data *d)
 			if (create_main_lst(d, input) == FAILURE)
 				error = 1;
 			else
-				display_main_lst(&(d->main));
+				// display_main_lst(&(d->main));
 			if (create_token_dblst(d) == FAILURE)
 				error = 1;
 			else
-				display_token_dblst(&(d->token));
+				// display_token_dblst(&(d->token));
 			printf("\n---------------------------------- INT MAIN ------------------------------------\n");
-			display_exec_lst(&(d->exec));
+			// display_exec_lst(&(d->exec));
 			if (error != 1)
 				while_cmd(d, &(d->exec));
 		}

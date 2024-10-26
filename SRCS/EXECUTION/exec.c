@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/26 00:52:14 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/26 19:01:59 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	go_exec(t_exec_lst *node)
 		else
 		{
 			yama(REMOVE, env_tab, 0);
-			exit(ft_exit_status(0, GET));
+			clean_exit_shell(ft_exit_status(0, GET));
 		}
 	}
 }
