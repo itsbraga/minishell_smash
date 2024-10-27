@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/24 22:35:46 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/27 02:57:59 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,24 @@ static bool	__check_if_is_dir(char *bin_path)
 {
 	struct stat	s_bin_path;
 
-	if (stat(bin_path, &s_bin_path) != 0)
+	if (stat(bin_path, &s_bin_path) == 0)
 	{
-		err_msg("stat", strerror(errno), 0);
-		exit(ft_exit_status(FAILURE, ADD));
+		if (S_ISDIR(s_bin_path.st_mode) != 0)
+		{
+			err_msg(bin_path, ERR_IS_DIR, 0);
+			return (true);
+		}
 	}
-	if (S_ISDIR(s_bin_path.st_mode) != 0)
-	{
-		err_msg(bin_path, ERR_IS_DIR, 0);
-		return (true);
-	}
-	else
-		return (false);
+	return (false);
 }
 
-int	check_bin_path(t_exec_lst *node, bool absolute_path)
+int	check_bin_path(t_exec_lst *node)
 {
 	if (__check_if_is_dir(node->bin_path) == true)
-		exit(ft_exit_status(CMD_CANNOT_EXEC, ADD));
+		clean_exit(ft_exit_status(CMD_CANNOT_EXEC, ADD));
 	if (access(node->bin_path, F_OK) == -1)
 	{
-		if (absolute_path == true)
+		if (node->absolute_path == true)
 		{
 			ft_exit_status(CMD_NOT_FOUND, ADD);
 			err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, CMD_NOT_FOUND);
@@ -98,14 +95,12 @@ int	check_bin_path(t_exec_lst *node, bool absolute_path)
 			ft_exit_status(CMD_NOT_FOUND, ADD);
 			err_msg_cmd(node->cmd[0], NULL, ERR_CMD, CMD_NOT_FOUND);
 		}
-		free_and_set_null(node->bin_path);
 		return (FAILURE);
 	}
 	else if (access(node->bin_path, X_OK) == -1)
 	{
 		ft_exit_status(CMD_CANNOT_EXEC, ADD);
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
-		free_and_set_null(node->bin_path);
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -118,8 +113,9 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 
 	error = 0;
 	tab_path = NULL;
+	dprintf(2, "hbinpath | absolute path = %d\n", node->absolute_path);
 	if (node->absolute_path == true)
-		error = check_bin_path(node, node->absolute_path);
+		error = check_bin_path(node);
 	else
 	{
 		tab_path = search_path(tab_path, env);
@@ -131,7 +127,7 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 		else
 			node->bin_path = search_bin(node->cmd[0], tab_path);
 		if (node->bin_path != NULL)
-			error = check_bin_path(node, node->absolute_path);
+			error = check_bin_path(node);
 		else
 			error = 1;
 	}

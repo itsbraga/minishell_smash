@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/26 00:50:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/27 02:39:47 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int				check_bin_path(t_exec_lst *node, bool absolute_path);
 int				handle_bin_path(t_exec_lst *node, char **env);
 
 // exec.c
-void			exec(char *path_bin, char **cmd_and_args, char **env);
+void			execute(char *path_bin, char **cmd_and_args, char **env);
 void			go_exec(t_exec_lst *node);
 
 // here_doc.c

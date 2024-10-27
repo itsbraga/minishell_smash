@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/26 18:59:32 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/27 02:07:49 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static char	*__handle_last_exit_code(char *str, char *var)
 {
 	char	*var_value;
 
+	dprintf(2, "hlexitcode | str = %s\n", str);
+	dprintf(2, "hlexitcode | var = %s\n", var);
 	var_value = ft_itoa(ft_exit_status(0, GET));
 	secure_malloc(var_value, true);
 	str = __add_var_value(str, var, var_value, ft_strlen(var_value));

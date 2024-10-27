@@ -6,13 +6,13 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/26 19:01:59 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/27 02:39:39 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	exec(char *path_bin, char **cmd_and_args, char **env)
+void	execute(char *path_bin, char **cmd_and_args, char **env)
 {
 	if (execve(path_bin, cmd_and_args, env) == -1)
 	{
@@ -38,7 +38,7 @@ void	go_exec(t_exec_lst *node)
 	{
 		env_tab = recreate_env_tab(&d->env);
 		if (handle_bin_path(node, env_tab) == 0)
-			exec(node->bin_path, node->cmd, env_tab);
+			execute(node->bin_path, node->cmd, env_tab);
 		else
 		{
 			yama(REMOVE, env_tab, 0);
