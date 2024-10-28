@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/28 01:55:43 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/28 17:10:53 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	__parent(t_exec_info *info)
 
 static void	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 {
-	if (d->info->cmd_count == 1)
+	if (d->info->cmd_count == 1 && (*e_lst)->cmd != NULL)
 		execute_parent_built_in(d, (*e_lst)->cmd);
 	if (d->info->all_cmd_heredoc_nb > 16)
 	{
