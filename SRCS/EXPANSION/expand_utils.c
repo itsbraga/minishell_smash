@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 20:07:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/27 23:44:55 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static char	*__take_var_value(char *str)
 		i++;
 	value = ft_strdup((str + i + 1));
 	secure_malloc(value, true);
-	(void)yama(ADD, value, 0);
 	return (value);
 }
 
@@ -75,7 +74,6 @@ char	*take_var(char *str, char *var)
 		j++;
 	to_find = ft_strldup(&(str[i]), (j - i));
 	secure_malloc(to_find, true);
-	(void)yama(ADD, to_find, 0);
 	return (to_find);
 }
 
@@ -90,16 +88,14 @@ char	*search_var(char *to_find, t_env_lst *env)
 	{
 		to_cmp = ft_strldup(curr->content, len_to_equal(curr->content));
 		secure_malloc(to_cmp, true);
-		(void)yama(ADD, to_cmp, 0);
 		if (ft_strcmp(to_find, to_cmp) == 0)
 		{
-			(void)yama(REMOVE, to_cmp, 0);
+			free_and_set_null(to_cmp);
 			return (__take_var_value(curr->content));
 		}
 		else
 		{
-			(void)yama(REMOVE, to_cmp, 0);
-			to_cmp = NULL;
+			free_and_set_null(to_cmp);
 			curr = curr->next;
 		}
 	}

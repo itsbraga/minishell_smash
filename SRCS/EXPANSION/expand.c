@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/27 02:07:49 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/28 00:11:31 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ size_t vv_size)
 		len_var++;
 	new_str = malloc(sizeof(char) * (ft_strlen(str) + (vv_size - len_var)));
 	secure_malloc(new_str, true);
-	yama(ADD, new_str, 0);
 	i = 0;
 	while (str != (var - 1))
 		new_str[i++] = *str++;
@@ -56,19 +55,6 @@ size_t vv_size)
 	return (free_and_set_null(start_str), new_str);
 }
 
-static char	*__handle_last_exit_code(char *str, char *var)
-{
-	char	*var_value;
-
-	dprintf(2, "hlexitcode | str = %s\n", str);
-	dprintf(2, "hlexitcode | var = %s\n", var);
-	var_value = ft_itoa(ft_exit_status(0, GET));
-	secure_malloc(var_value, true);
-	str = __add_var_value(str, var, var_value, ft_strlen(var_value));
-	free_and_set_null(var_value);
-	return (str);
-}
-
 static	char	*__handle_expand(t_data *d, char *str, char *var)
 {
 	char	*to_find;
@@ -77,7 +63,7 @@ static	char	*__handle_expand(t_data *d, char *str, char *var)
 	to_find = NULL;
 	var_value = NULL;
 	if (*var == '?')
-		str = __handle_last_exit_code(str, var);
+		str = handle_last_exit_code(str, var);
 	else if (*var == '"' || *var == '\'')
 		str = clean_translated_variable(str, var);
 	else
@@ -104,7 +90,6 @@ char	*expand(t_data *d, char *str, bool in_heredoc)
 	i = 0;
 	closed_quotes[0] = true;
 	closed_quotes[1] = true;
-	// dprintf(2, "expand has been called ! (%s)\n", str);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'' && closed_quotes[1] == true)

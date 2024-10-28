@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_lexing.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 23:47:29 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/28 00:10:47 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ size_t			len_to_equal(char *str);
 char			*clean_translated_variable(char *str, char *var);
 char			*take_var(char *str, char *var);
 char			*search_var(char *to_find, t_env_lst *env);
+
+//expand_exit_code.c
+char			*add_exit_code_value(char *str, char *var, char *var_value,
+size_t vv_size);
+char			*handle_last_exit_code(char *str, char *var);
 
 // expand.c
 char			*expand(t_data *d, char *str, bool in_heredoc);

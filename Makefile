@@ -63,7 +63,7 @@ PARSING_F		=	handle_quotes.c quotes_utils.c exec_lst_utils.c \
 					create_exec_lst.c redir_lst_utils.c create_redir_lst.c
 
 EXPAND_DIR		=	EXPANSION/
-EXPAND_F		=	expand.c expand_utils.c
+EXPAND_F		=	expand.c expand_exit_code.c expand_utils.c
 
 BUILT_INS_DIR	=	BUILT_INS/
 BUILT_INS_F		=	built_ins.c ft_echo.c ft_cd_utils.c ft_cd.c ft_pwd.c \

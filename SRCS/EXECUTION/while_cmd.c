@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/26 00:50:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/28 01:55:43 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ static void	__wait_child(t_exec_info *info)
 	child_count = info->cmd_count;
 	while (child_count != 0)
 	{
-		printf("PID : %d | waiting for child... (wait_child)\n", getpid());
+		// printf("PID : %d | waiting for child... (wait_child)\n", getpid());
 		if (waitpid(-1, &status, 0) == -1)
 			(err_msg("waitpid", strerror(errno), 0), clean_exit_shell(FAILURE));
+		if (WIFEXITED(status))
+			ft_exit_status(WEXITSTATUS(status), ADD);
 		child_count--;
-		printf("PID : %d | a child is done ! (wait_child)\n", getpid());
+		// printf("PID : %d | a child is done ! (wait_child)\n", getpid());
 	}
-	printf("PID : %d | no more child to wait (wait_child)\n", getpid());
+	// printf("PID : %d | no more child to wait (wait_child)\n", getpid());
 }
 
 static void	__parent(t_exec_info *info)
