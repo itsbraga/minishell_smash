@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 17:57:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/28 21:54:33 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	__handle_pipe_error(t_parser *p)
 int	parse_input(t_parser *p)
 {
 	__init_parser(p);
-	if (__first_check(p) == BAD_USAGE || check_order(p) == BAD_USAGE)
+	if (__first_check(p) == BAD_USAGE || check_redir_order(p) == BAD_USAGE)
 		return (BAD_USAGE);
 	p->i = p->start;
 	while (p->input[p->i] != '\0')

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 17:35:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:03:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ typedef struct s_parser
 	char	*input;
 	char	*tmp;
 	int		i;
+	char	curr_char;
+	// int		start_i;
 	int		rcount;
-	char	next_redir;
-	size_t	next_count;
-	size_t	orig_i;
+	int		rcount2;
 	int		start;
 	int		seg_count;
 	char	**segment;

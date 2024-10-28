@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_lexing.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 00:10:47 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/28 20:01:59 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int				parse_input(t_parser *p);
 
 // parse_input2.c
-int				check_order(t_parser *p);
+int				check_redir_order(t_parser *p);
 
 // create_main_lst.c
 int				create_main_lst(t_data *d, char *input);
