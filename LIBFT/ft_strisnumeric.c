@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:58:43 by annabrag          #+#    #+#             */
-/*   Updated: 2024/08/28 17:06:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:15:45 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	ft_strisnumeric(char *s)
 	while (s[i])
 	{
 		if (ft_isdigit(s[i]) == 0)
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }

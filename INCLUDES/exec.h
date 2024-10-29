@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 04:33:15 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 18:43:11 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 \******************************************************************************/
 
 // ft_exit.c
-void			ft_exit(char **args);
+int				ft_exit(char **args);
 
 // ft_env.c
 int				ft_env(t_env_lst *env, char **args);
@@ -43,6 +43,7 @@ int				ft_export(t_env_lst *exp_env, t_env_lst *env, char **args);
 
 // ft_cd_utils.c
 void			change_paths(t_env_lst *env, t_env_lst *exp_env);
+int				is_directory(const char *path);
 
 // ft_cd.c
 int				ft_cd(t_data *d);

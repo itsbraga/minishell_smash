@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 21:18:41 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 19:20:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ int	ft_echo(char **args)
 	int	i;
 	int	flag;
 
-	i = 1;
+	i = 0;
 	flag = 0;
-	while (args[i] != NULL && __n_option_exist(args[i]) == true)
+	if (write(STDOUT_FILENO, "\0", 1) == -1)
 	{
-		flag = 1;
-		i++;
+		ft_exit_status(FAILURE, ADD);
+		return (err_msg_cmd("echo", "write error", strerror(errno), FAILURE));
 	}
+	while (args[++i] != NULL && __n_option_exist(args[i]) == true)
+		flag = 1;
 	while (args[i] != NULL)
 	{
 		ft_putstr_fd(args[i], STDOUT_FILENO);

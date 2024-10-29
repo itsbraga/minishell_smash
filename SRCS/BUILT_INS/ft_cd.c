@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 22:19:33 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 17:02:58 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,38 @@ static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
 	return (ret);
 }
 
+static int	__handle_cd_error(char *path)
+{
+	const int	is_dir = is_directory(path);
+	int			error;
+
+	error = 0;
+	if (is_dir == 0)
+		error = err_msg_cmd("cd", path, ERR_NOT_DIR, FAILURE);
+	else if (is_dir == -1)
+		error = err_msg_cmd("cd", path, ERR_BAD_FILE, FAILURE);
+	return (ft_exit_status(error, ADD));
+}
+
 int	ft_cd(t_data *d)
 {
 	int			ret;
-	char		*next;
-	int			error;
+	char		*path;
 	t_prompt	pr;
 
+	path = d->token->next->content;
 	if ((d->token->next == NULL)
-		|| (ft_strcmp(d->token->next->content, "~") == 0))
+		|| (ft_strcmp(path, "~") == 0))
 		ret = __go_to_env_var(d->env, "HOME=", d->token);
-	else if (ft_strcmp(d->token->next->content, "-") == 0)
+	else if (ft_strcmp(path, "-") == 0)
 	{
 		ret = __go_to_env_var(d->env, "OLDPWD=", d->token);
 		ft_printf(STDOUT_FILENO, "%s\n", __find_var_path("OLDPWD=", d->env));
 	}
 	else
-		ret = chdir(d->token->next->content);
+		ret = chdir(path);
 	if (ret != 0)
-	{
-		next = d->token->next->content;
-		error = err_msg_cmd(d->token->content, next, ERR_BAD_FILE, FAILURE);
-		free_and_set_null(next);
-		return (ft_exit_status(error, ADD));
-	}
+		return (__handle_cd_error(path));
 	change_paths(d->env, d->exp_env);
 	update_prompt(d, &pr);
 	return (ft_exit_status(ret, ADD));

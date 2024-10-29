@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 21:07:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:03:08 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,16 @@ void	change_paths(t_env_lst *env, t_env_lst *exp_env)
 	__update_oldpwd(exp_env, exp_old_pwd);
 	free_and_set_null(new_pwd);
 	free_and_set_null(exp_new_pwd);
+}
+
+int	is_directory(const char *path)
+{
+    struct stat path_stat;
+	
+    if (stat(path, &path_stat) == -1)
+	{
+		if (errno == ENOENT)
+			return (-1);
+	}
+    return (S_ISDIR(path_stat.st_mode));
 }
