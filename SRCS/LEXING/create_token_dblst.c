@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 17:05:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:21:34 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	create_token_dblst(t_data *d)
 		if (create_exec_lst(d) == FAILURE)
 			return (FAILURE);
 		curr = curr->next;
-		// (void)yama(REMOVE, seg_elems, 0);
 	}
 	return (SUCCESS);
 }

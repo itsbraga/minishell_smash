@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 20:26:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:42:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 	{
 		while (curr != NULL && (d->info->executed_cmd != d->info->cmd_count))
 		{
+			dprintf(2, "in while_cmd | pipecount = %d\n", d->info->pipe_count);
 			__handle_exec_node(d, curr);
 			curr = curr->next;
 		}
 		__wait_child(d->info);
 	}
+	dprintf(2, "out while_cmd\n");
 }
