@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 19:16:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:50:55 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include "libraries.h"
 
 /******************************************************************************\
- * YAMA'S FLAGS
+ * FLAGS
 \******************************************************************************/
-
+    //yama
 # define CREATE 0
 # define CREATE_TAB 1
 # define ADD 2
@@ -28,6 +28,9 @@
 # define REMOVE -1
 # define CLEAN_ALL -2
 # define SEARCH -4
+    //general
+# define NOT_A_BUILTIN 42
+# define STOP_EXEC -42
 
 /******************************************************************************\
  * EXIT STATUS
@@ -35,8 +38,6 @@
 
 # define SUCCESS 0
 # define FAILURE 1
-
-# define NOT_A_BUILTIN 42
 
 # define BAD_USAGE 2
 # define CMD_CANNOT_EXEC 126

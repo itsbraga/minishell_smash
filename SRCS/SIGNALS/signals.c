@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/29 03:03:44 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 20:41:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ void	set_signals(void)
 static void	__sigint_handler_heredoc(int sig)
 {
 	(void)sig;
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	// fonction pour fermer le fd
+	g_sig_code = CTRL_C;
 	ft_exit_status(CTRL_C, ADD);
 }
 
