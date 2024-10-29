@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 21:50:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 22:00:59 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 /******************************************************************************\
  * FLAGS
 \******************************************************************************/
-    //yama
+
+// Yama
 # define CREATE 0
 # define CREATE_TAB 1
 # define ADD 2
@@ -28,7 +29,8 @@
 # define REMOVE -1
 # define CLEAN_ALL -2
 # define SEARCH -4
-    //general
+
+// General
 # define NOT_A_BUILTIN 42
 # define STOP_EXEC -42
 
@@ -59,6 +61,8 @@
 # define ERR_ENV_VAR "not a valid identifier"
 # define ERR_ARG "too many arguments"
 # define ERR_ARG_TYPE "numeric argument required"
+# define ERR_BAD_FILE "No such file or directory"
+# define ERR_NOT_DIR "Not a directory"
 
 // creation
 # define ERR_MALLOC "cannot allocate memory"
@@ -68,9 +72,7 @@
 # define ERR_GETCWD "getcwd: cannot access parent directories: "
 # define ERR_CMD "command not found"
 # define ERR_BAD_PERM "Permission denied"
-# define ERR_BAD_FILE "No such file or directory"
 # define ERR_IS_DIR "Is a directory"
-# define ERR_NOT_DIR "Not a directory"
 # define ERR_NO_ENV "$PATH doesn't exist, please specify absolute path"
 # define ERR_MAX_HD "maximum here-document count exceeded"
 
@@ -95,7 +97,5 @@
 # define LIM "=================================="
 # define LIM2 "================================"
 # define LIM3 "================================="
-
-# define BYE_MSG 
 
 #endif

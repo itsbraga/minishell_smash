@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:03:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 18:52:29 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:06:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static size_t	__get_varlen(char *var)
 void	update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp,
 t_env_lst *env, char *var)
 {
-	if ((ft_strchr(to_up_exp->content, '=') == NULL) && to_up == NULL)
+	if (to_up == NULL && ft_strchr(to_up_exp->content, '=') == NULL)
 		add_var_to_env(env, var);
 	else if (to_up != NULL)
 	{

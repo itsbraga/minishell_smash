@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 21:56:34 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 22:01:05 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int				ft_echo(char **args);
 // built_ins.c
 bool			is_built_in(char **cmd);
 int				execute_child_built_in(t_data *d, char **cmd);
-void			execute_parent_built_in(t_data *d, char **cmd);
+int				execute_parent_built_in(t_data *d, char **cmd);
 
 
 /******************************************************************************\

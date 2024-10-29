@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 21:05:57 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:06:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,22 @@ static void	__manage_variable(t_env_lst *export_env, t_env_lst *env, char *var)
 
 static int	__check_args(char *var)
 {
-	int	ret;
 	int	i;
 
-	ret = 0;
 	i = 0;
-	if ((ft_isalpha(var[0]) == 0) && var[0] != '_')
+	if (var[0] != '_' && ft_isalpha(var[0]) == 0)
 	{
-		ret = ft_exit_status(FAILURE, ADD);
-		return (err_msg_cmd("export", var, ERR_ENV_VAR, ret));
+		ft_exit_status(FAILURE, ADD);
+		return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
 	}
-	while (var[i] != '=' && var[i] != '\0')
+	while (var[i] != '\0' && var[i] != '=')
 	{
-		if (ft_isalpha(var[i]) == 1
-			|| ft_isdigit(var[i]) == 1 || var[i] == '_')
+		if (ft_isalpha(var[i]) == 1 || ft_isdigit(var[i]) == 1 || var[i] == '_')
 			i++;
 		else
 		{
-			ret = ft_exit_status(FAILURE, ADD);
-			return (err_msg_cmd("export", var, ERR_ENV_VAR, ret));
+			ft_exit_status(FAILURE, ADD);
+			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
 		}
 	}
 	return (ft_exit_status(SUCCESS, ADD));
@@ -67,8 +64,7 @@ static void	__print_export_env(t_env_lst *exp_env)
 	curr = exp_env;
 	while (curr != NULL)
 	{
-		ft_printf(1, "export ");
-		ft_printf(1, "%s\n", curr->content);
+		ft_printf(STDOUT_FILENO, "export %s\n", curr->content);
 		curr = curr->next;
 	}
 }
@@ -91,7 +87,3 @@ int	ft_export(t_env_lst *exp_env, t_env_lst *env, char **args)
 	}
 	return (ft_exit_status(SUCCESS, ADD));
 }
-
-// code de sortie ?
-// si ajout de $WAOUH elle doit se glisser apres VTE_VERSION et
-//	avant XAUTHORITY

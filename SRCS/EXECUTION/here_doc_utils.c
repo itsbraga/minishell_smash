@@ -6,11 +6,11 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 21:46:53 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 22:01:19 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "exec.h"
+#include "exec.h"
 
 static bool	__manage_limiter(char **limiter)
 {
@@ -62,7 +62,10 @@ int	open_heredoc(t_data *d, char *limiter)
 
 	line = NULL;
 	if (pipe(fd) == -1)
-		(err_msg(NULL, strerror(errno), 0), exit(FAILURE));
+	{
+		err_msg(NULL, strerror(errno), 0);
+		exit(FAILURE);
+	}
 	must_expand = __manage_limiter(&limiter);
 	set_signals_in_heredoc();
 	while (1)

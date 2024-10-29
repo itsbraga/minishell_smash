@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 04:58:19 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 21:13:13 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	go_exec(t_exec_lst *node)
 		clean_exit_shell(ft_exit_status(0, GET));
 	else if (ret == NOT_A_BUILTIN)
 	{
-		env_tab = recreate_env_tab(&d->env);
+		env_tab = recreate_env_tab(&(d->env));
 		if (handle_bin_path(node, env_tab) == SUCCESS)
 			execute(node->bin_path, node->cmd, env_tab);
 		else

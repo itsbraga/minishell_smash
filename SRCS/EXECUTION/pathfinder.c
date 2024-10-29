@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 04:44:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 21:16:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	__redirection_out(t_redir_lst *r)
 	return (SUCCESS);
 }
 
-static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
+static int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 {
 	int				error;
 	t_redir_lst		*curr;
@@ -69,7 +69,7 @@ static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 	return (error);
 }
 
-static	void	__basic_behaviour(t_exec_info *info, int heredoc_nb)
+static void	__basic_behaviour(t_exec_info *info, int heredoc_nb)
 {
 	if (info->pipe_count != 0)
 	{

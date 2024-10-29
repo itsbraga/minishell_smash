@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/29 16:32:44 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 19:41:56 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_status)
 
 void	err_msg_hd(char *limiter)
 {
-	char	*lim_wout_newline;
+	char	*lim_without_nl;
 
-	lim_wout_newline = ft_strtrim(limiter, "\n");
+	lim_without_nl = ft_strtrim(limiter, "\n");
 	ft_printf(2, "\n%swarning: here-document delimited by ", ERR_PREFIX);
-	ft_printf(2, "end-of-file (wanted `%s')\n", lim_wout_newline);
-	free_and_set_null(lim_wout_newline);
+	ft_printf(2, "end-of-file (wanted `%s')\n", lim_without_nl);
+	free_and_set_null(lim_without_nl);
 	return ;
 }

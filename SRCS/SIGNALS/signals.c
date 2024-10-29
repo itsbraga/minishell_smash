@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/29 20:41:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 22:17:43 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	rl_reset_custom_prompt(void)
 static void	__sigint_handler(int signo)
 {
 	(void)signo;
+	dprintf(2, "cc\n");
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	ft_exit_status(CTRL_C, ADD);
 	rl_reset_custom_prompt();
