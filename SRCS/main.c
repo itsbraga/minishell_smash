@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 01:36:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 05:25:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ static void	__minishell(t_data *d)
 			add_history(input);
 			if (create_main_lst(d, input) == FAILURE)
 				error = 1;
-			else
+			// else
 				// display_main_lst(&(d->main));
 			if (create_token_dblst(d) == FAILURE)
 				error = 1;
 			// else
+			// else
 				// display_token_dblst(&(d->token));
+			display_exec_lst(&(d->exec));
 			// printf("\n---------------------------------- INT MAIN ------------------------------------\n");
 			// display_exec_lst(&(d->exec));
 			if (error != 1)
