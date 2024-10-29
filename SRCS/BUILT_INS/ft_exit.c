@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/29 18:42:44 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:06:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static long long	__ft_atol(char *arg)
 	i = 0;
 	sign = 1;
 	res = 0;
-	while (arg[i] != '\0' && (ft_isspace(arg[i]) == 1))
+	while (arg[i] != '\0' && ft_isspace(arg[i]) == 1)
 		i++;
 	if (arg[i] == '-' || arg[i] == '+')
 	{
@@ -39,10 +39,6 @@ static long long	__ft_atol(char *arg)
 	return ((res * sign) % 256);
 }
 
-// exit (null) -> exit avec le dernier code erreur OK
-// exit ana 3 // exit ana ana -> exit mais avec affiche message d'erreur
-// exit 3 ana // exit 3 435425 -> ne exit pas et affiche message d'erreur
-// exit 4 -> exit avec le code indique
 static int	__get_exit_status(char **args)
 {
 	long long	exit_status;

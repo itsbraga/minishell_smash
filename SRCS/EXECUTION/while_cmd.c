@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 04:59:00 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 20:26:52 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	__parent(t_exec_info *info, t_exec_lst *curr)
 	info->executed_cmd++;
 }
 
-static void	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
+static int	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 {
 	if (d->info->all_cmd_heredoc_nb > 16)
 	{
@@ -56,9 +56,12 @@ static void	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 		clean_exit_shell(BAD_USAGE);
 	}
 	handle_heredoc(d, e_lst);
-	if (d->info->cmd_count == 1 && (*e_lst)->cmd != NULL)
-		execute_parent_built_in(d, (*e_lst)->cmd);
-	return ;
+	if ((*e_lst)->cmd != NULL && d->info->cmd_count == 1)
+	{
+		if (execute_parent_built_in(d, (*e_lst)->cmd) == NOT_A_BUILTIN)
+			return (NOT_A_BUILTIN);
+	}
+	return (SUCCESS);
 }
 
 static void	__handle_exec_node(t_data *d, t_exec_lst *curr)
@@ -83,11 +86,13 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 	t_exec_lst	*curr;
 
 	curr = *e_lst;
-	__before_while_cmd(d, e_lst);
-	while ((d->info->executed_cmd != d->info->cmd_count) && curr != NULL)
+	if (__before_while_cmd(d, e_lst) == NOT_A_BUILTIN)
 	{
-		__handle_exec_node(d, curr);
-		curr = curr->next;
+		while (curr != NULL && (d->info->executed_cmd != d->info->cmd_count))
+		{
+			__handle_exec_node(d, curr);
+			curr = curr->next;
+		}
+		__wait_child(d->info);
 	}
-	__wait_child(d->info);
 }

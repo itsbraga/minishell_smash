@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 18:43:11 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 20:12:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int				ft_echo(char **args);
 // built_ins.c
 bool			is_built_in(char **cmd);
 int				execute_child_built_in(t_data *d, char **cmd);
-void			execute_parent_built_in(t_data *d, char **cmd);
+int				execute_parent_built_in(t_data *d, char **cmd);
 
 
 /******************************************************************************\

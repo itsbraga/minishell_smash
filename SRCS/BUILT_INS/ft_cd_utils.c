@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 17:03:08 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:07:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 	curr = env;
 	while (curr != NULL)
 	{
-		if ((ft_strncmp(curr->content, "OLDPWD=", 7) == 0)
-			&& old_pwd != NULL)
+		if ((ft_strncmp(curr->content, "OLDPWD=", 7) == 0) && old_pwd != NULL)
 		{
 			free(curr->content);
 			curr->content = ft_strjoin("OLDPWD=", old_pwd + 4);
@@ -58,8 +57,6 @@ static void	__update_oldpwd(t_env_lst *env, char *old_pwd)
 		}
 		curr = curr->next;
 	}
-	// if (old_pwd != NULL)
-	// 	free(old_pwd);
 }
 
 void	change_paths(t_env_lst *env, t_env_lst *exp_env)
@@ -69,7 +66,6 @@ void	change_paths(t_env_lst *env, t_env_lst *exp_env)
 	char	*exp_old_pwd;
 	char	*exp_new_pwd;
 
-	// old_pwd = NULL;
 	new_pwd = __update_pwd(env, &old_pwd);
 	if (new_pwd == NULL)
 		return ;

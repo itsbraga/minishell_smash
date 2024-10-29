@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 21:54:33 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 20:03:14 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ static int	__handle_pipe_error(t_parser *p)
 	{
 		if (p->input[p->i + 1] == '|')
 			return (err_msg(NULL, "||", 2), BAD_USAGE);
+		p->i++;
 		while (p->input[p->i] != '\0' && ft_isspace(p->input[p->i]) == 1)
 			p->i++;
 		if (p->input[p->i] == '|' || p->input[p->i] == '\0')
 			return (err_msg(NULL, "|", 2), BAD_USAGE);
+		p->i--;
 	}
 	return (SUCCESS);
 }
