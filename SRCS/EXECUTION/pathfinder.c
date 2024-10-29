@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 21:16:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:04:41 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	pathfinder(t_data *d, t_exec_lst *node)
 
 	error = 0;
 	latest_redin = 0;
+	dprintf(2, "PID[%d] | cmd[1] = %s\n", getpid(), node->cmd[1]);
 	__basic_behaviour(d->info, node->heredoc_nb);
 	error = __handle_all_redir(node, &latest_redin);
 	if (latest_redin == HERE_DOC)

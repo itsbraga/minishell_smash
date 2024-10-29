@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 21:14:14 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:01:19 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "exec.h"
+#include "exec.h"
 
 static bool	__manage_limiter(char **limiter)
 {
@@ -32,9 +32,20 @@ static int	__close_heredoc(int fd[], char *limiter, char *line)
 	close(fd[1]);
 	return (fd[0]);
 }
+void		__sigint_close_heredoc(int *fd, char *line, char *limiter)
+{
+	dprintf(2, "PID : %d | closehd | cc\n", getpid());
+	get_next_line(0, 1);
+	free_and_set_null(line);
+	free_and_set_null(limiter);
+	close(fd[0]);
+	close(fd[1]);
+	clean_exit_shell(ft_exit_status(0, GET));
+}
+
 static	int	__check_gnl_return(char *line, char *limiter)
 {
-	if (line == NULL)
+	if (line == NULL && g_sig_code != CTRL_C)
 	{
 		err_msg_hd(limiter);
 		return (FAILURE);
@@ -61,6 +72,8 @@ int	open_heredoc(t_data *d, char *limiter)
 	{
 		ft_printf(2, "> ");
 		line = get_next_line(0, 0);
+		if (g_sig_code == CTRL_C)
+			__sigint_close_heredoc(fd, line, limiter);
 		if (__check_gnl_return(line, limiter) == FAILURE)
 			break;
 		if (ft_strcmp(limiter, line) == 0)

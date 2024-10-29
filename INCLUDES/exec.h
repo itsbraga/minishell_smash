@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 20:12:40 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:01:05 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			go_exec(t_exec_lst *node);
 
 // here_doc.c
 int				open_heredoc(t_data *d, char *limiter);
-void			handle_heredoc(t_data *d, t_exec_lst **e_lst);
+int				handle_heredoc(t_data *d, t_exec_lst **e_lst);
 
 // pathfinder.c
 void			pathfinder(t_data *d, t_exec_lst *node);

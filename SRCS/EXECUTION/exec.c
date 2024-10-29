@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 21:13:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:19:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	execute(char *bin_path, char **cmd_and_args, char **env)
 {
+	dprintf(2, "ntm\n");
 	if (execve(bin_path, cmd_and_args, env) == -1)
 	{
 		if (errno == EACCES)
@@ -61,10 +62,12 @@ void	go_exec(t_exec_lst *node)
 	int 	ret;
 	char	**env_tab;
 
+	dprintf(2, "PID[%d] | go_exec\n", getpid());
 	d = data_struct();
 	ret = 0;
 	env_tab = NULL;
 	ret = execute_child_built_in(d, node->cmd);
+	dprintf(2, "PID[%d] | go_exec ret = %d\n", getpid(), ret);
 	if (ret != NOT_A_BUILTIN)
 		clean_exit_shell(ft_exit_status(0, GET));
 	else if (ret == NOT_A_BUILTIN)
@@ -74,6 +77,7 @@ void	go_exec(t_exec_lst *node)
 			execute(node->bin_path, node->cmd, env_tab);
 		else
 		{
+			dprintf(2, "PID[%d] | handle bin path failure\n", getpid());
 			yama(REMOVE, env_tab, 0);
 			clean_exit_shell(ft_exit_status(0, GET));
 		}
