@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/24 20:58:25 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 02:49:35 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int				ft_exit_status(int exit_status, int mode);
 void			err_msg(char *detail, char *reason, int quotes);
 int				err_msg_cmd(char *cmd, char *detail, char *reason,
 					int err_status);
+void			err_msg_hd(char *limiter);
 
 // secure.c
 void			free_and_set_null(void *to_free);

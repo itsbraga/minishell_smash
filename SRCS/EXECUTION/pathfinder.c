@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/26 00:50:16 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 04:44:38 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,20 @@ static int	__redirection_out(t_redir_lst *r)
 static	int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 {
 	int				error;
+	t_redir_lst		*curr;
 
 	error = 0;
-	while (node->redir != NULL)
+	curr = node->redir;
+	while (curr != NULL)
 	{
-		if (node->redir->type == REDIR_IN || node->redir->type == HERE_DOC)
-			*latest_redin = node->redir->type;
-		if (node->redir->type == REDIR_IN)
-			error = __redirection_in(node->redir);
-		else if (node->redir->type == REDIR_OUT_TRUNC
-			|| node->redir->type == REDIR_OUT_APPEND)
-			error = __redirection_out(node->redir);
-		node->redir = node->redir->next;
+		if (curr->type == REDIR_IN || curr->type == HERE_DOC)
+			*latest_redin = curr->type;
+		if (curr->type == REDIR_IN)
+			error = __redirection_in(curr);
+		else if (curr->type == REDIR_OUT_TRUNC
+			|| curr->type == REDIR_OUT_APPEND)
+			error = __redirection_out(curr);
+		curr = curr->next;
 	}
 	return (error);
 }
@@ -96,11 +98,12 @@ void	pathfinder(t_data *d, t_exec_lst *node)
 	__basic_behaviour(d->info, node->heredoc_nb);
 	error = __handle_all_redir(node, &latest_redin);
 	if (latest_redin == HERE_DOC)
-	{
 		dup2(node->latest_hd, STDIN_FILENO);
+	if (node->latest_hd != 0)
 		close(node->latest_hd);
-	}
 	if (error == FAILURE)
+		clean_exit_shell(ft_exit_status(0, GET));
+	if (node->cmd == NULL)
 		clean_exit_shell(ft_exit_status(0, GET));
 	else
 		go_exec(node);

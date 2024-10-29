@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 00:52:30 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 04:33:15 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 \******************************************************************************/
 
 // ft_exit.c
-int				ft_exit(char **args);
+void			ft_exit(char **args);
 
 // ft_env.c
 int				ft_env(t_env_lst *env, char **args);
@@ -72,6 +72,7 @@ int				handle_bin_path(t_exec_lst *node, char **env);
 void			go_exec(t_exec_lst *node);
 
 // here_doc.c
+int				open_heredoc(t_data *d, char *limiter);
 void			handle_heredoc(t_data *d, t_exec_lst **e_lst);
 
 // pathfinder.c

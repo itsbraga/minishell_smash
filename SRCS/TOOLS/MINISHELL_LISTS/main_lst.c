@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:58:33 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 22:19:21 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:04:50 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	del_unwanted_whitespaces(t_main_lst *main)
 	{
 		trimmed_token = ft_strtrim(curr->content, " ");
 		secure_malloc(trimmed_token, true);
-		(void)yama(ADD, trimmed_token, 0);
 		free(curr->content);
 		curr->content = trimmed_token;
 		curr = curr->next;

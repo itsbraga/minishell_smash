@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/24 23:27:44 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 03:03:44 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	__sigint_handler_heredoc(int sig)
 }
 
 // appeler cet handler dans la fonction d'ouverture d'here_doc
-void	set_signals_in_heredoc(void)
+void	set_signals_in_heredoc()
 {
 	signal(SIGINT, &__sigint_handler_heredoc);
 	signal(SIGQUIT, SIG_IGN);

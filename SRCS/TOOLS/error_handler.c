@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/25 21:17:01 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/29 02:56:46 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ static char	*__append_strs(char *s1, char *s2)
 	secure_malloc(s1, true);
 	(void)yama(ADD, s1, 0);
 	return (s1);
+}
+
+void	err_msg_hd(char *limiter)
+{
+	char *lim_wout_newline;
+
+	lim_wout_newline = ft_strtrim(limiter, "\n");
+	ft_printf(2, "\n%swarning: here-document delimited by ", ERR_PREFIX);
+	ft_printf(2, "end-of-file (wanted `%s')\n", lim_wout_newline);
+	free_and_set_null(lim_wout_newline);
+	return ;
 }
 
 void	err_msg(char *detail, char *reason, int quotes)

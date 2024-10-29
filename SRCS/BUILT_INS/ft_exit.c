@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/25 19:09:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 04:32:53 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,20 @@ static int	__get_exit_status(char **args)
 	}
 	return (ft_exit_status(exit_status, ADD));
 }
-
-int	ft_exit(char **args)
+//j'ai changer le type de retour par void
+void	ft_exit(char **args)
 {
 	int	exit_status;
 
 	exit_status = 0;
 	ft_putendl_fd("exit", STDERR_FILENO);
 	exit_status = __get_exit_status(args);
-	if (exit_status >= 2)
-	{
-		clean_exit_shell(exit_status);
-		return (ft_exit_status(exit_status, ADD));
-	}
-	else
-		return (ft_exit_status(0, GET));
+	// if (exit_status >= 2)
+	// {
+	// 	clean_exit_shell(exit_status);
+	// 	return (ft_exit_status(exit_status, ADD));
+	// }
+	// else
+	// 	return (ft_exit_status(0, GET));
+	clean_exit_shell(exit_status);
 }

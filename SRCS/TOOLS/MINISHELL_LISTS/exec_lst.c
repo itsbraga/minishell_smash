@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 01:00:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/23 18:41:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/28 23:54:00 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_exec_lst	*exec_lst_new_node(void)
 	secure_malloc(new_node, true);
 	new_node->redir = NULL;
 	new_node->heredoc_nb = 0;
+	new_node->latest_hd = 0;
 	new_node->absolute_path = false;
 	new_node->bin_path = NULL;
 	new_node->cmd = NULL;

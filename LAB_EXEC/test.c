@@ -14,21 +14,25 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	pid_t	child_pid;
-	int tmp_fd;
-	int	fd[2];
+	char *line;
 
-	if (pipe(fd) == -1)
-		return (EXIT_FAILURE);
-	tmp_fd = 0;
-	printf("PIPE FDS MAIN\n");
-	printf("fd[1] = %d | fd[0] = %d\n", fd[1], fd[0]);
-	dup2(tmp_fd, fd[0]);
-	printf("dup2(tmp_fd, fd[0])\nfd[0] = %d | tmp_fd = %d\n", fd[0], tmp_fd);
-	dup2(fd[1], fd[0]);
-	printf("dup2(fd[1], fd[0])\nfd[0] = %d | fd[1] = %d\n", fd[0], fd[1]);
+	line = malloc(10);
+	// pid_t	child_pid;
+	// int tmp_fd;
+	// int	fd[2];
 
-	
+	// if (pipe(fd) == -1)
+	// 	return (EXIT_FAILURE);
+	// tmp_fd = 0;
+	// printf("PIPE FDS MAIN\n");
+	// printf("fd[1] = %d | fd[0] = %d\n", fd[1], fd[0]);
+	// dup2(tmp_fd, fd[0]);
+	// printf("dup2(tmp_fd, fd[0])\nfd[0] = %d | tmp_fd = %d\n", fd[0], tmp_fd);
+	// dup2(fd[1], fd[0]);
+	// printf("dup2(fd[1], fd[0])\nfd[0] = %d | fd[1] = %d\n", fd[0], fd[1]);
+	// read(0, line, 10);
+	// dprintf(2, "encore la\n");
+	write(2, "\n", 1);
 
 
 

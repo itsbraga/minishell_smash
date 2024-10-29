@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstclear.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:49:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/25 18:28:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/29 04:48:11 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	lstclear_main(t_main_lst **main)
 	{
 		tmp = (*main)->next;
 		(*main)->next = NULL;
-		// free_and_set_null((*main)->content);
+		free_and_set_null((*main)->content);
 		free(*main);
 		(*main) = tmp;
 	}
@@ -54,8 +54,8 @@ void	lstclear_redir(t_redir_lst **r)
 	{
 		tmp = (*r)->next;
 		(*r)->next = NULL;
-		// if ((*r)->limiter != NULL)
-		// 	free_and_set_null((*r)->limiter);
+		if ((*r)->limiter != NULL)
+			free_and_set_null((*r)->limiter);
 		if ((*r)->infile != NULL)
 			free_and_set_null((*r)->infile);
 		if ((*r)->outfile != NULL)
@@ -77,6 +77,8 @@ void	lstclear_exec(t_exec_lst **e)
 		(*e)->next = NULL;
 		if ((*e)->redir != NULL)
 			lstclear_redir(&((*e)->redir));
+		// if ((*e)->latest_hd != 0)
+		// 	close((*e)->latest_hd);
 		if ((*e)->cmd != NULL)
 			free_tab((*e)->cmd);
 		free(*e);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 20:30:40 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 20:07:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:33:04 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ t_redir_lst	*heredoc_n_limiter(t_token_dblst *curr)
 
 	new_redir = redir_lst_new_node(HERE_DOC);
 	secure_malloc(new_redir, true);
-	new_redir->limiter = curr->next->content;
+	new_redir->limiter = ft_strdup(curr->next->content);
 	return (new_redir);
 }
