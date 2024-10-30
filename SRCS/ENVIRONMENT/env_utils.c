@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/30 04:23:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/30 20:37:00 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ void	del_env_var(t_env_lst **env, char *var_to_rm)
 	len_var_to_rm = ft_strlen(var_to_rm);
 	while (curr != NULL)
 	{
-		if ((ft_strncmp(curr->content, var_to_rm, len_var_to_rm) == 0)
-			&& (curr->content[len_var_to_rm] == '='))
+		if (ft_strncmp(curr->content, var_to_rm, len_var_to_rm) == 0)
 		{
 			if (prev == NULL)
 				*env = curr->next;
