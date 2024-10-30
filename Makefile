@@ -73,8 +73,8 @@ SIGNALS_DIR		=	SIGNALS/
 SIGNALS_F		=	signals.c
 
 EXEC_DIR		=	EXECUTION/
-EXEC_F			=	exec_utils.c while_cmd.c pathfinder.c here_doc.c \
-					here_doc_utils.c exec.c
+EXEC_F			=	exec_utils.c exec_utils2.c while_cmd.c pathfinder.c \
+					here_doc.c here_doc_utils.c exec.c
 
 #******************************************************************************#
 #	COMBINE FILES AND DIRECTORIES

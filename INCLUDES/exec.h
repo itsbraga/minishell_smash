@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 22:01:05 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/30 20:29:02 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ int				execute_parent_built_in(t_data *d, char **cmd);
  * EXECUTION
 \******************************************************************************/
 
+//exec_utils2.c
+bool			check_if_is_dir(char *bin_path);
+char			**search_path(char **tab_path, char **env);
+
 // exec_utils.c
 char			*search_bin(char *cmd, char **tab_path);
-char			**search_path(char **tab_path, char **env);
 int				check_built_path(t_exec_lst *node);
 int				check_given_path(t_exec_lst *node);
 

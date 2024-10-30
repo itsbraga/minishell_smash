@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/30 04:39:13 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/30 19:08:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 		else
 		{
 			node->bin_path = search_bin(node->cmd[0], tab_path);
+			dprintf(2, "bin path = %s\n", node->bin_path);
 			error = check_built_path(node);
 		}
 	}
@@ -73,8 +74,8 @@ void	go_exec(t_exec_lst *node)
 		clean_exit_shell(ft_exit_status(0, GET));
 	else if (ret == NOT_A_BUILTIN)
 	{
-		if (d->info->executed_cmd == 1)
-			usleep(500);
+		// if (d->info->executed_cmd == 1)
+		// 	usleep(500);
 		env_tab = recreate_env_tab(&(d->env));
 		if (handle_bin_path(node, env_tab) == SUCCESS)
 			execute(node->bin_path, node->cmd, env_tab);

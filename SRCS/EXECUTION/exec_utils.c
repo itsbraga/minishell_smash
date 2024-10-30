@@ -6,85 +6,59 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/30 04:24:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/30 20:29:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-char	**search_path(char **tab_path, char **env)
+static char	*build_path_to_try(char *cmd, char *tab_path_to_join)
 {
-	char	*all_path;
-	int		i;
+	char *path_to_try;
+	char *tmp;
 
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
-	all_path = NULL;
-	i = 0;
-	while (env[i] != NULL)
-	{
-		if (ft_strncmp(env[i], "PATH", 4) != 0)
-			i++;
-		else
-		{
-			all_path = env[i];
-			break ;
-		}
-	}
-	if (all_path != NULL)
-	{
-		tab_path = yama(ADD_TAB, ft_split(all_path, ':'), 0);
-		secure_malloc(tab_path, true);
-	}
-	return (tab_path);
+	tmp = ft_strjoin(tab_path_to_join, "/");
+	secure_malloc(tmp, true);
+	path_to_try = ft_strjoin(tmp, cmd);
+	secure_malloc(path_to_try, true);
+	yama(ADD, path_to_try, 0);
+	free_and_set_null(tmp);
+	return (path_to_try);
 }
 
 char	*search_bin(char *cmd, char **tab_path)
 {
 	char	*path_to_try;
-	char	*tmp;
 	int		i;
 
 	i = 0;
 	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	while (tab_path[i] != NULL)
 	{
-		tmp = ft_strjoin(tab_path[i], "/");
-		secure_malloc(tmp, true);
-		(void)yama(ADD, tmp, 0);
-		path_to_try = ft_strjoin(tmp, cmd);
-		secure_malloc(path_to_try, true);
-		(void)yama(ADD, path_to_try, 0);
-		(void)yama(REMOVE, tmp, 0);
+		path_to_try = build_path_to_try(cmd, tab_path[i]);
 		if (access(path_to_try, F_OK) == -1)
 		{
-			(void)yama(REMOVE, path_to_try, 0);
+			yama(REMOVE, path_to_try, 0);
 			i++;
 		}
 		else
-			return ((void)yama(REMOVE, tab_path, 0), path_to_try);
+		{
+			if (check_if_is_dir(path_to_try) == false)
+				return ((void)yama(REMOVE, tab_path, 0), path_to_try);
+			else
+				return ((void)yama(REMOVE, tab_path, 0), NULL);
+		}
 	}
 	return ((void)yama(REMOVE, tab_path, 0), NULL);
 }
 
-static bool	__check_if_is_dir(char *bin_path)
-{
-	struct stat	s_bin_path;
-
-	if (stat(bin_path, &s_bin_path) == 0)
-	{
-		if (S_ISDIR(s_bin_path.st_mode) != 0)
-		{
-			err_msg(bin_path, ERR_IS_DIR, 0);
-			return (true);
-		}
-	}
-	return (false);
-}
-
 int	check_given_path(t_exec_lst *node)
 {
-	if (__check_if_is_dir(node->bin_path) == true)
+	if (check_if_is_dir(node->bin_path) == true)
+	{
+		err_msg(node->bin_path, ERR_IS_DIR, 0);
 		clean_exit_shell(ft_exit_status(CMD_CANNOT_EXEC, ADD));
+	}
 	if (access(node->bin_path, F_OK) == -1)
 	{
 		ft_exit_status(CMD_NOT_FOUND, ADD);
