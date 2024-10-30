@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 21:12:34 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/30 04:24:37 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**search_path(char **tab_path, char **env)
 	char	*all_path;
 	int		i;
 
+	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	all_path = NULL;
 	i = 0;
 	while (env[i] != NULL)
@@ -44,6 +45,7 @@ char	*search_bin(char *cmd, char **tab_path)
 	int		i;
 
 	i = 0;
+	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	while (tab_path[i] != NULL)
 	{
 		tmp = ft_strjoin(tab_path[i], "/");
@@ -100,6 +102,7 @@ int	check_given_path(t_exec_lst *node)
 
 int	check_built_path(t_exec_lst *node)
 {
+	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (node->bin_path == NULL)
 	{
 		ft_exit_status(CMD_NOT_FOUND, ADD);

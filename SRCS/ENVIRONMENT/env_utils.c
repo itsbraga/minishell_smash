@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/25 21:11:39 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/30 04:23:55 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	**recreate_env_tab(t_env_lst **env)
 	t_env_lst	*curr;
 	int			i;
 
+	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	tab = yama(CREATE_TAB, NULL, (sizeof(char *) * (get_envlst_size(env) + 1)));
 	secure_malloc(tab, true);
 	curr = *env;

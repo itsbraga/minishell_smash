@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 23:19:48 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/30 04:39:13 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execute(char *bin_path, char **cmd_and_args, char **env)
 {
-	dprintf(2, "ntm\n");
+	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (execve(bin_path, cmd_and_args, env) == -1)
 	{
 		if (errno == EACCES)
@@ -37,6 +37,7 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 
 	error = 0;
 	tab_path = NULL;
+	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (node->absolute_path == true)
 		error = check_given_path(node);
 	else if (node->absolute_path == false)
@@ -62,16 +63,18 @@ void	go_exec(t_exec_lst *node)
 	int 	ret;
 	char	**env_tab;
 
-	dprintf(2, "PID[%d] | go_exec\n", getpid());
+	// dprintf(2, "PID[%d] | go_exec\n", getpid());
 	d = data_struct();
 	ret = 0;
 	env_tab = NULL;
+	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	ret = execute_child_built_in(d, node->cmd);
-	dprintf(2, "PID[%d] | go_exec ret = %d\n", getpid(), ret);
 	if (ret != NOT_A_BUILTIN)
 		clean_exit_shell(ft_exit_status(0, GET));
 	else if (ret == NOT_A_BUILTIN)
 	{
+		if (d->info->executed_cmd == 1)
+			usleep(500);
 		env_tab = recreate_env_tab(&(d->env));
 		if (handle_bin_path(node, env_tab) == SUCCESS)
 			execute(node->bin_path, node->cmd, env_tab);

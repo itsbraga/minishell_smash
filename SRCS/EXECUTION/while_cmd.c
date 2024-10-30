@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 23:17:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/30 04:11:04 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ static void	__handle_exec_node(t_data *d, t_exec_lst *curr)
 				clean_exit_shell(FAILURE);
 		}
 		d->info->child_pid = fork();
-		if (d->info->child_pid == -1)
-			clean_exit_shell(FAILURE);
-		if (d->info->child_pid == 0)
-			pathfinder(d, curr);
-		else
-			__parent(d->info, curr);
+	if (d->info->child_pid == -1)
+		clean_exit_shell(FAILURE);
+	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	if (d->info->child_pid == 0)
+		pathfinder(d, curr);
+	else
+		__parent(d->info, curr);
 }
 
 static int	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
