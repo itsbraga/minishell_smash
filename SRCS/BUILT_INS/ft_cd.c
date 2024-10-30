@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/29 21:08:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:17:05 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,20 @@ static int	__handle_cd_error(char *path)
 int	ft_cd(t_data *d)
 {
 	int			ret;
-	char		*path;
 	t_prompt	pr;
 
-	path = d->token->next->content;
 	if ((d->token->next == NULL)
-		|| (ft_strcmp(path, "~") == 0))
+		|| (ft_strcmp(d->token->next->content, "~") == 0))
 		ret = __go_to_env_var(d->env, "HOME=", d->token);
-	else if (ft_strcmp(path, "-") == 0)
+	else if (ft_strcmp(d->token->next->content, "-") == 0)
 	{
 		ret = __go_to_env_var(d->env, "OLDPWD=", d->token);
 		ft_printf(STDOUT_FILENO, "%s\n", __find_var_path("OLDPWD=", d->env));
 	}
 	else
-		ret = chdir(path);
+		ret = chdir(d->token->next->content);
 	if (ret != 0)
-		return (__handle_cd_error(path));
+		return (__handle_cd_error(d->token->next->content));
 	change_paths(d->env, d->exp_env);
 	update_prompt(d, &pr);
 	return (ft_exit_status(ret, ADD));
