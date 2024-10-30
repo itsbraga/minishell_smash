@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 22:01:19 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/30 20:45:06 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	open_heredoc(t_data *d, char *limiter)
 	{
 		ft_printf(2, "> ");
 		line = get_next_line(0, 0);
-		if (g_sig_code == CTRL_C)
+		//if (g_sig_code == CTRL_C)
+		if (g_sig_code == 4)
 			__sigint_close_heredoc(fd, line, limiter);
 		if (__check_gnl_return(line, limiter) == FAILURE)
 			break;
