@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:13:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 22:57:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:42:24 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,12 +169,12 @@ int	main(int argc, char **argv, char **envp)
 				cell = new_node(cmd[i]);
 				if (cell == NULL)
 					return (FAILURE);
-				add_back(&g.token, cell);
+				add_back(g.token, cell);
 				i++;
 			}
 			exec_built_in(cmd, &g);
 			// display_tokens(g.token);
-			lstclear_token(&g.token);
+			lstclear_token(g.token);
 			free(cmd);
 		}
 	}

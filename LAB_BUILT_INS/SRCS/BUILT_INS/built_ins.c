@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/14 21:03:02 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 11:45:53 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	exec_built_in(char **cmd, t_global *g)
 {
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		my_echo(cmd);
-	else if (ft_strcmp(cmd[0], "cd") == 0)
-		my_cd(g);
+	// else if (ft_strcmp(cmd[0], "cd") == 0)
+	// 	my_cd(g);
 	else if (ft_strcmp(cmd[0], "pwd") == 0)
 		my_pwd();
 	else if (ft_strcmp(cmd[0], "export") == 0)

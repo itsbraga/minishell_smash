@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:11:16 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/17 21:29:08 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:43:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ typedef struct s_global
 {
 	char		*prompt;
 	char		*input;
-	t_env_lst	*env;
-	t_env_lst	*exp_env;
-	t_token		*token;
+	t_env_lst	**env;
+	t_env_lst	**exp_env;
+	t_token		**token;
 	int			last_exit_status;
 }				t_global;
 
@@ -135,12 +135,12 @@ void		display_tokens(t_token *t);
 
 void		exec_built_in(char **built_in, t_global *g);
 int			my_pwd(void);
-void		change_paths(t_env_lst *env, t_env_lst *exp_env);
+void		change_paths(t_env_lst **env, t_env_lst **exp_env);
 int			my_cd(t_global *g);
-int			my_env(t_env_lst *env);
+int			my_env(t_env_lst **env);
 void		my_exit(t_global *g, char **args);
 void		del_env_var(t_env_lst **env, char *var_to_rm);
-void		my_export(t_env_lst *exp_env, t_env_lst *env, char **args);
+void		my_export(t_env_lst **exp_env, t_env_lst **env, char **args);
 int			my_unset(t_global *g, char **args);
 int			my_echo(char **args);
 

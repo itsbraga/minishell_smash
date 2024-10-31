@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/11 18:54:33 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:10:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	create_env_list(t_env_lst **env, char **envp)
 			lstclear_env(env);
 			return (FAILURE);
 		}
-		if (last == NULL)
+		if (*env == NULL)
 			*env = var;
 		else
 			last->next = var;
@@ -70,13 +70,13 @@ int	create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
 	return (SUCCESS);
 }
 
-static void	__update_shlvl(t_env_lst *env)
+static void	__update_shlvl(t_env_lst **env)
 {
 	t_env_lst	*head;
 	int			var_value;
 	char		*new_value;
 
-	head = env;
+	head = *env;
 	while (head != NULL)
 	{
 		if (ft_strncmp(head->content, "SHLVL=", 6) == 0)
@@ -102,9 +102,9 @@ void	create_env(t_global *g, char **envp)
 	size_t	envp_size;
 
 	envp_size = get_env_size(envp);
-	if (create_env_list(&g->env, envp) == FAILURE)
+	if (create_env_list(g->env, envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
 	__update_shlvl(g->env);
-	if (create_exp_env_list(&g->exp_env, envp, envp_size, 0) == FAILURE)
+	if (create_exp_env_list(g->exp_env, envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
 }
