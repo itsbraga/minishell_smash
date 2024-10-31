@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/30 20:37:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/30 20:52:39 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ static void	__sigint_handler(int signo)
 {
 	(void)signo;
 	// dprintf(2, "cc\n");
+	// dprintf(2, "cc\n");
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	ft_exit_status(CTRL_C, ADD);
-	rl_reset_custom_prompt();
+	//rl_reset_custom_prompt();
 }
 
 void	set_signals(void)
@@ -51,7 +52,7 @@ void	set_signals(void)
 static void	__sigint_handler_heredoc(int sig)
 {
 	(void)sig;
-	g_sig_code = CTRL_C;
+	g_sig_code = 4;
 	ft_exit_status(CTRL_C, ADD);
 }
 
