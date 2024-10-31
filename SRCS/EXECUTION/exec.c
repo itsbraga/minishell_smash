@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/30 19:08:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 08:30:16 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	execute(char *bin_path, char **cmd_and_args, char **env)
 {
 	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	close(data_struct()->fd_stdin_backup); 
 	if (execve(bin_path, cmd_and_args, env) == -1)
 	{
 		if (errno == EACCES)
@@ -51,7 +52,7 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 		else
 		{
 			node->bin_path = search_bin(node->cmd[0], tab_path);
-			dprintf(2, "bin path = %s\n", node->bin_path);
+			// dprintf(2, "bin path = %s\n", node->bin_path);
 			error = check_built_path(node);
 		}
 	}

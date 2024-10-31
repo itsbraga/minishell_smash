@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 19:04:11 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 03:28:00 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ void			create_env(t_data *d, char **envp);
 
 // signals.c
 void			rl_reset_custom_prompt(void);
-void			handle_sigquit(void);
+void			sigquit_handler(int signo);
 void			set_signals(void);
 void			set_signals_in_heredoc(void);
+void			set_signals_in_exec(void);
 
 /******************************************************************************\
  * INIT

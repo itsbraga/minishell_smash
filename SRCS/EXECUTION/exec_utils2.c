@@ -6,11 +6,27 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:27:06 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/30 20:28:11 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 00:57:35 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "exec.h"
+
+void	close_hd_other_nodes(t_data *d, t_exec_lst *node)
+{
+	t_exec_lst *curr;
+
+	curr = d->exec;
+	while (curr != node)
+		curr = curr->next;
+	curr = curr->next;
+	while (curr != NULL)
+	{
+		close(curr->latest_hd);
+		curr = curr->next;
+	}
+	return ;
+}
 
 bool	check_if_is_dir(char *bin_path)
 {

@@ -33,7 +33,7 @@ static void	__wait_child(t_exec_info *info)
 
 static void	__parent(t_exec_info *info, t_exec_lst *curr)
 {
-	// printf("PID : %d | parent\n", getpid());
+	printf("PID[%d] | %s\n", getpid(), __func__);
 	if (info->pipe_count != 0)
 	{
 		close(info->fd[1]);
@@ -92,6 +92,7 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 	check_behaviour = __before_while_cmd(d, e_lst);
 	if (check_behaviour != STOP_EXEC)
 	{
+		set_signals_in_exec();
 		while (curr != NULL && (d->info->executed_cmd != d->info->cmd_count))
 		{
 			dprintf(2, "in while_cmd | pipecount = %d\n", d->info->pipe_count);
