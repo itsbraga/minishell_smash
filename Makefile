@@ -54,16 +54,17 @@ INIT_F			=	prompt.c init_data.c
 ENV_DIR			=	ENVIRONMENT/
 ENV_F			=	create_env.c env_utils.c export_env_utils.c
 
-LEXING_DIR		=	LEXING/
-LEXING_F		=	parse_input.c parse_input2.c create_main_lst.c \
-					parse_main.c tokenization.c create_token_dblst.c
+LEXER_DIR		=	LEXER/
+LEXER_F			=	parse_input.c parse_input_utils.c parse_input_utils2.c \
+					create_main_lst.c parse_main.c tokenization.c \
+					create_token_dblst.c
 
-PARSING_DIR		=	PARSING/
-PARSING_F		=	handle_quotes.c quotes_utils.c exec_lst_utils.c \
+PARSER_DIR		=	PARSER/
+PARSER_F		=	handle_quotes.c quotes_utils.c exec_lst_utils.c \
 					create_exec_lst.c redir_lst_utils.c create_redir_lst.c
 
 EXPAND_DIR		=	EXPANSION/
-EXPAND_F		=	expand.c expand_exit_code.c expand_utils.c
+EXPAND_F		=	expand.c expand_exit_status.c expand_utils.c
 
 BUILT_INS_DIR	=	BUILT_INS/
 BUILT_INS_F		=	built_ins.c ft_echo.c ft_cd_utils.c ft_cd.c ft_pwd.c \
@@ -87,9 +88,9 @@ SRCS_F			=	$(addprefix $(LISTS_DIR), $(LISTS_F)) \
 					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(ENV_DIR), $(ENV_F)) \
-					$(addprefix $(LEXING_DIR), $(LEXING_F)) \
+					$(addprefix $(LEXER_DIR), $(LEXER_F)) \
 					$(addprefix $(TESTS_DIR), $(TESTS_F)) \
-					$(addprefix $(PARSING_DIR), $(PARSING_F)) \
+					$(addprefix $(PARSER_DIR), $(PARSER_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(BUILT_INS_DIR), $(BUILT_INS_F)) \
 					$(addprefix $(SIGNALS_DIR), $(SIGNALS_F)) \

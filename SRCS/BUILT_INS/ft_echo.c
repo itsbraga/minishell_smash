@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 19:44:47 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 19:20:29 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 07:25:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,26 @@ static void	__resync_rl(void)
 	rl_replace_line("", 0);
 }
 
+static int	__write_error(void)
+{
+	ft_exit_status(FAILURE, ADD);
+	return (err_msg_cmd("echo", "write error", strerror(errno), FAILURE));
+}
+
 int	ft_echo(char **args)
 {
 	int	i;
 	int	flag;
 
-	i = 0;
+	i = 1;
 	flag = 0;
-	if (write(STDOUT_FILENO, "\0", 1) == -1)
+	if (write(STDOUT_FILENO, "", 0) == -1)
+		return (__write_error());
+	while (args[i] != NULL && __n_option_exist(args[i]) == true)
 	{
-		ft_exit_status(FAILURE, ADD);
-		return (err_msg_cmd("echo", "write error", strerror(errno), FAILURE));
-	}
-	while (args[++i] != NULL && __n_option_exist(args[i]) == true)
 		flag = 1;
+		i++;
+	}
 	while (args[i] != NULL)
 	{
 		ft_putstr_fd(args[i], STDOUT_FILENO);

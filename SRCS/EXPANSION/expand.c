@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/28 00:11:31 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 06:21:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_lexing.h"
+#include "parser_lexer.h"
 
 static char	*__del_var(char *str, char *var, size_t var_size)
 {
@@ -18,7 +18,7 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 	char	*end_var;
 
 	end_var = var + var_size;
-	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - var_size)));
+	new_str = malloc(sizeof(char) * (ft_strlen(str) - var_size));
 	secure_malloc(new_str, true);
 	ft_strlcpy(new_str, str, (var - str));
 	ft_strcpy(new_str + ((var - 1) - str), end_var);
@@ -52,10 +52,11 @@ size_t vv_size)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	return (free_and_set_null(start_str), new_str);
+	free_and_set_null(start_str);
+	return (new_str);
 }
 
-static	char	*__handle_expand(t_data *d, char *str, char *var)
+static char	*__handle_expand(t_data *d, char *str, char *var)
 {
 	char	*to_find;
 	char	*var_value;
@@ -63,7 +64,7 @@ static	char	*__handle_expand(t_data *d, char *str, char *var)
 	to_find = NULL;
 	var_value = NULL;
 	if (*var == '?')
-		str = handle_last_exit_code(str, var);
+		str = handle_last_exit_status(str, var);
 	else if (*var == '"' || *var == '\'')
 		str = clean_translated_variable(str, var);
 	else
@@ -82,6 +83,15 @@ static	char	*__handle_expand(t_data *d, char *str, char *var)
 	return (str);
 }
 
+static bool	__is_expandable(char *str)
+{
+	if ((*str >= 65 && *str <= 90) || (*str >= 97 && *str <= 122)
+		|| (*str >= 48 && *str <= 57) || *str == '?' || *str == '_')
+		return (true);
+	else
+		return (false);
+}
+
 char	*expand(t_data *d, char *str, bool in_heredoc)
 {
 	int		i;
@@ -92,15 +102,17 @@ char	*expand(t_data *d, char *str, bool in_heredoc)
 	closed_quotes[1] = true;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\'' && closed_quotes[1] == true)
-			closed_quotes[0] = switch_bool(closed_quotes[0]);
-		else if (str[i] == '"' && closed_quotes[0] == true)
-			closed_quotes[1] = switch_bool(closed_quotes[1]);
-		if ((str[i] == '$' && closed_quotes[0] == true)
-			&& (str[i + 1] != ' ' && str[i + 1] != '$'))
+		get_closed_quotes(str[i], closed_quotes);
+		if (str[i] == '$' && closed_quotes[1] != false)
 		{
+			if (__is_expandable(&str[i + 1]) == false)
+			{
+				i++;
+				continue ;
+			}
 			str = __handle_expand(d, str, &(str[i + 1]));
 			secure_malloc(str, true);
+			i = -1;
 		}
 		i++;
 	}

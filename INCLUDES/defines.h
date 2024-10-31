@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:07:16 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 22:00:59 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 02:55:46 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define OUT_OF_RANGE 255
 
 # define CTRL_C 130 // 128 + signal 2 (SIGINT)
-# define CTRL_BCKSLH 143 // 128 + signal 15 (SIGTERM)
+# define CTRL_BCKSLH 131 // 128 + signal 3 (SIGQUIT)
 
 /******************************************************************************\
  * ERROR
@@ -65,7 +65,7 @@
 # define ERR_NOT_DIR "Not a directory"
 
 // creation
-# define ERR_MALLOC "cannot allocate memory"
+# define ERR_MALLOC "Memory allocation failed"
 
 // exec
 # define ERR_PWD "pwd: error retrieving current directory: "

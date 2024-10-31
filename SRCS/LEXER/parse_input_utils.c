@@ -1,55 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input2.c                                     :+:      :+:    :+:   */
+/*   parse_input_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 22:52:06 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 04:17:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_lexing.h"
+#include "parser_lexer.h"
 
-static int	__handle_redir_near_pipe(t_parser *p)
+static int	__handle_redir_error(t_redir_parser *rp, t_parser *p)
 {
-	if (p->rcount <= 3)
-		return (err_msg(NULL, "|", 2), BAD_USAGE);
-	else
+	rp->curr_char = p->input[p->i];
+	while (p->input[p->i] == rp->curr_char)
 	{
-		p->rcount2 = p->rcount - 3;
-		if (p->curr_char == '<')
-		{
-			if (p->rcount2 == 1)
-				return (err_msg(NULL, "<", 2), BAD_USAGE);
-			else if (p->rcount2 == 2)
-				return (err_msg(NULL, "<<", 2), BAD_USAGE);
-			else
-				return (err_msg(NULL, "<<<", 2), BAD_USAGE);	
-		}
-		else if (p->curr_char == '>')
-			return (err_msg(NULL, ">>", 2), BAD_USAGE);
-	}
-	return (SUCCESS);
-}
-
-static int	__handle_redir_error(t_parser *p)
-{
-	p->curr_char = p->input[p->i];
-	p->rcount = 0;
-	while (p->input[p->i] == p->curr_char)
-	{
-		p->rcount++;
+		rp->rcount++;
 		p->i++;
 	}
 	while (ft_isspace(p->input[p->i]) == 1)
 		p->i++;
+	if ((rp->curr_char == '>' && p->input[p->i] == '<') ||
+		(rp->curr_char == '<' && p->input[p->i] == '>'))
+		return (handle_bidirections(rp));
+	if (rp->rcount >= 0 && (p->input[p->i] == '>' || p->input[p->i] == '<'))
+		return (handle_spaced_sequence(rp, p));
 	if (p->input[p->i] == '|')
-	{
-		if (__handle_redir_near_pipe(p) == BAD_USAGE)
-			return (BAD_USAGE);
-	}
+		return (handle_redir_near_pipe(rp));
 	if (p->input[p->i] == '\0')
 		return (err_msg(NULL, "newline", 2), BAD_USAGE);
 	return (SUCCESS);
@@ -57,15 +36,20 @@ static int	__handle_redir_error(t_parser *p)
 
 int	check_redir_order(t_parser *p)
 {
+	ft_bzero(p->rp, sizeof(t_redir_parser));
 	while (p->input[p->i] != '\0')
 	{
 		if (p->input[p->i] == '>' || p->input[p->i] == '<')
 		{
-			if (__handle_redir_error(p) == BAD_USAGE)
+			if (__handle_redir_error(p->rp, p) == BAD_USAGE)
+			{
+				free_and_set_null(p->rp);
 				return (BAD_USAGE);
+			}
 			continue ;
 		}
 		p->i++;
 	}
+	free_and_set_null(p->rp);
 	return (SUCCESS);
 }

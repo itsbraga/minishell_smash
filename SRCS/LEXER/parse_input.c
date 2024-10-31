@@ -6,17 +6,19 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/30 20:37:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:31:14 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_lexing.h"
+#include "parser_lexer.h"
 
 static void	__init_parser(t_parser *p)
 {
 	p->closed_quotes[0] = true;
 	p->closed_quotes[1] = true;
 	p->start = p->i;
+	p->rp = malloc(sizeof(t_redir_parser));
+	secure_malloc(p->rp, true);
 }
 
 static int	__first_check(t_parser *p)
@@ -41,7 +43,6 @@ static int	__handle_pipe_error(t_parser *p)
 			p->i++;
 		if (p->input[p->i] == '|' || p->input[p->i] == '\0')
 			return (err_msg(NULL, "|", 2), BAD_USAGE);
-		// p->i--;
 	}
 	return (SUCCESS);
 }
@@ -54,11 +55,8 @@ int	parse_input(t_parser *p)
 	p->i = p->start;
 	while (p->input[p->i] != '\0')
 	{
-		if (p->input[p->i] == '\'')
-			p->closed_quotes[0] = switch_bool(p->closed_quotes[0]);
-		else if (p->input[p->i] == '"')
-			p->closed_quotes[1] = switch_bool(p->closed_quotes[1]);
-		else if (p->input[p->i] == '|' && p->closed_quotes[0] == true
+		get_closed_quotes(p->input[p->i], p->closed_quotes);
+		if (p->input[p->i] == '|' && p->closed_quotes[0] == true
 			&& p->closed_quotes[1] == true)
 			break ;
 		p->i++;

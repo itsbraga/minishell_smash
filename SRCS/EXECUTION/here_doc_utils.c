@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 22:01:19 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/30 20:50:28 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	__close_heredoc(int fd[], char *limiter, char *line)
 	close(fd[1]);
 	return (fd[0]);
 }
-void		__sigint_close_heredoc(int *fd, char *line, char *limiter)
+void	__sigint_close_heredoc(int *fd, char *line, char *limiter)
 {
 	dprintf(2, "PID : %d | closehd | cc\n", getpid());
 	get_next_line(0, 1);

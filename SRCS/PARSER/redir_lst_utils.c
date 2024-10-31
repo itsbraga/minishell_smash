@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 20:30:40 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/28 22:33:04 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 04:17:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_lexing.h"
+#include "parser_lexer.h"
 
 t_redir_lst	*redir_in_n_infile(t_token_dblst *curr)
 {

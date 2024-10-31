@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 16:33:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:28:36 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int				err_msg_cmd(char *cmd, char *detail, char *reason,
 void			err_msg_hd(char *limiter);
 
 // secure.c
+void			get_closed_quotes(char c, bool closed_quotes[]);
 void			free_and_set_null(void *to_free);
 void			secure_malloc(void *to_secure, bool cleanup);
 

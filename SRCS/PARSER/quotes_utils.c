@@ -6,11 +6,11 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 20:07:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 04:17:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_lexing.h"
+#include "parser_lexer.h"
 
 bool	switch_bool(bool closed)
 {
@@ -33,7 +33,7 @@ int	find_closing_quote(char *str, char quote)
 
 bool	unclosed_quotes_return(bool closed[])
 {
-	if (closed[1] == false || closed[0] == false)
+	if (closed[0] == false || closed[1] == false)
 		return (true);
 	else
 		return (false);
@@ -47,7 +47,7 @@ char	*del_empty_quotes(char *str, int quote_idx)
 
 	i = 0;
 	j = 0;
-	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 1)));
+	new_str = malloc(sizeof(char) * (ft_strlen(str) - 1));
 	secure_malloc(new_str, true);
 	while (i != quote_idx)
 	{
@@ -73,7 +73,7 @@ char	*del_quote_pair(char *str, int first, int second)
 	char	*new_str;
 
 	i = 0;
-	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 1)));
+	new_str = malloc(sizeof(char) * (ft_strlen(str) - 1));
 	secure_malloc(new_str, true);
 	while (i != first)
 	{

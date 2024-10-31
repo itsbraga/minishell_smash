@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/27 23:44:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 04:17:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_lexing.h"
+#include "parser_lexer.h"
 
 size_t	len_to_equal(char *str)
 {
@@ -41,7 +41,7 @@ char	*clean_translated_variable(char *str, char *var)
 	char	*new_str;
 	int		i;
 
-	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(str) - 2)));
+	new_str = malloc(sizeof(char) * (ft_strlen(str) - 2));
 	secure_malloc(new_str, true);
 	i = 0;
 	while (str != (var - 1))

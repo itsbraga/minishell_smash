@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_redir_lst.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 20:44:31 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 19:26:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 04:17:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_lexing.h"
+#include "parser_lexer.h"
 
 static t_redir_lst	*__get_redir_infos(t_token_dblst *curr)
 {

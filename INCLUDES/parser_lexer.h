@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_lexing.h                                   :+:      :+:    :+:   */
+/*   parser_lexer.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 20:01:59 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 04:17:59 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_LEXING_H
-# define PARSING_LEXING_H
+#ifndef PARSER_LEXER_H
+# define PARSER_LEXER_H
 
 # include "libraries.h"
 
 /******************************************************************************\
- * LEXING
+ * LEXER
 \******************************************************************************/
+
+// parse_input_utils2.c
+int				handle_bidirections(t_redir_parser *rp);
+int				handle_spaced_sequence(t_redir_parser *rp, t_parser *p);
+int				handle_redir_near_pipe(t_redir_parser *rp);
+
+// parse_input_utils.c
+int				check_redir_order(t_parser *p);
 
 // parse_input.c
 int				parse_input(t_parser *p);
-
-// parse_input2.c
-int				check_redir_order(t_parser *p);
 
 // create_main_lst.c
 int				create_main_lst(t_data *d, char *input);
@@ -34,14 +39,11 @@ void			parse_segment(t_token_parser *p);
 // tokenization.c
 void			lst_tokenization(t_token_dblst *t);
 
-// check_token_sequence.c
-int				check_token_sequence(t_data *d, t_token_dblst *t);
-
 // create_token_lst.c
 int				create_token_dblst(t_data *d);
 
 /******************************************************************************\
- * PARSING
+ * PARSER
 \******************************************************************************/
 
 // quotes_utils.c
@@ -77,16 +79,14 @@ int				create_exec_lst(t_data *d);
  * EXPANSION
 \******************************************************************************/
 
+// expand_exit_status.c
+char			*handle_last_exit_status(char *str, char *var);
+
 // expand_utils.c
 size_t			len_to_equal(char *str);
 char			*clean_translated_variable(char *str, char *var);
 char			*take_var(char *str, char *var);
 char			*search_var(char *to_find, t_env_lst *env);
-
-//expand_exit_code.c
-char			*add_exit_code_value(char *str, char *var, char *var_value,
-size_t vv_size);
-char			*handle_last_exit_code(char *str, char *var);
 
 // expand.c
 char			*expand(t_data *d, char *str, bool in_heredoc);

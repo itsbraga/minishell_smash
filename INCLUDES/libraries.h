@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:58:47 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 20:08:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 04:19:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 # include "structs.h"
 # include "defines.h"
-# include "parsing_lexing.h"
+# include "parser_lexer.h"
 # include "exec.h"
 # include "minishell.h"
 # include "tools.h"
