@@ -6,23 +6,23 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:03:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 21:06:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:46:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	add_var_to_exp_env(t_env_lst *e_env, char *var)
+void	add_var_to_exp_env(t_env_lst **e_env, char *var)
 {
 	t_env_lst	*curr;
 	t_env_lst	*new;
 
-	curr = e_env;
+	curr = *e_env;
 	new = exp_env_new_var(var);
-	if (cmp_to_equal(curr->content, new->content) > 0)
+	if (curr == NULL || cmp_to_equal(curr->content, new->content) > 0)
 	{
 		new->next = curr;
-		e_env = new;
+		*e_env = new;
 		return ;
 	}
 	while (curr->next != NULL)
@@ -39,12 +39,12 @@ void	add_var_to_exp_env(t_env_lst *e_env, char *var)
 	new->next = NULL;
 }
 
-void	add_var_to_env(t_env_lst *env, char *var)
+void	add_var_to_env(t_env_lst **env, char *var)
 {
 	t_env_lst	*curr;
 	t_env_lst	*new;
 
-	curr = env;
+	curr = *env;
 	new = env_new_var(var);
 	while (curr->next != NULL)
 		curr = curr->next;
@@ -66,14 +66,16 @@ void	update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp,
 t_env_lst *env, char *var)
 {
 	if (to_up == NULL && ft_strchr(to_up_exp->content, '=') == NULL)
-		add_var_to_env(env, var);
+		add_var_to_env(&env, var);
 	else if (to_up != NULL)
 	{
-		free_and_set_null(to_up->content);
+		// free(to_up->content);
 		to_up->content = ft_strdup(var);
+		secure_malloc(to_up->content, true);
 	}
-	free_and_set_null(to_up_exp->content);
+	// free(to_up_exp->content);
 	to_up_exp->content = add_quotes_to_value(var);
+	secure_malloc(to_up_exp->content, true);
 }
 
 t_env_lst	*search_for_var(t_env_lst *env, char *var)

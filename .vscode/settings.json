@@ -16,7 +16,8 @@
         "stat.h": "c",
         "stdbool.h": "c",
         "libft.h": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "parser_lexer.h": "c"
     },
     "workbench.colorCustomizations": {
         "minimap.background": "#00000000",

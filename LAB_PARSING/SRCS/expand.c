@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/23 16:37:26 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 05:59:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,55 @@ static char	*__handle_expand(char *str, char *var, char **envp)
 	return (str);
 }
 
+static bool	__is_expandable(char *str)
+{
+	if ((*str >= 65 && *str <= 90) || (*str >= 97 && *str <= 122)
+		|| (*str >= 48 && *str <= 57) || *str == '?' || *str == '_')
+		return (true);
+	else
+		return (false);
+}
+
+void	get_closed_quotes(char c, bool closed_quotes[])
+{
+	if (c == '\'' && closed_quotes[0] == true)
+		closed_quotes[1] = switch_bool(closed_quotes[1]);
+	else if (c == '"' && closed_quotes[1] == true)
+		closed_quotes[0] = switch_bool(closed_quotes[0]);
+}
+
 //EXEMPLE : "'$USER'" = "'pmateo'" | '"$USER"' = '"$USER"'
 char *expand(char *str, char **envp)
 {
 	int		i;
 	bool 	closed[2];
 
+	if (str == NULL)
+		return (NULL);
 	i = 0;
 	closed[0] = true;
 	closed[1] = true;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '"' && closed[1] != false)
-			closed[0] = switch_bool(closed[0]);
-		else if (str[i] == '\'' && closed[0] != false)
-			closed[1] = switch_bool(closed[1]);
-		if ((str[i] == '$' && closed[1] != false) 
-			&& (str[i + 1] != ' ' && str[i + 1] != '"' 
-			&& str[i + 1] != '\'' && str[i + 1] != '$')) 
+		get_closed_quotes(str[i], closed);
+		// if (str[i] == '"' && closed[1] != false)
+		// 	closed[0] = switch_bool(closed[0]);
+		// else if (str[i] == '\'' && closed[0] != false)
+		// 	closed[1] = switch_bool(closed[1]);
+		if (str[i] == '$' && closed[1] != false)
 		{
-			str = __handle_expand(str, &str[i + 1], envp);
-			if (str == NULL)
-				return (NULL);
+			if (__is_expandable(&str[i + 1]) == true)
+			{
+				str = __handle_expand(str, &str[i + 1], envp);
+				if (str == NULL)
+					return (NULL);
+			}
+			else
+			{
+				i++;
+				continue ;
+			}
+			i = -1;
 		}
 		i++;
 	}

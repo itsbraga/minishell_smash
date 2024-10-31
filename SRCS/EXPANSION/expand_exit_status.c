@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_exit_code.c                                 :+:      :+:    :+:   */
+/*   expand_exit_status.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 00:07:17 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/28 01:38:27 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 04:17:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- # include "parsing_lexing.h"
+#include "parser_lexer.h"
 
- char	*add_exit_code_value(char *str, char *var, char *var_value,
+static char	*__add_exit_status_value(char *str, char *var, char *var_value,
 size_t vv_size)
 {
 	char	*new_str;
@@ -31,16 +31,17 @@ size_t vv_size)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	return (free_and_set_null(start_str), new_str);
+	free_and_set_null(start_str);
+	return (new_str);
 }
 
-char	*handle_last_exit_code(char *str, char *var)
+char	*handle_last_exit_status(char *str, char *var)
 {
 	char	*var_value;
 
 	var_value = ft_itoa(ft_exit_status(0, GET));
 	secure_malloc(var_value, true);
-	str = add_exit_code_value(str, var, var_value, ft_strlen(var_value));
+	str = __add_exit_status_value(str, var, var_value, ft_strlen(var_value));
 	free_and_set_null(var_value);
 	return (str);
 }

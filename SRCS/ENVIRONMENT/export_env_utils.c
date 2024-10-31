@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 20:46:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:51:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ t_env_lst	*ascii_sort(char **envp, char *last_added)
 	return (env_new_var(tmp));
 }
 
+/*	**	Instead of freeing var (the initial content),
+	we leave that responsibility to the caller.
+	
+	**	add_quotes_to_value now simply returns new_str,
+	allowing the caller to manage the memory more
+	explicitly.
+*/
 char	*add_quotes_to_value(char *var)
 {
 	int		i;
@@ -79,7 +86,7 @@ char	*add_quotes_to_value(char *var)
 	char	*tmp;
 
 	i = 0;
-	new_str = yama(CREATE, NULL, (sizeof(char) * (ft_strlen(var) + 3)));
+	new_str = malloc(sizeof(char) * (ft_strlen(var) + 3));
 	secure_malloc(new_str, true);
 	tmp = var;
 	while (*var != '=')
@@ -90,7 +97,7 @@ char	*add_quotes_to_value(char *var)
 		new_str[i++] = *var++;
 	new_str[i++] = '"';
 	new_str[i] = '\0';
-	free_and_set_null(tmp);
+	// free_and_set_null(tmp);
 	return (new_str);
 }
 
@@ -103,12 +110,10 @@ t_env_lst	*exp_env_new_var(char *content)
 	new_var->content = ft_strdup(content);
 	secure_malloc(new_var->content, true);
 	if (ft_strchr(content, '=') != NULL)
-		new_var->content = add_quotes_to_value(new_var->content);
-	if (new_var->content == NULL)
 	{
-		free_and_set_null(new_var->content);
-		free_and_set_null(new_var);
-		return (NULL);
+		// free(new_var->content);
+		new_var->content = add_quotes_to_value(content);
+		secure_malloc(new_var->content, true);
 	}
 	new_var->next = NULL;
 	return (new_var);

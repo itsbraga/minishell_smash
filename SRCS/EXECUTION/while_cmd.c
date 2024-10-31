@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 04:32:05 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 07:48:22 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,5 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 		}
 		__wait_child(d->info);
 	}
-	dprintf(2, "out while_cmd\n");
+	// dprintf(2, "out while_cmd\n");
 }

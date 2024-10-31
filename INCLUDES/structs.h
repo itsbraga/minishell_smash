@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
 /*   Updated: 2024/10/31 08:05:37 by pmateo           ###   ########.fr       */
@@ -21,7 +21,7 @@
 
 typedef enum e_mode
 {
-	ADD_C = 42,
+	ADD,
 	GET
 }			t_mode;
 
@@ -39,19 +39,27 @@ typedef enum e_token_type
 	OUTFILE
 }			t_token_type;
 
-typedef struct s_parser
+typedef struct s_redir_parser
 {
-	char	*input;
-	char	*tmp;
-	int		i;
 	char	curr_char;
-	// int		start_i;
 	int		rcount;
 	int		rcount2;
-	int		start;
-	int		seg_count;
-	char	**segment;
-	bool	closed_quotes[2];
+	char	next_char;
+	int		space;
+	int		count_next;
+	bool	is_db_redir;
+}				t_redir_parser;
+
+typedef struct s_parser
+{
+	char			*input;
+	char			*tmp;
+	int				i;
+	int				start;
+	t_redir_parser	*rp;
+	int				seg_count;
+	char			**segment;
+	bool			closed_quotes[2];
 }				t_parser;
 
 typedef struct s_token_dblst
