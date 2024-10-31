@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 07:37:11 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 10:26:01 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		wait_heredoc_child(pid_t pid)
+int	wait_heredoc_child(pid_t pid)
 {
 	int	status;
 
-		// printf("PID : %d | waiting for child... (wait_child)\n", getpid());
+	// printf("PID : %d | waiting for child... (wait_child)\n", getpid());
 	if (waitpid(pid, &status, 0) == -1)
-		(err_msg("waitpid", strerror(errno), 0), clean_exit_shell(FAILURE));
+	{
+		err_msg("waitpid", strerror(errno), 0);
+		clean_exit_shell(ft_exit_status(FAILURE, ADD));
+	}
 	if (WEXITSTATUS(status) == CTRL_C)
 	{
-		ft_exit_status(130, ADD);
+		ft_exit_status(CTRL_C, ADD);
 		return (STOP_EXEC);
 	}	
 	else
@@ -32,11 +35,11 @@ int		wait_heredoc_child(pid_t pid)
 static int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 {
 	t_redir_lst	*curr;
-	char		*limiter_w_newline;
+	char		*limiter_with_nl;
 	int			latest_read_fd;
 
 	curr = r;
-	limiter_w_newline = NULL;
+	limiter_with_nl = NULL;
 	latest_read_fd = 0;
 	set_signals_in_heredoc();
 	while (curr != NULL)
@@ -45,9 +48,9 @@ static int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 		{
 			if (latest_read_fd != 0)
 				close(latest_read_fd);
-			limiter_w_newline = ft_strjoin(curr->limiter, "\n");
+			limiter_with_nl = ft_strjoin(curr->limiter, "\n");
 			secure_malloc(curr->limiter, true);
-			latest_read_fd = open_heredoc(d, limiter_w_newline);
+			latest_read_fd = open_heredoc(d, limiter_with_nl);
 			if (latest_read_fd == STOP_EXEC)
 				return (latest_read_fd);
 		}

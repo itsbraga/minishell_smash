@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 09:15:02 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 10:57:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ static	int	__check_gnl_return(char *line, char *limiter)
 {
 	if (line == NULL)
 	{
-		if (g_sig_code != CTRL_C)
+		if (g_sig_code == CTRL_C)
+			return (FAILURE);
+		else
 		{
 			err_msg_hd(limiter);
 			return (FAILURE);
 		}
-		else if (g_sig_code == CTRL_C)
-			return (FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -84,8 +84,9 @@ int	open_heredoc(t_data *d, char *limiter)
 	must_expand = __manage_limiter(&limiter);
 	while (1)
 	{
-		ft_printf(2, "> ");
-		line = get_next_line(0, 0);
+		// ft_printf(2, "> ");
+		// line = get_next_line(0, 0);
+		line = readline("> ");
 		// //if (g_sig_code == CTRL_C)
 		// if (g_sig_code == 4)
 		// 	__sigint_close_heredoc(fd, line, limiter);
@@ -95,7 +96,7 @@ int	open_heredoc(t_data *d, char *limiter)
 			break ;
 		if (must_expand == true)
 			line = expand(d, line, true);
-		ft_printf(fd[1], "%s", line);
+		// ft_printf(fd[1], "%s", line);
 		free_and_set_null(line);
 	}
 	return (__close_heredoc(fd, limiter, line));

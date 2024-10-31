@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:03:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 08:46:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 10:22:19 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	add_var_to_exp_env(t_env_lst **e_env, char *var)
 
 	curr = *e_env;
 	new = exp_env_new_var(var);
-	if (curr == NULL || cmp_to_equal(curr->content, new->content) > 0)
+	if (cmp_to_equal(curr->content, new->content) > 0)
 	{
 		new->next = curr;
 		*e_env = new;
