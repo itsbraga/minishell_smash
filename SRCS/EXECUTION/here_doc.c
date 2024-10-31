@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/29 22:11:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 07:37:11 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,35 @@ int		wait_heredoc_child(pid_t pid)
 		// printf("PID : %d | a child is done ! (wait_child)\n", getpid());
 }
 
+static int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
+{
+	t_redir_lst	*curr;
+	char		*limiter_w_newline;
+	int			latest_read_fd;
+
+	curr = r;
+	limiter_w_newline = NULL;
+	latest_read_fd = 0;
+	set_signals_in_heredoc();
+	while (curr != NULL)
+	{
+		if (curr->type == HERE_DOC)
+		{
+			if (latest_read_fd != 0)
+				close(latest_read_fd);
+			limiter_w_newline = ft_strjoin(curr->limiter, "\n");
+			secure_malloc(curr->limiter, true);
+			latest_read_fd = open_heredoc(d, limiter_w_newline);
+			if (latest_read_fd == STOP_EXEC)
+				return (latest_read_fd);
+		}
+	curr = curr->next;
+	}
+	return (latest_read_fd);
+}
+
 // static int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 // {
-// 	pid_t		pid;
 // 	t_redir_lst	*curr;
 // 	char		*limiter_w_newline;
 // 	int			latest_read_fd;
@@ -39,6 +65,7 @@ int		wait_heredoc_child(pid_t pid)
 // 	curr = r;
 // 	limiter_w_newline = NULL;
 // 	latest_read_fd = 0;
+// 	set_signals_in_heredoc();
 // 	while (curr != NULL)
 // 	{
 // 		if (curr->type == HERE_DOC)
@@ -48,50 +75,16 @@ int		wait_heredoc_child(pid_t pid)
 // 			limiter_w_newline = ft_strjoin(curr->limiter, "\n");
 // 			secure_malloc(curr->limiter, true);
 // 			latest_read_fd = open_heredoc(d, limiter_w_newline);
+// 			if (latest_read_fd == STOP_EXEC)
+// 				clean_exit_shell(ft_exit_status(CTRL_C, ADD));
 // 		}
+// 	curr = curr->next;
 // 	}
-// 		curr = curr->next;
-// 		clean_exit_shell(SUCCESS);
-// 	}
+// 	if (wait_heredoc_child(pid) == STOP_EXEC)
+// 		return (STOP_EXEC);
 // 	else
-// 		wait_heredoc_child(pid);
-// 	return (latest_read_fd);
+// 		return (latest_read_fd);
 // }
-
-static int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
-{
-	pid_t		pid;
-	t_redir_lst	*curr;
-	char		*limiter_w_newline;
-	int			latest_read_fd;
-
-	curr = r;
-	limiter_w_newline = NULL;
-	latest_read_fd = 0;
-	pid = fork();
-	if (pid == -1)
-		clean_exit_shell(FAILURE);
-	else if (pid == 0)
-	{
-		while (curr != NULL)
-		{
-			if (curr->type == HERE_DOC)
-			{
-				if (latest_read_fd != 0)
-					close(latest_read_fd);
-				limiter_w_newline = ft_strjoin(curr->limiter, "\n");
-				secure_malloc(curr->limiter, true);
-				latest_read_fd = open_heredoc(d, limiter_w_newline);
-			}
-		curr = curr->next;
-		}
-		clean_exit_shell(SUCCESS);
-	}
-	if (wait_heredoc_child(pid) == STOP_EXEC)
-		return (STOP_EXEC);
-	else
-		return (latest_read_fd);
-}
 
 int	handle_heredoc(t_data *d, t_exec_lst **e_lst)
 {

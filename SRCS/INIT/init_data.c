@@ -24,6 +24,7 @@ t_data	*data_struct(void)
 		secure_malloc(instance, true);
 		instance->prompt = generate_prompt(&pr, instance);
 		secure_malloc(instance->prompt, true);
+		instance->fd_stdin_backup = 0;
 		instance->main = NULL;
 		instance->token = NULL;
 		instance->exec = NULL;

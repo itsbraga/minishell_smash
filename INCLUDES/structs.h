@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/29 05:24:42 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 08:05:37 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct s_prompt
 typedef struct s_data
 {
 	char			*prompt;
+	int				fd_stdin_backup;
 	t_main_lst		*main;
 	t_token_dblst	*token;
 	t_exec_info		*info;

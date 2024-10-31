@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/30 20:38:13 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:25:58 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ static void	__minishell(t_data *d)
 	int		error;
 
 	error = 0;
+	d->fd_stdin_backup = dup(STDIN_FILENO);
 	while (1)
 	{
+		if (isatty(STDIN_FILENO) == 0)
+			dup2(d->fd_stdin_backup, STDIN_FILENO);
 		display_shell_info();
 		set_signals();
 		input = readline(d->prompt);

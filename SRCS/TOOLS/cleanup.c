@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/29 22:17:15 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:37:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	clean_after_execution(t_data *d, char *input)
 {
+	g_sig_code = 0;
 	if (d->main != NULL)
 		lstclear_main(&(d->main));
 	if (d->token != NULL)
@@ -73,6 +74,8 @@ static void	__free_data(t_data *d, bool clear_history)
 	{
 		if (d->prompt != NULL)
 			free_and_set_null(d->prompt);
+		if (d->fd_stdin_backup)
+			close(d->fd_stdin_backup);
 		if (d->main != NULL)
 			lstclear_main(&(d->main));
 		if (d->token != NULL)
@@ -90,7 +93,6 @@ static void	__free_data(t_data *d, bool clear_history)
 	}
 }
 
-// verifier si on ne doit pas plutot quitter avec last_exit_code
 void	clean_exit_shell(int err_status)
 {
 	t_data	*d;

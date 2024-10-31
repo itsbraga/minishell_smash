@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/30 20:52:39 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 06:28:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,61 @@ void	rl_reset_custom_prompt(void)
 	}
 }
 
+void	sigquit_handler(int signo)
+{
+	(void)signo;
+	ft_putendl_fd("Quit (core dumped)", STDOUT_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	g_sig_code = CTRL_BCKSLH;
+	ft_exit_status(CTRL_BCKSLH, ADD);
+}
+
+static void	__sigint_handler_exec(int signo)
+{
+	(void)signo;
+	dprintf(2, "sigint handler exec\n");
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	g_sig_code = CTRL_C;
+	ft_exit_status(CTRL_C, ADD);
+}
+
 static void	__sigint_handler(int signo)
 {
 	(void)signo;
-	// dprintf(2, "cc\n");
-	// dprintf(2, "cc\n");
+	dprintf(2, "sigint handler main\n");
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	ft_exit_status(CTRL_C, ADD);
-	//rl_reset_custom_prompt();
+	rl_reset_custom_prompt();
+}
+
+static void	__sigint_handler_heredoc(int signo)
+{
+	(void)signo;
+	dprintf(2, "sigint handler heredoc\n");
+	close(STDIN_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	g_sig_code = CTRL_C;
+	ft_exit_status(CTRL_C, ADD);
+}
+void	set_signals_in_exec(void)
+{
+	signal(SIGINT, &__sigint_handler_exec);
+	signal(SIGQUIT, &sigquit_handler);
+}
+
+void	set_signals_in_heredoc(void)
+{
+	signal(SIGINT, &__sigint_handler_heredoc);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	set_signals(void)
 {
 	signal(SIGINT, &__sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-static void	__sigint_handler_heredoc(int sig)
-{
-	(void)sig;
-	g_sig_code = 4;
-	ft_exit_status(CTRL_C, ADD);
-}
-
-void	set_signals_in_heredoc()
-{
-	signal(SIGINT, &__sigint_handler_heredoc);
 	signal(SIGQUIT, SIG_IGN);
 }
