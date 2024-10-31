@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:44:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 04:17:49 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:24:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	__command_case(t_token_dblst *t, t_ptrs *p)
 	p->new_task->cmd[p->i] = cleaned_token;
 	if (ft_strchr(cleaned_token, '/') != NULL)
 	{
-		p->new_task->absolute_path = true;
+		p->new_task->is_given_path = true;
 		p->new_task->bin_path = cleaned_token;
 	}
 	p->i++;

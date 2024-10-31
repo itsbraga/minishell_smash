@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/30 20:29:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 12:23:52 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char	*build_path_to_try(char *cmd, char *tab_path_to_join)
 {
-	char *path_to_try;
-	char *tmp;
+	char	*path_to_try;
+	char	*tmp;
 
 	tmp = ft_strjoin(tab_path_to_join, "/");
 	secure_malloc(tmp, true);
@@ -57,17 +57,15 @@ int	check_given_path(t_exec_lst *node)
 	if (check_if_is_dir(node->bin_path) == true)
 	{
 		err_msg(node->bin_path, ERR_IS_DIR, 0);
-		clean_exit_shell(ft_exit_status(CMD_CANNOT_EXEC, ADD));
+		clean_exit_shell(CMD_CANNOT_EXEC);
 	}
 	if (access(node->bin_path, F_OK) == -1)
 	{
-		ft_exit_status(CMD_NOT_FOUND, ADD);
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_FILE, CMD_NOT_FOUND);
 		return (FAILURE);
 	}
 	else if (access(node->bin_path, X_OK) == -1)
 	{
-		ft_exit_status(CMD_CANNOT_EXEC, ADD);
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
 		return (FAILURE);
 	}
@@ -79,13 +77,11 @@ int	check_built_path(t_exec_lst *node)
 	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (node->bin_path == NULL)
 	{
-		ft_exit_status(CMD_NOT_FOUND, ADD);
 		err_msg_cmd(node->cmd[0], NULL, ERR_CMD, CMD_NOT_FOUND);
 		return (FAILURE);
 	}
 	else if (access(node->bin_path, X_OK) == -1)
 	{
-		ft_exit_status(CMD_CANNOT_EXEC, ADD);
 		err_msg_cmd(node->bin_path, NULL, ERR_BAD_PERM, CMD_CANNOT_EXEC);
 		return (FAILURE);
 	}

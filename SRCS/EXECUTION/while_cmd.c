@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 07:48:22 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:26:39 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static void	__wait_child(t_exec_info *info)
 	{
 		// printf("PID : %d | waiting for child... (wait_child)\n", getpid());
 		if (waitpid(-1, &status, 0) == -1)
-			(err_msg("waitpid", strerror(errno), 0), clean_exit_shell(FAILURE));
+		{
+			err_msg("waitpid", strerror(errno), 0);
+			clean_exit_shell(FAILURE);
+		}
 		if (WIFEXITED(status))
 			ft_exit_status(WEXITSTATUS(status), ADD);
 		child_count--;
@@ -51,12 +54,12 @@ static void	__parent(t_exec_info *info, t_exec_lst *curr)
 static void	__handle_exec_node(t_data *d, t_exec_lst *curr)
 {
 	if (d->info->pipe_count != 0
-			&& (d->info->executed_cmd != d->info->cmd_count - 1))
-		{
-			if (pipe(d->info->fd) == -1)
-				clean_exit_shell(FAILURE);
-		}
-		d->info->child_pid = fork();
+		&& (d->info->executed_cmd != d->info->cmd_count - 1))
+	{
+		if (pipe(d->info->fd) == -1)
+			clean_exit_shell(FAILURE);
+	}
+	d->info->child_pid = fork();
 	if (d->info->child_pid == -1)
 		clean_exit_shell(FAILURE);
 	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
@@ -101,5 +104,4 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 		}
 		__wait_child(d->info);
 	}
-	// dprintf(2, "out while_cmd\n");
 }

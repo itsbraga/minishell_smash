@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 03:28:00 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 12:46:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ char			*add_quotes_to_value(char *var);
 t_env_lst		*exp_env_new_var(char *content);
 
 // env_utils.c
-size_t			get_envlst_size(t_env_lst **env);
-size_t			get_envtab_size(char **env);
-t_env_lst		*env_new_var(char *content);
-void			del_env_var(t_env_lst **env, char *var_to_rm);
+size_t			get_env_tab_size(char **env);
 char			**recreate_env_tab(t_env_lst **env);
 
 // create_env.c
@@ -48,11 +45,12 @@ void			create_env(t_data *d, char **envp);
  * SIGNALS
 \******************************************************************************/
 
+// signals_here_doc.c
+void			set_signals_in_heredoc(void);
+
 // signals.c
-void			rl_reset_custom_prompt(void);
 void			sigquit_handler(int signo);
 void			set_signals(void);
-void			set_signals_in_heredoc(void);
 void			set_signals_in_exec(void);
 
 /******************************************************************************\
@@ -62,6 +60,7 @@ void			set_signals_in_exec(void);
 // prompt.c
 char			*generate_prompt(t_prompt *pr, t_data *d);
 void			update_prompt(t_data *d, t_prompt *pr);
+void			rl_reset_custom_prompt(void);
 
 // init_data.c
 t_data			*data_struct(void);

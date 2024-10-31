@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 08:05:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 11:23:38 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_exec_lst
 	t_redir_lst			*redir;
 	int					heredoc_nb;
 	int					latest_hd;
-	bool				absolute_path;
+	bool				is_given_path;
 	char				*bin_path;
 	char				**cmd;
 	struct s_exec_lst	*next;

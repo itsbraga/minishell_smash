@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 08:51:48 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:05:00 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*add_quotes_to_value(char *var)
 		new_str[i++] = *var++;
 	new_str[i++] = '"';
 	new_str[i] = '\0';
-	// free_and_set_null(tmp);
+	free_and_set_null(tmp);
 	return (new_str);
 }
 
@@ -111,7 +111,6 @@ t_env_lst	*exp_env_new_var(char *content)
 	secure_malloc(new_var->content, true);
 	if (ft_strchr(content, '=') != NULL)
 	{
-		// free(new_var->content);
 		new_var->content = add_quotes_to_value(content);
 		secure_malloc(new_var->content, true);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/28 19:26:45 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 11:24:18 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	display_exec_lst(t_exec_lst **e)
 	{
 		ft_printf(1, "--- NODE ---\n");
 		ft_printf(1, Y "heredoc_nb:\t [" R "%d" Y "]\n" R, curr->heredoc_nb);
-		ft_printf(1, Y "absolute_path:\t [" R);
-		ft_printf(1, "%d" Y "]\n" R, curr->absolute_path);
+		ft_printf(1, Y "is_given_path:\t [" R);
+		ft_printf(1, "%d" Y "]\n" R, curr->is_given_path);
 		ft_printf(1, Y "bin_path:\t [" R "%s" Y "]\n" R, curr->bin_path);
 		if (curr->cmd != NULL)
 			print_cmd(curr->cmd);

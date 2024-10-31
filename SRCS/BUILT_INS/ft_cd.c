@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/30 15:17:05 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:19:20 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	__handle_cd_error(char *path)
 		error = err_msg_cmd("cd", path, ERR_NOT_DIR, FAILURE);
 	else if (is_dir == -1)
 		error = err_msg_cmd("cd", path, ERR_BAD_FILE, FAILURE);
-	return (ft_exit_status(error, ADD));
+	return (error);
 }
 
 int	ft_cd(t_data *d)

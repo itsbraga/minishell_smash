@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:42:29 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/23 17:52:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:10:00 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,23 @@ void	update_prompt(t_data *d, t_prompt *pr)
 		free_and_set_null(d->prompt);
 	d->prompt = generate_prompt(pr, d);
 	secure_malloc(d->prompt, true);
+}
+
+void	rl_reset_custom_prompt(void)
+{
+	t_prompt	pr;
+	char		*nl_pos;
+	size_t		line1_len;
+
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	update_prompt(data_struct(), &pr);
+	nl_pos = ft_strchr(data_struct()->prompt, '\n');
+	if (nl_pos != NULL)
+	{
+		line1_len = nl_pos - data_struct()->prompt + 1;
+		display_shell_info();
+		write(STDOUT_FILENO, data_struct()->prompt, line1_len);
+		rl_redisplay();
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 11:09:35 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:33:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,6 @@ static int	__close_heredoc(int fd[], char *line)
 		return (STOP_EXEC);
 	}
 }
-// void		__sigint_close_heredoc(int *fd, char *line, char *limiter)
-// {
-// 	dprintf(2, "PID : %d | closehd | cc\n", getpid());
-// 	get_next_line(0, 1);
-// 	free_and_set_null(line);
-// 	free_and_set_null(limiter);
-// 	close(fd[0]);
-// 	close(fd[1]);
-// }
 
 static	int	__check_gnl_return(char *line, char *limiter)
 {
@@ -85,7 +76,7 @@ int	open_heredoc(t_data *d, char *limiter)
 	{
 		line = readline("> ");
 		if (__check_gnl_return(line, limiter) == FAILURE)
-			break;
+			break ;
 		if (ft_strcmp(limiter, line) == 0)
 			break ;
 		if (must_expand == true)

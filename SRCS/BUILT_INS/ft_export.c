@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 08:32:46 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:33:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	__manage_variable(t_env_lst *export_env, t_env_lst *env, char *var)
 			add_var_to_exp_env(&export_env, var);
 		}
 	}
-	return ;
 }
 
 static int	__check_args(char *var)
@@ -42,18 +41,12 @@ static int	__check_args(char *var)
 	while (var[i] != '\0' && var[i] != '=')
 	{
 		if (ft_isalpha(var[i]) == 0 && var[i] != '_')
-		{
-			ft_exit_status(FAILURE, ADD);
 			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
-		}
 		else if (ft_isalpha(var[i]) == 1 || ft_isdigit(var[i]) == 1
 			|| var[i] == '_')
 			i++;
 		else
-		{
-			ft_exit_status(FAILURE, ADD);
 			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
-		}
 	}
 	return (ft_exit_status(SUCCESS, ADD));
 }

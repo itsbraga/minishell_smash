@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 08:37:40 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 12:18:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,11 @@ int	free_gc_tab(t_gc_lst **y, char **tab)
 
 	error = 0;
 	i = 0;
-	// dprintf(2, "free_gc_tab\n");
-	// print_tab2(tab);
-	// if (yama(SEARCH, tab, 0) == NULL)
-	// 	dprintf(2, "free_gc_tab | tab n'est pas présent dans yama\n");
-	// else
-	// 	dprintf(2, "free_gc_tab | tab est présent dans yama\n");
 	while (tab[i] != NULL)
 	{
-		// dprintf(2, "free_gc_tab | i = %d\n", i);
-		// if (yama(SEARCH, tab[i], 0) == NULL)
-		// 	dprintf(2, "free_gc_tab | tab[%d] n'est pas présent dans yama\n", i);
-		// else
-		// 	dprintf(2, "free_gc_tab | tab[%d] est présent dans yama\n", i);
-		// dprintf(2, "free_gc_tab | error = %d\n", error);
 		error = remove_gc_node(y, tab[i]);
 		i++;
 	}
-	// dprintf(2, "free_gc_tab = %p\n", tab);
 	remove_gc_node(y, tab);
 	return (error);
 }
@@ -93,13 +80,10 @@ static void	__free_data(t_data *d, bool clear_history)
 	}
 }
 
-void	clean_exit_shell(int err_status)
+void	clean_exit_shell(int err_no)
 {
-	t_data	*d;
-
-	d = data_struct();
-	if (d != NULL)
-		__free_data(d, true);
+	if (data_struct() != NULL)
+		__free_data(data_struct(), true);
 	yama(CLEAN_ALL, NULL, 0);
-	exit(err_status);
+	exit(ft_exit_status(err_no, ADD));
 }

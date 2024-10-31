@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:34:57 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 05:49:15 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:13:40 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ void	init_ptrs(t_ptrs *p)
 
 char	*token_cleanup(char *content)
 {
-	t_data	*d;
-
-	d = data_struct();
 	content = empty_quotes(content);
-	content = expand(d, content, false);
+	content = expand(data_struct(), content, false);
 	content = other_quotes(content);
 	return (content);
 }

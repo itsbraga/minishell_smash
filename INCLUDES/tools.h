@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 06:28:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:14:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 // error_handler.c
 int				ft_exit_status(int exit_status, int mode);
 void			err_msg(char *detail, char *reason, int quotes);
-int				err_msg_cmd(char *cmd, char *detail, char *reason,
-					int err_status);
+int				err_msg_cmd(char *cmd, char *detail, char *reason, int err_no);
 void			err_msg_hd(char *limiter);
 
 // secure.c
@@ -42,7 +41,7 @@ void			lstclear_env(t_env_lst **env);
 void			clean_after_execution(t_data *d, char *input);
 void			free_tab(char **tab);
 int				free_gc_tab(t_gc_lst **yama, char **ptr);
-void			clean_exit_shell(int err_status);
+void			clean_exit_shell(int err_no);
 
 /******************************************************************************\
  * GARBAGE_COLLECTOR
@@ -61,8 +60,13 @@ int				handle_remove(t_gc_lst **yama, void *ptr);
 void			*yama(int flag, void *ptr, size_t size);
 
 /******************************************************************************\
- * MINISHELL_LISTS
+ * LISTS
 \******************************************************************************/
+
+// env_lst.c
+void			del_env_var(t_env_lst **env, char *var_to_rm);
+void			env_lst_add_back(t_env_lst **env, t_env_lst *new_node);
+t_env_lst		*env_new_var(char *content);
 
 // main_lst.c
 void			del_unwanted_whitespaces(t_main_lst *main);

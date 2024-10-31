@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/29 19:41:56 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:15:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_exit_status(int exit_status, int mode)
 {
-	static int	code = 0; 
-	
+	static int	code = 0;
+
 	if (mode == ADD)
 		code = exit_status;
 	if (mode == GET)
@@ -66,7 +66,7 @@ void	err_msg(char *detail, char *reason, int quotes)
 	yama(REMOVE, msg, 0);
 }
 
-int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_status)
+int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_no)
 {
 	char	*msg;
 
@@ -88,7 +88,7 @@ int	err_msg_cmd(char *cmd, char *detail, char *reason, int err_status)
 	msg = __append_strs(msg, reason);
 	ft_putendl_fd(msg, STDERR_FILENO);
 	yama(REMOVE, msg, 0);
-	return (err_status);
+	return (ft_exit_status(err_no, ADD));
 }
 
 void	err_msg_hd(char *limiter)
@@ -99,5 +99,4 @@ void	err_msg_hd(char *limiter)
 	ft_printf(2, "\n%swarning: here-document delimited by ", ERR_PREFIX);
 	ft_printf(2, "end-of-file (wanted `%s')\n", lim_without_nl);
 	free_and_set_null(lim_without_nl);
-	return ;
 }

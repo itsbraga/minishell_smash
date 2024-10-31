@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_dblst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/28 18:25:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 12:55:19 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_token_dblst	*token_dblst_new_node(char *content, t_token_type type)
 	secure_malloc(new_node, true);
 	new_node->type = type;
 	new_node->content = ft_strdup(content);
-	//dprintf(2, "%s\tcontent = %s\n", __func__, content);
 	secure_malloc(new_node->content, true);
 	new_node->prev = NULL;
 	new_node->next = NULL;

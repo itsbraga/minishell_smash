@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:03:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 10:22:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:23:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	add_var_to_exp_env(t_env_lst **e_env, char *var)
 
 	curr = *e_env;
 	new = exp_env_new_var(var);
-	if (cmp_to_equal(curr->content, new->content) > 0)
+	if (cmp_to_equal((*e_env)->content, new->content) > 0)
 	{
-		new->next = curr;
+		new->next = *e_env;
 		*e_env = new;
 		return ;
 	}
@@ -62,8 +62,8 @@ static size_t	__get_varlen(char *var)
 	return (i);
 }
 
-void	update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp,
-t_env_lst *env, char *var)
+void	update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp, t_env_lst *env,
+char *var)
 {
 	if (to_up == NULL && ft_strchr(to_up_exp->content, '=') == NULL)
 		add_var_to_env(&env, var);

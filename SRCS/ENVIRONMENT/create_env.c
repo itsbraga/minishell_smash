@@ -6,61 +6,49 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 18:54:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:01:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	create_env_list(t_env_lst **env, char **envp)
+static int	__create_env_list(t_data *d, char **envp)
 {
 	int			i;
-	t_env_lst	*var;
-	t_env_lst	*last;
+	t_env_lst	*new_var;
 
 	i = 0;
 	if (envp == NULL)
 		return (FAILURE);
-	var = NULL;
-	last = NULL;
+	new_var = NULL;
 	while (envp[i] != NULL)
 	{
-		var = env_new_var(envp[i]);
-		secure_malloc(var, true);
-		if (last == NULL)
-			*env = var;
-		else
-			last->next = var;
-		last = var;
+		new_var = env_new_var(envp[i]);
+		secure_malloc(new_var, true);
+		env_lst_add_back(&(d->env), new_var);
 		i++;
 	}
 	return (SUCCESS);
 }
 
-int	create_exp_env_list(t_env_lst **exp_env, char **envp, size_t envp_size,
-	size_t idx_exp_env)
+static int	__create_exp_env_list(t_data *d, char **envp, size_t envp_size,
+size_t idx_exp_env)
 {
-	t_env_lst	*var_to_add;
-	t_env_lst	*last;
+	t_env_lst	*new_var;
 
-	var_to_add = NULL;
-	last = NULL;
+	new_var = NULL;
 	while (idx_exp_env != envp_size)
 	{
 		if (idx_exp_env == 0)
-			var_to_add = copy_toppest(envp);
+			new_var = copy_toppest(envp);
 		else
-			var_to_add = ascii_sort(envp, last->content);
-		if (var_to_add == NULL)
+			new_var = ascii_sort(envp, new_var->content);
+		if (new_var == NULL)
 		{
-			lstclear_env(exp_env);
+			lstclear_env(&(d->exp_env));
 			return (FAILURE);
 		}
-		if (last == NULL)
-			*exp_env = var_to_add;
-		else
-			last->next = var_to_add;
-		last = var_to_add;
+		env_lst_add_back(&(d->exp_env), new_var);
 		idx_exp_env++;
 	}
 	return (SUCCESS);
@@ -95,10 +83,10 @@ void	create_env(t_data *d, char **envp)
 {
 	size_t	envp_size;
 
-	envp_size = get_envtab_size(envp);
-	if (create_env_list(&(d->env), envp) == FAILURE)
+	envp_size = get_env_tab_size(envp);
+	if (__create_env_list(d, envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
 	__update_shlvl(d->env);
-	if (create_exp_env_list(&(d->exp_env), envp, envp_size, 0) == FAILURE)
+	if (__create_exp_env_list(d, envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
 }

@@ -39,8 +39,8 @@ DEBUG		=	-g -g3
 TOOLS_DIR		=	TOOLS/
 TOOLS_F			=	error_handler.c lstclear.c cleanup.c secure.c
 
-LISTS_DIR		=	TOOLS/MINISHELL_LISTS/
-LISTS_F			=	main_lst.c token_dblst.c redir_lst.c exec_lst.c
+LISTS_DIR		=	TOOLS/LISTS/
+LISTS_F			=	env_lst.c main_lst.c token_dblst.c redir_lst.c exec_lst.c
 
 GARBAGE_DIR		=	TOOLS/GARBAGE_COLLECTOR/
 GARBAGE_F		=	utils.c lst_utils.c garbage_collector.c
@@ -71,7 +71,7 @@ BUILT_INS_F		=	built_ins.c ft_echo.c ft_cd_utils.c ft_cd.c ft_pwd.c \
 					ft_export_utils.c ft_export.c ft_unset.c ft_env.c ft_exit.c
 
 SIGNALS_DIR		=	SIGNALS/
-SIGNALS_F		=	signals.c
+SIGNALS_F		=	signals.c signals_here_doc.c
 
 EXEC_DIR		=	EXECUTION/
 EXEC_F			=	exec_utils.c exec_utils2.c while_cmd.c pathfinder.c \
@@ -82,14 +82,13 @@ EXEC_F			=	exec_utils.c exec_utils2.c while_cmd.c pathfinder.c \
 #******************************************************************************#
 
 SRCS_DIR		=	SRCS/
-SRCS_F			=	$(addprefix $(LISTS_DIR), $(LISTS_F)) \
+SRCS_F			=	$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
+					$(addprefix $(LISTS_DIR), $(LISTS_F)) \
 					$(addprefix $(GARBAGE_DIR), $(GARBAGE_F)) \
 					$(addprefix $(FEATURES_DIR), $(FEATURES_F)) \
-					$(addprefix $(TOOLS_DIR), $(TOOLS_F)) \
 					$(addprefix $(INIT_DIR), $(INIT_F)) \
 					$(addprefix $(ENV_DIR), $(ENV_F)) \
 					$(addprefix $(LEXER_DIR), $(LEXER_F)) \
-					$(addprefix $(TESTS_DIR), $(TESTS_F)) \
 					$(addprefix $(PARSER_DIR), $(PARSER_F)) \
 					$(addprefix $(EXPAND_DIR), $(EXPAND_F)) \
 					$(addprefix $(BUILT_INS_DIR), $(BUILT_INS_F)) \

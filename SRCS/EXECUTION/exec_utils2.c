@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:27:06 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 10:59:03 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:30:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 void	close_hd_all_nodes(t_data *d)
 {
-	t_exec_lst *curr;
+	t_exec_lst	*curr;
 
 	curr = d->exec;
 	while (curr != NULL)
 	{
 		if (curr->latest_hd != 0)
 			close(curr->latest_hd);
-		curr = curr->next;			
+		curr = curr->next;
 	}
-	return ;
 }
 
 void	close_hd_other_nodes(t_data *d, t_exec_lst *node)
 {
-	t_exec_lst *curr;
+	t_exec_lst	*curr;
 
 	curr = d->exec;
 	while (curr != node)
@@ -39,7 +38,6 @@ void	close_hd_other_nodes(t_data *d, t_exec_lst *node)
 		close(curr->latest_hd);
 		curr = curr->next;
 	}
-	return ;
 }
 
 bool	check_if_is_dir(char *bin_path)
