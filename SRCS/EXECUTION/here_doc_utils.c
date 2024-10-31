@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 09:15:02 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 10:11:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	__close_heredoc(int fd[], char *limiter, char *line)
 		free_and_set_null(limiter);
 		close(fd[1]);
 		close(fd[0]);
+		close_hd_all_nodes(data_struct());
 		return (STOP_EXEC);
 	}
 }

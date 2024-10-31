@@ -6,11 +6,25 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:27:06 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 00:57:35 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 10:13:18 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "exec.h"
+
+void	close_hd_all_nodes(t_data *d)
+{
+	t_exec_lst *curr;
+
+	curr = d->exec;
+	while (curr != NULL)
+	{
+		if (curr->latest_hd != 0)
+			close(curr->latest_hd);
+		curr = curr->next;			
+	}
+	return ;
+}
 
 void	close_hd_other_nodes(t_data *d, t_exec_lst *node)
 {
