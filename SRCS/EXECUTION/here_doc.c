@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 10:26:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:08:00 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ int	wait_heredoc_child(pid_t pid)
 static int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 {
 	t_redir_lst	*curr;
-	char		*limiter_with_nl;
 	int			latest_read_fd;
 
 	curr = r;
-	limiter_with_nl = NULL;
 	latest_read_fd = 0;
 	set_signals_in_heredoc();
 	while (curr != NULL)
@@ -48,9 +46,7 @@ static int	__fill_all_heredoc(t_data *d, t_redir_lst *r)
 		{
 			if (latest_read_fd != 0)
 				close(latest_read_fd);
-			limiter_with_nl = ft_strjoin(curr->limiter, "\n");
-			secure_malloc(curr->limiter, true);
-			latest_read_fd = open_heredoc(d, limiter_with_nl);
+			latest_read_fd = open_heredoc(d, curr->limiter);
 			if (latest_read_fd == STOP_EXEC)
 				return (latest_read_fd);
 		}

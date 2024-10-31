@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 00:57:32 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/10/31 10:10:21 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int				execute_parent_built_in(t_data *d, char **cmd);
 \******************************************************************************/
 
 //exec_utils2.c
+void			close_hd_all_nodes(t_data *d);
 void			close_hd_other_nodes(t_data *d, t_exec_lst *node);
 bool			check_if_is_dir(char *bin_path);
 char			**search_path(char **tab_path, char **env);

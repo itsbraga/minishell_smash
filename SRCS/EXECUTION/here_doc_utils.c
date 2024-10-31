@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 10:57:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:09:35 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ static bool	__manage_limiter(char **limiter)
 	}
 }
 
-static int	__close_heredoc(int fd[], char *limiter, char *line)
+static int	__close_heredoc(int fd[], char *line)
 {
 	if (g_sig_code != CTRL_C)
 	{
 		get_next_line(0, 1);
 		free_and_set_null(line);
-		free_and_set_null(limiter);
 		close(fd[1]);
 		return (fd[0]);
 	}
@@ -38,9 +37,9 @@ static int	__close_heredoc(int fd[], char *limiter, char *line)
 	{
 		get_next_line(0, 1);
 		free_and_set_null(line);
-		free_and_set_null(limiter);
 		close(fd[1]);
 		close(fd[0]);
+		close_hd_all_nodes(data_struct());
 		return (STOP_EXEC);
 	}
 }
@@ -84,20 +83,15 @@ int	open_heredoc(t_data *d, char *limiter)
 	must_expand = __manage_limiter(&limiter);
 	while (1)
 	{
-		// ft_printf(2, "> ");
-		// line = get_next_line(0, 0);
 		line = readline("> ");
-		// //if (g_sig_code == CTRL_C)
-		// if (g_sig_code == 4)
-		// 	__sigint_close_heredoc(fd, line, limiter);
 		if (__check_gnl_return(line, limiter) == FAILURE)
 			break;
 		if (ft_strcmp(limiter, line) == 0)
 			break ;
 		if (must_expand == true)
 			line = expand(d, line, true);
-		// ft_printf(fd[1], "%s", line);
+		ft_printf(fd[1], "%s", line);
 		free_and_set_null(line);
 	}
-	return (__close_heredoc(fd, limiter, line));
+	return (__close_heredoc(fd, line));
 }
