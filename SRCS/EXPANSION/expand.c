@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 06:21:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 22:34:25 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	*expand(t_data *d, char *str, bool in_heredoc)
 	while (str[i] != '\0')
 	{
 		get_closed_quotes(str[i], closed_quotes);
-		if (str[i] == '$' && closed_quotes[1] != false)
+		if (str[i] == '$' && closed_quotes[0] == true)
 		{
 			if (__is_expandable(&str[i + 1]) == false)
 			{
