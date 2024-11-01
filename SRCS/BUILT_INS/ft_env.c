@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:18:45 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/30 15:15:01 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/01 05:29:04 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	ft_env(t_env_lst *env, char **args)
+int	ft_env(t_env_lst **env, char **args)
 {
 	t_env_lst	*curr;
 
-	curr = env;
+	curr = *env;
 	if (args[1] != NULL)
 	{
 		err_msg(args[1] + 1, ERR_BAD_FILE, 1);

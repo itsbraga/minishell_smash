@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 12:10:35 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 05:19:43 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int				ft_exit(char **args);
 
 // ft_env.c
-int				ft_env(t_env_lst *env, char **args);
+int				ft_env(t_env_lst **env, char **args);
 
 // ft_unset.c
 int				ft_unset(t_data *d, char **args);
@@ -35,14 +35,14 @@ int				ft_pwd(void);
 void			add_var_to_exp_env(t_env_lst **e_env, char *var);
 void			add_var_to_env(t_env_lst **env, char *var);
 void			update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp,
-					t_env_lst *env, char *var);
-t_env_lst		*search_for_var(t_env_lst *env, char *var);
+					t_env_lst **env, char *var);
+t_env_lst		*search_for_var(t_env_lst **env, char *var);
 
 // ft_export.c
-int				ft_export(t_env_lst *exp_env, t_env_lst *env, char **args);
+int				ft_export(t_env_lst **exp_env, t_env_lst **env, char **args);
 
 // ft_cd_utils.c
-void			change_paths(t_env_lst *env, t_env_lst *exp_env);
+void			change_paths(t_env_lst **env, t_env_lst **exp_env);
 int				is_directory(const char *path);
 
 // ft_cd.c

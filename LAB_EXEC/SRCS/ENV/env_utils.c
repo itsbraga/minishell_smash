@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/07 20:28:29 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/01 07:15:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**recreate_env_tab(t_env_lst **env)
 	return (tab);
 }
 
-t_env_lst	*env_new_var(char *content)
+t_env_lst	*env_new_var(char *content, bool is export)
 {
 	t_env_lst	*new_var;
 

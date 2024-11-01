@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 13:05:00 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 07:18:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_env_lst	*copy_toppest(char **envp)
 				i++;
 		}
 	}
-	return (env_new_var(tmp_top));
+	return (exp_env_new_var(tmp_top));
 }
 
 // COMPARE LES VALEURS DANS ENV_LIST POUR TROUVER 
@@ -69,7 +69,7 @@ t_env_lst	*ascii_sort(char **envp, char *last_added)
 		}
 		i++;
 	}
-	return (env_new_var(tmp));
+	return (exp_env_new_var(tmp));
 }
 
 /*	**	Instead of freeing var (the initial content),
@@ -79,25 +79,24 @@ t_env_lst	*ascii_sort(char **envp, char *last_added)
 	allowing the caller to manage the memory more
 	explicitly.
 */
-char	*add_quotes_to_value(char *var)
+char	*add_quotes_to_value(char *content)
 {
 	int		i;
 	char	*new_str;
 	char	*tmp;
 
 	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(var) + 3));
+	new_str = malloc(sizeof(char) * (ft_strlen(content) + 3));
 	secure_malloc(new_str, true);
-	tmp = var;
-	while (*var != '=')
-		new_str[i++] = *var++;
-	new_str[i++] = *var++;
+	tmp = content;
+	while (*tmp != '=')
+		new_str[i++] = *tmp++;
+	new_str[i++] = *tmp++;
 	new_str[i++] = '"';
-	while (*var != '\0')
-		new_str[i++] = *var++;
+	while (*tmp != '\0')
+		new_str[i++] = *tmp++;
 	new_str[i++] = '"';
 	new_str[i] = '\0';
-	free_and_set_null(tmp);
 	return (new_str);
 }
 
@@ -107,13 +106,8 @@ t_env_lst	*exp_env_new_var(char *content)
 
 	new_var = malloc(sizeof(t_env_lst));
 	secure_malloc(new_var, true);
-	new_var->content = ft_strdup(content);
+	new_var->content = add_quotes_to_value(content);
 	secure_malloc(new_var->content, true);
-	if (ft_strchr(content, '=') != NULL)
-	{
-		new_var->content = add_quotes_to_value(content);
-		secure_malloc(new_var->content, true);
-	}
 	new_var->next = NULL;
 	return (new_var);
 }

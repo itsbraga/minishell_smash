@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:03:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 13:23:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 06:51:19 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,28 @@ static size_t	__get_varlen(char *var)
 	return (i);
 }
 
-void	update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp, t_env_lst *env,
+void	update_var_val(t_env_lst *to_up, t_env_lst *to_up_exp, t_env_lst **env,
 char *var)
 {
 	if (to_up == NULL && ft_strchr(to_up_exp->content, '=') == NULL)
-		add_var_to_env(&env, var);
+		add_var_to_env(env, var);
 	else if (to_up != NULL)
 	{
-		// free(to_up->content);
+		free_and_set_null(to_up->content);
 		to_up->content = ft_strdup(var);
 		secure_malloc(to_up->content, true);
 	}
-	// free(to_up_exp->content);
+	free_and_set_null(to_up_exp->content);
 	to_up_exp->content = add_quotes_to_value(var);
 	secure_malloc(to_up_exp->content, true);
 }
 
-t_env_lst	*search_for_var(t_env_lst *env, char *var)
+t_env_lst	*search_for_var(t_env_lst **env, char *var)
 {
 	t_env_lst	*curr;
 	size_t		len_var;
 
-	curr = env;
+	curr = *env;
 	len_var = __get_varlen(var);
 	while (curr != NULL)
 	{

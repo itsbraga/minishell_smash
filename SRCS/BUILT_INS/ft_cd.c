@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 12:19:20 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 05:26:43 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static char	*__find_var_path(char *to_find, t_env_lst *env)
+static char	*__find_var_path(char *to_find, t_env_lst **env)
 {
 	t_env_lst	*curr;
 	char		*path;
 	size_t		len_var_env;
 	size_t		len_to_find;
 
-	curr = env;
+	curr = *env;
 	path = NULL;
 	len_to_find = ft_strlen(to_find);
 	while (curr != NULL)
@@ -37,7 +37,7 @@ static char	*__find_var_path(char *to_find, t_env_lst *env)
 	return (NULL);
 }
 
-static int	__go_to_env_var(t_env_lst *env, char *var, t_token_dblst *t)
+static int	__go_to_env_var(t_env_lst **env, char *var, t_token_dblst *t)
 {
 	char	*var_path;
 	int		ret;
@@ -78,17 +78,17 @@ int	ft_cd(t_data *d)
 
 	if ((d->token->next == NULL)
 		|| (ft_strcmp(d->token->next->content, "~") == 0))
-		ret = __go_to_env_var(d->env, "HOME=", d->token);
+		ret = __go_to_env_var(&d->env, "HOME=", d->token);
 	else if (ft_strcmp(d->token->next->content, "-") == 0)
 	{
-		ret = __go_to_env_var(d->env, "OLDPWD=", d->token);
-		ft_printf(STDOUT_FILENO, "%s\n", __find_var_path("OLDPWD=", d->env));
+		ret = __go_to_env_var(&d->env, "OLDPWD=", d->token);
+		ft_printf(STDOUT_FILENO, "%s\n", __find_var_path("OLDPWD=", &d->env));
 	}
 	else
 		ret = chdir(d->token->next->content);
 	if (ret != 0)
 		return (__handle_cd_error(d->token->next->content));
-	change_paths(d->env, d->exp_env);
+	change_paths(&d->env, &d->exp_env);
 	update_prompt(d, &pr);
 	return (ft_exit_status(ret, ADD));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 12:18:29 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 06:12:55 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	free_tab(char **tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
+		// dprintf(2, "cmdtab | %s | %p\n", tab[i], tab[i]);
 		free_and_set_null(tab[i]);
 		i++;
 	}

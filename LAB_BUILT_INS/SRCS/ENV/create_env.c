@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 12:10:40 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/01 05:05:00 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	create_env_list(t_env_lst **env, char **envp)
 	int			i;
 	t_env_lst	*var;
 	t_env_lst	*last;
-
+	
+	dprintf(2, "**env = %p\n", env);
 	i = 0;
 	if (envp == NULL)
 		return (FAILURE);
@@ -102,9 +103,9 @@ void	create_env(t_global *g, char **envp)
 	size_t	envp_size;
 
 	envp_size = get_env_size(envp);
-	if (create_env_list(g->env, envp) == FAILURE)
+	if (create_env_list(&g->env, envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
-	__update_shlvl(g->env);
-	if (create_exp_env_list(g->exp_env, envp, envp_size, 0) == FAILURE)
+	__update_shlvl(&g->env);
+	if (create_exp_env_list(&g->exp_env, envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
 }

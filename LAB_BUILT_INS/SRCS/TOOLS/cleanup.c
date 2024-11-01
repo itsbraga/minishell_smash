@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 19:35:38 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 11:39:43 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/01 05:08:14 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void    free_global(t_global *g, bool clear_history)
 		if (g->input != NULL)
 			free(g->input);
 		if (g->token != NULL)
-			lstclear_token(g->token);
+			lstclear_token(&g->token);
 		if (clear_history == true)
 		{
 			if (g->env != NULL)
-				lstclear_env(g->env);
+				lstclear_env(&g->env);
 			if (g->exp_env != NULL)
-				lstclear_env(g->env);
+				lstclear_env(&g->env);
 			rl_clear_history();
 		}
 	}

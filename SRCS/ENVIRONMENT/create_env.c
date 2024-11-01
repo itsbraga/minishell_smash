@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 13:01:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 05:23:02 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ size_t idx_exp_env)
 	return (SUCCESS);
 }
 
-static void	__update_shlvl(t_env_lst *env)
+static void	__update_shlvl(t_env_lst **env)
 {
 	t_env_lst	*curr;
 	int			var_value;
 	char		*new_value;
 
-	curr = env;
+	curr = *env;
 	while (curr != NULL)
 	{
 		if (ft_strncmp(curr->content, "SHLVL=", 6) == 0)
@@ -86,7 +86,7 @@ void	create_env(t_data *d, char **envp)
 	envp_size = get_env_tab_size(envp);
 	if (__create_env_list(d, envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
-	__update_shlvl(d->env);
+	__update_shlvl(&d->env);
 	if (__create_exp_env_list(d, envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
 }
