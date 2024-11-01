@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/30 04:23:16 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/01 04:28:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	execute_child_built_in(t_data *d, char **cmd)
 {
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		return (ft_echo(cmd));
 	else if (ft_strcmp(cmd[0], "pwd") == 0)

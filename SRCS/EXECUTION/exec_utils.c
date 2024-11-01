@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 12:23:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 04:25:56 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*search_bin(char *cmd, char **tab_path)
 	int		i;
 
 	i = 0;
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	while (tab_path[i] != NULL)
 	{
 		path_to_try = build_path_to_try(cmd, tab_path[i]);
@@ -74,7 +74,7 @@ int	check_given_path(t_exec_lst *node)
 
 int	check_built_path(t_exec_lst *node)
 {
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (node->bin_path == NULL)
 	{
 		err_msg_cmd(node->cmd[0], NULL, ERR_CMD, CMD_NOT_FOUND);

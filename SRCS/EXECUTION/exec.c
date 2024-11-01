@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 12:24:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 04:25:42 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execute(char *bin_path, char **cmd_and_args, char **env)
 {
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	close(data_struct()->fd_stdin_backup);
 	if (execve(bin_path, cmd_and_args, env) == -1)
 	{
@@ -38,7 +38,7 @@ int	handle_bin_path(t_exec_lst *node, char **env)
 
 	error = 0;
 	tab_path = NULL;
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (node->is_given_path == true)
 		error = check_given_path(node);
 	else if (node->is_given_path == false)
@@ -65,7 +65,7 @@ void	go_exec(t_exec_lst *node)
 
 	ret = 0;
 	env_tab = NULL;
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	ret = execute_child_built_in(data_struct(), node->cmd);
 	if (ret != NOT_A_BUILTIN)
 		clean_exit_shell(ft_exit_status(0, GET));
@@ -76,7 +76,7 @@ void	go_exec(t_exec_lst *node)
 			execute(node->bin_path, node->cmd, env_tab);
 		else
 		{
-			dprintf(2, "PID[%d] | handle bin path failure\n", getpid());
+			// dprintf(2, "PID[%d] | handle bin path failure\n", getpid());
 			yama(REMOVE, env_tab, 0);
 			clean_exit_shell(ft_exit_status(0, GET));
 		}

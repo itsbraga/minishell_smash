@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 12:26:39 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 04:27:32 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	__wait_child(t_exec_info *info)
 
 static void	__parent(t_exec_info *info, t_exec_lst *curr)
 {
-	printf("PID[%d] | %s\n", getpid(), __func__);
+	// printf("PID[%d] | %s\n", getpid(), __func__);
 	if (info->pipe_count != 0)
 	{
 		close(info->fd[1]);
@@ -62,7 +62,7 @@ static void	__handle_exec_node(t_data *d, t_exec_lst *curr)
 	d->info->child_pid = fork();
 	if (d->info->child_pid == -1)
 		clean_exit_shell(FAILURE);
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (d->info->child_pid == 0)
 		pathfinder(d, curr);
 	else
@@ -98,7 +98,7 @@ void	while_cmd(t_data *d, t_exec_lst **e_lst)
 		set_signals_in_exec();
 		while (curr != NULL && (d->info->executed_cmd != d->info->cmd_count))
 		{
-			dprintf(2, "in while_cmd | pipecount = %d\n", d->info->pipe_count);
+			// dprintf(2, "in while_cmd | pipecount = %d\n", d->info->pipe_count);
 			__handle_exec_node(d, curr);
 			curr = curr->next;
 		}

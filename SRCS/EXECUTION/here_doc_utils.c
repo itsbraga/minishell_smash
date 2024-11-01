@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 11:33:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 04:45:03 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ static bool	__manage_limiter(char **limiter)
 
 static int	__close_heredoc(int fd[], char *line)
 {
+	dprintf(2, "g_sig_code = %d\n", g_sig_code);
 	if (g_sig_code != CTRL_C)
 	{
-		get_next_line(0, 1);
 		free_and_set_null(line);
 		close(fd[1]);
 		return (fd[0]);
 	}
 	else
 	{
-		get_next_line(0, 1);
 		free_and_set_null(line);
 		close(fd[1]);
 		close(fd[0]);
@@ -64,8 +63,8 @@ int	open_heredoc(t_data *d, char *limiter)
 	int		fd[2];
 	bool	must_expand;
 	char	*line;
+	char	*line_w_nl;
 
-	line = NULL;
 	if (pipe(fd) == -1)
 	{
 		err_msg("pipe", strerror(errno), 0);
@@ -81,8 +80,9 @@ int	open_heredoc(t_data *d, char *limiter)
 			break ;
 		if (must_expand == true)
 			line = expand(d, line, true);
-		ft_printf(fd[1], "%s", line);
-		free_and_set_null(line);
+		line_w_nl = ft_strjoin(line, "\n");
+		secure_malloc(line_w_nl, true);
+		(ft_printf(fd[1], "%s", line_w_nl), free_and_set_null(line));
 	}
 	return (__close_heredoc(fd, line));
 }

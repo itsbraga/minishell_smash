@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 11:27:09 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 04:26:52 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 	{
 		if (curr->type == REDIR_IN || curr->type == HERE_DOC)
 			*latest_redin = curr->type;
-		dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+		// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 		if (curr->type == REDIR_IN)
 			error = __redirection_in(curr);
 		else if (curr->type == REDIR_OUT_TRUNC
@@ -84,7 +84,7 @@ static void	__basic_behaviour(t_exec_info *info, int heredoc_nb)
 		}
 		close(info->fd[1]);
 		close(info->fd[0]);
-		dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+		// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	}
 } 
 
@@ -95,13 +95,13 @@ void	pathfinder(t_data *d, t_exec_lst *node)
 
 	error = 0;
 	latest_redin = 0;
-	dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
+	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	close_hd_other_nodes(d, node);
 	__basic_behaviour(d->info, node->heredoc_nb);
 	error = __handle_all_redir(node, &latest_redin);
 	if (latest_redin == HERE_DOC)
 	{
-		dprintf(2, "PID[%d] | stdin cheated to latest_hd\n", getpid());
+		// dprintf(2, "PID[%d] | stdin cheated to latest_hd\n", getpid());
 		dup2(node->latest_hd, STDIN_FILENO);
 	}
 	if (node->latest_hd != 0)
