@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:22 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 06:26:41 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/01 22:22:26 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,9 @@ bool	unclosed_quotes(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'')
-		{
-			if (closed[0] == true && closed[1] == true)
-				closed[0] = false;
-			else
-				closed[0] = true;
-		}
+			closed[0] = switch_bool(closed[0]);
 		else if (str[i] == '"')
-		{
-			if (closed[1] == true && closed[0] == true)
-				closed[1] = false;
-			else
-				closed[1] = true;
-		}
+			closed[1] = switch_bool(closed[1]);
 		i++;
 	}
 	return (unclosed_quotes_return(closed));
@@ -47,7 +37,7 @@ static bool	__handle_empty_quotes(char *str, int i, bool closed_quotes[])
 		&& (closed_quotes[1] == true && closed_quotes[0] == true))
 		return (true);
 	else if ((str[i] == '\'' && str[i + 1] == '\'')
-		&& (closed_quotes[1] == true && closed_quotes[0] == true))
+		&& (closed_quotes[0] == true && closed_quotes[1] == true))
 		return (true);
 	get_closed_quotes(str[i], closed_quotes);
 	return (false);
