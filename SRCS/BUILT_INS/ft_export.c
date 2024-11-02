@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 02:39:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 19:47:20 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ static int	__check_args(char *var)
 
 	i = 0;
 	if (ft_isalpha(var[i]) == 0 && var[i] != '_')
-		return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
+	{
+		err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE);
+		return (ft_exit_status(FAILURE, ADD));
+	}
 	else
 		i++;
 	while (var[i] != '\0' && var[i] != '=')
@@ -47,7 +50,10 @@ static int	__check_args(char *var)
 		if (ft_isalpha(var[i]) == 1 || ft_isdigit(var[i]) == 1 || var[i] == '_')
 			i++;
 		else
-			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
+		{
+			err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE);
+			return (ft_exit_status(FAILURE, ADD));
+		}
 	}
 	return (ft_exit_status(SUCCESS, ADD));
 }
@@ -80,5 +86,5 @@ int	ft_export(t_env_lst **exp_env, t_env_lst **env, char **args)
 			i++;
 		}
 	}
-	return (ft_exit_status(SUCCESS, ADD));
+	return (ft_exit_status(0, GET));
 }
