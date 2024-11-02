@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:40:43 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 00:39:57 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:06:51 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	del_env_var(t_env_lst **env, char *var_to_rm)
 				*env = curr->next;
 			else
 				prev->next = curr->next;
-			// free_and_set_null(curr->content);
-			// free_and_set_null(curr);
 			free_and_set_null((void **)&curr->content);
 			free_and_set_null((void **)&curr);
 			return ;

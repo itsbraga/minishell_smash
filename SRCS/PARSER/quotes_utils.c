@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 18:23:16 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 00:33:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:05:28 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	*del_empty_quotes(char *str, int quote_idx)
 		j++;
 	}
 	new_str[i] = '\0';
-	// free_and_set_null(str);
 	free_and_set_null((void **)&str);
 	return (new_str);
 }
@@ -88,7 +87,6 @@ char	*del_quote_pair(char *str, int first, int second)
 	while (str[j] != '\0')
 		new_str[i++] = str[j++];
 	new_str[i] = '\0';
-	// free_and_set_null(str);
 	free_and_set_null((void **)&str);
 	return (new_str);
 }

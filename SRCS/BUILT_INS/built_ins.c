@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 00:18:29 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 02:38:41 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	execute_child_built_in(t_data *d, char **cmd)
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		return (ft_echo(cmd));
 	else if (ft_strcmp(cmd[0], "pwd") == 0)
-		return (ft_pwd());
+		return (ft_pwd(cmd));
 	else if (ft_strcmp(cmd[0], "env") == 0)
 		return (ft_env(&d->env, cmd));
 	else if (ft_strcmp(cmd[0], "exit") == 0)

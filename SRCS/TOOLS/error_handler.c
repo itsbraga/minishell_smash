@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:42:30 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 00:34:56 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:06:19 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ void	err_msg_hd(char *limiter)
 	lim_without_nl = ft_strtrim(limiter, "\n");
 	ft_printf(2, "\n%swarning: here-document delimited by ", ERR_PREFIX);
 	ft_printf(2, "end-of-file (wanted `%s')\n", lim_without_nl);
-	// free_and_set_null(lim_without_nl);
 	free_and_set_null((void **)&lim_without_nl);
 }

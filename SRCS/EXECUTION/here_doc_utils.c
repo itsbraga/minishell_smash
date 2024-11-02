@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 00:28:59 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:04:32 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ static int	__close_heredoc(int fd[], char *line)
 	dprintf(2, "g_sig_code = %d\n", g_sig_code);
 	if (g_sig_code != CTRL_C)
 	{
-		// free_and_set_null(line);
 		free_and_set_null((void **)&line);
 		close(fd[1]);
 		return (fd[0]);
 	}
 	else
 	{
-		// free_and_set_null(line);
 		free_and_set_null((void **)&line);
 		close(fd[1]);
 		close(fd[0]);
@@ -84,7 +82,6 @@ int	open_heredoc(t_data *d, char *limiter)
 			line = expand(d, line, true);
 		line_w_nl = ft_strjoin(line, "\n");
 		secure_malloc(line_w_nl, true);
-		// (ft_printf(fd[1], "%s", line_w_nl), free_and_set_null(line));
 		(ft_printf(fd[1], "%s", line_w_nl), free_and_set_null((void **)&line));
 	}
 	return (__close_heredoc(fd, line));

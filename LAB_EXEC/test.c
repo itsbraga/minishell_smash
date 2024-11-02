@@ -50,10 +50,10 @@ char	*ft_strdup(const char *s1)
 	return (s2);
 }
 
-void	free_and_set_null(void *to_free)
+void	free_and_set_null(void **to_free)
 {
-	free(to_free);
-	to_free = NULL;
+	free(*to_free);
+	*to_free = NULL;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -63,8 +63,9 @@ int	main(int argc, char **argv, char **envp)
 	char *str;
 
 	str = ft_strdup("helloworld");
-	free_and_set_null(str);
+	free_and_set_null((void *)&str);
 	dprintf(2, "%s | %p\n", str, str);
+
 	str = ft_strdup("helloworld");
 	free(str);
 	str = NULL;

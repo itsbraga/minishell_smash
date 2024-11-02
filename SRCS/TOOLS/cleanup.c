@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 00:34:33 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:06:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	clean_after_execution(t_data *d, char *input)
 	if (d->exec != NULL)
 		lstclear_exec(&(d->exec));
 	if (input != NULL)
-		// free_and_set_null(input);
 		free_and_set_null((void **)&input);
 }
 
@@ -35,11 +34,9 @@ void	free_tab(char **tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
-		// free_and_set_null(tab[i]);
 		free_and_set_null((void **)&tab[i]);
 		i++;
 	}
-	// free_and_set_null(tab);
 	free_and_set_null((void **)&tab);
 }
 
@@ -64,7 +61,6 @@ static void	__free_data(t_data *d, bool clear_history)
 	if (d != NULL)
 	{
 		if (d->prompt != NULL)
-			// free_and_set_null(d->prompt);
 			free_and_set_null((void **)&(d->prompt));
 		if (d->fd_stdin_backup)
 			close(d->fd_stdin_backup);

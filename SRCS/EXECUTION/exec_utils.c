@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 00:27:52 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:04:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static char	*build_path_to_try(char *cmd, char *tab_path_to_join)
 	path_to_try = ft_strjoin(tmp, cmd);
 	secure_malloc(path_to_try, true);
 	yama(ADD, path_to_try, 0);
-	// free_and_set_null(tmp);
 	free_and_set_null((void **)&tmp);
 	return (path_to_try);
 }
@@ -33,7 +32,6 @@ char	*search_bin(char *cmd, char **tab_path)
 	int		i;
 
 	i = 0;
-	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	while (tab_path[i] != NULL)
 	{
 		path_to_try = build_path_to_try(cmd, tab_path[i]);
@@ -75,7 +73,6 @@ int	check_given_path(t_exec_lst *node)
 
 int	check_built_path(t_exec_lst *node)
 {
-	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	if (node->bin_path == NULL)
 	{
 		err_msg_cmd(node->cmd[0], NULL, ERR_CMD, CMD_NOT_FOUND);

@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 00:46:37 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 02:02:17 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	**recreate_env_tab(t_env_lst **env)
 	{
 		tab[i] = ft_strdup(curr->content);
 		secure_malloc(tab[i], true);
+		(void)yama(ADD, tab[i], 0);
 		i++;
 		curr = curr->next;
 	}

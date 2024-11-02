@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 00:26:55 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:03:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,10 @@ static int	__go_to_env_var(t_env_lst **env, char *var, t_token_dblst *t)
 	{
 		next = t->next->content;
 		error = err_msg_cmd(t->content, next, ERR_BAD_FILE, FAILURE);
-		// free_and_set_null(next);
 		free_and_set_null((void **)&next);
 		return (error);
 	}
 	if (var_path != NULL)
-		// free_and_set_null(var_path);
 		free_and_set_null((void **)&var_path);
 	return (ret);
 }
@@ -73,11 +71,19 @@ static int	__handle_cd_error(char *path)
 	return (error);
 }
 
+static int	__args_error(void)
+{
+	err_msg("cd", "too many arguments", 0);
+	return (ft_exit_status(FAILURE, ADD));
+}
+
 int	ft_cd(t_data *d)
 {
 	int			ret;
 	t_prompt	pr;
 
+	if (d->token->next->next != NULL)
+		return (__args_error());
 	if ((d->token->next == NULL)
 		|| (ft_strcmp(d->token->next->content, "~") == 0))
 		ret = __go_to_env_var(&d->env, "HOME=", d->token);

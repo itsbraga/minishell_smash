@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 22:48:25 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 01:55:01 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 02:10:34 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static char	**__get_all_seg_elems(char *main_content)
 	t_token_parser	p;
 	size_t			seg_len;
 
+	if (main_content == NULL || main_content[0] == '\0')
+		return (NULL);
 	ft_bzero(&p, sizeof(t_token_parser));
 	p.main_content = main_content;
-	// if (p.main_content == NULL || p.main_content[0] == '\0')
-	// 	return (NULL);
 	seg_len = ft_strlen(p.main_content);
 	p.seg_elems = yama(CREATE_TAB, NULL, (sizeof(char *) * (seg_len + 1)));
 	secure_malloc(p.seg_elems, true);

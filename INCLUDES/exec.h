@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/01 05:19:43 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 02:40:22 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int				ft_env(t_env_lst **env, char **args);
 int				ft_unset(t_data *d, char **args);
 
 // ft_pwd.c
-int				ft_pwd(void);
+int				ft_pwd(char **args);
 
 // ft_export_utils.c
 void			add_var_to_exp_env(t_env_lst **e_env, char *var);

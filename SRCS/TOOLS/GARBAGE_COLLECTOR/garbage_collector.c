@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:33:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 00:37:54 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:06:40 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static int	__clean_all(t_gc_lst **yama)
 	{
 		tmp = (*yama)->next;
 		(*yama)->next = NULL;
-		// free_and_set_null((*yama)->ptr);
 		free_and_set_null((void **)&(*yama)->ptr);
 		free((*yama));
 		(*yama) = tmp;

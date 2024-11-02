@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/01 07:18:26 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 01:55:42 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,20 @@ t_env_lst	*ascii_sort(char **envp, char *last_added)
 char	*add_quotes_to_value(char *content)
 {
 	int		i;
+	int		j;
 	char	*new_str;
-	char	*tmp;
 
 	i = 0;
+	j = 0;
+	// dprintf(2, "%s | content = %s - content ptr = %p\n", __func__, content, content);
 	new_str = malloc(sizeof(char) * (ft_strlen(content) + 3));
 	secure_malloc(new_str, true);
-	tmp = content;
-	while (*tmp != '=')
-		new_str[i++] = *tmp++;
-	new_str[i++] = *tmp++;
+	while (content[j] != '=')
+		new_str[i++] = content[j++];
+	new_str[i++] = content[j++];
 	new_str[i++] = '"';
-	while (*tmp != '\0')
-		new_str[i++] = *tmp++;
+	while (content[j] != '\0')
+		new_str[i++] = content[j++];
 	new_str[i++] = '"';
 	new_str[i] = '\0';
 	return (new_str);
@@ -106,8 +107,16 @@ t_env_lst	*exp_env_new_var(char *content)
 
 	new_var = malloc(sizeof(t_env_lst));
 	secure_malloc(new_var, true);
-	new_var->content = add_quotes_to_value(content);
-	secure_malloc(new_var->content, true);
+	if (ft_strchr(content, '=') == NULL)
+	{
+		new_var->content = ft_strdup(content);
+		secure_malloc(new_var->content, true);
+	}
+	else
+	{
+		new_var->content = add_quotes_to_value(content);
+		secure_malloc(new_var->content, true);
+	}
 	new_var->next = NULL;
 	return (new_var);
 }

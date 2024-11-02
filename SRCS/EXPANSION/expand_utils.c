@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:56:57 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 00:30:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 03:04:52 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*clean_translated_variable(char *str, char *var)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	// free_and_set_null(str);
 	free_and_set_null((void **)&str);
 	return (new_str);
 }
@@ -91,13 +90,11 @@ char	*search_var(char *to_find, t_env_lst *env)
 		secure_malloc(to_cmp, true);
 		if (ft_strcmp(to_find, to_cmp) == 0)
 		{
-			// free_and_set_null(to_cmp);
 			free_and_set_null((void **)&to_cmp);
 			return (__take_var_value(curr->content));
 		}
 		else
 		{
-			// free_and_set_null(to_cmp);
 			free_and_set_null((void **)&to_cmp);
 			curr = curr->next;
 		}
