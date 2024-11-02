@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/01 04:26:52 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 17:08:41 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,7 @@ void	pathfinder(t_data *d, t_exec_lst *node)
 	__basic_behaviour(d->info, node->heredoc_nb);
 	error = __handle_all_redir(node, &latest_redin);
 	if (latest_redin == HERE_DOC)
-	{
-		// dprintf(2, "PID[%d] | stdin cheated to latest_hd\n", getpid());
 		dup2(node->latest_hd, STDIN_FILENO);
-	}
 	if (node->latest_hd != 0)
 		close(node->latest_hd);
 	if (error == FAILURE)

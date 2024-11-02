@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:27:06 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/01 04:25:48 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 17:06:09 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	close_hd_other_nodes(t_data *d, t_exec_lst *node)
 	curr = curr->next;
 	while (curr != NULL)
 	{
-		close(curr->latest_hd);
+		if (curr->latest_hd != 0)
+			close(curr->latest_hd);
 		curr = curr->next;
 	}
 }
