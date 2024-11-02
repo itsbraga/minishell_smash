@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 12:25:48 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:27:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int	handle_heredoc(t_data *d, t_exec_lst **e_lst)
 		{
 			curr->latest_hd = __fill_all_heredoc(d, curr->redir);
 			if (curr->latest_hd == STOP_EXEC)
+			{
+				curr->latest_hd = 0;
 				return (STOP_EXEC);
+			}
 		}
 		curr = curr->next;
 	}
