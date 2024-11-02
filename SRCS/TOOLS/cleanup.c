@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 03:06:04 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 18:31:28 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	clean_after_execution(t_data *d, char *input)
 {
 	g_sig_code = 0;
+	close_hd_all_nodes(data_struct());
 	if (d->main != NULL)
 		lstclear_main(&(d->main));
 	if (d->token != NULL)

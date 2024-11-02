@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 03:04:32 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 17:45:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,20 @@ static bool	__manage_limiter(char **limiter)
 	}
 }
 
-static int	__close_heredoc(int fd[], char *line)
+static int	__close_heredoc(int fd[], char *line_w_nl)
 {
 	dprintf(2, "g_sig_code = %d\n", g_sig_code);
 	if (g_sig_code != CTRL_C)
 	{
-		free_and_set_null((void **)&line);
+		if (line_w_nl != NULL)
+			free_and_set_null((void **)&line_w_nl);
 		close(fd[1]);
 		return (fd[0]);
 	}
 	else
 	{
-		free_and_set_null((void **)&line);
+		if (line_w_nl != NULL)
+			free_and_set_null((void **)&line_w_nl);
 		close(fd[1]);
 		close(fd[0]);
 		close_hd_all_nodes(data_struct());
@@ -64,12 +66,10 @@ int	open_heredoc(t_data *d, char *limiter)
 	bool	must_expand;
 	char	*line;
 	char	*line_w_nl;
-
+	
+	line_w_nl = NULL;
 	if (pipe(fd) == -1)
-	{
-		err_msg("pipe", strerror(errno), 0);
-		clean_exit_shell(FAILURE);
-	}
+		(err_msg("pipe", strerror(errno), 0), clean_exit_shell(FAILURE));
 	must_expand = __manage_limiter(&limiter);
 	while (1)
 	{
@@ -84,5 +84,5 @@ int	open_heredoc(t_data *d, char *limiter)
 		secure_malloc(line_w_nl, true);
 		(ft_printf(fd[1], "%s", line_w_nl), free_and_set_null((void **)&line));
 	}
-	return (__close_heredoc(fd, line));
+	return (__close_heredoc(fd, line_w_nl));
 }
