@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:42:03 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/01 22:34:25 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 00:30:56 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static char	*__del_var(char *str, char *var, size_t var_size)
 	secure_malloc(new_str, true);
 	ft_strlcpy(new_str, str, (var - str));
 	ft_strcpy(new_str + ((var - 1) - str), end_var);
-	free_and_set_null(str);
+	// free_and_set_null(str);
+	free_and_set_null((void **)&str);
 	return (new_str);
 }
 
@@ -52,7 +53,8 @@ size_t vv_size)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	free_and_set_null(start_str);
+	// free_and_set_null(start_str);
+	free_and_set_null((void **)&start_str);
 	return (new_str);
 }
 
@@ -77,9 +79,11 @@ static char	*__handle_expand(t_data *d, char *str, char *var)
 			str = __add_var_value(str, var, var_value, ft_strlen(var_value));
 	}
 	if (to_find != NULL)
-		free_and_set_null(to_find);
+		// free_and_set_null(to_find);
+		free_and_set_null((void **)&to_find);
 	if (var_value != NULL)
-		free_and_set_null(var_value);
+		// free_and_set_null(var_value);
+		free_and_set_null((void **)&var_value);
 	return (str);
 }
 

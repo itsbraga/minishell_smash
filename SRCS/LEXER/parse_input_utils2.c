@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 02:02:07 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 04:13:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:19:02 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libraries.h"
+#include "parser_lexer.h"
 
 int	handle_bidirections(t_redir_parser *rp)
 {

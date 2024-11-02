@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 04:17:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 01:23:09 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_lexer.h"
 
-static int	__handle_redir_error(t_redir_parser *rp, t_parser *p)
+static int	__handle_redir_error(t_parser *p, t_redir_parser *rp)
 {
 	rp->curr_char = p->input[p->i];
 	while (p->input[p->i] == rp->curr_char)
@@ -34,22 +34,18 @@ static int	__handle_redir_error(t_redir_parser *rp, t_parser *p)
 	return (SUCCESS);
 }
 
-int	check_redir_order(t_parser *p)
+int	check_redir_order(t_parser *p, t_redir_parser *rp)
 {
-	ft_bzero(p->rp, sizeof(t_redir_parser));
+	ft_bzero(rp, sizeof(t_redir_parser));
 	while (p->input[p->i] != '\0')
 	{
 		if (p->input[p->i] == '>' || p->input[p->i] == '<')
 		{
-			if (__handle_redir_error(p->rp, p) == BAD_USAGE)
-			{
-				free_and_set_null(p->rp);
+			if (__handle_redir_error(p, rp) == BAD_USAGE)
 				return (BAD_USAGE);
-			}
 			continue ;
 		}
 		p->i++;
 	}
-	free_and_set_null(p->rp);
 	return (SUCCESS);
 }

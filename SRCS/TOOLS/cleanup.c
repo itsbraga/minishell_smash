@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/01 06:12:55 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 00:34:33 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	clean_after_execution(t_data *d, char *input)
 		lstclear_token(&(d->token));
 	if (d->exec != NULL)
 		lstclear_exec(&(d->exec));
-	free_and_set_null(input);
+	if (input != NULL)
+		// free_and_set_null(input);
+		free_and_set_null((void **)&input);
 }
 
 void	free_tab(char **tab)
@@ -33,11 +35,12 @@ void	free_tab(char **tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
-		// dprintf(2, "cmdtab | %s | %p\n", tab[i], tab[i]);
-		free_and_set_null(tab[i]);
+		// free_and_set_null(tab[i]);
+		free_and_set_null((void **)&tab[i]);
 		i++;
 	}
-	free_and_set_null(tab);
+	// free_and_set_null(tab);
+	free_and_set_null((void **)&tab);
 }
 
 int	free_gc_tab(t_gc_lst **y, char **tab)
@@ -61,7 +64,8 @@ static void	__free_data(t_data *d, bool clear_history)
 	if (d != NULL)
 	{
 		if (d->prompt != NULL)
-			free_and_set_null(d->prompt);
+			// free_and_set_null(d->prompt);
+			free_and_set_null((void **)&(d->prompt));
 		if (d->fd_stdin_backup)
 			close(d->fd_stdin_backup);
 		if (d->main != NULL)

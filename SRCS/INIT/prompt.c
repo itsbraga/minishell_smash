@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:42:29 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 12:10:00 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:32:19 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	__part_one(t_prompt *pr)
 	(void)yama(REMOVE, pr->rainbow_user, 0);
 	pr->part2 = ft_strjoin(pr->part1, "\001" R "@42] " "\002");
 	secure_malloc(pr->part2, true);
-	free_and_set_null(pr->part1);
+	// free_and_set_null(pr->part1);
+	free_and_set_null((void **)&pr->part1);
 }
 
 static void	__custom_cwd(t_prompt *pr)
@@ -45,10 +46,12 @@ static void	__custom_cwd(t_prompt *pr)
 	secure_malloc(extracted, true);
 	relative_cwd = ft_strjoin("~", extracted);
 	secure_malloc(relative_cwd, true);
-	free_and_set_null(extracted);
+	// free_and_set_null(extracted);
+	free_and_set_null((void **)&extracted);
 	pr->custom_cwd = ft_strjoin("\001" ITAL LIGHT_GRAY "\002", relative_cwd);
 	secure_malloc(pr->custom_cwd, true);
-	free_and_set_null(relative_cwd);
+	// free_and_set_null(relative_cwd);
+	free_and_set_null((void **)&relative_cwd);
 }
 
 char	*generate_prompt(t_prompt *pr, t_data *d)
@@ -60,18 +63,22 @@ char	*generate_prompt(t_prompt *pr, t_data *d)
 	__custom_cwd(pr);
 	pr->part3 = ft_strjoin(pr->part2, pr->custom_cwd);
 	secure_malloc(pr->part3, true);
-	free_and_set_null(pr->part2);
-	free_and_set_null(pr->custom_cwd);
+	// free_and_set_null(pr->part2);
+	// free_and_set_null(pr->custom_cwd);
+	free_and_set_null((void **)&pr->part2);
+	free_and_set_null((void **)&pr->custom_cwd);
 	d->prompt = ft_strjoin(pr->part3, "\001" R "\002" "\n$> ");
 	secure_malloc(d->prompt, true);
-	free_and_set_null(pr->part3);
+	// free_and_set_null(pr->part3);
+	free_and_set_null((void **)&pr->part3);
 	return (d->prompt);
 }
 
 void	update_prompt(t_data *d, t_prompt *pr)
 {
 	if (d->prompt != NULL)
-		free_and_set_null(d->prompt);
+		// free_and_set_null(d->prompt);
+		free_and_set_null((void **)&d->prompt);
 	d->prompt = generate_prompt(pr, d);
 	secure_malloc(d->prompt, true);
 }

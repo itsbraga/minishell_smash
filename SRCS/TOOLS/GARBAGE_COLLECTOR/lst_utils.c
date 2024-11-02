@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage_collector_lst_utils.c                      :+:      :+:    :+:   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:44:25 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/23 13:49:02 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 01:35:07 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 	{
 		node = *yama;
 		*yama = (*yama)->next;
-		free_and_set_null(node->ptr);
-		free_and_set_null(node);
+		// free_and_set_null(node->ptr);
+		// free_and_set_null(node);
+		free_and_set_null((void **)&node->ptr);
+		free_and_set_null((void **)&node);
 		return (SUCCESS);
 	}
 	prev = *yama;
@@ -71,7 +73,9 @@ int	remove_gc_node(t_gc_lst **yama, void *ptr)
 	node = prev->next;
 	// dprintf(2, "ligne 69 : node = %p\n", node);
 	prev->next = (prev->next)->next;
-	free_and_set_null(node->ptr);
-	free_and_set_null(node);
+	// free_and_set_null(node->ptr);
+	// free_and_set_null(node);
+	free_and_set_null((void **)&node->ptr);
+	free_and_set_null((void **)&node);
 	return (SUCCESS);
 }

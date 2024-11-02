@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstclear.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:49:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 10:38:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:37:20 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	lstclear_main(t_main_lst **main)
 	{
 		tmp = (*main)->next;
 		(*main)->next = NULL;
-		free_and_set_null((*main)->content);
+		// free_and_set_null((*main)->content);
+		free_and_set_null((void **)&(*main)->content);
 		free(*main);
 		(*main) = tmp;
 	}
@@ -38,7 +39,8 @@ void	lstclear_token(t_token_dblst **t)
 	{
 		tmp = (*t)->next;
 		(*t)->next = NULL;
-		free_and_set_null((*t)->content);
+		// free_and_set_null((*t)->content);
+		free_and_set_null((void **)&(*t)->content);
 		free(*t);
 		(*t) = tmp;
 	}
@@ -55,11 +57,14 @@ void	lstclear_redir(t_redir_lst **r)
 		tmp = (*r)->next;
 		(*r)->next = NULL;
 		if ((*r)->limiter != NULL)
-			free_and_set_null((*r)->limiter);
+			// free_and_set_null((*r)->limiter);
+			free_and_set_null((void **)&(*r)->limiter);
 		if ((*r)->infile != NULL)
-			free_and_set_null((*r)->infile);
+			// free_and_set_null((*r)->infile);
+			free_and_set_null((void **)&(*r)->infile);
 		if ((*r)->outfile != NULL)
-			free_and_set_null((*r)->outfile);
+			// free_and_set_null((*r)->outfile);
+			free_and_set_null((void **)&(*r)->outfile);
 		free(*r);
 		(*r) = tmp;
 	}
@@ -94,7 +99,8 @@ void	lstclear_env(t_env_lst **env)
 	{
 		tmp = (*env)->next;
 		(*env)->next = NULL;
-		free_and_set_null((*env)->content);
+		// free_and_set_null((*env)->content);
+		free_and_set_null((void **)&(*env)->content);
 		free(*env);
 		(*env) = tmp;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 12:27:21 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 02:01:02 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static void	__minishell(t_data *d)
 			add_history(input);
 			if (create_main_lst(d, input) == FAILURE)
 				error = 1;
-			// else
-			// 	display_main_lst(&(d->main));
+			else
+				display_main_lst(&(d->main));
 			if (create_token_dblst(d) == FAILURE)
 				error = 1;
-			// else
-			// 	display_token_dblst(&(d->token));
-			// display_exec_lst(&(d->exec));
+			else
+				display_token_dblst(&(d->token));
+			display_exec_lst(&(d->exec));
 			if (error != 1)
 				while_cmd(d, &(d->exec));
 			error = 0;

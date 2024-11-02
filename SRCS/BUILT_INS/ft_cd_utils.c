@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/01 05:25:05 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 00:26:21 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	__update_oldpwd(t_env_lst **env, char *old_pwd)
 			free(curr->content);
 			curr->content = ft_strjoin("OLDPWD=", old_pwd + 4);
 			secure_malloc(curr->content, true);
-			free_and_set_null(old_pwd);
+			// free_and_set_null(old_pwd);
+			free_and_set_null((void **)&old_pwd);
 			break ;
 		}
 		curr = curr->next;
@@ -75,8 +76,10 @@ void	change_paths(t_env_lst **env, t_env_lst **exp_env)
 		return ;
 	__update_oldpwd(env, old_pwd);
 	__update_oldpwd(exp_env, exp_old_pwd);
-	free_and_set_null(new_pwd);
-	free_and_set_null(exp_new_pwd);
+	// free_and_set_null(new_pwd);
+	free_and_set_null((void **)&new_pwd);
+	// free_and_set_null(exp_new_pwd);
+	free_and_set_null((void **)&exp_new_pwd);
 }
 
 int	is_directory(const char *path)

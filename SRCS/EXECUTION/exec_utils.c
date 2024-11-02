@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/01 04:25:56 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 00:27:52 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static char	*build_path_to_try(char *cmd, char *tab_path_to_join)
 	path_to_try = ft_strjoin(tmp, cmd);
 	secure_malloc(path_to_try, true);
 	yama(ADD, path_to_try, 0);
-	free_and_set_null(tmp);
+	// free_and_set_null(tmp);
+	free_and_set_null((void **)&tmp);
 	return (path_to_try);
 }
 

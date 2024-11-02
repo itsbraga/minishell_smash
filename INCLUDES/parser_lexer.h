@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_lexer.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:23:46 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 04:17:59 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 01:17:58 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int				handle_spaced_sequence(t_redir_parser *rp, t_parser *p);
 int				handle_redir_near_pipe(t_redir_parser *rp);
 
 // parse_input_utils.c
-int				check_redir_order(t_parser *p);
+// int				check_redir_order(t_parser *p);
+int				check_redir_order(t_parser *p, t_redir_parser *rp);
 
 // parse_input.c
 int				parse_input(t_parser *p);

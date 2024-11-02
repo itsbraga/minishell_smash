@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:03:18 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/01 06:51:19 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 00:27:25 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ char *var)
 		add_var_to_env(env, var);
 	else if (to_up != NULL)
 	{
-		free_and_set_null(to_up->content);
+		// free_and_set_null(to_up->content);
+		free_and_set_null((void **)&to_up->content);
 		to_up->content = ft_strdup(var);
 		secure_malloc(to_up->content, true);
 	}
-	free_and_set_null(to_up_exp->content);
+	// free_and_set_null(to_up_exp->content);
+	free_and_set_null((void **)&to_up_exp->content);
 	to_up_exp->content = add_quotes_to_value(var);
 	secure_malloc(to_up_exp->content, true);
 }

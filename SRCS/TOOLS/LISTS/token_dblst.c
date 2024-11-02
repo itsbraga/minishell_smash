@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_dblst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 23:02:40 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 12:55:19 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:40:16 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	del_current_token(t_token_dblst **t, t_token_dblst *to_delete)
 		if (to_delete->next != NULL)
 			to_delete->next->prev = to_delete->prev;
 	}
-	free_and_set_null(to_delete->content);
-	free_and_set_null(to_delete);
+	// free_and_set_null(to_delete->content);
+	// free_and_set_null(to_delete);
+	free_and_set_null((void **)&to_delete->content);
+	free_and_set_null((void **)&to_delete);
 }

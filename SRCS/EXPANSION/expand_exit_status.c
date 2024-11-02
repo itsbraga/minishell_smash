@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_exit_status.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 00:07:17 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 04:17:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:29:29 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ size_t vv_size)
 	while (*str)
 		new_str[i++] = *str++;
 	new_str[i] = '\0';
-	free_and_set_null(start_str);
+	// free_and_set_null(start_str);
+	free_and_set_null((void **)&start_str);
 	return (new_str);
 }
 
@@ -42,6 +43,7 @@ char	*handle_last_exit_status(char *str, char *var)
 	var_value = ft_itoa(ft_exit_status(0, GET));
 	secure_malloc(var_value, true);
 	str = __add_exit_status_value(str, var, var_value, ft_strlen(var_value));
-	free_and_set_null(var_value);
+	// free_and_set_null(var_value);
+	free_and_set_null((void **)&var_value);
 	return (str);
 }

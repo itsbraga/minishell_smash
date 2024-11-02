@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   secure.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:30:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/10/31 12:14:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:25:04 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,19 @@ void	secure_malloc(void *to_secure, bool cleanup)
 	}
 }
 
-void	free_and_set_null(void *to_free)
+// void	free_and_set_null(void *to_free)
+// {
+// 	free(to_free);
+// 	to_free = NULL;
+// }
+
+void	free_and_set_null(void **to_free)
 {
-	free(to_free);
-	to_free = NULL;
+	if (to_free != NULL && (*to_free) != NULL)
+	{
+		free(*to_free);
+		*to_free = NULL;
+	}
 }
 
 void	get_closed_quotes(char c, bool closed_quotes[])

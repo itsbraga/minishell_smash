@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:19:11 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 12:09:52 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:19:57 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ void	sigquit_handler(int signo)
 	ft_exit_status(CTRL_BCKSLH, ADD);
 }
 
+static void	__sigint_handler(int signo)
+{
+	(void)signo;
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	ft_exit_status(CTRL_C, ADD);
+	rl_reset_custom_prompt();
+}
+
+void	set_signals(void)
+{
+	signal(SIGINT, &__sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
 static void	__sigint_handler_exec(int signo)
 {
 	(void)signo;
@@ -32,22 +46,8 @@ static void	__sigint_handler_exec(int signo)
 	ft_exit_status(CTRL_C, ADD);
 }
 
-static void	__sigint_handler(int signo)
-{
-	(void)signo;
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	ft_exit_status(CTRL_C, ADD);
-	rl_reset_custom_prompt();
-}
-
 void	set_signals_in_exec(void)
 {
 	signal(SIGINT, &__sigint_handler_exec);
 	signal(SIGQUIT, &sigquit_handler);
-}
-
-void	set_signals(void)
-{
-	signal(SIGINT, &__sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
 }
