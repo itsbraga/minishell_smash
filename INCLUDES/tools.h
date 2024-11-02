@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 00:25:26 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 20:57:51 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void			err_msg_hd(char *limiter);
 
 // secure.c
 void			get_closed_quotes(char c, bool closed_quotes[]);
-// void			free_and_set_null(void *to_free);
 void			free_and_set_null(void **to_free);
 void			secure_malloc(void *to_secure, bool cleanup);
 

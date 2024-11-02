@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 03:03:01 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 19:35:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	change_paths(t_env_lst **env, t_env_lst **exp_env)
 
 int	is_directory(const char *path)
 {
-    struct stat path_stat;
-	
-    if (stat(path, &path_stat) == -1)
+	struct stat	path_stat;
+
+	if (stat(path, &path_stat) == -1)
 	{
 		if (errno == ENOENT)
 			return (-1);
 	}
-    return (S_ISDIR(path_stat.st_mode));
+	return (S_ISDIR(path_stat.st_mode));
 }

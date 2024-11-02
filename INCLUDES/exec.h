@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:20:17 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 02:40:22 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 19:48:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void			change_paths(t_env_lst **env, t_env_lst **exp_env);
 int				is_directory(const char *path);
 
 // ft_cd.c
-int				ft_cd(t_data *d);
+// int				ft_cd(t_data *d);
+int				ft_cd(t_data *d, char **args);
 
 // ft_echo.c
 int				ft_echo(char **args);

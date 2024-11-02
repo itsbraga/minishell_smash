@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 02:39:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 19:35:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void	__manage_variable(t_env_lst **export_env, t_env_lst **env, char *var)
+static void	__manage_variable(t_env_lst **export_env, t_env_lst **env,
+char *var)
 {
 	t_env_lst	*to_find;
 	t_env_lst	*to_find_exp;
