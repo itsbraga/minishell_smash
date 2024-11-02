@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 20:56:15 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:35:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	__go_to_env_var(t_env_lst **env, char *var, char **args)
 	var_path = __find_var_path(var, env);
 	ret = chdir(var_path);
 	if (ret != 0)
-		return (err_msg_cmd(args[0], args[1], ERR_BAD_FILE, FAILURE));
+		return (err_msg_cmd("cd", args[1], ERR_BAD_FILE, FAILURE));
 	if (var_path != NULL)
 		free_and_set_null((void **)&var_path);
 	return (ret);
@@ -56,9 +56,9 @@ static int	__handle_cd_error(char *path)
 	const int	is_dir = is_directory(path);
 
 	if (is_dir == 0)
-		return (err_msg_cmd("cd", path, ERR_NOT_DIR, FAILURE));
+		return (err_msg_cmd("cd", path, ERR_NOT_DIR, ft_exit_status(1, ADD)));
 	else if (is_dir == -1)
-		return (err_msg_cmd("cd", path, ERR_BAD_FILE, FAILURE));
+		return (err_msg_cmd("cd", path, ERR_BAD_FILE, ft_exit_status(1, ADD)));
 	return (SUCCESS);
 }
 
