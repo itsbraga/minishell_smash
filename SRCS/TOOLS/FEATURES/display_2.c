@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:56:55 by annabrag          #+#    #+#             */
-/*   Updated: 2024/10/31 11:24:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:27:44 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,10 @@ void	print_cmd(char **cmd)
 	i = 0;
 	while (cmd[i] != NULL)
 	{
-		dprintf(2, Y "cmd[i]:\t\t [" R "%s" Y "]\t @bloc " R, cmd[i]);
-		dprintf(2, "%p\n", cmd[i]);
+		ft_printf(2, Y "cmd[i]:\t\t [" R "%s" Y "]\t @bloc " R, cmd[i]);
+		ft_printf(2, "%p\n", cmd[i]);
 		i++;
 	}
-}
-
-void	print_tab2(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (tab)
-		dprintf(2, "tab existe\n");
-	else
-		dprintf(2, "tab n'existe pas\n");
-	if (tab[i])
-	{
-		while (tab[i])
-		{
-			dprintf(2, "tab[%d] = %s\n", i, tab[i]);
-			i++;
-		}
-	}
-	else
-		dprintf(2, "tab existe mais est vide\n");
 }
 
 void	print_tab(char **tab)
@@ -80,14 +59,14 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
-		dprintf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
-		dprintf(2, BOLD GREEN "located at: " R "%p\n", tab[i]);
+		ft_printf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
+		ft_printf(2, BOLD GREEN "located at: " R "%p\n", tab[i]);
 		i++;
 	}
 	if (tab[i] == NULL)
 	{
-		dprintf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
-		dprintf(2, BOLD GREEN "located at: " R "%p\n", tab[i]);
+		ft_printf(2, BOLD GREEN "tab[i]: " R "%s" GREEN " ; " R, tab[i]);
+		ft_printf(2, BOLD GREEN "located at: " R "%p\n", tab[i]);
 	}
 }
 
@@ -95,7 +74,7 @@ void	display_shell_info(void)
 {
 	ft_printf(STDOUT_FILENO, "\rPID : %d\n", getpid());
 	if (isatty(STDIN_FILENO) == 1)
-		printf("STDIN connected to terminal :)\n");
+		ft_printf(STDOUT_FILENO, "STDIN connected to terminal :)\n");
 	else
-		printf("STDIN isn't connected to terminal /!\\\n");
+		ft_printf(STDOUT_FILENO, "STDIN isn't connected to terminal /!\\\n");
 }

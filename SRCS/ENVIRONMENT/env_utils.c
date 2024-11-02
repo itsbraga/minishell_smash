@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 02:02:17 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 21:09:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	**recreate_env_tab(t_env_lst **env)
 	t_env_lst	*curr;
 	int			i;
 
-	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	size = (sizeof(char *) * (__get_env_lst_size(env) + 1));
 	tab = yama(CREATE_TAB, NULL, size);
 	secure_malloc(tab, true);

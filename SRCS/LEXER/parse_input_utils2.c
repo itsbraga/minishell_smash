@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 02:02:07 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 00:19:02 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 21:19:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	handle_redir_near_pipe(t_redir_parser *rp)
 			else if (rp->rcount2 == 2)
 				return (err_msg(NULL, "<<", 2), BAD_USAGE);
 			else
-				return (err_msg(NULL, "<<<", 2), BAD_USAGE);	
+				return (err_msg(NULL, "<<<", 2), BAD_USAGE);
 		}
 		else if (rp->curr_char == '>')
 			return (err_msg(NULL, ">>", 2), BAD_USAGE);

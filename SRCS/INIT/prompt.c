@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:42:29 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 03:05:20 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 21:29:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	rl_reset_custom_prompt(void)
 	if (nl_pos != NULL)
 	{
 		line1_len = nl_pos - data_struct()->prompt + 1;
-		display_shell_info();
 		write(STDOUT_FILENO, data_struct()->prompt, line1_len);
 		rl_redisplay();
 	}

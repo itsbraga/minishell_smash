@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 19:35:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:09:26 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static char	*__update_pwd(t_env_lst **env, char **old_pwd)
 	new_pwd = getcwd(NULL, 0);
 	if (new_pwd == NULL)
 	{
-		err_msg("getcwd()", ERR_BAD_FILE, 0);
-		// err_msg("0: getcwd() failed", ERR_BAD_FILE, 0);
+		err_msg("0: getcwd() failed", ERR_BAD_FILE, 0);
 		return (NULL);
 	}
 	curr = *env;
@@ -33,7 +32,7 @@ static char	*__update_pwd(t_env_lst **env, char **old_pwd)
 			free(curr->content);
 			curr->content = ft_strjoin("PWD=", new_pwd);
 			if (curr->content == NULL)
-				(free(new_pwd), exit(FAILURE));
+				(free(new_pwd), clean_exit_shell(FAILURE));
 		}
 		curr = curr->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:36:43 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 01:23:09 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 21:22:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	__handle_redir_error(t_parser *p, t_redir_parser *rp)
 	}
 	while (ft_isspace(p->input[p->i]) == 1)
 		p->i++;
-	if ((rp->curr_char == '>' && p->input[p->i] == '<') ||
-		(rp->curr_char == '<' && p->input[p->i] == '>'))
+	if ((rp->curr_char == '>' && p->input[p->i] == '<')
+		|| (rp->curr_char == '<' && p->input[p->i] == '>'))
 		return (handle_bidirections(rp));
 	if (rp->rcount >= 0 && (p->input[p->i] == '>' || p->input[p->i] == '<'))
 		return (handle_spaced_sequence(rp, p));

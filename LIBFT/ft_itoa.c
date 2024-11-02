@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 02:56:20 by pmateo            #+#    #+#             */
-/*   Updated: 2024/09/05 20:29:11 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 21:21:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	reversestr(char *str, int len)
 	while (i < j)
 	{
 		tmp = str[i];
-	str[i] = str[j];
-	str[j] = tmp;
-	i++;
-	j--;
+		str[i] = str[j];
+		str[j] = tmp;
+		i++;
+		j--;
 	}
 }
 

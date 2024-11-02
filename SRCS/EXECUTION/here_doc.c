@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/10/31 12:25:48 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:11:03 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	wait_heredoc_child(pid_t pid)
 {
 	int	status;
 
-	// printf("PID : %d | waiting for child... (wait_child)\n", getpid());
 	if (waitpid(pid, &status, 0) == -1)
 	{
 		err_msg("waitpid", strerror(errno), 0);
@@ -29,7 +28,6 @@ int	wait_heredoc_child(pid_t pid)
 	}
 	else
 		return (SUCCESS);
-		// printf("PID : %d | a child is done ! (wait_child)\n", getpid());
 }
 
 static int	__fill_all_heredoc(t_data *d, t_redir_lst *r)

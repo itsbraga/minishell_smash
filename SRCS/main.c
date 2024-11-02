@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 16:28:27 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 21:23:36 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_sig_code = 0;
+static void	__loop(t_data *d, char **input, int *error)
+{
+	add_history(*input);
+	if (create_main_lst(d, *input) == FAILURE)
+		*error = 1;
+	if (create_token_dblst(d) == FAILURE)
+		*error = 1;
+	if (*error != 1)
+		while_cmd(d, &(d->exec));
+	*error = 0;
+}
 
 static void	__minishell(t_data *d)
 {
@@ -25,7 +35,6 @@ static void	__minishell(t_data *d)
 	{
 		if (isatty(STDIN_FILENO) == 0)
 			dup2(d->fd_stdin_backup, STDIN_FILENO);
-		display_shell_info();
 		set_signals();
 		input = readline(d->prompt);
 		if (input == NULL)
@@ -34,21 +43,7 @@ static void	__minishell(t_data *d)
 			clean_exit_shell(SUCCESS);
 		}
 		else if (input[0] != '\0')
-		{
-			add_history(input);
-			if (create_main_lst(d, input) == FAILURE)
-				error = 1;
-			else
-				display_main_lst(&(d->main));
-			if (create_token_dblst(d) == FAILURE)
-				error = 1;
-			else
-				display_token_dblst(&(d->token));
-			display_exec_lst(&(d->exec));
-			if (error != 1)
-				while_cmd(d, &(d->exec));
-			error = 0;
-		}
+			__loop(d, &input, &error);
 		clean_after_execution(d, input);
 	}
 }

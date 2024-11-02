@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 17:08:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 21:14:32 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 	{
 		if (curr->type == REDIR_IN || curr->type == HERE_DOC)
 			*latest_redin = curr->type;
-		// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 		if (curr->type == REDIR_IN)
 			error = __redirection_in(curr);
 		else if (curr->type == REDIR_OUT_TRUNC
@@ -84,9 +83,8 @@ static void	__basic_behaviour(t_exec_info *info, int heredoc_nb)
 		}
 		close(info->fd[1]);
 		close(info->fd[0]);
-		// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	}
-} 
+}
 
 void	pathfinder(t_data *d, t_exec_lst *node)
 {
@@ -95,7 +93,6 @@ void	pathfinder(t_data *d, t_exec_lst *node)
 
 	error = 0;
 	latest_redin = 0;
-	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	close_hd_other_nodes(d, node);
 	__basic_behaviour(d->info, node->heredoc_nb);
 	error = __handle_all_redir(node, &latest_redin);

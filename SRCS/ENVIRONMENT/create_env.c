@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 20:46:46 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 21:19:57 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static	char	**__handle_empty_envp(void)
 {
-	char **new_envp;
-	char *actual_pwd;
-	
+	char	**new_envp;
+	char	*actual_pwd;
+
 	new_envp = malloc(4 * sizeof(char *));
 	secure_malloc(new_envp, true);
 	actual_pwd = getcwd(NULL, 0);
@@ -99,7 +99,7 @@ void	create_env(t_data *d, char **envp)
 {
 	bool	envp_has_been_rebuilt;
 	size_t	envp_size;
-	
+
 	envp_has_been_rebuilt = false;
 	envp_size = get_env_tab_size(envp);
 	if (envp_size == 0)
@@ -110,7 +110,7 @@ void	create_env(t_data *d, char **envp)
 	}
 	if (__create_env_list(d, envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
-	__update_shlvl(&d->env);
+	__update_shlvl(&(d->env));
 	if (__create_exp_env_list(d, envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
 	if (envp_has_been_rebuilt == true)

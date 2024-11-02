@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:44:48 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 01:55:42 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 21:09:57 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char	*add_quotes_to_value(char *content)
 
 	i = 0;
 	j = 0;
-	// dprintf(2, "%s | content = %s - content ptr = %p\n", __func__, content, content);
 	new_str = malloc(sizeof(char) * (ft_strlen(content) + 3));
 	secure_malloc(new_str, true);
 	while (content[j] != '=')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:27:06 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 17:06:09 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 21:10:07 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	**search_path(char **tab_path, char **env)
 	char	*all_path;
 	int		i;
 
-	// dprintf(2, "PID[%d] | %s\n", getpid(), __func__);
 	all_path = NULL;
 	i = 0;
 	while (env[i] != NULL)

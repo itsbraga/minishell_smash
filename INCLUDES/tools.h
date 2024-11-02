@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 20:57:51 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:12:55 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ t_exec_lst		*exec_lst_new_node(void);
 void			display_exec_lst(t_exec_lst **e);
 void			print_cmd(char **cmd);
 void			print_tab(char **tab);
-void			print_tab2(char **tab);
 void			display_shell_info(void);
 
 // display.c

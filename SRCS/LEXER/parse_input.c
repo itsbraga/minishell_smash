@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 02:16:00 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/02 21:21:58 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	__first_check(t_parser *p)
 int	parse_input(t_parser *p)
 {
 	t_redir_parser	rp;
-	
+
 	__init_parser(p);
 	if (__first_check(p) == BAD_USAGE || check_redir_order(p, &rp) == BAD_USAGE)
 		return (ft_exit_status(BAD_USAGE, ADD));
