@@ -30,8 +30,6 @@ LFLAGS		=	-L $(LIBFT_PATH) -lft -lreadline
 DEPFLAGS	=	-MMD -MP
 MAKEFLAGS	+=	--no-print-directory
 
-DEBUG		=	-g -g3
-
 #******************************************************************************#
 #	SOURCES
 #******************************************************************************#
@@ -110,7 +108,7 @@ all: $(LIBFT) $(NAME)
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 				@mkdir -p $(dir $@)
 				@printf "$(BOLD)$(ITAL)$(GREEN)Compiled: $(RESET)$(ITAL)$<                                  \n"
-				@$(CC) $(DEBUG) $(DEPFLAGS) $(CFLAGS) $(INC) -c $< -o $@
+				@$(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c $< -o $@
 -include $(DEPS_F)
 
 $(LIBFT):
@@ -121,7 +119,7 @@ $(NAME): $(OBJS_F) $(LIBFT)
 			@printf "$(BOLD)=================\n\n"
 			@printf "$(BLINK)$(PINK)\t\t   READY!$(RESET)\n\n"
 			@printf "$(BOLD)=============================================\n\n$(RESET)"
-			@$(CC) $(CFLAGS) $(INC) $(DEBUG) $(OBJS_F) $(LFLAGS) -o $(NAME)
+			@$(CC) $(CFLAGS) $(INC) $(OBJS_F) $(LFLAGS) -o $(NAME)
 
 clean:
 		@rm -rf $(OBJS_DIR)
