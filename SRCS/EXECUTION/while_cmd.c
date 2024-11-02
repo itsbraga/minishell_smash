@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/01 04:27:32 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 20:46:52 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ static void	__handle_exec_node(t_data *d, t_exec_lst *curr)
 
 static int	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 {
+	int	check_behaviour;
+
+	check_behaviour = 0;
 	if (d->info->all_cmd_heredoc_nb > 16)
 	{
 		err_msg(NULL, ERR_MAX_HD, 0);
@@ -80,7 +83,10 @@ static int	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 		return (STOP_EXEC);
 	if ((*e_lst)->cmd != NULL && d->info->cmd_count == 1)
 	{
-		if (execute_parent_built_in(d, (*e_lst)->cmd) != NOT_A_BUILTIN)
+		check_behaviour = execute_parent_built_in(d, (*e_lst)->cmd);
+		if (check_behaviour == NOT_A_BUILTIN || check_behaviour == CD_CASE)
+			return (SUCCESS);
+		else
 			return (STOP_EXEC);
 	}
 	return (SUCCESS);
