@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:43:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/01 21:41:16 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/02 02:39:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ static int	__check_args(char *var)
 	int	i;
 
 	i = 0;
+	if (ft_isalpha(var[i]) == 0 && var[i] != '_')
+		return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
+	else
+		i++;
 	while (var[i] != '\0' && var[i] != '=')
 	{
-		if (ft_isalpha(var[i]) == 0 && var[i] != '_')
-			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
-		else if (ft_isalpha(var[i]) == 1 || ft_isdigit(var[i]) == 1
-			|| var[i] == '_')
+		if (ft_isalpha(var[i]) == 1 || ft_isdigit(var[i]) == 1 || var[i] == '_')
 			i++;
 		else
 			return (err_msg_cmd("export", var, ERR_ENV_VAR, FAILURE));
@@ -74,7 +75,6 @@ int	ft_export(t_env_lst **exp_env, t_env_lst **env, char **args)
 	{
 		while (args[i] != NULL)
 		{
-			dprintf (2, "%s | cmd[%d] = %s\n", __func__, i, args[i]);
 			if (__check_args(args[i]) == SUCCESS)
 				__manage_variable(exp_env, env, args[i]);
 			i++;
