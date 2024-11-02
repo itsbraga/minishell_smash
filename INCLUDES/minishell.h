@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:23:12 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:38:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*	To be used only to indicate a received signal.
 	The signal handler must not access our main data structures.
 */
-extern int		g_sig_code = 0;
+extern int		g_sig_code;
 
 /******************************************************************************\
  * ENVIRONMENT

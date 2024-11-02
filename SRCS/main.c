@@ -6,11 +6,13 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:23:36 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/02 21:40:05 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_sig_code = 0;
 
 static void	__loop(t_data *d, char **input, int *error)
 {
