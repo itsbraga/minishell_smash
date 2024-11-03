@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:38:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/03 06:06:35 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char			*add_quotes_to_value(char *var);
 t_env_lst		*exp_env_new_var(char *content);
 
 // env_utils.c
+void			update_shlvl_export(t_env_lst **exp_env);
+void			update_shlvl(t_env_lst **env);
 size_t			get_env_tab_size(char **env);
 char			**recreate_env_tab(t_env_lst **env);
 

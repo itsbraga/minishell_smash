@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/03 05:51:10 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/03 06:18:46 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	char	**__handle_empty_envp(void)
 	actual_pwd = getcwd(NULL, 0);
 	new_envp[0] = ft_strjoin("PWD=", actual_pwd);
 	new_envp[1] = ft_strjoin("OLDPWD=", actual_pwd);
-	new_envp[2] = ft_strdup("SHLVL=0");
+	new_envp[2] = ft_strdup("SHLVL=1");
 	new_envp[3] = NULL;
 	free_and_set_null((void **)&actual_pwd);
 	return (new_envp);
@@ -70,31 +70,6 @@ size_t idx_exp_env)
 	return (SUCCESS);
 }
 
-static void	__update_shlvl(t_env_lst **env)
-{
-	t_env_lst	*curr;
-	int			var_value;
-	char		*new_value;
-
-	curr = *env;
-	while (curr != NULL)
-	{
-		if (ft_strncmp(curr->content, "SHLVL=", 6) == 0)
-		{
-			var_value = ft_atoi(curr->content + 6, 0);
-			var_value += 1;
-			new_value = ft_itoa(var_value);
-			secure_malloc(new_value, true);
-			(void)yama(ADD, new_value, 0);
-			free(curr->content);
-			curr->content = ft_strjoin("SHLVL=", new_value);
-			secure_malloc(curr->content, true);
-			(void)yama(REMOVE, new_value, 0);
-		}
-		curr = curr->next;
-	}
-}
-
 void	create_env(t_data *d, char **envp)
 {
 	bool	envp_has_been_rebuilt;
@@ -110,10 +85,13 @@ void	create_env(t_data *d, char **envp)
 	}
 	if (__create_env_list(d, envp) == FAILURE)
 		err_msg("An error occured with env_list", NULL, 0);
-	__update_shlvl(&(d->env));
+	if (envp_has_been_rebuilt == false)
+		update_shlvl(&(d->env));
 	dprintf(2, "envp_size = %ld\n", envp_size);
 	if (__create_exp_env_list(d, envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
+	if (envp_has_been_rebuilt == false)
+		update_shlvl_export(&(d->exp_env));
 	if (envp_has_been_rebuilt == true)
 		free_tab(envp);
 }
