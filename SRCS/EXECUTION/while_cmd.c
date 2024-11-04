@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/04 17:02:42 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:24:37 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ static void	__handle_exec_node(t_data *d, t_exec_lst *curr)
 
 static int	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 {
-	int	check_behaviour;
-
-	check_behaviour = 0;
 	if (d->info->all_cmd_heredoc_nb > 16)
 	{
 		err_msg(NULL, ERR_MAX_HD, 0);
@@ -79,13 +76,7 @@ static int	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 	if (handle_heredoc(d, e_lst) == STOP_EXEC)
 		return (STOP_EXEC);
 	if ((*e_lst)->cmd != NULL && d->info->cmd_count == 1)
-	{
-		check_behaviour = execute_parent_built_in(d, (*e_lst)->cmd);
-		if (check_behaviour == NOT_A_BUILTIN || check_behaviour == CD_CASE)
-			return (SUCCESS);
-		else
-			return (STOP_EXEC);
-	}
+		execute_parent_built_in(d, (*e_lst)->cmd);
 	return (SUCCESS);
 }
 
