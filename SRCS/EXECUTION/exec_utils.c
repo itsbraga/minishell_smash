@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:24:08 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 03:04:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	check_given_path(t_exec_lst *node)
 	if (check_if_is_dir(node->bin_path) == true)
 	{
 		err_msg(node->bin_path, ERR_IS_DIR, 0);
-		clean_exit_shell(CMD_CANNOT_EXEC);
+		clean_exit(CMD_CANNOT_EXEC);
 	}
 	if (access(node->bin_path, F_OK) == -1)
 	{

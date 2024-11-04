@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:15:21 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:35:18 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	wait_heredoc_child(pid_t pid)
 	if (waitpid(pid, &status, 0) == -1)
 	{
 		err_msg("waitpid", strerror(errno), 0);
-		clean_exit_shell(FAILURE);
+		clean_exit(FAILURE);
 	}
 	if (WEXITSTATUS(status) == CTRL_C)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:10:43 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	open_heredoc(t_data *d, char *limiter)
 
 	line_w_nl = NULL;
 	if (pipe(fd) == -1)
-		(err_msg("pipe", strerror(errno), 0), clean_exit_shell(FAILURE));
+		(err_msg("pipe", strerror(errno), 0), clean_exit(FAILURE));
 	must_expand = __manage_limiter(&limiter);
 	while (1)
 	{

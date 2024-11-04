@@ -6,7 +6,7 @@
 /*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 01:21:46 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 02:42:01 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,11 @@ typedef struct s_env_lst
 typedef struct s_prompt
 {
 	char	*username;
-	char	*rainbow_user;
+	// char	*rainbow_user;
+	char	*user;
+	char	*extracted;
+	char	*home_path;
+	char	*home_pos;
 	char	*custom_cwd;
 	char	*part1;
 	char	*part2;

@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 22:35:04 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/04 01:46:42 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+static bool	__bad_arguments(char **args)
+{
+	size_t	i;
+
+	i = 0;
+	while (args[i] != NULL)
+		i++;
+	if (i >= 3)
+		return (true);
+	else
+		return (false);
+}
+
+static int	__handle_cd_error(char *path)
+{
+	const int	is_dir = is_directory(path);
+	int			ret;
+
+	ret = 0;
+	if (is_dir == 0)
+		ret = err_msg_cmd("cd", path, ERR_NOT_DIR, FAILURE);
+	else if (is_dir == -1 || is_dir == 1)
+		ret = err_msg_cmd("cd", path, strerror(errno), FAILURE);
+	else
+		ret = SUCCESS;
+	return (ret);
+}
 
 static char	*__find_var_path(char *to_find, t_env_lst **env)
 {
@@ -43,36 +71,20 @@ static int	__go_to_env_var(t_env_lst **env, char *var, char **args)
 	int		ret;
 
 	var_path = __find_var_path(var, env);
+	if (var_path == NULL)
+	{
+		if (args[1] == NULL)
+			ret = err_msg_cmd("cd", NULL, "HOME not set", FAILURE);
+		else if (ft_strcmp(args[1], "-") == 0)
+			ret = err_msg_cmd("cd", NULL, "OLDPWD not set", FAILURE);
+		return (ret);
+	}
 	ret = chdir(var_path);
 	if (ret != 0)
-		return (err_msg_cmd("cd", args[1], ERR_BAD_FILE, FAILURE));
+		ret = __handle_cd_error(var_path);
 	if (var_path != NULL)
 		free_and_set_null((void **)&var_path);
 	return (ret);
-}
-
-static int	__handle_cd_error(char *path)
-{
-	const int	is_dir = is_directory(path);
-
-	if (is_dir == 0)
-		return (err_msg_cmd("cd", path, ERR_NOT_DIR, ft_exit_status(1, ADD)));
-	else if (is_dir == -1)
-		return (err_msg_cmd("cd", path, ERR_BAD_FILE, ft_exit_status(1, ADD)));
-	return (SUCCESS);
-}
-
-static bool	__bad_arguments(char **args)
-{
-	size_t	i;
-
-	i = 0;
-	while (args[i] != NULL)
-		i++;
-	if (i >= 3)
-		return (true);
-	else
-		return (false);
 }
 
 int	ft_cd(t_data *d, char **args)
@@ -82,18 +94,18 @@ int	ft_cd(t_data *d, char **args)
 	t_prompt	pr;
 
 	if (__bad_arguments(args) == true)
-	{
-		err_msg("cd", "too many arguments", 0);
-		return (ft_exit_status(FAILURE, ADD));
-	}
+		return (err_msg_cmd("cd", NULL, ERR_ARG, FAILURE));
 	if (args[1] == NULL || ft_strcmp(args[1], "~") == 0)
 		ret = __go_to_env_var(&(d->env), "HOME=", args);
 	else if (ft_strcmp(args[1], "-") == 0)
 	{
 		ret = __go_to_env_var(&(d->env), "OLDPWD=", args);
-		path = __find_var_path("OLDPWD=", &(d->env));
-		ft_printf(STDOUT_FILENO, "%s\n", path);
-		free_and_set_null((void **)&path);
+		if (ret == 0)
+		{
+			path = __find_var_path("OLDPWD=", &(d->env));
+			ft_printf(STDOUT_FILENO, "%s\n", path);
+			free_and_set_null((void **)&path);
+		}
 	}
 	else
 		ret = chdir(args[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:53:27 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/02 18:31:28 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	__free_data(t_data *d, bool clear_history)
 	}
 }
 
-void	clean_exit_shell(int err_no)
+void	clean_exit(int err_no)
 {
 	if (data_struct() != NULL)
 		__free_data(data_struct(), true);

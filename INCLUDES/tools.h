@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:59:30 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 21:12:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/04 02:03:52 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			lstclear_env(t_env_lst **env);
 void			clean_after_execution(t_data *d, char *input);
 void			free_tab(char **tab);
 int				free_gc_tab(t_gc_lst **yama, char **ptr);
-void			clean_exit_shell(int err_no);
+void			clean_exit(int err_no);
 
 /******************************************************************************\
  * GARBAGE_COLLECTOR
@@ -108,6 +108,7 @@ void			display_token_dblst(t_token_dblst **t);
 void			display_redir_lst(t_redir_lst **r);
 
 // rainbow_txt.c
+char			*rainbow_banner(const char *str);
 char			*rainbow_prompt(const char *str);
 
 #endif

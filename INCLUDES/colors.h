@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:29:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/23 21:59:01 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/04 02:23:40 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 # define BRIGHT_BLACK		"\e[90m"
 # define LIGHT_GRAY     	"\e[38;2;173;165;165m"
+# define LIGHT_GRAY2     	"\e[38;2;211;211;211m"
 # define BRIGHT_RED			"\e[91m"
 # define BRIGHT_GREEN		"\e[92m"
 # define BRIGHT_YELLOW		"\e[38;2;255;234;150m"

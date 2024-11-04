@@ -47,7 +47,7 @@ FEATURES_DIR	=	TOOLS/FEATURES/
 FEATURES_F		=	display.c display_2.c rainbow_txt.c
 
 INIT_DIR		=	INIT/
-INIT_F			=	prompt.c init_data.c
+INIT_F			=	prompt_utils.c prompt.c init_data.c
 
 ENV_DIR			=	ENVIRONMENT/
 ENV_F			=	create_env.c env_utils.c export_env_utils.c
@@ -117,7 +117,7 @@ $(LIBFT):
 $(NAME): $(OBJS_F) $(LIBFT)
 			@printf "\n\n=================$(shell bash rainbow.sh " MINISHELL ")"
 			@printf "$(BOLD)=================\n\n"
-			@printf "$(BLINK)$(PINK)\t\t   READY!$(RESET)\n\n"
+			@printf "$(BLINK)$(GREEN)\t\t   READY!$(RESET)\n\n"
 			@printf "$(BOLD)=============================================\n\n$(RESET)"
 			@$(CC) $(CFLAGS) $(INC) $(OBJS_F) $(LFLAGS) -o $(NAME)
 

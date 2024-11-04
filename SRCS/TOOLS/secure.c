@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   secure.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:30:48 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 20:58:28 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	secure_malloc(void *to_secure, bool cleanup)
 	{
 		err_msg("malloc", strerror(errno), 0);
 		if (cleanup == true)
-			clean_exit_shell(FAILURE);
+			clean_exit(FAILURE);
 	}
 }
 

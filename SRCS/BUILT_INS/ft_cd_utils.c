@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/02 21:09:26 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/04 01:43:54 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*__update_pwd(t_env_lst **env, char **old_pwd)
 			free(curr->content);
 			curr->content = ft_strjoin("PWD=", new_pwd);
 			if (curr->content == NULL)
-				(free(new_pwd), clean_exit_shell(FAILURE));
+				(free(new_pwd), clean_exit(FAILURE));
 		}
 		curr = curr->next;
 	}
@@ -82,10 +82,11 @@ int	is_directory(const char *path)
 {
 	struct stat	path_stat;
 
-	if (stat(path, &path_stat) == -1)
+	if (lstat(path, &path_stat) == -1)
 	{
-		if (errno == ENOENT)
-			return (-1);
+		if (errno == EACCES)
+			return (1);
+		return (-1);
 	}
 	return (S_ISDIR(path_stat.st_mode));
 }

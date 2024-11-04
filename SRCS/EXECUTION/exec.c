@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:10:24 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	execute(char *bin_path, char **cmd_and_args, char **env)
 		if (errno == EACCES)
 		{
 			err_msg_cmd(bin_path, NULL, strerror(errno), 0);
-			clean_exit_shell(CMD_CANNOT_EXEC);
+			clean_exit(CMD_CANNOT_EXEC);
 		}
 		else
 		{
 			err_msg_cmd(bin_path, NULL, strerror(errno), 0);
-			clean_exit_shell(FAILURE);
+			clean_exit(FAILURE);
 		}
 	}
 }
@@ -65,7 +65,7 @@ void	go_exec(t_exec_lst *node)
 	env_tab = NULL;
 	ret = execute_child_built_in(data_struct(), node->cmd);
 	if (ret != NOT_A_BUILTIN)
-		clean_exit_shell(ft_exit_status(0, GET));
+		clean_exit(ft_exit_status(0, GET));
 	else if (ret == NOT_A_BUILTIN)
 	{
 		env_tab = recreate_env_tab(&(data_struct()->env));
@@ -74,7 +74,7 @@ void	go_exec(t_exec_lst *node)
 		else
 		{
 			yama(REMOVE, env_tab, 0);
-			clean_exit_shell(ft_exit_status(0, GET));
+			clean_exit(ft_exit_status(0, GET));
 		}
 	}
 }

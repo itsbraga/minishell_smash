@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/03 06:06:35 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/04 02:48:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void			set_signals_in_exec(void);
 /******************************************************************************\
  * INIT
 \******************************************************************************/
+
+// prompt_utils.c
+void			part_one(t_prompt *pr);
+void			custom_cwd(t_prompt *pr);
+char			*substract_path(t_prompt *pr);
 
 // prompt.c
 char			*generate_prompt(t_prompt *pr, t_data *d);

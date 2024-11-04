@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:14:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	pathfinder(t_data *d, t_exec_lst *node)
 	if (node->latest_hd != 0)
 		close(node->latest_hd);
 	if (error == FAILURE)
-		clean_exit_shell(ft_exit_status(0, GET));
+		clean_exit(ft_exit_status(0, GET));
 	if (node->cmd == NULL)
-		clean_exit_shell(ft_exit_status(0, GET));
+		clean_exit(ft_exit_status(0, GET));
 	else
 		go_exec(node);
 }

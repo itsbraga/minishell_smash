@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:11:35 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	__wait_child(t_exec_info *info)
 		if (waitpid(-1, &status, 0) == -1)
 		{
 			err_msg("waitpid", strerror(errno), 0);
-			clean_exit_shell(FAILURE);
+			clean_exit(FAILURE);
 		}
 		if (WIFEXITED(status))
 			ft_exit_status(WEXITSTATUS(status), ADD);
@@ -53,11 +53,11 @@ static void	__handle_exec_node(t_data *d, t_exec_lst *curr)
 		&& (d->info->executed_cmd != d->info->cmd_count - 1))
 	{
 		if (pipe(d->info->fd) == -1)
-			clean_exit_shell(FAILURE);
+			clean_exit(FAILURE);
 	}
 	d->info->child_pid = fork();
 	if (d->info->child_pid == -1)
-		clean_exit_shell(FAILURE);
+		clean_exit(FAILURE);
 	if (d->info->child_pid == 0)
 		pathfinder(d, curr);
 	else
@@ -72,7 +72,7 @@ static int	__before_while_cmd(t_data *d, t_exec_lst **e_lst)
 	if (d->info->all_cmd_heredoc_nb > 16)
 	{
 		err_msg(NULL, ERR_MAX_HD, 0);
-		clean_exit_shell(BAD_USAGE);
+		clean_exit(BAD_USAGE);
 	}
 	if (handle_heredoc(d, e_lst) == STOP_EXEC)
 		return (STOP_EXEC);

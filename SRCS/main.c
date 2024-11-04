@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/02 21:40:05 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/04 02:16:10 by art3mis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	__minishell(t_data *d)
 		if (input == NULL)
 		{
 			ft_printf(STDERR_FILENO, "exit\n");
-			clean_exit_shell(SUCCESS);
+			clean_exit(SUCCESS);
 		}
 		else if (input[0] != '\0')
 			__loop(d, &input, &error);
@@ -53,16 +53,18 @@ static void	__minishell(t_data *d)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*d;
+	const char	*acronym = rainbow_banner(CREATORS);
 
 	(void)argv;
 	d = data_struct();
 	if (argc != 1)
 	{
 		ft_printf(STDOUT_FILENO, BOLD YELLOW "No arguments allowed\n" R);
-		clean_exit_shell(FAILURE);
+		clean_exit(FAILURE);
 	}
-	printf("\n%s", BOLD WELCOME_BANNER R);
+	printf("\n%s%s%s", BANNER_PT1, acronym, BANNER_PT2);
 	create_env(d, envp);
 	__minishell(d);
+	(void)yama(REMOVE, (void *)&acronym, 0);
 	return (SUCCESS);
 }
