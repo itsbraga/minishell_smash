@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:41:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/04 01:46:42 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 17:14:24 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	__go_to_env_var(t_env_lst **env, char *var, char **args)
 	char	*var_path;
 	int		ret;
 
+	ret = 0;
 	var_path = __find_var_path(var, env);
 	if (var_path == NULL)
 	{
