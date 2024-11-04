@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/04 19:01:30 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/04 19:57:46 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	create_env(t_data *d, char **envp)
 		err_msg("An error occured with env_list", NULL, 0);
 	if (envp_has_been_rebuilt == false)
 		update_shlvl(&(d->env));
-	dprintf(2, "envp_size = %ld\n", envp_size);
 	if (__create_exp_env_list(d, envp, envp_size, 0) == FAILURE)
 		err_msg("An error occured with export_env_list", NULL, 0);
 	if (envp_has_been_rebuilt == false)

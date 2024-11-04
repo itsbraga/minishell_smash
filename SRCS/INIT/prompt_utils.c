@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 02:40:19 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/04 19:10:25 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:59:09 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	part_one(t_prompt *pr)
 {
 	pr->user = ft_strjoin("\001" BR "\002", pr->username);
 	secure_malloc(pr->user, true);
-	pr->part1 = ft_strjoin("\001" BOLD "[" "\002", pr->user);
+	pr->part1 = ft_strjoin("\001" R BOLD "[" "\002", pr->user);
 	secure_malloc(pr->part1, true);
 	free_and_set_null((void **)&pr->user);
 	pr->part2 = ft_strjoin(pr->part1, "\001" R BOLD "@" PY "42" R BOLD "] "\

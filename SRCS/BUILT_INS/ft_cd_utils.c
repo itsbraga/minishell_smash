@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:42:55 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/04 01:43:54 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:50:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static char	*__update_pwd(t_env_lst **env, char **old_pwd)
 
 	new_pwd = getcwd(NULL, 0);
 	if (new_pwd == NULL)
-	{
-		err_msg("0: getcwd() failed", ERR_BAD_FILE, 0);
-		return (NULL);
-	}
+		return (err_msg("0: getcwd() failed", ERR_BAD_FILE, 0), NULL);
 	curr = *env;
 	while (curr != NULL)
 	{
@@ -32,7 +29,10 @@ static char	*__update_pwd(t_env_lst **env, char **old_pwd)
 			free(curr->content);
 			curr->content = ft_strjoin("PWD=", new_pwd);
 			if (curr->content == NULL)
-				(free(new_pwd), clean_exit(FAILURE));
+			{
+				free_and_set_null((void **)&new_pwd);
+				clean_exit(FAILURE);
+			}
 		}
 		curr = curr->next;
 	}
@@ -56,6 +56,8 @@ static void	__update_oldpwd(t_env_lst **env, char *old_pwd)
 		}
 		curr = curr->next;
 	}
+	if (old_pwd != NULL)
+		free_and_set_null((void **)&old_pwd);
 }
 
 void	change_paths(t_env_lst **env, t_env_lst **exp_env)

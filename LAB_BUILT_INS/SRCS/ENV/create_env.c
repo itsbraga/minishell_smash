@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 04:28:04 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/01 05:05:00 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/04 19:57:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	create_env_list(t_env_lst **env, char **envp)
 	int			i;
 	t_env_lst	*var;
 	t_env_lst	*last;
-	
-	dprintf(2, "**env = %p\n", env);
+
 	i = 0;
 	if (envp == NULL)
 		return (FAILURE);
