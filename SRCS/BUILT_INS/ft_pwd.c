@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 14:12:03 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/03 23:36:48 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:21:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	ft_pwd(char **args)
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 	{
-		// err_msg(NULL, ERR_PWD ERR_GETCWD ERR_BAD_FILE, 0);
 		ft_printf(STDERR_FILENO, ERR_PWD ERR_GETCWD ERR_BAD_FILE "\n");
 		return (ft_exit_status(FAILURE, ADD));
 	}

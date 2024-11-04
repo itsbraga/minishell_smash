@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 02:40:19 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/04 02:50:08 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:10:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@
 */
 void	part_one(t_prompt *pr)
 {
-	pr->user = ft_strjoin("\001" RED "\002", pr->username);
+	pr->user = ft_strjoin("\001" BR "\002", pr->username);
 	secure_malloc(pr->user, true);
-	pr->part1 = ft_strjoin("[", pr->user);
+	pr->part1 = ft_strjoin("\001" BOLD "[" "\002", pr->user);
 	secure_malloc(pr->part1, true);
 	free_and_set_null((void **)&pr->user);
-	pr->part2 = ft_strjoin(pr->part1, "\001" R "@" Y "42" R "] " "\002");
+	pr->part2 = ft_strjoin(pr->part1, "\001" R BOLD "@" PY "42" R BOLD "] "\
+	R "\002");
 	secure_malloc(pr->part2, true);
 	free_and_set_null((void **)&pr->part1);
 }

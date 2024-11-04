@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:12 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/04 02:16:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:23:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	__minishell(t_data *d)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data	*d;
+	t_data		*d;
 	const char	*acronym = rainbow_banner(CREATORS);
 
 	(void)argv;

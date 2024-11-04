@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 01:59:00 by art3mis           #+#    #+#             */
-/*   Updated: 2024/11/04 02:42:01 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 18:30:12 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,16 @@ typedef struct s_env_lst
 	struct s_env_lst	*next;
 }				t_env_lst;
 
+typedef struct s_rainbow_txt
+{
+	char		*colored_str;
+	int			i;
+	size_t		len;
+}				t_rainbow_txt;
+
 typedef struct s_prompt
 {
 	char	*username;
-	// char	*rainbow_user;
 	char	*user;
 	char	*extracted;
 	char	*home_path;

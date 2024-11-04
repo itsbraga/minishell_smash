@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:50:27 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 17:02:42 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	__wait_child(t_exec_info *info)
 
 static void	__parent(t_exec_info *info, t_exec_lst *curr)
 {
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	if (info->pipe_count != 0)
 	{
 		close(info->fd[1]);
