@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:27:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/04 00:17:58 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:21:45 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static long long	__ft_atol(char *arg)
 
 static bool	__is_overflow(char *arg)
 {
-	int     i;
-	size_t  len;
+	int		i;
+	size_t	len;
 
 	i = 0;
 	while (arg[i] != '\0' && ft_isspace(arg[i]) == 1)

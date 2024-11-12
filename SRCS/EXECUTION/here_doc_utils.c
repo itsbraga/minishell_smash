@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:26:44 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 21:39:21 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	__close_heredoc(int fd[], char *line_w_nl)
 	}
 }
 
-static	int	__check_gnl_return(char *line, char *limiter)
+static	int	__check_rl_return(char *line, char *limiter)
 {
 	if (line == NULL)
 	{
@@ -73,7 +73,7 @@ int	open_heredoc(t_data *d, char *limiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (__check_gnl_return(line, limiter) == FAILURE)
+		if (__check_rl_return(line, limiter) == FAILURE)
 			break ;
 		if (ft_strcmp(limiter, line) == 0)
 			break ;
@@ -83,6 +83,7 @@ int	open_heredoc(t_data *d, char *limiter)
 		secure_malloc(line_w_nl, true);
 		ft_printf(fd[1], "%s", line_w_nl);
 		free_and_set_null((void **)&line);
+		free_and_set_null((void **)&line_w_nl);
 	}
 	return (__close_heredoc(fd, line_w_nl));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:15:10 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/03 06:17:04 by pmateo           ###   ########.fr       */
+/*   Updated: 2024/11/04 19:22:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	update_shlvl_export(t_env_lst **exp_env)
 			curr->content = ft_strjoin("SHLVL=", new_value);
 			secure_malloc(curr->content, true);
 			tmp = curr->content;
-			curr->content= add_quotes_to_value(curr->content);
+			curr->content = add_quotes_to_value(curr->content);
 			free_and_set_null((void **)&tmp);
 			(void)yama(REMOVE, new_value, 0);
 		}

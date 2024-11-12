@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:02:51 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/04 02:48:10 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:23:48 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include "libraries.h"
 
-/*	To be used only to indicate a received signal.
-	The signal handler must not access our main data structures.
-*/
 extern int		g_sig_code;
 
 /******************************************************************************\

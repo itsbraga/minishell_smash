@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 16:20:34 by annabrag          #+#    #+#             */
-/*   Updated: 2024/11/04 01:20:11 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:13:51 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ int	execute_child_built_in(t_data *d, char **cmd)
 	else if (ft_strcmp(cmd[0], "export") == 0)
 		return (ft_exit_status(SUCCESS, ADD));
 	else if (ft_strcmp(cmd[0], "cd") == 0)
-		return (ft_exit_status(SUCCESS, ADD));
+	{
+		if (d->info->cmd_count == 1)
+			return (ft_exit_status(0, GET));
+		else
+			return (ft_exit_status(SUCCESS, ADD));
+	}
 	else if (ft_strcmp(cmd[0], "unset") == 0)
 		return (ft_exit_status(SUCCESS, ADD));
 	return (NOT_A_BUILTIN);

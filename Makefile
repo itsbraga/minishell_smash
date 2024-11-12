@@ -115,8 +115,7 @@ $(LIBFT):
 		@make -sC $(LIBFT_PATH) $(MAKEFLAGS)
 
 $(NAME): $(OBJS_F) $(LIBFT)
-			@printf "\n\n=================$(shell bash rainbow.sh " MINISHELL ")"
-			@printf "$(BOLD)=================\n\n"
+			@printf "\n\n================= MINISHELL =================\n\n"
 			@printf "$(BLINK)$(GREEN)\t\t   READY!$(RESET)\n\n"
 			@printf "$(BOLD)=============================================\n\n$(RESET)"
 			@$(CC) $(CFLAGS) $(INC) $(OBJS_F) $(LFLAGS) -o $(NAME)

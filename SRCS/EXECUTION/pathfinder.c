@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:16:29 by pmateo            #+#    #+#             */
-/*   Updated: 2024/11/03 23:23:35 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 17:50:47 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ static int	__handle_all_redir(t_exec_lst *node, t_token_type *latest_redin)
 		else if (curr->type == REDIR_OUT_TRUNC
 			|| curr->type == REDIR_OUT_APPEND)
 			error = __redirection_out(curr);
-		curr = curr->next;
+		if (error > 0)
+			return (error);
+		else
+			curr = curr->next;
 	}
 	return (error);
 }

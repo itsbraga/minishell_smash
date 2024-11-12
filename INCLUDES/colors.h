@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: art3mis <art3mis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:29:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/11/04 02:23:40 by art3mis          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:15:04 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@
 # define CYAN			"\e[36m"
 # define WHITE			"\e[37m"
 
-# define BRIGHT_BLACK		"\e[90m"
 # define LIGHT_GRAY     	"\e[38;2;173;165;165m"
 # define LIGHT_GRAY2     	"\e[38;2;211;211;211m"
-# define BRIGHT_RED			"\e[91m"
-# define BRIGHT_GREEN		"\e[92m"
-# define BRIGHT_YELLOW		"\e[38;2;255;234;150m"
-# define BRIGHT_BLUE		"\e[94m"
-# define BRIGHT_PURPLE		"\e[95m"
-# define BRIGHT_CYAN		"\e[96m"
+
+// Pastel colors
+# define PG			"\e[38;2;173;235;179m" // green
+# define PGG		"\e[38;2;152;168;105m" // green
+# define PB			"\e[38;2;179;235;242m" // blue
+# define PY			"\e[38;2;255;234;150m" // yellow
+# define PP			"\e[38;2;211;211;255m" // purple
+# define PO			"\e[38;2;255;178;127m" // orange
 
 #endif
